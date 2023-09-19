@@ -5,6 +5,20 @@ Vue.use(Router);
 
 export default new Router({
     routes: [
+        /* ************************* *
+         *       PORTAL
+         * ************************* */
+        // INICIO
+        {
+            path: "/",
+            name: "portal.inicio",
+            component: require("./portal/Inicio.vue").default,
+        },
+
+        /* ************************* *
+         *     ADMINISTRACIÓN
+         * ************************* */
+
         // INICIO
         {
             path: "/administracion",

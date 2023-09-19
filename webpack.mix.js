@@ -25,6 +25,7 @@ mix.setPublicPath("./")
     )
     .styles(
         [
+            "resources/assets/css/all.min.css",
             "resources/assets/css/portal/material-design-iconic-font.min.css",
             "resources/assets/css/portal/icon-font.min.css",
             "resources/assets/css/portal/animate.css",
@@ -37,6 +38,7 @@ mix.setPublicPath("./")
             "resources/assets/css/portal/perfect-scrollbar.css",
             "resources/assets/css/portal/util.css",
             "resources/assets/css/portal/main.css",
+            "resources/assets/css/portal.css",
         ],
         "./css/portal.css"
     )

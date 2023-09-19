@@ -17,23 +17,13 @@
 
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed text-sm">
     <div id="app">
-        <Portal ruta="{{ route('base_path') }}" logo="{{ asset('imgs/' . $configuracion->first()->logo) }}"
-            empresa="{{ $configuracion->first()->razon_social }}" configuracion="{{ $configuracion->first() }}">
+        <Portal ruta="{{ route('portal.inicio') }}" logo="{{ asset('imgs/' . $configuracion->first()->logo) }}"
+            ruta_asset="{{ asset('') }}" configuracion="{{ $configuracion->first() }}">
         </Portal>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ mix('js/portal.js') }}"></script>
     <script>
-        // $(document).ready(function() {
-        //     $(document).on("click", "aside nav ul li a", function() {
-        //         if ($("body").hasClass("sidebar-open") && !$(this).parent().hasClass("menu")) {
-        //             $("body").addClass("sidebar-collapse");
-        //             $("body").addClass("sidebar-close");
-        //             $("body").removeClass("sidebar-open");
-        //         }
-        //     });
-        // });
-
         // OPCIONAL
         $('.js-addwish-b2').on('click', function(e) {
             e.preventDefault();

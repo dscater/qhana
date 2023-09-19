@@ -1,6 +1,6 @@
 :root {
     --principal: #c57a40;
-    --secundario: #1a1915;
+    --secundario: #222222;
     --correcto: #d2e7c9;
     --secondary: #da1900;
     --transparente: #000000bd;
@@ -41,7 +41,7 @@
 }
 
 .login-page .login-box .card .card-header img {
-    width: 100%;
+    width: 75%;
 }
 
 .vs-pagination--ul {
