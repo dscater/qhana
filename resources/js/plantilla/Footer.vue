@@ -5,8 +5,11 @@
                 <b>Versión</b> 1.0.0
             </div>
             <strong
-                >Copyright &copy; {{fechaActual}}
-                <router-link :to="{name:'inicio'}">{{configuracion.alias}}</router-link>.</strong
+                >Copyright &copy; {{ fechaActual }}
+                <router-link :to="{ name: 'inicio' }" class="text-warning">{{
+                    configuracion.alias
+                }}</router-link
+                >.</strong
             >
             Todos los derechos reservados.
         </footer>
@@ -15,12 +18,12 @@
 
 <script>
 export default {
-    props:["configuracion"],
-    computed:{
-        fechaActual(){
+    props: ["configuracion"],
+    computed: {
+        fechaActual() {
             return this.$moment(String(new Date())).format("YYYY");
-        }
-    }
+        },
+    },
 };
 </script>
 

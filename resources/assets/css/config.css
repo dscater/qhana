@@ -1,5 +1,7 @@
 :root {
     --principal: #c57a40;
+    --principal_hover: #e48033;
+    --principal_transparent: #c57a40cb;
     --secundario: #222222;
     --correcto: #d2e7c9;
     --secondary: #da1900;
@@ -140,7 +142,7 @@ input.form-control {
 }
 
 :disabled {
-    background: var(--secundario) !important;
+    /* background: var(--secundario) !important; */
 }
 
 .content-wrapper {
@@ -175,4 +177,22 @@ input.form-control {
     white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
+}
+
+.page-item.active .page-link {
+    background-color: var(--principal);
+    border-color: var(--principal);
+}
+
+.small-box .informacion {
+    display: flex;
+    padding: 15px;
+}
+
+.small-box .informacion .icon img {
+    width: 140px;
+}
+
+.small-box .informacion .inner {
+    flex: 1;
 }

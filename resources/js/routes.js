@@ -15,6 +15,34 @@ export default new Router({
             component: require("./portal/Inicio.vue").default,
         },
 
+        // SECCIONES
+        {
+            path: "/secciones",
+            name: "portal.secciones",
+            component: require("./portal/Secciones.vue").default,
+        },
+
+        // NOSOTROS
+        {
+            path: "/nosotros",
+            name: "portal.nosotros",
+            component: require("./portal/Nosotros.vue").default,
+        },
+
+        // PRODUCTOS
+        {
+            path: "/productos",
+            name: "portal.productos",
+            component: require("./portal/Productos.vue").default,
+        },
+
+        // CONTACTOS
+        {
+            path: "/contactos",
+            name: "portal.contactos",
+            component: require("./portal/Contactos.vue").default,
+        },
+
         /* ************************* *
          *     ADMINISTRACIÓN
          * ************************* */

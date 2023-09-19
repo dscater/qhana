@@ -104,4 +104,9 @@ class ConfiguracionController extends Controller
             'msj' => 'No se encontró ninguna configuración'
         ], 200);
     }
+
+    public function url_asset()
+    {
+        return asset("");
+    }
 }

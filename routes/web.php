@@ -3,21 +3,17 @@
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PortalController;
-use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 // PORTAL
-Route::get('/', [PortalController::class, 'index'])->name("portal.inicio");
+Route::get('/url_asset', [ConfiguracionController::class, 'url_asset'])->name("url_asset");
 
 // LOGIN
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-// REGISTRO
-Route::get('/registro', [RegistroController::class, 'registro'])->name("registro");
-Route::post('/registro', [RegistroController::class, 'store']);
 // CONFIGURACIÓN
 Route::get('/configuracion/getConfiguracion', [ConfiguracionController::class, 'getConfiguracion']);
 
@@ -42,7 +38,15 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// ---------------------------------------
+
+
+// ADMINISTRACIÓN
 Route::get('/administracion/{optional?}', function () {
     return view('app');
 })->name('base_path')->where('optional', '.*');
+
+
+// PORTAL
+Route::get('/{optional?}', function () {
+    return view('portal');
+})->name('portal.inicio')->where('optional', '.*');

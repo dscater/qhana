@@ -1,8 +1,12 @@
 <template>
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-light">
+    <aside class="main-sidebar sidebar-dark-warning">
         <!-- Brand Logo -->
-        <router-link exact :to="{ name: 'inicio' }" class="brand-link bg-orange">
+        <router-link
+            exact
+            :to="{ name: 'inicio' }"
+            class="brand-link bg-orange"
+        >
             <img
                 :src="configuracion.path_image"
                 alt="Logo"
@@ -76,17 +80,14 @@
                         </router-link>
                     </li>
                     <li
-                        class="nav-header bg-gray"
+                        class="nav-header font-weight-bold"
                         v-if="permisos.includes('usuarios.index')"
                     >
-                        ADMINISTRACIÓN
+                        ADMINISTRACIÓN:
                     </li>
                     <li
                         class="nav-item"
-                        v-if="
-                            permisos.includes('usuarios.index') &&
-                            user_sidebar.configuracion == 1
-                        "
+                        v-if="permisos.includes('usuarios.index')"
                     >
                         <router-link
                             exact
@@ -98,18 +99,95 @@
                             <p>Usuarios</p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fa fa-table"></i>
+                            <p>Portal</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fa fa-tags"></i>
+                            <p>Productos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fa fa-list-alt"></i>
+                            <p>Catálogos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p>Pedidos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Personal</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-truck-moving"></i>
+                            <p>Distribución de Pedidos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>Pagos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            href=""
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-cash-register"></i>
+                            <p>Cajas</p>
+                        </a>
+                    </li>
                     <li
-                        class="nav-header bg-gray"
+                        class="nav-header font-weight-bold"
                         v-if="permisos.includes('reportes.usuarios')"
                     >
-                        REPORTES
+                        REPORTES:
                     </li>
                     <li
                         class="nav-item"
-                        v-if="
-                            permisos.includes('reportes.usuarios') &&
-                            user_sidebar.configuracion == 1
-                        "
+                        v-if="permisos.includes('reportes.usuarios')"
                     >
                         <router-link
                             :to="{ name: 'reportes.usuarios' }"
@@ -119,7 +197,7 @@
                             <p>Lista de Usuarios</p>
                         </router-link>
                     </li>
-                    <li class="nav-header bg-gray">OTRAS OPCIONES</li>
+                    <li class="nav-header font-weight-bold">OTRAS OPCIONES:</li>
                     <li
                         class="nav-item"
                         v-if="permisos.includes('configuracion.index')"
@@ -177,7 +255,7 @@ export default {
     },
     mounted() {
         // Configurar el temporizador para llamar a logout después de 5 minutos de inactividad
-        // this.resetLogoutTimer();
+        this.resetLogoutTimer();
         // window.addEventListener("mousemove", this.resetLogoutTimer);
     },
     methods: {
@@ -196,7 +274,7 @@ export default {
             clearTimeout(this.timeoutId);
             this.timeoutId = setTimeout(() => {
                 this.logout();
-            }, 5 * 60 * 1000); // 5 minutos en milisegundos
+            }, 10 * 60 * 1000); // 10 minutos en milisegundos
         },
     },
     beforeDestroy() {

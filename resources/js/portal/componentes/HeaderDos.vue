@@ -13,24 +13,84 @@
                     <!-- Menu desktop -->
                     <div class="menu-desktop">
                         <ul class="main-menu">
-                            <li class="active-menu">
-                                <a href="">Inicio</a>
+                            <li
+                                :class="[
+                                    $route.name == 'portal.inicio'
+                                        ? 'active-menu'
+                                        : '',
+                                ]"
+                            >
+                                <router-link
+                                    :to="{ name: 'portal.inicio' }"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                    >Inicio</router-link
+                                >
                             </li>
 
-                            <li>
-                                <a href="">Secciones</a>
+                            <li
+                                :class="[
+                                    $route.name == 'portal.secciones'
+                                        ? 'active-menu'
+                                        : '',
+                                ]"
+                            >
+                                <router-link
+                                    :to="{ name: 'portal.secciones' }"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                    >Secciones</router-link
+                                >
                             </li>
 
-                            <li>
-                                <a href="">Nosotros</a>
+                            <li
+                                :class="[
+                                    $route.name == 'portal.nosotros'
+                                        ? 'active-menu'
+                                        : '',
+                                ]"
+                            >
+                                <router-link
+                                    :to="{ name: 'portal.nosotros' }"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                    >Nosotros</router-link
+                                >
                             </li>
 
-                            <li>
-                                <a href="">Productos</a>
+                            <li
+                                :class="[
+                                    $route.name == 'portal.productos'
+                                        ? 'active-menu'
+                                        : '',
+                                ]"
+                            >
+                                <router-link
+                                    :to="{ name: 'portal.productos' }"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                    >Productos</router-link
+                                >
                             </li>
 
-                            <li>
-                                <a href="">Contactos</a>
+                            <li
+                                :class="[
+                                    $route.name == 'portal.contactos'
+                                        ? 'active-menu'
+                                        : '',
+                                ]"
+                            >
+                                <router-link
+                                    :to="{ name: 'portal.contactos' }"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                    >Contactos</router-link
+                                >
                             </li>
                         </ul>
                     </div>
@@ -177,7 +237,9 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+            fullscreenLoading: false,
+        };
     },
     methods: {},
 };

@@ -8,7 +8,7 @@
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header bg-warning">
                     <h4 class="modal-title" v-text="tituloModal"></h4>
                     <button
                         type="button"
@@ -158,7 +158,7 @@
                                     :class="{
                                         'text-danger': errors.correo,
                                     }"
-                                    >Correo*</label
+                                    >Correo</label
                                 >
                                 <el-input
                                     placeholder="Correo"
@@ -202,15 +202,21 @@
                                     }"
                                     >Tipo de Usuario*</label
                                 >
-                                <el-input
+                                <el-select
+                                    class="w-100"
                                     :class="{
                                         'is-invalid': errors.tipo,
                                     }"
                                     v-model="usuario.tipo"
                                     clearable
-                                    readonly
                                 >
-                                </el-input>
+                                    <el-option
+                                        v-for="item in listTipos"
+                                        :key="item"
+                                        :value="item"
+                                        :label="item"
+                                    ></el-option>
+                                </el-select>
                                 <span
                                     class="error invalid-feedback"
                                     v-if="errors.tipo"
@@ -239,33 +245,6 @@
                                     v-text="errors.foto[0]"
                                 ></span>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label
-                                    :class="{
-                                        'text-danger': errors.acceso,
-                                    }"
-                                    >Acceso*</label
-                                >
-                                <el-switch
-                                    :class="{
-                                        'is-invalid': errors.acceso,
-                                    }"
-                                    style="display: block"
-                                    v-model="usuario.acceso"
-                                    active-color="#13ce66"
-                                    inactive-color="#ff4949"
-                                    active-text="HABILITADO"
-                                    inactive-text="DESHABILITADO"
-                                    active-value="1"
-                                    inactive-value="0"
-                                >
-                                </el-switch>
-                                <span
-                                    class="error invalid-feedback"
-                                    v-if="errors.acceso"
-                                    v-text="errors.acceso[0]"
-                                ></span>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -279,8 +258,8 @@
                         Cerrar
                     </button>
                     <el-button
-                        type="primary"
-                        class="bg-primary"
+                        type="warning"
+                        class="bg-warning"
                         :loading="enviando"
                         @click="setRegistroModal()"
                         >{{ textoBoton }}</el-button
@@ -316,7 +295,6 @@ export default {
                 fono: [],
                 tipo: "",
                 foto: null,
-                acceso: 0,
             },
         },
     },
@@ -363,21 +341,14 @@ export default {
                 { value: "PD", label: "Pando" },
                 { value: "BN", label: "Beni" },
             ],
-            listTipos: ["ADMINISTRADOR", "AUXILIAR"],
-            listCajas: [],
+            listTipos: ["ADMINISTRADOR", "REPRESENTANTE", "SOCIO"],
             errors: [],
         };
     },
     mounted() {
         this.bModal = this.muestra_modal;
-        this.getCajas();
     },
     methods: {
-        getCajas() {
-            axios.get("/admin/cajas").then((response) => {
-                this.listCajas = response.data.cajas;
-            });
-        },
         setRegistroModal() {
             this.enviando = true;
             try {
@@ -434,11 +405,6 @@ export default {
                 formdata.append(
                     "foto",
                     this.usuario.foto ? this.usuario.foto : ""
-                );
-
-                formdata.append(
-                    "acceso",
-                    this.usuario.acceso ? this.usuario.acceso : ""
                 );
 
                 if (this.accion == "edit") {
@@ -518,7 +484,6 @@ export default {
             this.usuario.fono = [];
             this.usuario.tipo = "";
             this.usuario.foto = null;
-            this.usuario.acceso = 0;
             this.$refs.input_file.value = null;
         },
     },

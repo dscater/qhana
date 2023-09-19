@@ -18,7 +18,6 @@ class UserController extends Controller
         'paterno' => 'required|min:4',
         'ci' => 'required|numeric|digits_between:4, 20|unique:users,ci',
         'ci_exp' => 'required',
-        'correo' => 'required|email|unique:users,correo',
         'fono' => 'required',
         'dir' => 'required',
     ];
@@ -48,8 +47,26 @@ class UserController extends Controller
             'usuarios.edit',
             'usuarios.destroy',
 
+            'portals.index',
+
+            'productos.index',
+
+            'catalogos.index',
+
+            'pedidos.index',
+
+            'personals.index',
+
+            'distribucions.index',
+
+            'pagos.index',
+
+            'cajas.index',
+
             'configuracion.index',
             'configuracion.edit',
+
+            // "reportes.usuarios"
         ],
         "REPRESENTANTE" => [],
         "SOCIO" => [],
@@ -66,6 +83,10 @@ class UserController extends Controller
     {
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
+        }
+
+        if ($request->hasFile('correo') && trim($request->hasFile('correo')) != "") {
+            $this->validacion['correo'] = 'required|email|unique:users,correo';
         }
 
         $request->validate($this->validacion, $this->mensajes);
@@ -350,10 +371,44 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Usuarios',
                 'cantidad' => count(User::where('id', '!=', 1)->get()),
-                'color' => 'bg-primary',
-                'icon' => 'fas fa-users',
+                'color' => 'bg-dark',
+                'icon' => asset("imgs/people.png"),
+                "url" => "usuarios.index"
             ];
         }
+
+        $array_infos[] = [
+            'label' => 'Pedidos',
+            'cantidad' => count(User::where('id', '!=', 1)->get()),
+            'color' => 'bg-dark',
+            'icon' => asset("imgs/checklist.png"),
+            "url" => ""
+        ];
+
+        $array_infos[] = [
+            'label' => 'Catálogos',
+            'cantidad' => count(User::where('id', '!=', 1)->get()),
+            'color' => 'bg-dark',
+            'icon' => asset("imgs/catalogue.png"),
+            "url" => ""
+        ];
+
+        $array_infos[] = [
+            'label' => 'Productos',
+            'cantidad' => count(User::where('id', '!=', 1)->get()),
+            'color' => 'bg-dark',
+            'icon' => asset("imgs/product-development.png"),
+            "url" => ""
+        ];
+
+        $array_infos[] = [
+            'label' => 'Personal',
+            'cantidad' => count(User::where('id', '!=', 1)->get()),
+            'color' => 'bg-dark',
+            'icon' => asset("imgs/teamwork.png"),
+            "url" => ""
+        ];
+
         return response()->JSON($array_infos);
     }
 

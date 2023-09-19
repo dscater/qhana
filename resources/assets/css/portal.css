@@ -1,6 +1,9 @@
 :root {
     --principal: #c57a40;
-    --secundario: #1a1915;
+    --principal_hover: #e48033;
+    --principal_transparent: #c57a40cb;
+    --secundario: #222222;
+    --secundario_transparent: #222222f3;
     --correcto: #d2e7c9;
     --secondary: #da1900;
     --transparente: #000000bd;
@@ -20,7 +23,8 @@ a.logo strong {
     margin-right: 5px;
 }
 
-.main-menu > li.active-menu a {
+.main-menu > li.active-menu a,
+.main-menu > li.active a {
     color: black;
     font-weight: bold;
 }
@@ -50,6 +54,11 @@ a.logo strong {
 
 .header-cart-item-info {
     color: var(--secundario);
+}
+
+/* SLIDER */
+.section-slide {
+    background-color: var(--secundario);
 }
 
 /* SIDEBAR */
@@ -130,4 +139,20 @@ a.cl7:hover,
 
 .arrow-slick1:hover {
     color: black;
+}
+
+.el-loading-mask {
+    background-color: var(--secundario_transparent) !important;
+}
+.el-loading-spinner .path {
+    animation: loading-dash 1.5s ease-in-out infinite;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    stroke-width: 4 !important;
+    stroke: var(--principal) !important;
+    stroke-linecap: round;
+}
+
+.hov-btn1:hover {
+    background-color: var(--principal);
 }
