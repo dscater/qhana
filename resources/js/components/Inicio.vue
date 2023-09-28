@@ -75,7 +75,7 @@ export default {
     },
     methods: {
         getInfoBox() {
-            axios.get("/admin/usuarios/getInfoBox").then((res) => {
+            axios.get(main_url + "/admin/usuarios/getInfoBox").then((res) => {
                 this.listInfoBox = res.data;
             });
         },

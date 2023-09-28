@@ -91,6 +91,22 @@
                                                         size="3rem"
                                                     ></b-avatar>
                                                 </template>
+                                                <template #cell(estado)="row">
+                                                    <span
+                                                        class="badge badge-success"
+                                                        v-if="
+                                                            row.item.estado == 1
+                                                        "
+                                                    >
+                                                        HABILITADO
+                                                    </span>
+                                                    <span
+                                                        v-else
+                                                        class="badge badge-danger"
+                                                    >
+                                                        RETIRADO
+                                                    </span>
+                                                </template>
 
                                                 <template
                                                     #cell(fecha_registro)="row"
@@ -126,6 +142,66 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
+                                                                    >Fecha de nacimiento:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.fecha_nac
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Genero:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.genero
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Cargo:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.cargo
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Fecha de ingreso:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.fecha_ingreso
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Taller al que pertenece:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.taller
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
                                                                     >Dirección:</b
                                                                 ></b-col
                                                             >
@@ -138,11 +214,11 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Correo:</b
+                                                                    >Teléfono/Celular:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.correo
+                                                                row.item.fono
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-row class="mb-2">
@@ -150,11 +226,35 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Teléfono/Celular:</b
+                                                                    >Tipo de personal:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.fono
+                                                                row.item.tipo_personal
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Porcentaje de discapacidad(%):</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.p_discapacidad
+                                                            }}</b-col>
+                                                        </b-row>
+                                                        <b-row class="mb-2">
+                                                            <b-col
+                                                                sm="3"
+                                                                class="text-sm-right"
+                                                                ><b
+                                                                    >Validez del credencial:</b
+                                                                ></b-col
+                                                            >
+                                                            <b-col>{{
+                                                                row.item.validez_credencial
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-button
@@ -174,31 +274,30 @@
                                                     >
                                                         <b-button
                                                             v-if="
-                                                                user.configuracion ==
-                                                                    1 &&
-                                                                row.item.tipo ==
-                                                                    'ADMINISTRADOR'
+                                                                permisos.includes(
+                                                                    'usuarios.edit'
+                                                                )
                                                             "
                                                             size="sm"
                                                             pill
-                                                            variant="outline-warning"
+                                                            variant="outline-primary"
                                                             class="btn-flat btn-block"
-                                                            title="Asignar configuración"
+                                                            title="Exportar credencial"
                                                             @click="
-                                                                asignarConfiguracion(
-                                                                    row.item.id,
-                                                                    `Usuario asignado: ${row.item.full_name}`
+                                                                editarRegistro(
+                                                                    row.item
                                                                 )
                                                             "
                                                         >
                                                             <i
-                                                                class="fa fa-user-cog"
+                                                                class="fa fa-id-card"
                                                             ></i>
                                                         </b-button>
                                                         <b-button
                                                             v-if="
-                                                                user.configuracion ==
-                                                                1
+                                                                permisos.includes(
+                                                                    'usuarios.edit'
+                                                                )
                                                             "
                                                             size="sm"
                                                             pill
@@ -217,8 +316,9 @@
                                                         </b-button>
                                                         <b-button
                                                             v-if="
-                                                                user.configuracion ==
-                                                                1
+                                                                permisos.includes(
+                                                                    'usuarios.destroy'
+                                                                )
                                                             "
                                                             size="sm"
                                                             pill
@@ -230,7 +330,7 @@
                                                                     row.item.id,
                                                                     row.item
                                                                         .full_name +
-                                                                        '<br/><h4>Esta acción eliminará todos los registros relacionados a este y después no se podrá deshacer</h4>'
+                                                                        '<br/><h4>¿Está seguro(a) de eliminar este registro?</h4>'
                                                                 )
                                                             "
                                                         >
@@ -311,6 +411,7 @@ export default {
                 { key: "full_ci", label: "C.I.", sortable: true },
                 { key: "tipo", label: "Tipo Usuario", sortable: true },
                 { key: "foto", label: "Foto" },
+                { key: "estado", label: "Estado" },
                 {
                     key: "fecha_registro",
                     label: "Fecha de registro",
@@ -333,11 +434,20 @@ export default {
                 materno: "",
                 ci: "",
                 ci_exp: "",
+                fecha_nac: "",
+                genero: "",
+                cargo: "",
+                fecha_ingreso: "",
+                taller: "",
                 dir: "",
-                correo: "",
                 fono: [],
+                tipo_personal: "",
+                p_discapacidad: "",
                 tipo: "",
                 foto: null,
+                validez_credencial: "",
+                password: "",
+                estado: "",
             },
             currentPage: 1,
             perPage: 5,
@@ -366,10 +476,26 @@ export default {
             this.oUsuario.materno = item.materno ? item.materno : "";
             this.oUsuario.ci = item.ci ? item.ci : "";
             this.oUsuario.ci_exp = item.ci_exp ? item.ci_exp : "";
+            this.oUsuario.fecha_nac = item.fecha_nac ? item.fecha_nac : "";
+            this.oUsuario.genero = item.genero ? item.genero : "";
+            this.oUsuario.cargo = item.cargo ? item.cargo : "";
+            this.oUsuario.fecha_ingreso = item.fecha_ingreso
+                ? item.fecha_ingreso
+                : "";
+            this.oUsuario.taller = item.taller ? item.taller : "";
             this.oUsuario.dir = item.dir ? item.dir : "";
-            this.oUsuario.correo = item.correo ? item.correo : "";
             this.oUsuario.fono = item.fono ? item.fono.split("; ") : "";
+            this.oUsuario.tipo_personal = item.tipo_personal
+                ? item.tipo_personal
+                : "";
+            this.oUsuario.p_discapacidad = item.p_discapacidad
+                ? item.p_discapacidad
+                : "";
             this.oUsuario.tipo = item.tipo ? item.tipo : "";
+            this.oUsuario.validez_credencial = item.validez_credencial
+                ? item.validez_credencial
+                : "";
+            this.oUsuario.estado = item.estado ? "" + item.estado : "0";
             this.modal_accion = "edit";
             this.muestra_modal = true;
         },
@@ -378,7 +504,7 @@ export default {
         getUsuarios() {
             this.showOverlay = true;
             this.muestra_modal = false;
-            let url = "/admin/usuarios";
+            let url = main_url + "/admin/usuarios";
             if (this.pagina != 0) {
                 url += "?page=" + this.pagina;
             }
@@ -397,7 +523,7 @@ export default {
                 title: "¿Quierés eliminar este registro?",
                 html: `<strong>${descripcion}</strong>`,
                 showCancelButton: true,
-                confirmButtonColor: "#149FDA",
+                confirmButtonColor: "#c57a40",
                 confirmButtonText: "Si, eliminar",
                 cancelButtonText: "No, cancelar",
                 denyButtonText: `No, cancelar`,
@@ -405,7 +531,7 @@ export default {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios
-                        .post("/admin/usuarios/" + id, {
+                        .post(main_url + "/admin/usuarios/" + id, {
                             _method: "DELETE",
                         })
                         .then((res) => {
@@ -417,57 +543,6 @@ export default {
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
-                        })
-                        .catch((error) => {
-                            if (error.response) {
-                                if (error.response.status === 422) {
-                                    this.errors = error.response.data.errors;
-                                }
-                                if (
-                                    error.response.status === 420 ||
-                                    error.response.status === 419 ||
-                                    error.response.status === 401
-                                ) {
-                                    window.location = "/";
-                                }
-                                if (error.response.status === 500) {
-                                    Swal.fire({
-                                        icon: "error",
-                                        title: "Error",
-                                        html: error.response.data.message,
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                    });
-                                }
-                            }
-                        });
-                }
-            });
-        },
-        asignarConfiguracion(id, descripcion) {
-            Swal.fire({
-                title: "¿Estás seguro(a) de asignar la configuración del sistema a este usuario?",
-                html: `<strong>${descripcion}</strong>`,
-                showCancelButton: true,
-                confirmButtonColor: "#149FDA",
-                confirmButtonText: "Si, asignar",
-                cancelButtonText: "No, cancelar",
-                denyButtonText: `No, cancelar`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    axios
-                        .post("/admin/usuarios/asignarConfiguracion/" + id, {
-                            _method: "PATCH",
-                        })
-                        .then((res) => {
-                            Swal.fire({
-                                icon: "success",
-                                title: res.data.msj,
-                                showConfirmButton: false,
-                                timer: 1500,
-                            });
-                            this.$router.push({ name: "inicio" });
                         })
                         .catch((error) => {
                             if (error.response) {
@@ -513,13 +588,19 @@ export default {
             this.oUsuario.materno = "";
             this.oUsuario.ci = "";
             this.oUsuario.ci_exp = "";
-            this.oUsuario.dir = "";
-            this.oUsuario.correo = "";
-            this.oUsuario.fono = [];
+            this.oUsuario.fecha_nac = "";
+            this.oUsuario.genero = "";
             this.oUsuario.cargo = "";
-            this.oUsuario.unidad_id = "";
-            this.oUsuario.tipo = "ADMINISTRADOR";
+            this.oUsuario.fecha_ingreso = "";
+            this.oUsuario.taller = "";
+            this.oUsuario.dir = "";
+            this.oUsuario.fono = [];
+            this.oUsuario.tipo_personal = "";
+            this.oUsuario.p_discapacidad = "";
+            this.oUsuario.tipo = "";
             this.oUsuario.foto = null;
+            this.oUsuario.validez_credencial = "";
+            this.oUsuario.estado = "0";
         },
         formatoFecha(date) {
             return this.$moment(String(date)).format("DD/MM/YYYY");

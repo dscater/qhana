@@ -125,11 +125,12 @@ export default {
     methods: {
         logout() {
             this.fullscreenLoading = true;
-            axios.post("/logout").then((res) => {
+            axios.post(main_url + "/logout").then((res) => {
+                let self = this;
                 setTimeout(function () {
+                    self.$router.push({ name: "login" });
                     localStorage.clear();
                     location.reload();
-                    this.$router.push({ name: "login" });
                 }, 500);
             });
         },

@@ -35,6 +35,8 @@ class ConfiguracionController extends Controller
             'dir' => 'required|min:4',
             'fono' => 'required|min:4',
             'correo' => 'nullable|email',
+            'correo_pedido' => 'required|email',
+            'correo_pedido2' => 'required|email',
             'actividad' => 'required|min:4',
         ];
         $mensajes =  [
@@ -64,6 +66,10 @@ class ConfiguracionController extends Controller
             try {
                 $datos_original = HistorialAccion::getDetalleRegistro($configuracion, "configuracions");
                 $configuracion->update(array_map('mb_strtoupper', $request->except('logo')));
+                $configuracion->correo = mb_strtolower($configuracion->correo);
+                $configuracion->correo_pedido = mb_strtolower($configuracion->correo_pedido);
+                $configuracion->correo_pedido2 = mb_strtolower($configuracion->correo_pedido2);
+                $configuracion->save();
                 if ($request->hasFile('logo')) {
                     $antiguo = $configuracion->logo;
                     \File::delete(public_path() . '/imgs/' . $antiguo);

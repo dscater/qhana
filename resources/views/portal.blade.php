@@ -11,8 +11,8 @@
     <style>
     </style>
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/portal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal.css') }}">
 </head>
 
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed text-sm">
@@ -21,8 +21,13 @@
             ruta_asset="{{ asset('') }}" configuracion="{{ $configuracion->first() }}">
         </Portal>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/portal.js') }}"></script>
+    <script>
+        var main_url = "{{ url('') }}";
+        var app_base = "";
+        // var app_base = "qhana"; //habilitar esta linea si existe la carpeta public en el proyecto con el nombre del sistema
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/portal.js') }}"></script>
     <script>
         // OPCIONAL
         $('.js-addwish-b2').on('click', function(e) {

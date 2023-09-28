@@ -75,17 +75,6 @@
 
                             <div class="card-body">
                                 <strong
-                                    ><i
-                                        class="fas fa-envelope-open-text mr-1"
-                                    ></i>
-                                    Correo</strong
-                                >
-                                <p
-                                    class="text-orange"
-                                    v-text="oUsuario?.correo"
-                                ></p>
-                                <hr />
-                                <strong
                                     ><i class="fas fa-id-card mr-1"></i>
                                     C.I:</strong
                                 >
@@ -309,7 +298,7 @@ export default {
             document.getElementById("img_perfil").src = this.src_perfil;
         },
         getUsuario() {
-            axios.get("/admin/usuarios/" + this.id).then((res) => {
+            axios.get(main_url + "/admin/usuarios/" + this.id).then((res) => {
                 this.oUsuario = res.data.usuario;
                 setTimeout(() => {
                     this.loading_foto = false;
@@ -322,7 +311,8 @@ export default {
             try {
                 axios
                     .post(
-                        "/admin/usuarios/actualizaContrasenia/" +
+                        main_url +
+                            "/admin/usuarios/actualizaContrasenia/" +
                             this.oUsuario.id,
                         this.formPassword
                     )
@@ -374,7 +364,9 @@ export default {
             try {
                 axios
                     .post(
-                        "/admin/usuarios/actualizaFoto/" + this.oUsuario.id,
+                        main_url +
+                            "/admin/usuarios/actualizaFoto/" +
+                            this.oUsuario.id,
                         formData,
                         config
                     )

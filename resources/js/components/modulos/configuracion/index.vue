@@ -69,13 +69,6 @@
                                         <el-descriptions-item>
                                             <template slot="label">
                                                 <i class="el-icon-document"></i>
-                                                Nit
-                                            </template>
-                                            {{ oConfiguracion.nit }}
-                                        </el-descriptions-item>
-                                        <el-descriptions-item>
-                                            <template slot="label">
-                                                <i class="el-icon-document"></i>
                                                 Actividad
                                             </template>
                                             {{ oConfiguracion.actividad }}
@@ -106,9 +99,23 @@
                                         <el-descriptions-item>
                                             <template slot="label">
                                                 <i class="el-icon-message"></i>
-                                                Correo
+                                                Correo eléctronico
                                             </template>
                                             {{ oConfiguracion.correo }}
+                                        </el-descriptions-item>
+                                        <el-descriptions-item>
+                                            <template slot="label">
+                                                <i class="el-icon-message"></i>
+                                                Correo eléctronico pedido 1
+                                            </template>
+                                            {{ oConfiguracion.correo_pedido }}
+                                        </el-descriptions-item>
+                                        <el-descriptions-item>
+                                            <template slot="label">
+                                                <i class="el-icon-message"></i>
+                                                Correo eléctronico pedido 2
+                                            </template>
+                                            {{ oConfiguracion.correo_pedido2 }}
                                         </el-descriptions-item>
                                         <el-descriptions-item>
                                             <template slot="label">
@@ -221,26 +228,6 @@
                                         class="error invalid-feedback"
                                         v-if="errors.razon_social"
                                         v-text="errors.razon_social[0]"
-                                    ></span>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label
-                                        :class="{ 'text-danger': errors.nit }"
-                                        >Nit*</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        :class="{
-                                            'is-invalid': errors.nit,
-                                        }"
-                                        placeholder="Alias"
-                                        v-model="oConfiguracion.nit"
-                                    />
-                                    <span
-                                        class="error invalid-feedback"
-                                        v-if="errors.nit"
-                                        v-text="errors.nit[0]"
                                     ></span>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -367,6 +354,46 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label
+                                        :class="{
+                                            'text-danger': errors.correo_pedido,
+                                        }"
+                                        >Correo eléctronico pedido 1</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errors.correo_pedido }"
+                                        placeholder="Correo eléctronico pedido 1"
+                                        v-model="oConfiguracion.correo_pedido"
+                                    />
+                                    <span
+                                        class="error invalid-feedback"
+                                        v-if="errors.correo_pedido"
+                                        v-text="errors.correo_pedido[0]"
+                                    ></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label
+                                        :class="{
+                                            'text-danger': errors.correo_pedido2,
+                                        }"
+                                        >Correo electrónico pedido 2</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errors.correo_pedido2 }"
+                                        placeholder="Correo electrónico pedido 2"
+                                        v-model="oConfiguracion.correo_pedido2"
+                                    />
+                                    <span
+                                        class="error invalid-feedback"
+                                        v-if="errors.correo_pedido2"
+                                        v-text="errors.correo_pedido2[0]"
+                                    ></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label
                                         :class="{ 'text-danger': errors.logo }"
                                         >Logo</label
                                     >
@@ -439,6 +466,8 @@ export default {
                 fono: "",
                 web: "",
                 correo: "",
+                correo_pedido: "",
+                correo_pedido2: "",
                 logo: "",
             },
             errors: [],
@@ -455,7 +484,7 @@ export default {
         // Listar Usuarios
         getConfiguracion() {
             this.loading = true;
-            let url = "/configuracion/getConfiguracion";
+            let url = main_url + "/configuracion/getConfiguracion";
             axios.get(url).then((res) => {
                 this.oConfiguracion = res.data.configuracion;
             });
@@ -469,7 +498,7 @@ export default {
             this.enviando = true;
             try {
                 this.textoBtn = "Enviando...";
-                let url = "/configuracion/update";
+                let url = main_url + "/configuracion/update";
                 let formdata = new FormData();
                 formdata.append(
                     "nombre_sistema",
@@ -480,7 +509,6 @@ export default {
                     "razon_social",
                     this.oConfiguracion.razon_social
                 );
-                formdata.append("nit", this.oConfiguracion.nit);
                 formdata.append("actividad", this.oConfiguracion.actividad);
                 formdata.append("ciudad", this.oConfiguracion.ciudad);
                 formdata.append("dir", this.oConfiguracion.dir);
@@ -492,6 +520,18 @@ export default {
                 formdata.append(
                     "correo",
                     this.oConfiguracion.correo ? this.oConfiguracion.correo : ""
+                );
+                formdata.append(
+                    "correo_pedido",
+                    this.oConfiguracion.correo_pedido
+                        ? this.oConfiguracion.correo_pedido
+                        : ""
+                );
+                formdata.append(
+                    "correo_pedido2",
+                    this.oConfiguracion.correo_pedido2
+                        ? this.oConfiguracion.correo_pedido2
+                        : ""
                 );
                 formdata.append("logo", this.oConfiguracion.logo);
 
@@ -572,6 +612,8 @@ export default {
             this.oConfiguracion.fono = "";
             this.oConfiguracion.web = "";
             this.oConfiguracion.correo = "";
+            this.oConfiguracion.correo_pedido = "";
+            this.oConfiguracion.correo_pedido2 = "";
             this.oConfiguracion.logo = "";
         },
     },

@@ -1040,7 +1040,7 @@ export default {
     },
     methods: {
         getUrlAsset() {
-            axios.get("/url_asset").then((response) => {
+            axios.get(main_url + "/url_asset").then((response) => {
                 this.url_asset = response.data;
             });
         },

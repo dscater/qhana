@@ -18,8 +18,18 @@ class UserController extends Controller
         'paterno' => 'required|min:4',
         'ci' => 'required|numeric|digits_between:4, 20|unique:users,ci',
         'ci_exp' => 'required',
+        'fecha_nac' => 'required|date',
+        'genero' => 'required',
+        'cargo' => 'required',
+        'fecha_ingreso' => 'required|date',
+        'taller' => 'required',
+        'estado' => 'required',
         'fono' => 'required',
         'dir' => 'required',
+        'tipo_personal' => 'required',
+        'p_discapacidad' => 'required|numeric|min:1',
+        'validez_credencial' => 'required',
+
     ];
 
     public $mensajes = [
@@ -85,8 +95,10 @@ class UserController extends Controller
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }
 
-        if ($request->hasFile('correo') && trim($request->hasFile('correo')) != "") {
-            $this->validacion['correo'] = 'required|email|unique:users,correo';
+        if ($request["tipo_personal"] == "SOCIO") {
+            $this->validacion['tipo'] = 'required';
+        } else {
+            $request["tipo"] = 'NINGUNO';
         }
 
         $request->validate($this->validacion, $this->mensajes);
@@ -108,8 +120,6 @@ class UserController extends Controller
             // crear el Usuario
             $nuevo_usuario = User::create(array_map('mb_strtoupper', $request->except('foto')));
             $nuevo_usuario->password = Hash::make($request->ci);
-            $nuevo_usuario->usuario = mb_strtolower($nuevo_usuario->usuario);
-            $nuevo_usuario->correo = mb_strtolower($nuevo_usuario->correo);
             $nuevo_usuario->save();
             $nuevo_usuario->foto = 'default.png';
             if ($request->hasFile('foto')) {
@@ -118,7 +128,6 @@ class UserController extends Controller
                 $nuevo_usuario->foto = $nom_foto;
                 $file->move(public_path() . '/imgs/users/', $nom_foto);
             }
-            $nuevo_usuario->correo = mb_strtolower($nuevo_usuario->correo);
             $nuevo_usuario->save();
 
             $datos_original = HistorialAccion::getDetalleRegistro($nuevo_usuario, "users");
@@ -150,20 +159,20 @@ class UserController extends Controller
     public function update(Request $request, User $usuario)
     {
         $this->validacion['ci'] = 'required|min:4|numeric|unique:users,ci,' . $usuario->id;
-        $this->validacion['correo'] = 'required|email|unique:users,correo,' . $usuario->id;
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }
+        if ($request["tipo_personal"] == "SOCIO") {
+            $this->validacion['tipo'] = 'required';
+        } else {
+            $request["tipo"] = 'NINGUNO';
+        }
+
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($usuario, "users");
             $usuario->update(array_map('mb_strtoupper', $request->except('foto')));
-            $usuario->usuario = mb_strtolower($usuario->correo);
-            $usuario->correo = mb_strtolower($usuario->correo);
-            if ($usuario->correo == "") {
-                $usuario->correo = NULL;
-            }
 
             if ($request->hasFile('foto')) {
                 $antiguo = $usuario->foto;
@@ -175,7 +184,6 @@ class UserController extends Controller
                 $usuario->foto = $nom_foto;
                 $file->move(public_path() . '/imgs/users/', $nom_foto);
             }
-            $usuario->correo = mb_strtolower($usuario->correo);
             $usuario->save();
 
             $datos_nuevo = HistorialAccion::getDetalleRegistro($usuario, "users");

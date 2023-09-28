@@ -11,15 +11,15 @@
     <style>
         #app {
             background-color: none;
-            background-image: url("/imgs/login.png");
+            background-image: url("{{ url('') }}/imgs/login.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
         }
     </style>
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/plantilla.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plantilla.css') }}">
 </head>
 
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed text-sm">
@@ -34,8 +34,13 @@
             </Auth>
         @endif
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/plantilla.js') }}"></script>
+    <script>
+        var main_url = "{{ url('') }}";
+        var app_base = "";
+        // var app_base = "qhana"; //habilitar esta linea si existe la carpeta public en el proyecto con el nombre del sistema
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/plantilla.js') }}"></script>
     <script>
         $(document).ready(function() {
             $(document).on("click", "aside nav ul li a", function() {

@@ -136,41 +136,133 @@
                             <div class="form-group col-md-6">
                                 <label
                                     :class="{
-                                        'text-danger': errors.dir,
+                                        'text-danger': errors.fecha_nac,
                                     }"
-                                    >Dirección*</label
+                                    >Fecha de nacimiento*</label
                                 >
-                                <el-input
-                                    placeholder="Dirección"
-                                    :class="{ 'is-invalid': errors.dir }"
-                                    v-model="usuario.dir"
-                                    clearable
-                                >
-                                </el-input>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.fecha_nac,
+                                    }"
+                                    v-model="usuario.fecha_nac"
+                                />
                                 <span
                                     class="error invalid-feedback"
-                                    v-if="errors.dir"
-                                    v-text="errors.dir[0]"
+                                    v-if="errors.fecha_nac"
+                                    v-text="errors.fecha_nac[0]"
                                 ></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label
                                     :class="{
-                                        'text-danger': errors.correo,
+                                        'text-danger': errors.genero,
                                     }"
-                                    >Correo</label
+                                    >Genero*</label
                                 >
+
                                 <el-input
-                                    placeholder="Correo"
-                                    :class="{ 'is-invalid': errors.correo }"
-                                    v-model="usuario.correo"
+                                    placeholder="Genero"
+                                    :class="{ 'is-invalid': errors.genero }"
+                                    v-model="usuario.genero"
                                     clearable
                                 >
                                 </el-input>
                                 <span
                                     class="error invalid-feedback"
-                                    v-if="errors.correo"
-                                    v-text="errors.correo[0]"
+                                    v-if="errors.genero"
+                                    v-text="errors.genero[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.cargo,
+                                    }"
+                                    >Cargo*</label
+                                >
+
+                                <el-input
+                                    placeholder="Cargo"
+                                    :class="{ 'is-invalid': errors.cargo }"
+                                    v-model="usuario.cargo"
+                                    clearable
+                                >
+                                </el-input>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.cargo"
+                                    v-text="errors.cargo[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.fecha_ingreso,
+                                    }"
+                                    >Fecha de ingreso*</label
+                                >
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.fecha_ingreso,
+                                    }"
+                                    v-model="usuario.fecha_ingreso"
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.fecha_ingreso"
+                                    v-text="errors.fecha_ingreso[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.taller,
+                                    }"
+                                    >Taller al que pertenece*</label
+                                >
+
+                                <el-input
+                                    placeholder="Taller al que pertenece"
+                                    :class="{ 'is-invalid': errors.taller }"
+                                    v-model="usuario.taller"
+                                    clearable
+                                >
+                                </el-input>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.taller"
+                                    v-text="errors.taller[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.estado,
+                                    }"
+                                    >Estado*</label
+                                >
+                                <el-switch
+                                    :class="{
+                                        'is-invalid': errors.estado,
+                                    }"
+                                    style="display: block"
+                                    v-model="usuario.estado"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949"
+                                    active-text="ACTIVO"
+                                    inactive-text="RETIRADO"
+                                    active-value="1"
+                                    inactive-value="0"
+                                >
+                                </el-switch>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.estado"
+                                    v-text="errors.estado[0]"
                                 ></span>
                             </div>
                             <div class="form-group col-md-6">
@@ -196,6 +288,80 @@
                                 ></span>
                             </div>
                             <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.dir,
+                                    }"
+                                    >Dirección*</label
+                                >
+                                <el-input
+                                    placeholder="Dirección"
+                                    :class="{ 'is-invalid': errors.dir }"
+                                    v-model="usuario.dir"
+                                    clearable
+                                >
+                                </el-input>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.dir"
+                                    v-text="errors.dir[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.tipo_personal,
+                                    }"
+                                    >Tipo de Personal*</label
+                                >
+                                <el-select
+                                    class="w-100"
+                                    :class="{
+                                        'is-invalid': errors.tipo_personal,
+                                    }"
+                                    v-model="usuario.tipo_personal"
+                                    clearable
+                                >
+                                    <el-option
+                                        v-for="item in listTiposPersonal"
+                                        :key="item"
+                                        :value="item"
+                                        :label="item"
+                                    ></el-option>
+                                </el-select>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.tipo_personal"
+                                    v-text="errors.tipo_personal[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.p_discapacidad,
+                                    }"
+                                    >Porcentaje de discapacidad(%)*</label
+                                >
+                                <input
+                                    type="number"
+                                    placeholder="Porcentaje de discapacidad(%)"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.p_discapacidad,
+                                    }"
+                                    v-model="usuario.p_discapacidad"
+                                    clearable
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.p_discapacidad"
+                                    v-text="errors.p_discapacidad[0]"
+                                ></span>
+                            </div>
+                            <div
+                                class="form-group col-md-6"
+                                v-show="usuario.tipo_personal == 'SOCIO'"
+                            >
                                 <label
                                     :class="{
                                         'text-danger': errors.tipo,
@@ -245,6 +411,28 @@
                                     v-text="errors.foto[0]"
                                 ></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger':
+                                            errors.validez_credencial,
+                                    }"
+                                    >Validez del Credencial*</label
+                                >
+                                <el-input
+                                    placeholder="Validez del Credencial"
+                                    :class="{
+                                        'is-invalid': errors.validez_credencial,
+                                    }"
+                                    v-model="usuario.validez_credencial"
+                                    clearable
+                                ></el-input>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.validez_credencial"
+                                    v-text="errors.validez_credencial[0]"
+                                ></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -284,17 +472,24 @@ export default {
         usuario: {
             type: Object,
             default: {
-                id: 0,
                 nombre: "",
                 paterno: "",
                 materno: "",
                 ci: "",
                 ci_exp: "",
+                fecha_nac: "",
+                genero: "",
+                cargo: "",
+                fecha_ingreso: "",
+                taller: "",
                 dir: "",
-                correo: "",
                 fono: [],
+                tipo_personal: "",
+                p_discapacidad: "",
                 tipo: "",
                 foto: null,
+                validez_credencial: "",
+                estado: "0",
             },
         },
     },
@@ -341,6 +536,7 @@ export default {
                 { value: "PD", label: "Pando" },
                 { value: "BN", label: "Beni" },
             ],
+            listTiposPersonal: ["SOCIO", "TRABAJADOR"],
             listTipos: ["ADMINISTRADOR", "REPRESENTANTE", "SOCIO"],
             errors: [],
         };
@@ -353,7 +549,7 @@ export default {
             this.enviando = true;
             try {
                 this.textoBtn = "Enviando...";
-                let url = "/admin/usuarios";
+                let url = main_url + "/admin/usuarios";
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data",
@@ -378,37 +574,64 @@ export default {
                     this.usuario.ci_exp ? this.usuario.ci_exp : ""
                 );
                 formdata.append(
-                    "dir",
-                    this.usuario.dir ? this.usuario.dir : ""
+                    "fecha_nac",
+                    this.usuario.fecha_nac ? this.usuario.fecha_nac : ""
                 );
                 formdata.append(
-                    "correo",
-                    this.usuario.correo ? this.usuario.correo : ""
-                );
-                formdata.append(
-                    "fono",
-                    this.usuario.fono ? this.usuario.fono.join("; ") : ""
+                    "genero",
+                    this.usuario.genero ? this.usuario.genero : ""
                 );
                 formdata.append(
                     "cargo",
                     this.usuario.cargo ? this.usuario.cargo : ""
                 );
                 formdata.append(
-                    "unidad_id",
-                    this.usuario.unidad_id ? this.usuario.unidad_id : ""
+                    "fecha_ingreso",
+                    this.usuario.fecha_ingreso ? this.usuario.fecha_ingreso : ""
+                );
+                formdata.append(
+                    "taller",
+                    this.usuario.taller ? this.usuario.taller : ""
+                );
+                formdata.append(
+                    "dir",
+                    this.usuario.dir ? this.usuario.dir : ""
+                );
+                formdata.append(
+                    "fono",
+                    this.usuario.fono ? this.usuario.fono.join("; ") : ""
+                );
+                formdata.append(
+                    "tipo_personal",
+                    this.usuario.tipo_personal ? this.usuario.tipo_personal : ""
+                );
+                formdata.append(
+                    "p_discapacidad",
+                    this.usuario.p_discapacidad
+                        ? this.usuario.p_discapacidad
+                        : ""
                 );
                 formdata.append(
                     "tipo",
                     this.usuario.tipo ? this.usuario.tipo : ""
                 );
-
                 formdata.append(
                     "foto",
                     this.usuario.foto ? this.usuario.foto : ""
                 );
+                formdata.append(
+                    "validez_credencial",
+                    this.usuario.validez_credencial
+                        ? this.usuario.validez_credencial
+                        : ""
+                );
+                formdata.append(
+                    "estado",
+                    this.usuario.estado ? this.usuario.estado : ""
+                );
 
                 if (this.accion == "edit") {
-                    url = "/admin/usuarios/" + this.usuario.id;
+                    url = main_url + "/admin/usuarios/" + this.usuario.id;
                     formdata.append("_method", "PUT");
                 }
                 axios
@@ -479,11 +702,19 @@ export default {
             this.usuario.materno = "";
             this.usuario.ci = "";
             this.usuario.ci_exp = "";
+            this.usuario.fecha_nac = "";
+            this.usuario.genero = "";
+            this.usuario.cargo = "";
+            this.usuario.fecha_ingreso = "";
+            this.usuario.taller = "";
             this.usuario.dir = "";
-            this.usuario.correo = "";
             this.usuario.fono = [];
+            this.usuario.tipo_personal = "";
+            this.usuario.p_discapacidad = "";
             this.usuario.tipo = "";
             this.usuario.foto = null;
+            this.usuario.validez_credencial = "";
+            this.usuario.estado = "0";
             this.$refs.input_file.value = null;
         },
     },

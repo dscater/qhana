@@ -20,7 +20,7 @@ export default {
         getUsuariosTipo(tipo) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get("/admin/usuarios/getUsuarioTipo", {
+                    .get(main_url + "/admin/usuarios/getUsuarioTipo", {
                         params: {
                             tipo: tipo,
                         },
@@ -36,7 +36,7 @@ export default {
         getUsuarioById(id) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get("/admin/usuarios/getUsuario/" + id)
+                    .get(main_url + "/admin/usuarios/getUsuario/" + id)
                     .then((response) => {
                         resolve(response);
                     })

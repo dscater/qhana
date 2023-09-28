@@ -35,7 +35,7 @@
                         exact
                         :to="{
                             name: 'usuarios.perfil',
-                            params: { id: user_sidebar.id },
+                            params: { id: user.id },
                         }"
                         class="d-block"
                         v-text="user_sidebar.full_name"
@@ -215,7 +215,7 @@
                             exact
                             :to="{
                                 name: 'usuarios.perfil',
-                                params: { id: user_sidebar.id },
+                                params: { id: user.id },
                             }"
                             class="nav-link"
                         >
@@ -261,11 +261,12 @@ export default {
     methods: {
         logout() {
             this.fullscreenLoading = true;
-            axios.post("/logout").then((res) => {
+            axios.post(main_url + "/logout").then((res) => {
+                let self = this;
                 setTimeout(function () {
+                    self.$router.push({ name: "login" });
                     localStorage.clear();
                     location.reload();
-                    this.$router.push({ name: "login" });
                 }, 500);
             });
         },

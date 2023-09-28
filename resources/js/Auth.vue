@@ -118,7 +118,7 @@ export default {
         login() {
             this.fullscreenLoading = true;
             axios
-                .post("/login", {
+                .post(main_url + "/login", {
                     usuario: this.usuario,
                     password: this.password,
                 })
@@ -145,14 +145,16 @@ export default {
                 });
         },
         obtienePermisos(user) {
-            axios.get("/admin/usuarios/getPermisos/" + user.id).then((res) => {
-                this.error = false;
-                this.$router.push({ name: "inicio" });
-                localStorage.setItem("configuracion", this.configuracion);
-                localStorage.setItem("permisos", JSON.stringify(res.data));
-                localStorage.setItem("user", JSON.stringify(user));
-                location.reload();
-            });
+            axios
+                .get(main_url + "/admin/usuarios/getPermisos/" + user.id)
+                .then((res) => {
+                    this.error = false;
+                    this.$router.push({ name: "inicio" });
+                    localStorage.setItem("configuracion", this.configuracion);
+                    localStorage.setItem("permisos", JSON.stringify(res.data));
+                    localStorage.setItem("user", JSON.stringify(user));
+                    location.reload();
+                });
         },
     },
 };

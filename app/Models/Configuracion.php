@@ -10,8 +10,8 @@ class Configuracion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre_sistema', 'alias', 'razon_social', 'nit', 'ciudad', 'dir',
-        'fono', 'web', 'actividad', 'correo', 'logo',
+        'nombre_sistema', 'alias', 'razon_social', 'ciudad', 'dir',
+        'fono', 'web', 'actividad', 'correo', 'correo_pedido', 'correo_pedido2', 'logo',
     ];
 
     protected $appends = ['path_image'];

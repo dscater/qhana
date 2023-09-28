@@ -5,7 +5,7 @@
             <div class="p-b-66">
                 <h2 class="ltext-105 cl5 txt-center respon1">NOSOTROS</h2>
             </div>
-            
+
             <div class="row">
                 <div class="col-sm-6 col-md-4 p-b-40">
                     <div class="blog-item">
@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         getUrlAsset() {
-            axios.get("/url_asset").then((response) => {
+            axios.get(main_url + "/url_asset").then((response) => {
                 this.url_asset = response.data;
             });
         },
