@@ -100,14 +100,16 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <a
-                            href=""
+                        <router-link
+                            :to="{
+                                name: 'admin_portal.index',
+                            }"
                             class="nav-link"
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fa fa-table"></i>
                             <p>Portal</p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
                         <a

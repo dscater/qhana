@@ -20,6 +20,20 @@
                         >Inicio</router-link
                     >
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <router-link
+                        :to="{ name: 'inicio' }"
+                        class="nav-link text-white"
+                        >Pedidos</router-link
+                    >
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <router-link
+                        :to="{ name: 'inicio' }"
+                        class="nav-link text-white"
+                        >Actividades</router-link
+                    >
+                </li>
             </ul>
 
             <!-- Right navbar links -->

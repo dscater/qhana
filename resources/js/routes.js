@@ -77,6 +77,60 @@ export default new Router({
                 .default,
         },
 
+        // Portal
+        {
+            path: "/administracion/portal",
+            name: "admin_portal.index",
+            component: require("./components/modulos/portal/index.vue")
+                .default,
+            props: true,
+        },
+
+        // Portal - actividades
+        {
+            path: "/administracion/portal/actividades",
+            name: "admin_portal.actividades",
+            component: require("./components/modulos/portal/Actividades.vue")
+                .default,
+            props: true,
+        },
+
+        // Portal - banners
+        {
+            path: "/administracion/portal/banners",
+            name: "admin_portal.banners",
+            component: require("./components/modulos/portal/Banners.vue")
+                .default,
+            props: true,
+        },
+
+        // Portal - banners
+        {
+            path: "/administracion/portal/contactos",
+            name: "admin_portal.contactos",
+            component: require("./components/modulos/portal/Contactos.vue")
+                .default,
+            props: true,
+        },
+
+        // Portal - nosotros
+        {
+            path: "/administracion/portal/nosotros",
+            name: "admin_portal.nosotros",
+            component: require("./components/modulos/portal/Nosotros.vue")
+                .default,
+            props: true,
+        },
+
+        // Portal - redes_sociales
+        {
+            path: "/administracion/portal/redes_sociales",
+            name: "admin_portal.redes_sociales",
+            component: require("./components/modulos/portal/RedesSociales.vue")
+                .default,
+            props: true,
+        },
+
         // Configuración
         {
             path: "/administracion/configuracion",
