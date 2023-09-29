@@ -33,7 +33,12 @@ class User extends Authenticatable
         'password',
     ];
 
-    protected $appends = ['full_name', 'full_ci', 'path_image'];
+    protected $appends = ['full_name', 'full_name_abre', 'full_ci', 'path_image', "fecha_registro_t"];
+
+    public function getFechaRegistroTAttribute()
+    {
+        return date("d/m/Y", strtotime($this->fecha_registro));
+    }
 
     public static function getNombreUsuario($nom, $apep)
     {
@@ -43,9 +48,34 @@ class User extends Authenticatable
 
         return $nombre_user;
     }
+
     public function getFullNameAttribute()
     {
         return $this->nombre . ' ' . $this->paterno . ($this->materno != NULL && $this->materno != '' ? ' ' . $this->materno : '');
+    }
+
+    public function getFullNameAbreAttribute()
+    {
+        $nombre_completo = $this->nombre . ' ' . $this->paterno . ($this->materno != NULL && $this->materno != '' ? ' ' . $this->materno : '');
+
+        $nombre = $this->nombre;
+        $paterno = $this->paterno;
+        $materno = ($this->materno != NULL && $this->materno != '' ? ' ' . $this->materno : '');
+        $nombre_completo = $nombre . ' ' . $paterno . ($materno != '' ? ' ' . $materno : '');
+        if (strlen($nombre_completo) > 25) {
+            $array_nombre = explode(" ", $nombre);
+            if (count($array_nombre) > 1) {
+                $nombre = $array_nombre[0] . ' ' .  substr($array_nombre[1], 0, 1) . '.';
+            }
+        }
+        $nombre_completo = $nombre . ' ' . $paterno . ($materno != '' ? ' ' . $materno : '');
+        if (strlen($nombre_completo) > 26) {
+            if (strlen($materno) > 1) {
+                $materno = substr($this->materno, 0, 1) . '.';
+            }
+        }
+        $nombre_completo = $nombre . ' ' . $paterno . ($materno != '' ? ' ' . $materno : '');
+        return $nombre_completo;
     }
 
     public function getFullCiAttribute()

@@ -507,7 +507,7 @@ export default {
     computed: {
         tituloModal() {
             if (this.accion == "nuevo") {
-                return "AGREGAR USUARIO";
+                return "AGREGAR PERSONAL";
             } else {
                 return "MODIFICAR REGISTRO";
             }

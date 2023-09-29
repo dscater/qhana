@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use PDF;
 
 class UserController extends Controller
 {
@@ -365,6 +366,16 @@ class UserController extends Controller
         }
     }
 
+    public function imprimirCredencial(User $usuario)
+    {
+
+
+
+        $pdf = PDF::loadView('reportes.credencial', compact('usuario'))->setPaper('letter', 'portrait');
+        $pdf->setPaper([0, 0, 350, 150], 'cm');
+        return $pdf->download('Credencial.pdf');
+    }
+
     public function getPermisos(User $usuario)
     {
         $tipo = $usuario->tipo;
@@ -377,7 +388,7 @@ class UserController extends Controller
         $array_infos = [];
         if (in_array('usuarios.index', $this->permisos[$tipo])) {
             $array_infos[] = [
-                'label' => 'Usuarios',
+                'label' => 'Personal',
                 'cantidad' => count(User::where('id', '!=', 1)->get()),
                 'color' => 'bg-dark',
                 'icon' => asset("imgs/people.png"),
@@ -406,14 +417,6 @@ class UserController extends Controller
             'cantidad' => count(User::where('id', '!=', 1)->get()),
             'color' => 'bg-dark',
             'icon' => asset("imgs/product-development.png"),
-            "url" => ""
-        ];
-
-        $array_infos[] = [
-            'label' => 'Personal',
-            'cantidad' => count(User::where('id', '!=', 1)->get()),
-            'color' => 'bg-dark',
-            'icon' => asset("imgs/teamwork.png"),
             "url" => ""
         ];
 

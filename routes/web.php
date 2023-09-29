@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         // Usuarios
+        Route::post('usuarios/imprimirCredencial/{usuario}', [UserController::class, 'imprimirCredencial']);
         Route::get('usuarios/getUsuarioTipo', [UserController::class, 'getUsuarioTipo']);
         Route::get('usuarios/getUsuario/{usuario}', [UserController::class, 'getUsuario']);
         Route::patch('usuarios/asignarConfiguracion/{usuario}', [UserController::class, 'asignarConfiguracion']);

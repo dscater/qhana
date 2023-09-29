@@ -96,7 +96,7 @@
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fas fa-users"></i>
-                            <p>Usuarios</p>
+                            <p>Personal</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
@@ -137,16 +137,6 @@
                         >
                             <i class="nav-icon fas fa-clipboard-list"></i>
                             <p>Pedidos</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            href=""
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-user-tie"></i>
-                            <p>Personal</p>
                         </a>
                     </li>
                     <li class="nav-item">

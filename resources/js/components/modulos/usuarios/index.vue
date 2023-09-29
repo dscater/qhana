@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Usuarios</h1>
+                        <h1>Personal</h1>
                     </div>
                 </div>
             </div>
@@ -107,17 +107,6 @@
                                                         RETIRADO
                                                     </span>
                                                 </template>
-
-                                                <template
-                                                    #cell(fecha_registro)="row"
-                                                >
-                                                    {{
-                                                        formatoFecha(
-                                                            row.item
-                                                                .fecha_registro
-                                                        )
-                                                    }}
-                                                </template>
                                                 <template #cell(mas)="row">
                                                     <b-button
                                                         variant="warning"
@@ -142,11 +131,13 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Fecha de nacimiento:</b
+                                                                    >Fecha de
+                                                                    nacimiento:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.fecha_nac
+                                                                row.item
+                                                                    .fecha_nac
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-row class="mb-2">
@@ -178,11 +169,13 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Fecha de ingreso:</b
+                                                                    >Fecha de
+                                                                    ingreso:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.fecha_ingreso
+                                                                row.item
+                                                                    .fecha_ingreso
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-row class="mb-2">
@@ -190,7 +183,9 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Taller al que pertenece:</b
+                                                                    >Taller al
+                                                                    que
+                                                                    pertenece:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
@@ -226,11 +221,13 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Tipo de personal:</b
+                                                                    >Tipo de
+                                                                    personal:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.tipo_personal
+                                                                row.item
+                                                                    .tipo_personal
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-row class="mb-2">
@@ -238,11 +235,14 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Porcentaje de discapacidad(%):</b
+                                                                    >Porcentaje
+                                                                    de
+                                                                    discapacidad(%):</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.p_discapacidad
+                                                                row.item
+                                                                    .p_discapacidad
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-row class="mb-2">
@@ -250,11 +250,13 @@
                                                                 sm="3"
                                                                 class="text-sm-right"
                                                                 ><b
-                                                                    >Validez del credencial:</b
+                                                                    >Validez del
+                                                                    credencial:</b
                                                                 ></b-col
                                                             >
                                                             <b-col>{{
-                                                                row.item.validez_credencial
+                                                                row.item
+                                                                    .validez_credencial
                                                             }}</b-col>
                                                         </b-row>
                                                         <b-button
@@ -273,19 +275,14 @@
                                                         class="row justify-content-between"
                                                     >
                                                         <b-button
-                                                            v-if="
-                                                                permisos.includes(
-                                                                    'usuarios.edit'
-                                                                )
-                                                            "
                                                             size="sm"
                                                             pill
                                                             variant="outline-primary"
                                                             class="btn-flat btn-block"
                                                             title="Exportar credencial"
                                                             @click="
-                                                                editarRegistro(
-                                                                    row.item
+                                                                imprimirCredencial(
+                                                                    row.item.id
                                                                 )
                                                             "
                                                         >
@@ -413,7 +410,7 @@ export default {
                 { key: "foto", label: "Foto" },
                 { key: "estado", label: "Estado" },
                 {
-                    key: "fecha_registro",
+                    key: "fecha_registro_t",
                     label: "Fecha de registro",
                     sortable: true,
                 },
@@ -516,6 +513,22 @@ export default {
                     this.showOverlay = false;
                     this.listRegistros = res.data.usuarios;
                     this.totalRows = res.data.total;
+                });
+        },
+        imprimirCredencial(id) {
+            let config = {
+                responseType: "blob",
+            };
+            axios
+                .post("/admin/usuarios/imprimirCredencial/" + id, null, config)
+                .then((res) => {
+                    this.errors = [];
+                    this.enviando = false;
+                    let pdfBlob = new Blob([res.data], {
+                        type: "application/pdf",
+                    });
+                    let urlReporte = URL.createObjectURL(pdfBlob);
+                    window.open(urlReporte);
                 });
         },
         eliminaUsuario(id, descripcion) {
