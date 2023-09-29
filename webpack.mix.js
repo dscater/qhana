@@ -42,6 +42,7 @@ mix.setPublicPath("./")
         ],
         "./css/portal.css"
     )
+    .scripts(["resources/assets/js/jquery-3.2.1.min.js"], "./js/jquery.js")
     .scripts(
         ["resources/assets/js/adminlte.min.js", "resources/assets/js/demo.js"],
         "./js/plantilla.js"
@@ -53,14 +54,19 @@ mix.setPublicPath("./")
             "resources/assets/js/portal/moment.min.js",
             "resources/assets/js/portal/daterangepicker.js",
             "resources/assets/js/portal/slick.min.js",
-            "resources/assets/js/portal/slick-custom.js",
             "resources/assets/js/portal/parallax100.js",
             "resources/assets/js/portal/jquery.magnific-popup.min.js",
             "resources/assets/js/portal/isotope.pkgd.min.js",
             "resources/assets/js/portal/perfect-scrollbar.min.js",
-            "resources/assets/js/portal/main.js",
         ],
         "./js/portal.js"
+    )
+    .scripts(
+        [
+            "resources/assets/js/portal/slick-custom.js",
+            "resources/assets/js/portal/main.js",
+        ],
+        "./js/portal_custom.js"
     )
     .copy("resources/assets/imgs", "./imgs")
     .copy("resources/assets/images", "./images")

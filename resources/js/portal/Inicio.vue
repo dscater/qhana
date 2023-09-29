@@ -2103,15 +2103,11 @@ export default {
     },
     mounted() {
         let self = this;
-        $(document).ready(function () {
-            setTimeout(function () {
-                $(".slick1").slick("slickGoTo", 0);
-                self.initSlick2();
-            }, 200);
-            setTimeout(function () {
-                self.loadingWindow.close();
-            }, 500);
-        });
+        self.initSlick2();
+        $(".slick1").slick("slickGoTo", 0);
+        setTimeout(function () {
+            self.loadingWindow.close();
+        }, 500);
     },
     methods: {
         initSlick2() {

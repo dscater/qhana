@@ -26,8 +26,10 @@
         var app_base = "";
         // var app_base = "qhana"; //habilitar esta linea si existe la carpeta public en el proyecto con el nombre del sistema
     </script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/portal.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/portal_custom.js') }}"></script> --}}
     <script>
         // OPCIONAL
         $('.js-addwish-b2').on('click', function(e) {
