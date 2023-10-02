@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
+use App\Models\HistorialAccion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ContactoController extends Controller
 {
@@ -11,7 +14,6 @@ class ContactoController extends Controller
         "direccion" => "required",
         "fonos" => "required",
         "correo" => "required|email",
-        "mapa" => "required",
     ];
 
     public $mensajes = [
@@ -19,7 +21,6 @@ class ContactoController extends Controller
         "fonos.required" => "Este campo es obligatorio",
         "correo.required" => "Este campo es obligatorio",
         "correo.email" => "Debes ingresar un correo valido",
-        "mapa.required" => "Este campo es obligatorio",
     ];
 
     public function index(Request $request)
@@ -30,19 +31,17 @@ class ContactoController extends Controller
 
     public function store(Request $request)
     {
-        $this->validacion['imagen'] = 'required|mimes:jpeg,jpg,png,webp|max:4096';
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
             // crear el Contacto
             $contacto = Contacto::get()->first();
             if (!$contacto) {
-                $contacto = Contacto::create(array_map('mb_strtoupper', $request->except("mapa")));
-                $contacto->mapa = $request->mapa;
+                $contacto = Contacto::create(array_map('mb_strtoupper', $request->all()));
             } else {
-                $contacto->update(array_map('mb_strtoupper', $request->except("mapa")));
-                $contacto->mapa = $request->mapa;
+                $contacto->update(array_map('mb_strtoupper', $request->all()));
             }
+            $contacto->correo = mb_strtolower($contacto->correo);
             $contacto->save();
             $datos_original = HistorialAccion::getDetalleRegistro($contacto, "contactos");
             HistorialAccion::create([

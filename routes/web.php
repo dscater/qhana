@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PortalController;
+use App\Http\Controllers\RedSocialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,13 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 // CONFIGURACIÓN
 Route::get('/configuracion/getConfiguracion', [ConfiguracionController::class, 'getConfiguracion']);
+
+// ACCIONES PORTAL
+Route::get('portal/getSliders', [BannerController::class, 'index']);
+Route::get('portal/getActividades', [ActividadController::class, 'index']);
+Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
+Route::get('portal/getContacto', [ContactoController::class, 'index']);
+Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/configuracion/update', [ConfiguracionController::class, 'update']);
@@ -41,11 +49,13 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         // BANNERS
+        Route::get('banners/get_banner/ultimo', [BannerController::class, 'bannerPrincipal']);
         Route::resource('banners', BannerController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
         // ACTIVIDADES
+        Route::get('actividads/get_actividad/ultimo', [ActividadController::class, 'ultimaActividad']);
         Route::resource('actividads', ActividadController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
@@ -57,6 +67,11 @@ Route::middleware(['auth'])->group(function () {
 
         // CONTACTOS
         Route::resource('contactos', ContactoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // REDES SOCIALES
+        Route::resource('red_socials', RedSocialController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
     });

@@ -2106,7 +2106,6 @@ export default {
         self.initSlick2();
         setTimeout(function () {
             self.loadingWindow.close();
-            $(".slick1").slick("slickGoTo", 0);
         }, 500);
     },
     methods: {

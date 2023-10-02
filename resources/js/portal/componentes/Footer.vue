@@ -14,16 +14,33 @@
                     </p>
 
                     <div class="p-t-27">
-                        <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <a
+                            :href="oRedSocial?.twitter"
+                            target="_blank"
+                            class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+                        >
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a
+                            :href="oRedSocial?.facebook"
+                            target="_blank"
+                            class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+                        >
                             <i class="fab fa-facebook fa-lg"></i>
                         </a>
-
-                        <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                            <i class="fab fa-instagram fa-lg"></i>
+                        <a
+                            :href="oRedSocial?.youtube"
+                            target="_blank"
+                            class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+                        >
+                            <i class="fab fa-youtube fa-lg"></i>
                         </a>
-
-                        <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                            <i class="fab fa-twitter fa-lg"></i>
+                        <a
+                            :href="oRedSocial?.instagram"
+                            target="_blank"
+                            class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+                        >
+                            <i class="fab fa-instagram fa-lg"></i>
                         </a>
                     </div>
                 </div>
@@ -61,7 +78,19 @@
 export default {
     props: ["logo", "empresa"],
     data() {
-        return {};
+        return {
+            oRedSocial: null,
+        };
+    },
+    mounted() {
+        this.getInfoRedSocial();
+    },
+    methods: {
+        getInfoRedSocial() {
+            axios.get(main_url + "/portal/getRedSocial").then((response) => {
+                this.oRedSocial = response.data.red_social;
+            });
+        },
     },
 };
 </script>

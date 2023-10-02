@@ -5,7 +5,7 @@
         <CarritoLateral></CarritoLateral>
         <Slider
             :ruta_asset="ruta_asset"
-            v-show="$route.name == 'portal.inicio'"
+            v-if="$route.name == 'portal.inicio'"
         ></Slider>
 
         <transition name="fade" mode="out-in">

@@ -156,3 +156,8 @@ a.cl7:hover,
 .hov-btn1:hover {
     background-color: var(--principal);
 }
+
+.btn-warning {
+    background-color: var(--principal) !important;
+    border-color: var(--principal) !important;
+}

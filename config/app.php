@@ -2,6 +2,8 @@
 
 return [
 
+    'google_map_api' => env('GOOGLEMAP_API', 'AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

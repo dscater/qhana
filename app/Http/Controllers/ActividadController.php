@@ -24,8 +24,14 @@ class ActividadController extends Controller
 
     public function index(Request $request)
     {
-        $actividads = Actividad::orderBy("id", "asc")->get();
+        $actividads = Actividad::orderBy("id", "desc")->get();
         return response()->JSON(['actividads' => $actividads, 'total' => count($actividads)], 200);
+    }
+
+    public function ultimaActividad()
+    {
+        $actividad = Actividad::orderBy("id", "asc")->get()->last();
+        return response()->JSON(['actividad' => $actividad], 200);
     }
 
     public function store(Request $request)

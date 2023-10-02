@@ -1,13 +1,16 @@
 <template>
     <!-- Blog -->
-    <section class="sec-blog bg0 p-t-60 p-b-90">
+    <section class="sec-blog bg0 p-t-60 p-b-90 contenedor_nosotros">
         <div class="container">
             <div class="p-b-66">
                 <h2 class="ltext-105 cl5 txt-center respon1">NOSOTROS</h2>
             </div>
 
             <div class="row">
-                <div class="col-sm-6 col-md-4 p-b-40">
+                <div
+                    class="col-sm-6 col-md-4 p-b-40"
+                    v-if="oNosotros.historia != ''"
+                >
                     <div class="blog-item">
                         <div class="hov-img0">
                             <a href="">
@@ -18,26 +21,25 @@
                             </a>
                         </div>
 
-                        <div class="p-t-15">
+                        <div class="p-t-15 descripcion_nosotros">
                             <h4 class="p-b-12">
-                                <a
-                                    href=""
-                                    class="mtext-101 cl2 hov-cl1 trans-04"
-                                >
-                                    QHANA
-                                </a>
+                                <span class="mtext-101 cl2 hov-cl1 trans-04">
+                                    HISTORIA
+                                </span>
                             </h4>
 
-                            <p class="stext-108 cl6">
-                                Duis ut velit gravida nibh bibendum commodo.
-                                Suspendisse pellentesque mattis augue id
-                                euismod. Interdum et male-suada fames
-                            </p>
+                            <p
+                                class="stext-108 cl6 text-justify"
+                                v-text="oNosotros.historia"
+                            ></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 p-b-40">
+                <div
+                    class="col-sm-6 col-md-4 p-b-40"
+                    v-if="oNosotros.mision != ''"
+                >
                     <div class="blog-item">
                         <div class="hov-img0">
                             <a href="">
@@ -48,27 +50,25 @@
                             </a>
                         </div>
 
-                        <div class="p-t-15">
+                        <div class="p-t-15 descripcion_nosotros">
                             <h4 class="p-b-12">
-                                <a
-                                    href=""
-                                    class="mtext-101 cl2 hov-cl1 trans-04"
-                                >
+                                <span class="mtext-101 cl2 hov-cl1 trans-04">
                                     MISIÓN
-                                </a>
+                                </span>
                             </h4>
 
-                            <p class="stext-108 cl6">
-                                Nullam scelerisque, lacus sed consequat laoreet,
-                                dui enim iaculis leo, eu viverra ex nulla in
-                                tellus. Nullam nec ornare tellus, ac fringilla
-                                lacus. Ut sit ame
-                            </p>
+                            <p
+                                class="stext-108 cl6 text-justify"
+                                v-text="oNosotros.mision"
+                            ></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 p-b-40">
+                <div
+                    class="col-sm-6 col-md-4 p-b-40"
+                    v-if="oNosotros.vision != ''"
+                >
                     <div class="blog-item">
                         <div class="hov-img0">
                             <a href="">
@@ -79,21 +79,17 @@
                             </a>
                         </div>
 
-                        <div class="p-t-15">
+                        <div class="p-t-15 descripcion_nosotros">
                             <h4 class="p-b-12">
-                                <a
-                                    href=""
-                                    class="mtext-101 cl2 hov-cl1 trans-04"
-                                >
+                                <span class="mtext-101 cl2 hov-cl1 trans-04">
                                     VISIÓN
-                                </a>
+                                </span>
                             </h4>
 
-                            <p class="stext-108 cl6">
-                                Proin nec vehicula lorem, a efficitur ex. Nam
-                                vehicula nulla vel erat tincidunt, sed hendrerit
-                                ligula porttitor. Fusce sit amet maximus nunc
-                            </p>
+                            <p
+                                class="stext-108 cl6 text-justify"
+                                v-text="oNosotros.vision"
+                            ></p>
                         </div>
                     </div>
                 </div>
@@ -110,11 +106,17 @@ export default {
                 fullscreen: this.fullscreenLoading,
             }),
             url_asset: "",
+            oNosotros: {
+                historia: "QHANA",
+                mision: "",
+                vision: "",
+            },
         };
     },
     mounted() {
         this.loadingWindow.close();
         this.getUrlAsset();
+        this.getInfoNosotros();
     },
     methods: {
         getUrlAsset() {
@@ -122,6 +124,28 @@ export default {
                 this.url_asset = response.data;
             });
         },
+        getInfoNosotros() {
+            axios.get(main_url + "/portal/getNosotros").then((response) => {
+                this.oNosotros = response.data.nosotros;
+            });
+        },
     },
 };
 </script>
+<style>
+.contenedor_nosotros .blog-item .descripcion_nosotros {
+    padding: 10px;
+    border-left: solid 1px var(--secundario);
+    border-bottom: solid 1px var(--secundario);
+    border-right: solid 1px var(--secundario);
+    border-radius: 0px 0px 10px 10px;
+    background: var(--secundario);
+}
+
+.contenedor_nosotros .blog-item .descripcion_nosotros p,
+.contenedor_nosotros .blog-item .descripcion_nosotros h4,
+.contenedor_nosotros .blog-item .descripcion_nosotros h4 span,
+.contenedor_nosotros .blog-item .descripcion_nosotros h4 a {
+    color: white;
+}
+</style>

@@ -520,7 +520,11 @@ export default {
                 responseType: "blob",
             };
             axios
-                .post("/admin/usuarios/imprimirCredencial/" + id, null, config)
+                .post(
+                    main_url + "/admin/usuarios/imprimirCredencial/" + id,
+                    null,
+                    config
+                )
                 .then((res) => {
                     this.errors = [];
                     this.enviando = false;

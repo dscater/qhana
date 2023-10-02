@@ -18,7 +18,8 @@ class CreateContactosTable extends Migration
             $table->string("direccion", 255);
             $table->string("fonos", 255);
             $table->string("correo", 255);
-            $table->text("mapa");
+            $table->string("lat", 255);
+            $table->string("lng", 255);
             $table->timestamps();
         });
     }

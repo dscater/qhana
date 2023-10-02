@@ -72,7 +72,7 @@
                                     <div class="col-md-12">
                                         <el-input
                                             type="textarea"
-                                            placeholder="Historia"
+                                            placeholder="Misión"
                                             :class="{
                                                 'is-invalid': errors.mision,
                                             }"
@@ -109,7 +109,7 @@
                                     <div class="col-md-12">
                                         <el-input
                                             type="textarea"
-                                            placeholder="Historia"
+                                            placeholder="Visión"
                                             :class="{
                                                 'is-invalid': errors.vision,
                                             }"

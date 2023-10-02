@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RedSocial extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "twitter",
+        "facebook",
+        "instagram",
+        "youtube",
+    ];
 }

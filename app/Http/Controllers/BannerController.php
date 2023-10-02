@@ -29,6 +29,16 @@ class BannerController extends Controller
         return response()->JSON(['banners' => $banners, 'total' => count($banners)], 200);
     }
 
+    public function bannerPrincipal(Request $request)
+    {
+        $banner = Banner::where("posicion", 1)->get()->first();
+        if (!$banner) {
+            $banner = Banner::get()->first();
+        }
+        return response()->JSON(['banner' => $banner], 200);
+    }
+
+
     public function store(Request $request)
     {
         $this->validacion['img'] = 'required|mimes:jpeg,jpg,png,webp|max:4096';

@@ -103,32 +103,14 @@
                                             :class="{
                                                 'text-danger': errors.mapa,
                                             }"
-                                            >Mapa*</label
+                                            >Mapa*
+                                            <small
+                                                >(Mueve el marcador para definir
+                                                la nueva ubicación)</small
+                                            ></label
                                         >
-                                        <el-input
-                                            placeholder="Mapa"
-                                            :class="{
-                                                'is-invalid': errors.mapa,
-                                            }"
-                                            v-model="oContacto.mapa"
-                                        >
-                                            >
-                                        </el-input>
-                                        <span
-                                            class="error invalid-feedback"
-                                            v-if="errors.mapa"
-                                            v-text="errors.mapa[0]"
-                                        ></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
                                         <!-- Map -->
-                                        <div
-                                            id="google_map"
-                                            data-map-x="40.691446"
-                                            data-map-y="-73.886787"
-                                        ></div>
+                                        <div id="google_map"></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +149,8 @@ export default {
                 direccion: "",
                 fonos: "",
                 correo: "",
-                mapa: "",
+                lat: "-16.50405",
+                lng: "-68.13081",
             },
             errors: [],
         };
@@ -185,34 +168,24 @@ export default {
             axios.get(url).then((res) => {
                 if (res.data.contacto) {
                     this.oContacto = res.data.contacto;
-                } else {
-                    
                 }
+                let self = this;
+                setTimeout(function () {
+                    self.cargaMapaGoogle(
+                        self.oContacto.lat,
+                        self.oContacto.lng,
+                        true,
+                        self.oContacto.direccion
+                    );
+                }, 400);
             });
         },
         actualizaInformacion() {
             this.enviando = true;
             try {
                 let url = main_url + "/admin/contactos";
-                let formdata = new FormData();
-                formdata.append(
-                    "direccion",
-                    this.oContacto.direccion ? this.oContacto.direccion : ""
-                );
-                formdata.append(
-                    "fonos",
-                    this.oContacto.fonos ? this.oContacto.fonos : ""
-                );
-                formdata.append(
-                    "correo",
-                    this.oContacto.correo ? this.oContacto.correo : ""
-                );
-                formdata.append(
-                    "mapa",
-                    this.oContacto.mapa ? this.oContacto.mapa : ""
-                );
                 axios
-                    .post(url, formdata)
+                    .post(url, this.oContacto)
                     .then((res) => {
                         Swal.fire({
                             icon: "success",
@@ -220,7 +193,7 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        this.oContacto = res.data.contactos;
+                        this.oContacto = res.data.contacto;
                         this.errors = [];
                     })
                     .catch((error) => {
@@ -249,6 +222,52 @@ export default {
             } catch (e) {
                 this.enviando = false;
                 console.log(e);
+            }
+        },
+        cargaMapaGoogle(lat, lng, drag = false, dir = "") {
+            lat = parseFloat(lat);
+            lng = parseFloat(lng);
+
+            // Inicializa el mapa
+            this.map = new google.maps.Map(
+                document.getElementById("google_map"),
+                {
+                    center: { lat: lat, lng: lng },
+                    zoom: 18,
+                }
+            );
+
+            // Configura el icono personalizado
+            const customIcon = {
+                url: main_url + "/imgs/pinqhana.png", // Ruta a tu icono personalizado
+                scaledSize: new google.maps.Size(32, 32), // Tamaño del icono
+            };
+
+            // Crea un marcador en el centro del mapa
+            this.marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: this.map,
+                icon: customIcon,
+                draggable: drag,
+            });
+
+            // Escucha el evento de arrastrar del marcador
+            google.maps.event.addListener(this.marker, "dragend", () => {
+                const newPosition = this.marker.getPosition();
+                this.oContacto.lat = newPosition.lat();
+                this.oContacto.lng = newPosition.lng();
+            });
+
+            if (dir != "") {
+                // Crea una ventana de información (infowindow) con el contenido deseado
+                let self = this;
+                this.infowindow = new google.maps.InfoWindow({
+                    content: `<strong>DIRECCIÓN:</strong><br>${self.oContacto.direccion}`,
+                });
+                // Escucha el evento 'click' en el marcador para abrir la ventana de información
+                this.marker.addListener("click", () => {
+                    this.infowindow.open(this.map, this.marker);
+                });
             }
         },
     },
