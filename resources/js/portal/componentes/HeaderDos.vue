@@ -31,17 +31,17 @@
 
                             <li
                                 :class="[
-                                    $route.name == 'portal.secciones'
+                                    $route.name == 'portal.actividads'
                                         ? 'active-menu'
                                         : '',
                                 ]"
                             >
                                 <router-link
-                                    :to="{ name: 'portal.secciones' }"
+                                    :to="{ name: 'portal.actividads' }"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
                                     "
-                                    >Secciones</router-link
+                                    >Actividades</router-link
                                 >
                             </li>
 

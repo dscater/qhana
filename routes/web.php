@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +37,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('usuarios/actualizaContrasenia/{usuario}', [UserController::class, 'actualizaContrasenia']);
         Route::post('usuarios/actualizaFoto/{usuario}', [UserController::class, 'actualizaFoto']);
         Route::resource('usuarios', UserController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // BANNERS
+        Route::resource('banners', BannerController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // ACTIVIDADES
+        Route::resource('actividads', ActividadController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // NOSOTROS
+        Route::resource('nosotros', NosotrosController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // CONTACTOS
+        Route::resource('contactos', ContactoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
     });

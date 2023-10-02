@@ -60,6 +60,16 @@ class UserController extends Controller
 
             'portals.index',
 
+            'banners.index',
+            'banners.create',
+            'banners.edit',
+            'banners.destroy',
+
+            'actividads.index',
+            'actividads.create',
+            'actividads.edit',
+            'actividads.destroy',
+
             'productos.index',
 
             'catalogos.index',

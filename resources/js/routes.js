@@ -16,11 +16,11 @@ export default new Router({
             component: require("./portal/Inicio.vue").default,
         },
 
-        // SECCIONES
+        // ACTIVIDADES
         {
-            path: "/secciones",
-            name: "portal.secciones",
-            component: require("./portal/Secciones.vue").default,
+            path: "/actividades",
+            name: "portal.actividads",
+            component: require("./portal/Actividades.vue").default,
         },
 
         // NOSOTROS

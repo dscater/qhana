@@ -627,7 +627,7 @@ export default {
                 );
                 formdata.append(
                     "estado",
-                    this.usuario.estado ? this.usuario.estado : ""
+                    this.usuario.estado ? this.usuario.estado : "0"
                 );
 
                 if (this.accion == "edit") {
