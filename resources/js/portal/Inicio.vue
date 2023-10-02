@@ -2104,9 +2104,9 @@ export default {
     mounted() {
         let self = this;
         self.initSlick2();
-        $(".slick1").slick("slickGoTo", 0);
         setTimeout(function () {
             self.loadingWindow.close();
+            $(".slick1").slick("slickGoTo", 0);
         }, 500);
     },
     methods: {

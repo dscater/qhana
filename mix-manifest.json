@@ -10,7 +10,12 @@
     "/imgs/avatar.png": "/imgs/avatar.png",
     "/imgs/catalogue.png": "/imgs/catalogue.png",
     "/imgs/checklist.png": "/imgs/checklist.png",
+    "/imgs/fondo_actividades.png": "/imgs/fondo_actividades.png",
+    "/imgs/fondo_banner.png": "/imgs/fondo_banner.png",
     "/imgs/fondo_credencial.png": "/imgs/fondo_credencial.png",
+    "/imgs/fondo_direccion.jpg": "/imgs/fondo_direccion.jpg",
+    "/imgs/fondo_nosotros.png": "/imgs/fondo_nosotros.png",
+    "/imgs/fondo_social.jpg": "/imgs/fondo_social.jpg",
     "/imgs/login.jpg": "/imgs/login.jpg",
     "/imgs/login.png": "/imgs/login.png",
     "/imgs/logo.png": "/imgs/logo.png",
@@ -180,12 +185,5 @@
     "/fonts/Poppins/Poppins-Thin.ttf": "/fonts/Poppins/Poppins-Thin.ttf",
     "/fonts/Poppins/Poppins-ThinItalic.ttf": "/fonts/Poppins/Poppins-ThinItalic.ttf",
     "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf",
-    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff",
-    "/imgs/banner.png": "/imgs/banner.png",
-    "/imgs/1.png": "/imgs/1.png",
-    "/imgs/fondo_banner.png": "/imgs/fondo_banner.png",
-    "/imgs/fondo_actividades.png": "/imgs/fondo_actividades.png",
-    "/imgs/fondo_nosotros.png": "/imgs/fondo_nosotros.png",
-    "/imgs/fondo_direccion.jpg": "/imgs/fondo_direccion.jpg",
-    "/imgs/fondo_social.jpg": "/imgs/fondo_social.jpg"
+    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff"
 }
