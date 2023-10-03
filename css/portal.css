@@ -9619,6 +9619,10 @@ a.logo strong {
     background-color: var(--principal);
 }
 
+.bg-dark {
+    background-color: var(--secundario) !important;
+}
+
 .item-slick1 {
     background-size: 100% 100%;
 }
@@ -9670,4 +9674,15 @@ a.cl7:hover,
 .btn-warning {
     background-color: var(--principal) !important;
     border-color: var(--principal) !important;
+}
+.btn-warning:hover {
+    background-color: var(--principal_hover) !important;
+}
+
+.text-warning {
+    color: var(--principal) !important;
+}
+
+.text-warning:hover {
+    color: var(--principal_hover) !important;
 }

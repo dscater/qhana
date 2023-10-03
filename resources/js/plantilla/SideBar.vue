@@ -84,7 +84,8 @@
                         v-if="
                             permisos.includes('usuarios.index') ||
                             permisos.includes('portals.index') ||
-                            permisos.includes('catalogos.index')
+                            permisos.includes('catalogos.index') ||
+                            permisos.includes('productos.index')
                         "
                     >
                         ADMINISTRACIÓN:
@@ -118,15 +119,18 @@
                             <p>Portal</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <a
-                            href=""
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('catalogos.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'productos.index' }"
                             class="nav-link"
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fa fa-tags"></i>
                             <p>Productos</p>
-                        </a>
+                        </router-link>
                     </li>
                     <li
                         class="nav-item"

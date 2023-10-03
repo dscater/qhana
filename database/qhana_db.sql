@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-10-2023 a las 21:24:46
+-- Tiempo de generación: 03-10-2023 a las 21:53:16
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actividads` (
   `id` bigint UNSIGNED NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -51,10 +51,10 @@ INSERT INTO `actividads` (`id`, `imagen`, `descripcion`, `created_at`, `updated_
 
 CREATE TABLE `banners` (
   `id` bigint UNSIGNED NOT NULL,
-  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `posicion` int NOT NULL,
-  `desc1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `muestra_boton` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -76,11 +76,19 @@ INSERT INTO `banners` (`id`, `img`, `posicion`, `desc1`, `desc2`, `muestra_boton
 
 CREATE TABLE `catalogos` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `catalogos`
+--
+
+INSERT INTO `catalogos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) VALUES
+(1, 'CATÁLOGO #1', 'CATALOGO #1 DESCRIPCIÓN', '2023-10-03 19:50:56', '2023-10-03 19:50:56'),
+(2, 'CATÁLOGO #2', '', '2023-10-03 19:51:05', '2023-10-03 19:51:05');
 
 -- --------------------------------------------------------
 
@@ -90,18 +98,18 @@ CREATE TABLE `catalogos` (
 
 CREATE TABLE `configuracions` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre_sistema` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `razon_social` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `web` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `actividad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo_pedido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo_pedido2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_sistema` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `razon_social` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `web` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `actividad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo_pedido` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo_pedido2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -121,11 +129,11 @@ INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `
 
 CREATE TABLE `contactos` (
   `id` bigint UNSIGNED NOT NULL,
-  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fonos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fonos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `lat` varbinary(255) NOT NULL,
-  `lng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lng` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -163,11 +171,11 @@ CREATE TABLE `detalle_pedidos` (
 CREATE TABLE `historial_accions` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
-  `accion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `datos_original` text COLLATE utf8mb4_unicode_ci,
-  `datos_nuevo` text COLLATE utf8mb4_unicode_ci,
-  `modulo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `accion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datos_original` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `datos_nuevo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `modulo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -225,7 +233,26 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (44, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BANNER', 'created_at: 2023-10-02 12:29:42<br/>desc1: <br/>desc2: <br/>id: 5<br/>img: 1696264182_5.png<br/>muestra_boton: 0<br/>posicion: 2<br/>updated_at: 2023-10-02 15:47:52<br/>', 'created_at: 2023-10-02 12:29:42<br/>desc1: <br/>desc2: <br/>id: 5<br/>img: 1696264182_5.png<br/>muestra_boton: 0<br/>posicion: 1<br/>updated_at: 2023-10-02 15:48:21<br/>', 'BANNERS', '2023-10-02', '15:48:21', '2023-10-02 19:48:21', '2023-10-02 19:48:21'),
 (45, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BANNER', 'created_at: 2023-10-02 12:30:03<br/>desc1: NUEVA COLECCIÓN 2023<br/>desc2: CHAQUETAS Y ABRIGOS<br/>id: 6<br/>img: 1696264203_6.png<br/>muestra_boton: 1<br/>posicion: 1<br/>updated_at: 2023-10-02 15:47:35<br/>', 'created_at: 2023-10-02 12:30:03<br/>desc1: NUEVA COLECCIÓN 2023<br/>desc2: CHAQUETAS Y ABRIGOS<br/>id: 6<br/>img: 1696264203_6.png<br/>muestra_boton: 1<br/>posicion: 2<br/>updated_at: 2023-10-02 15:48:27<br/>', 'BANNERS', '2023-10-02', '15:48:27', '2023-10-02 19:48:27', '2023-10-02 19:48:27'),
 (46, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN NOSOTROS', 'created_at: 2023-10-02 13:11:42<br/>historia: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>id: 1<br/>mision: <br/>updated_at: 2023-10-02 17:05:57<br/>vision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>', NULL, 'NOSOTROS', '2023-10-02', '17:05:57', '2023-10-02 21:05:57', '2023-10-02 21:05:57'),
-(47, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN NOSOTROS', 'created_at: 2023-10-02 13:11:42<br/>historia: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>id: 1<br/>mision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>updated_at: 2023-10-02 17:05:59<br/>vision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>', NULL, 'NOSOTROS', '2023-10-02', '17:05:59', '2023-10-02 21:05:59', '2023-10-02 21:05:59');
+(47, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN NOSOTROS', 'created_at: 2023-10-02 13:11:42<br/>historia: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>id: 1<br/>mision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>updated_at: 2023-10-02 17:05:59<br/>vision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>', NULL, 'NOSOTROS', '2023-10-02', '17:05:59', '2023-10-02 21:05:59', '2023-10-02 21:05:59'),
+(48, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:49:12<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 1<br/>materno: <br/>nombre: CATALOGO #1<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:49:12<br/>usuario: <br/>validez_credencial: <br/>', NULL, 'CATALOGOS', '2023-10-03', '15:49:12', '2023-10-03 19:49:12', '2023-10-03 19:49:12'),
+(49, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:49:12<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 1<br/>materno: <br/>nombre: CATALOGO #1<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:49:12<br/>usuario: <br/>validez_credencial: <br/>', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:49:12<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 1<br/>materno: <br/>nombre: CATALOGO #1 MODIFICADO<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:49:22<br/>usuario: <br/>validez_credencial: <br/>', 'CATALOGOS', '2023-10-03', '15:49:22', '2023-10-03 19:49:22', '2023-10-03 19:49:22'),
+(50, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:49:12<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 1<br/>materno: <br/>nombre: CATALOGO #1 MODIFICADO<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:49:22<br/>usuario: <br/>validez_credencial: <br/>', NULL, 'CATALOGOS', '2023-10-03', '15:50:02', '2023-10-03 19:50:02', '2023-10-03 19:50:02'),
+(51, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:50:29<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 2<br/>materno: <br/>nombre: CATÁLOGO #1<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:50:29<br/>usuario: <br/>validez_credencial: <br/>', NULL, 'CATALOGOS', '2023-10-03', '15:50:29', '2023-10-03 19:50:29', '2023-10-03 19:50:29'),
+(52, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:50:56<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 1<br/>materno: <br/>nombre: CATÁLOGO #1<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:50:56<br/>usuario: <br/>validez_credencial: <br/>', NULL, 'CATALOGOS', '2023-10-03', '15:50:56', '2023-10-03 19:50:56', '2023-10-03 19:50:56'),
+(53, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CATALOGO', 'cargo: <br/>ci: <br/>ci_exp: <br/>created_at: 2023-10-03 15:51:05<br/>dir: <br/>estado: <br/>fecha_ingreso: <br/>fecha_nac: <br/>fecha_registro: <br/>fono: <br/>foto: <br/>genero: <br/>id: 2<br/>materno: <br/>nombre: CATÁLOGO #2<br/>p_discapacidad: <br/>password: <br/>paterno: <br/>taller: <br/>tipo: <br/>tipo_personal: <br/>updated_at: 2023-10-03 15:51:05<br/>usuario: <br/>validez_credencial: <br/>', NULL, 'CATALOGOS', '2023-10-03', '15:51:05', '2023-10-03 19:51:05', '2023-10-03 19:51:05'),
+(54, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 10<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:06<br/>descripcion: DESC. PROD. #1<br/>id: 1<br/>imagen: default.png<br/>nombre: PRODUCTO #1<br/>precio: 300<br/>updated_at: 2023-10-03 16:33:06<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:33:06', '2023-10-03 20:33:06', '2023-10-03 20:33:06'),
+(55, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:49<br/>descripcion: <br/>id: 2<br/>imagen: 1696365229_2.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200<br/>updated_at: 2023-10-03 16:33:49<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:33:49', '2023-10-03 20:33:49', '2023-10-03 20:33:49'),
+(56, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:49<br/>descripcion: <br/>id: 2<br/>imagen: 1696365229_2.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:33:49<br/>', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:49<br/>descripcion: <br/>id: 2<br/>imagen: 1696365293_2.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:34:53<br/>', 'PRODUCTOS', '2023-10-03', '16:34:53', '2023-10-03 20:34:53', '2023-10-03 20:34:53'),
+(57, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:49<br/>descripcion: <br/>id: 2<br/>imagen: 1696365293_2.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:34:53<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:37:07', '2023-10-03 20:37:07', '2023-10-03 20:37:07'),
+(58, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:24<br/>descripcion: <br/>id: 3<br/>imagen: 1696365444_3.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200<br/>updated_at: 2023-10-03 16:37:24<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:37:24', '2023-10-03 20:37:24', '2023-10-03 20:37:24'),
+(59, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 3<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:47<br/>descripcion: DESC #3<br/>id: 4<br/>imagen: 1696365467_4.jpg<br/>nombre: PRODUCTO #3<br/>precio: 189.99<br/>updated_at: 2023-10-03 16:37:47<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:37:47', '2023-10-03 20:37:47', '2023-10-03 20:37:47'),
+(60, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 3<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:38:36<br/>descripcion: <br/>id: 5<br/>imagen: 1696365516_5.jpg<br/>nombre: PRODUCTO #4<br/>precio: 99.99<br/>updated_at: 2023-10-03 16:38:36<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:38:36', '2023-10-03 20:38:36', '2023-10-03 20:38:36'),
+(61, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 3<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:38:36<br/>descripcion: <br/>id: 5<br/>imagen: 1696365516_5.jpg<br/>nombre: PRODUCTO #4<br/>precio: 99.99<br/>updated_at: 2023-10-03 16:38:36<br/>', 'cantidad_stock: 3<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:38:36<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 5<br/>imagen: 1696365516_5.jpg<br/>nombre: PRODUCTO #4<br/>precio: 99.99<br/>updated_at: 2023-10-03 16:39:52<br/>', 'PRODUCTOS', '2023-10-03', '16:39:52', '2023-10-03 20:39:52', '2023-10-03 20:39:52'),
+(62, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 3<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:47<br/>descripcion: DESC #3<br/>id: 4<br/>imagen: 1696365467_4.jpg<br/>nombre: PRODUCTO #3<br/>precio: 189.99<br/>updated_at: 2023-10-03 16:37:47<br/>', 'cantidad_stock: 3<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:47<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 4<br/>imagen: 1696365467_4.jpg<br/>nombre: PRODUCTO #3<br/>precio: 189.99<br/>updated_at: 2023-10-03 16:39:57<br/>', 'PRODUCTOS', '2023-10-03', '16:39:57', '2023-10-03 20:39:57', '2023-10-03 20:39:57'),
+(63, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:24<br/>descripcion: <br/>id: 3<br/>imagen: 1696365444_3.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:37:24<br/>', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:24<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 3<br/>imagen: 1696365444_3.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:40:02<br/>', 'PRODUCTOS', '2023-10-03', '16:40:02', '2023-10-03 20:40:02', '2023-10-03 20:40:02'),
+(64, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 10<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:06<br/>descripcion: DESC. PROD. #1<br/>id: 1<br/>imagen: default.png<br/>nombre: PRODUCTO #1<br/>precio: 300.00<br/>updated_at: 2023-10-03 16:33:06<br/>', 'cantidad_stock: 10<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:06<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 1<br/>imagen: default.png<br/>nombre: PRODUCTO #1<br/>precio: 300.00<br/>updated_at: 2023-10-03 16:40:08<br/>', 'PRODUCTOS', '2023-10-03', '16:40:08', '2023-10-03 20:40:08', '2023-10-03 20:40:08'),
+(65, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 10<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:45:30<br/>descripcion: PROD 5<br/>id: 6<br/>imagen: 1696365930_6.jpg<br/>nombre: PRODUCTO #5<br/>precio: 200.5<br/>updated_at: 2023-10-03 16:45:30<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:45:30', '2023-10-03 20:45:30', '2023-10-03 20:45:30'),
+(66, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 2<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:45:44<br/>descripcion: DESC 6<br/>id: 7<br/>imagen: default.png<br/>nombre: PRODUCTO #6<br/>precio: 100<br/>updated_at: 2023-10-03 16:45:44<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:45:44', '2023-10-03 20:45:44', '2023-10-03 20:45:44');
 
 -- --------------------------------------------------------
 
@@ -235,7 +262,7 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -266,9 +293,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `nosotros` (
   `id` bigint UNSIGNED NOT NULL,
-  `historia` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mision` text COLLATE utf8mb4_unicode_ci,
-  `vision` text COLLATE utf8mb4_unicode_ci,
+  `historia` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mision` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `vision` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -288,12 +315,12 @@ INSERT INTO `nosotros` (`id`, `historia`, `mision`, `vision`, `created_at`, `upd
 
 CREATE TABLE `pedidos` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombres` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellidos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pec` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombres` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellidos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pec` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `monto_total` decimal(24,2) NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -308,11 +335,11 @@ CREATE TABLE `pedidos` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -326,15 +353,27 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `productos` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `precio` decimal(24,2) NOT NULL,
   `cantidad_stock` double(8,2) NOT NULL,
   `catalogo_id` bigint UNSIGNED NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad_stock`, `catalogo_id`, `imagen`, `created_at`, `updated_at`) VALUES
+(1, 'PRODUCTO #1', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 300.00, 10.00, 1, 'default.png', '2023-10-03 20:33:06', '2023-10-03 20:40:08'),
+(3, 'PRODUCTO #2', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 200.00, 5.00, 1, '1696365444_3.jpg', '2023-10-03 20:37:24', '2023-10-03 20:40:02'),
+(4, 'PRODUCTO #3', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 189.99, 3.00, 1, '1696365467_4.jpg', '2023-10-03 20:37:47', '2023-10-03 20:39:57'),
+(5, 'PRODUCTO #4', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 99.99, 3.00, 2, '1696365516_5.jpg', '2023-10-03 20:38:36', '2023-10-03 20:39:52'),
+(6, 'PRODUCTO #5', 'PROD 5', 200.50, 10.00, 2, '1696365930_6.jpg', '2023-10-03 20:45:30', '2023-10-03 20:45:30'),
+(7, 'PRODUCTO #6', 'DESC 6', 100.00, 2.00, 2, 'default.png', '2023-10-03 20:45:44', '2023-10-03 20:45:44');
 
 -- --------------------------------------------------------
 
@@ -344,10 +383,10 @@ CREATE TABLE `productos` (
 
 CREATE TABLE `red_socials` (
   `id` bigint UNSIGNED NOT NULL,
-  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `youtube` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -367,25 +406,25 @@ INSERT INTO `red_socials` (`id`, `twitter`, `facebook`, `instagram`, `youtube`, 
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ci` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ci` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_nac` date DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cargo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `genero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cargo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_ingreso` date DEFAULT NULL,
-  `taller` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_personal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `taller` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_personal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `p_discapacidad` double(8,2) NOT NULL,
   `tipo` enum('ADMINISTRADOR','REPRESENTANTE','SOCIO','NINGUNO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `validez_credencial` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `validez_credencial` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `estado` int NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -516,7 +555,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -540,7 +579,7 @@ ALTER TABLE `detalle_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -570,7 +609,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `red_socials`

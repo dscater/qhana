@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalogo;
 use App\Models\HistorialAccion;
+use App\Models\Producto;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -101,6 +103,11 @@ class CatalogoController extends Controller
     {
         DB::beginTransaction();
         try {
+            $tiene_productos = Producto::where("catalogo_id", $catalogo->id)->get();
+            if (count($tiene_productos) > 0) {
+                throw new Exception("No se puede eliminar el registro debido a que existen productos que lo usan");
+            }
+
             $antiguo = $catalogo->foto;
             if ($antiguo != 'default.png') {
                 \File::delete(public_path() . '/imgs/users/' . $antiguo);

@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PortalController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RedSocialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,9 @@ Route::get('portal/getActividades', [ActividadController::class, 'index']);
 Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
 Route::get('portal/getContacto', [ContactoController::class, 'index']);
 Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);
+Route::get('portal/getProductos', [ProductoController::class, 'listaProductos']);
+Route::get('portal/ultimosProductos', [ProductoController::class, 'ultimosProductos']);
+Route::get('portal/getProducto/{producto}', [ProductoController::class, 'show']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/configuracion/update', [ConfiguracionController::class, 'update']);
@@ -78,6 +82,11 @@ Route::middleware(['auth'])->group(function () {
 
         // CATALOGOS
         Route::resource('catalogos', CatalogoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // PRODUCTOS
+        Route::resource('productos', ProductoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
     });

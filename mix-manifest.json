@@ -26,6 +26,7 @@
     "/imgs/people.png": "/imgs/people.png",
     "/imgs/pinqhana.png": "/imgs/pinqhana.png",
     "/imgs/product-development.png": "/imgs/product-development.png",
+    "/imgs/productos/default.png": "/imgs/productos/default.png",
     "/imgs/secciones/1.png": "/imgs/secciones/1.png",
     "/imgs/secciones/2.png": "/imgs/secciones/2.png",
     "/imgs/secciones/3.png": "/imgs/secciones/3.png",
@@ -190,5 +191,10 @@
     "/fonts/Poppins/Poppins-Thin.ttf": "/fonts/Poppins/Poppins-Thin.ttf",
     "/fonts/Poppins/Poppins-ThinItalic.ttf": "/fonts/Poppins/Poppins-ThinItalic.ttf",
     "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf",
-    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff"
+    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff",
+    "/imgs/productos/1696365293_2.jpg": "/imgs/productos/1696365293_2.jpg",
+    "/imgs/productos/1696365444_3.jpg": "/imgs/productos/1696365444_3.jpg",
+    "/imgs/productos/1696365467_4.jpg": "/imgs/productos/1696365467_4.jpg",
+    "/imgs/productos/1696365516_5.jpg": "/imgs/productos/1696365516_5.jpg",
+    "/imgs/productos/1696365930_6.jpg": "/imgs/productos/1696365930_6.jpg"
 }

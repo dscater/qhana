@@ -71,6 +71,9 @@ class UserController extends Controller
             'actividads.destroy',
 
             'productos.index',
+            'productos.create',
+            'productos.edit',
+            'productos.destroy',
 
             'catalogos.index',
             'catalogos.create',

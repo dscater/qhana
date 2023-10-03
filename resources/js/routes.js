@@ -139,6 +139,15 @@ export default new Router({
             props: true,
         },
 
+        // Productos
+        {
+            path: "/administracion/productos",
+            name: "productos.index",
+            component: require("./components/modulos/productos/index.vue")
+                .default,
+            props: true,
+        },
+
         // Configuración
         {
             path: "/administracion/configuracion",
