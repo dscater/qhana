@@ -203,7 +203,7 @@ export default {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        this.oNosotros = res.data.nosotros;
+                        this.oNosotros[col] = res.data.nosotros[col];
                         this.errors = [];
                     })
                     .catch((error) => {
