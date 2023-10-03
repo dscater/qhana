@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
@@ -72,6 +73,11 @@ Route::middleware(['auth'])->group(function () {
 
         // REDES SOCIALES
         Route::resource('red_socials', RedSocialController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // CATALOGOS
+        Route::resource('catalogos', CatalogoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
     });

@@ -73,6 +73,9 @@ class UserController extends Controller
             'productos.index',
 
             'catalogos.index',
+            'catalogos.create',
+            'catalogos.edit',
+            'catalogos.destroy',
 
             'pedidos.index',
 
@@ -338,20 +341,7 @@ class UserController extends Controller
                 \File::delete(public_path() . '/imgs/users/' . $antiguo);
             }
             $datos_original = HistorialAccion::getDetalleRegistro($usuario, "users");
-            foreach ($usuario->empresas as $empresa) {
-                $empresa->accionistas()->delete();
-                $empresa->competidores()->delete();
-                $empresa->cuestionario()->delete();
-                $empresa->fondo()->delete();
-                $empresa->finanzas()->delete();
-                $empresa->valoracion()->delete();
-                $empresa->valoracion_users()->delete();
-                $empresa->delete();
-            }
-
-            $usuario->valoracion_user()->delete();
             $usuario->delete();
-
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

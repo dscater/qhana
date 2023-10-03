@@ -81,7 +81,11 @@
                     </li>
                     <li
                         class="nav-header font-weight-bold"
-                        v-if="permisos.includes('usuarios.index')"
+                        v-if="
+                            permisos.includes('usuarios.index') ||
+                            permisos.includes('portals.index') ||
+                            permisos.includes('catalogos.index')
+                        "
                     >
                         ADMINISTRACIÓN:
                     </li>
@@ -99,7 +103,10 @@
                             <p>Personal</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('portals.index')"
+                    >
                         <router-link
                             :to="{
                                 name: 'admin_portal.index',
@@ -121,15 +128,19 @@
                             <p>Productos</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a
-                            href=""
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('catalogos.index')"
+                    >
+                        <router-link
+                            exact
+                            :to="{ name: 'catalogos.index' }"
                             class="nav-link"
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fa fa-list-alt"></i>
                             <p>Catálogos</p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
                         <a

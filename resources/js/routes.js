@@ -81,8 +81,7 @@ export default new Router({
         {
             path: "/administracion/portal",
             name: "admin_portal.index",
-            component: require("./components/modulos/portal/index.vue")
-                .default,
+            component: require("./components/modulos/portal/index.vue").default,
             props: true,
         },
 
@@ -127,6 +126,15 @@ export default new Router({
             path: "/administracion/portal/redes_sociales",
             name: "admin_portal.redes_sociales",
             component: require("./components/modulos/portal/RedesSociales.vue")
+                .default,
+            props: true,
+        },
+
+        // Catálogos
+        {
+            path: "/administracion/catalogos",
+            name: "catalogos.index",
+            component: require("./components/modulos/catalogos/index.vue")
                 .default,
             props: true,
         },
