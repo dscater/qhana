@@ -1,6 +1,6 @@
 <template>
     <!-- Blog -->
-    <section class="sec-blog bg0 p-t-60 p-b-90">
+    <section class="sec-blog bg0 p-t-60 p-b-90 fondo_seccion">
         <div class="container">
             <div class="p-b-66">
                 <h2 class="ltext-105 cl5 txt-center respon1">PRODUCTOS</h2>

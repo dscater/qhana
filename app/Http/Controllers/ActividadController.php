@@ -34,6 +34,12 @@ class ActividadController extends Controller
         return response()->JSON(['actividad' => $actividad], 200);
     }
 
+    public function ultimasActividades()
+    {
+        $actividads = Actividad::orderBy("id", "desc")->get()->take(3);
+        return response()->JSON(['actividads' => $actividads], 200);
+    }
+
     public function store(Request $request)
     {
         $this->validacion['imagen'] = 'required|mimes:jpeg,jpg,png,webp|max:4096';
@@ -75,6 +81,11 @@ class ActividadController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function show(Actividad $actividad)
+    {
+        return response()->JSON(["actividad" => $actividad]);
     }
 
     public function update(Request $request, Actividad $actividad)

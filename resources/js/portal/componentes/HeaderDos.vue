@@ -14,82 +14,19 @@
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li
+                                v-for="item in listMenu"
                                 :class="[
-                                    $route.name == 'portal.inicio'
+                                    $route.name == item.ruta
                                         ? 'active-menu'
                                         : '',
                                 ]"
                             >
                                 <router-link
-                                    :to="{ name: 'portal.inicio' }"
+                                    :to="{ name: item.ruta }"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
                                     "
-                                    >Inicio</router-link
-                                >
-                            </li>
-
-                            <li
-                                :class="[
-                                    $route.name == 'portal.actividads'
-                                        ? 'active-menu'
-                                        : '',
-                                ]"
-                            >
-                                <router-link
-                                    :to="{ name: 'portal.actividads' }"
-                                    v-loading.fullscreen.lock="
-                                        fullscreenLoading
-                                    "
-                                    >Actividades</router-link
-                                >
-                            </li>
-
-                            <li
-                                :class="[
-                                    $route.name == 'portal.nosotros'
-                                        ? 'active-menu'
-                                        : '',
-                                ]"
-                            >
-                                <router-link
-                                    :to="{ name: 'portal.nosotros' }"
-                                    v-loading.fullscreen.lock="
-                                        fullscreenLoading
-                                    "
-                                    >Nosotros</router-link
-                                >
-                            </li>
-
-                            <li
-                                :class="[
-                                    $route.name == 'portal.productos'
-                                        ? 'active-menu'
-                                        : '',
-                                ]"
-                            >
-                                <router-link
-                                    :to="{ name: 'portal.productos' }"
-                                    v-loading.fullscreen.lock="
-                                        fullscreenLoading
-                                    "
-                                    >Productos</router-link
-                                >
-                            </li>
-
-                            <li
-                                :class="[
-                                    $route.name == 'portal.contactos'
-                                        ? 'active-menu'
-                                        : '',
-                                ]"
-                            >
-                                <router-link
-                                    :to="{ name: 'portal.contactos' }"
-                                    v-loading.fullscreen.lock="
-                                        fullscreenLoading
-                                    "
-                                    >Contactos</router-link
+                                    >{{ item.label }}</router-link
                                 >
                             </li>
                         </ul>
@@ -182,30 +119,13 @@
         <!-- Menu Mobile -->
         <div class="menu-mobile">
             <ul class="main-menu-m">
-                <li class="active-menu">
-                    <a href="">Inicio</a>
-                </li>
-
-                <li>
-                    <a href="">Shop</a>
-                </li>
-
-                <li>
-                    <a href="shoping-" class="label1 rs1" data-label1="hot"
-                        >Features</a
-                    >
-                </li>
-
-                <li>
-                    <a href="">Blog</a>
-                </li>
-
-                <li>
-                    <a href="">About</a>
-                </li>
-
-                <li>
-                    <a href="">Contact</a>
+                <li
+                    v-for="item in listMenu"
+                    :class="[$route.name == item.ruta ? 'active-menu' : '']"
+                >
+                    <router-link :to="{ name: item.ruta }">{{
+                        item.label
+                    }}</router-link>
                 </li>
             </ul>
         </div>
@@ -239,6 +159,28 @@ export default {
     data() {
         return {
             fullscreenLoading: false,
+            listMenu: [
+                {
+                    label: "Inicio",
+                    ruta: "portal.inicio",
+                },
+                {
+                    label: "Actividades",
+                    ruta: "portal.actividads",
+                },
+                {
+                    label: "Nosotros",
+                    ruta: "portal.nosotros",
+                },
+                {
+                    label: "Productos",
+                    ruta: "portal.productos",
+                },
+                {
+                    label: "Contactos",
+                    ruta: "portal.contactos",
+                },
+            ],
         };
     },
     mounted() {

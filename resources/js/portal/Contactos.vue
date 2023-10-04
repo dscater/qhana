@@ -4,7 +4,7 @@
         <div class="map">
             <div id="google_map"></div>
         </div>
-        <section class="sec-blog bg0 p-t-60 p-b-90">
+        <section class="sec-blog bg0 p-t-60 p-b-90 fondo_seccion">
             <div class="container">
                 <div class="flex-w flex-tr">
                     <div

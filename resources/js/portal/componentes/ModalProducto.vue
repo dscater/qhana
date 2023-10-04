@@ -18,7 +18,7 @@
                 <div class="row" v-if="oProducto && oProducto.id != 0">
                     <div class="col-md-6 col-lg-7 p-b-30">
                         <div class="p-l-25 p-r-30 p-lr-0-lg">
-                            <div class="wrap-slick3 flex-sb flex-w">
+                            <div class="wrap-slick3 d-block bg-dark">
                                 <div class="gallery-lb">
                                     <div
                                         class="item-slick3"
@@ -30,12 +30,12 @@
                                                 alt="IMG-PRODUCT"
                                             />
 
-                                            <!-- <a
+                                            <a
                                                 class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                                 :href="oProducto.url_imagen"
                                             >
                                                 <i class="fa fa-expand"></i>
-                                            </a> -->
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -59,43 +59,37 @@
 
                             <!--  -->
                             <div class="p-t-33">
-                                <div class="flex-w flex-r-m p-b-10">
+                                <div class="contenedor_agregar_carrito">
                                     <div
-                                        class="size-204 flex-w flex-m respon6-next"
+                                        class="wrap-num-product flex-w m-r-20 m-tb-10"
                                     >
                                         <div
-                                            class="wrap-num-product flex-w m-r-20 m-tb-10"
+                                            class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
                                         >
-                                            <div
-                                                class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                            >
-                                                <i
-                                                    class="fs-16 zmdi zmdi-minus"
-                                                ></i>
-                                            </div>
-
-                                            <input
-                                                class="mtext-104 cl3 txt-center num-product"
-                                                type="number"
-                                                name="num-product"
-                                                value="1"
-                                            />
-
-                                            <div
-                                                class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
-                                            >
-                                                <i
-                                                    class="fs-16 zmdi zmdi-plus"
-                                                ></i>
-                                            </div>
+                                            <i
+                                                class="fs-16 zmdi zmdi-minus"
+                                            ></i>
                                         </div>
 
-                                        <button
-                                            class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                        <input
+                                            class="mtext-104 cl3 txt-center num-product"
+                                            type="number"
+                                            name="num-product"
+                                            value="1"
+                                        />
+
+                                        <div
+                                            class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
                                         >
-                                            Añadir al carrito
-                                        </button>
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
                                     </div>
+
+                                    <button
+                                        class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                    >
+                                        Añadir al carrito
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -103,9 +97,7 @@
                 </div>
                 <div class="row" v-else>
                     <div class="col-md-12">
-                        <h4 class="w-100 text-center">
-                            CARGANDO PRODUCTO...
-                        </h4>
+                        <h4 class="w-100 text-center">CARGANDO PRODUCTO...</h4>
                     </div>
                 </div>
             </div>
@@ -144,6 +136,10 @@ export default {
                 .get(main_url + "/portal/getProducto/" + this.id)
                 .then((response) => {
                     this.oProducto = response.data.producto;
+                    let self = this;
+                    setTimeout(function () {
+                        self.initSlick3();
+                    }, 500);
                 });
         },
         cerrar() {
@@ -157,6 +153,47 @@ export default {
                 catalogo: { nombre: "", descripcion: "" },
             };
             this.$emit("close");
+        },
+        initSlick3() {
+            $(".wrap-slick3").each(function () {
+                $(this).find(".slick3").slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    fade: true,
+                    infinite: true,
+                    autoplay: false,
+                    autoplaySpeed: 6000,
+                });
+            });
+
+            // GALERIA
+            $(".gallery-lb").each(function () {
+                // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: "a", // the selector for gallery item
+                    type: "image",
+                    gallery: {
+                        enabled: true,
+                    },
+                    mainClass: "mfp-fade",
+                });
+            });
+            /*==================================================================
+            [ +/- num product ]*/
+            $(".btn-num-product-down").on("click", function () {
+                var numProduct = Number($(this).next().val());
+                if (numProduct > 0)
+                    $(this)
+                        .next()
+                        .val(numProduct - 1);
+            });
+
+            $(".btn-num-product-up").on("click", function () {
+                var numProduct = Number($(this).prev().val());
+                $(this)
+                    .prev()
+                    .val(numProduct + 1);
+            });
         },
     },
 };

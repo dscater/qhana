@@ -9,6 +9,10 @@
     --transparente: #000000bd;
 }
 
+.fondo_seccion {
+    background-color: #3a3a3a;
+}
+
 /* PAGINA INICIAL */
 .header-v2 .wrap-menu-desktop {
     background-color: var(--principal);
@@ -164,6 +168,8 @@ a.cl7:hover,
 .btn-warning {
     background-color: var(--principal) !important;
     border-color: var(--principal) !important;
+    color: var(--secundario) !important;
+    font-weight: bold;
 }
 .btn-warning:hover {
     background-color: var(--principal_hover) !important;
@@ -175,4 +181,28 @@ a.cl7:hover,
 
 .text-warning:hover {
     color: var(--principal_hover) !important;
+}
+
+.img_actividad img {
+    width: 100%;
+}
+
+.contenedor_agregar_carrito {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .item-slick1 {
+        background-size: cover;
+    }
+
+    .respon1 {
+        font-size: 1.4em;
+    }
+    .contenedor_agregar_carrito {
+        flex-direction: column;
+        justify-content: center;
+    }
 }

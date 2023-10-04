@@ -27,6 +27,8 @@ Route::get('/configuracion/getConfiguracion', [ConfiguracionController::class, '
 // ACCIONES PORTAL
 Route::get('portal/getSliders', [BannerController::class, 'index']);
 Route::get('portal/getActividades', [ActividadController::class, 'index']);
+Route::get('portal/getActividad/{actividad}', [ActividadController::class, 'show']);
+Route::get('portal/ultimasActividades', [ActividadController::class, 'ultimasActividades']);
 Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
 Route::get('portal/getContacto', [ContactoController::class, 'index']);
 Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);

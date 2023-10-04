@@ -8,11 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $configuracion->first()->alias }}</title>
-    <style>
-    </style>
-
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal.css') }}">
+    <style>
+        .contenedor_inicio {
+            background-color: var(--principal);
+        }
+    </style>
 </head>
 
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed text-sm">

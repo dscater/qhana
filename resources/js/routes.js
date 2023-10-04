@@ -22,6 +22,12 @@ export default new Router({
             name: "portal.actividads",
             component: require("./portal/Actividades.vue").default,
         },
+        {
+            path: "/actividades/:id",
+            name: "portal.actividad",
+            component: require("./portal/Actividad.vue").default,
+            props: true,
+        },
 
         // NOSOTROS
         {

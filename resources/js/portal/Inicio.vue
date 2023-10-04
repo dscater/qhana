@@ -1,7 +1,7 @@
 <template>
     <div class="contenedor_inicio">
         <!-- Product -->
-        <section class="sec-blog bg0 p-b-90">
+        <section class="sec-blog bg0 p-b-90 fondo_seccion">
             <div class="container-fluid p-0 mb-4">
                 <div class="bg-dark">
                     <h1
@@ -11,7 +11,10 @@
                     </h1>
                 </div>
             </div>
-            <div class="container bg-dark pt-3 pb-3">
+            <div
+                class="container bg-dark pt-3 pb-3 wow fadeInUp"
+                data-wow-delay="0.1s"
+            >
                 <h4 class="cl11 txt-center respon1">
                     ÚLTIMOS PRODUCTOS AGREGADOS
                 </h4>
@@ -74,12 +77,11 @@
                                                 <div
                                                     class="block2-txt-child1 flex-col-l"
                                                 >
-                                                    <a
-                                                        href="product-detail.html"
+                                                    <span
                                                         class="stext-104 cl0 hov-cl1 trans-04 js-name-b2 p-b-6"
                                                     >
                                                         {{ item.nombre }}
-                                                    </a>
+                                                    </span>
 
                                                     <span class="stext-105 cl4">
                                                         Bs. {{ item.precio }}
@@ -122,8 +124,71 @@
                 </div>
             </div>
             <hr />
-            <div class="container bg-dark pt-3 pb-3">
-                <h4 class="cl11 txt-center respon1">NUESTRAS ACTIVIDADES</h4>
+            <div
+                class="container bg-dark pt-3 pb-3 wow slideInLeft contenedor_actividades"
+                data-wow-delay="0.1s"
+            >
+                <h4 class="cl11 txt-center respon1 mb-2">
+                    NUESTRAS ACTIVIDADES
+                </h4>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div
+                            class="col-sm-6 col-md-4"
+                            v-for="item in listActividads"
+                        >
+                            <div class="blog-item">
+                                <div class="hov-img0">
+                                    <router-link
+                                        :to="{
+                                            name: 'portal.actividad',
+                                            params: { id: item.id },
+                                        }"
+                                    >
+                                        <img
+                                            :src="item.url_imagen"
+                                            alt="IMG-ACTIIDAD"
+                                        />
+                                    </router-link>
+                                </div>
+
+                                <div class="p-t-15 descripcion_actividad">
+                                    <!-- <h4 class="p-b-12">
+                                <a
+                                    href=""
+                                    class="mtext-101 cl2 hov-cl1 trans-04"
+                                >
+                                    SOCIOS
+                                </a>
+                            </h4> -->
+
+                                    <p
+                                        class="stext-108 cl6"
+                                        v-text="item.descripcion"
+                                    ></p>
+                                    <router-link
+                                        :to="{
+                                            name: 'portal.actividad',
+                                            params: { id: item.id },
+                                        }"
+                                        class="btn btn-warning btn-xs btn-block mt-1"
+                                    >
+                                        Ver más
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-5 ml-auto mr-auto">
+                            <router-link
+                                :to="{ name: 'portal.actividads' }"
+                                class="btn btn-block btn-warning"
+                                >VER TODAS LAS ACTIVIDADES</router-link
+                            >
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <ModalProducto
@@ -146,6 +211,7 @@ export default {
                 fullscreen: this.fullscreenLoading,
             }),
             listProductos: [],
+            listActividads: [],
             id_seleccionado: 0,
             muestra_modal_producto: false,
         };
@@ -156,6 +222,7 @@ export default {
             self.loadingWindow.close();
         }, 500);
         this.ultimosProductos();
+        this.ultimasActividades();
     },
     methods: {
         ultimosProductos() {
@@ -167,6 +234,13 @@ export default {
                     setTimeout(function () {
                         self.initSlick2();
                     }, 300);
+                });
+        },
+        ultimasActividades() {
+            axios
+                .get(main_url + "/portal/ultimasActividades")
+                .then((response) => {
+                    this.listActividads = response.data.actividads;
                 });
         },
         initSlick2() {

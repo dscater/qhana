@@ -58,6 +58,7 @@ mix.setPublicPath("./")
             "resources/assets/js/portal/jquery.magnific-popup.min.js",
             "resources/assets/js/portal/isotope.pkgd.min.js",
             "resources/assets/js/portal/perfect-scrollbar.min.js",
+            "resources/assets/js/portal/wow.min.js",
         ],
         "./js/portal.js"
     )

@@ -1,11 +1,16 @@
 <template>
     <!-- Blog -->
-    <section class="sec-blog bg0 p-t-60 p-b-90 contenedor_actividades">
-        <div class="container">
-            <div class="p-b-66">
-                <h2 class="ltext-105 cl5 txt-center respon1">ACTIVIDADES</h2>
+    <section class="sec-blog bg0 p-b-90 contenedor_actividades fondo_seccion">
+        <div class="container-fluid p-0 mb-4">
+            <div class="bg-dark">
+                <h2
+                    class="ltext-105 cl5 txt-center respon1 text-warning pt-3 pb-3"
+                >
+                    ACTIVIDADES
+                </h2>
             </div>
-
+        </div>
+        <div class="container wow fadeIn" data-wow-delay="0.5s">
             <div class="row">
                 <div
                     class="col-sm-6 col-md-4 p-b-40"
@@ -13,12 +18,17 @@
                 >
                     <div class="blog-item">
                         <div class="hov-img0">
-                            <a href="">
+                            <router-link
+                                :to="{
+                                    name: 'portal.actividad',
+                                    params: { id: item.id },
+                                }"
+                            >
                                 <img
                                     :src="item.url_imagen"
                                     alt="IMG-ACTIIDAD"
                                 />
-                            </a>
+                            </router-link>
                         </div>
 
                         <div class="p-t-15 descripcion_actividad">
@@ -35,12 +45,15 @@
                                 class="stext-108 cl6"
                                 v-text="item.descripcion"
                             ></p>
-                            <a
-                                href="product.html"
+                            <router-link
+                                :to="{
+                                    name: 'portal.actividad',
+                                    params: { id: item.id },
+                                }"
                                 class="btn btn-warning btn-xs btn-block mt-1"
                             >
                                 Ver más
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -94,10 +107,12 @@ export default {
     border-bottom: solid 1px var(--secundario);
     border-right: solid 1px var(--secundario);
     border-radius: 0px 0px 10px 10px;
-    background: var(--secundario);
+    background: white;
 }
 .contenedor_actividades .blog-item .descripcion_actividad p {
-    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.85em;
+    color: var(--secundario);
     display: block;
     display: -webkit-box;
     max-width: 100%;
