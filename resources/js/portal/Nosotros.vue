@@ -1,11 +1,16 @@
 <template>
     <!-- Blog -->
-    <section class="sec-blog bg0 p-t-60 p-b-90 contenedor_nosotros fondo_seccion">
-        <div class="container">
-            <div class="p-b-66">
-                <h2 class="ltext-105 cl5 txt-center respon1">NOSOTROS</h2>
+    <section class="sec-blog bg0 p-b-90 contenedor_nosotros fondo_seccion">
+        <div class="container-fluid p-0 mb-4">
+            <div class="bg-dark">
+                <h2
+                    class="ltext-105 cl5 txt-center respon1 text-warning pt-3 pb-3"
+                >
+                    NOSOTROS
+                </h2>
             </div>
-
+        </div>
+        <div class="container wow fadeInUp" wow-data-delay="0.2s">
             <div class="row">
                 <div
                     class="col-sm-6 col-md-4 p-b-40"
@@ -135,17 +140,14 @@ export default {
 <style>
 .contenedor_nosotros .blog-item .descripcion_nosotros {
     padding: 10px;
-    border-left: solid 1px var(--secundario);
-    border-bottom: solid 1px var(--secundario);
-    border-right: solid 1px var(--secundario);
     border-radius: 0px 0px 10px 10px;
-    background: var(--secundario);
+    background: white;
 }
 
 .contenedor_nosotros .blog-item .descripcion_nosotros p,
 .contenedor_nosotros .blog-item .descripcion_nosotros h4,
 .contenedor_nosotros .blog-item .descripcion_nosotros h4 span,
 .contenedor_nosotros .blog-item .descripcion_nosotros h4 a {
-    color: white;
+    color: black;
 }
 </style>

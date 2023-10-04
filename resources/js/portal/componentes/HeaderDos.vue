@@ -54,7 +54,7 @@
                         <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
                             <div
                                 class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
-                                data-notify="2"
+                                :data-notify="cantidad_carrito"
                             >
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
@@ -101,7 +101,7 @@
                 <div class="flex-c-m h-full p-lr-10 bor5">
                     <div
                         class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
-                        data-notify="2"
+                        :data-notify="cantidad_carrito"
                     >
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
@@ -180,13 +180,38 @@ export default {
                     label: "Contactos",
                     ruta: "portal.contactos",
                 },
+                {
+                    label: "Tú carrito",
+                    ruta: "portal.carrito",
+                },
             ],
+            cantidad_carrito: 0,
+            carrito: [],
         };
     },
     mounted() {
         this.animacionHeader();
+        this.getCarrito();
+        EventBus.$on("producto_agregado", () => {
+            this.getCarrito();
+        });
+        let self = this;
+        setTimeout(function () {
+            self.initShowCarrito();
+        }, 300);
     },
     methods: {
+        getCarrito() {
+            if (localStorage.getItem("carrito_qhana")) {
+                this.carrito = JSON.parse(
+                    localStorage.getItem("carrito_qhana")
+                );
+                this.cantidad_carrito = this.carrito.length;
+            } else {
+                this.cantidad_carrito;
+            }
+        },
+
         animacionHeader() {
             /*==================================================================
             [ Fixed Header ]*/
@@ -250,6 +275,27 @@ export default {
                         }
                     });
                 }
+            });
+        },
+        initShowCarrito() {
+            /*==================================================================
+            [ Cart ]*/
+            $(".js-show-cart").on("click", function () {
+                $(".js-panel-cart").addClass("show-header-cart");
+            });
+
+            $(".js-hide-cart").on("click", function () {
+                $(".js-panel-cart").removeClass("show-header-cart");
+            });
+
+            /*==================================================================
+            [ Cart ]*/
+            $(".js-show-sidebar").on("click", function () {
+                $(".js-sidebar").addClass("show-sidebar");
+            });
+
+            $(".js-hide-sidebar").on("click", function () {
+                $(".js-sidebar").removeClass("show-sidebar");
             });
         },
     },

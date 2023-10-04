@@ -10,7 +10,7 @@
                 </h2>
             </div>
         </div>
-        <div class="container wow fadeIn" data-wow-delay="0.5s">
+        <div class="container wow fadeInUp" wow-data-delay="0.2s">
             <div class="row">
                 <div
                     class="col-sm-6 col-md-4 p-b-40"

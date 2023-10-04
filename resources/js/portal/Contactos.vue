@@ -8,10 +8,10 @@
             <div class="container">
                 <div class="flex-w flex-tr">
                     <div
-                        class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md"
+                        class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md bg-dark"
                     >
                         <form>
-                            <h4 class="mtext-105 cl2 txt-center p-b-30">
+                            <h4 class="mtext-105 cl0 txt-center p-b-30">
                                 Escribenos
                             </h4>
 
@@ -38,7 +38,7 @@
                             </div>
 
                             <button
-                                class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                                class="flex-c-m stext-101 cl2 size-121 bg0 bor1 hov-btn3 p-lr-15 trans-04 pointer"
                             >
                                 Enviar
                             </button>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div
-                        class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md"
+                        class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md bg-dark"
                         v-if="oContacto"
                     >
                         <div class="flex-w w-full p-b-42">
@@ -55,10 +55,10 @@
                             </span>
 
                             <div class="size-212 p-t-2">
-                                <span class="mtext-110 cl2"> Dirección </span>
+                                <span class="mtext-110 cl0"> Dirección </span>
 
                                 <p
-                                    class="stext-115 cl6 size-213 p-t-18"
+                                    class="stext-115 cl1 size-213 p-t-18"
                                     v-text="oContacto.direccion"
                                 ></p>
                             </div>
@@ -70,10 +70,10 @@
                             </span>
 
                             <div class="size-212 p-t-2">
-                                <span class="mtext-110 cl2"> Teléfonos </span>
+                                <span class="mtext-110 cl0"> Teléfonos </span>
 
                                 <p
-                                    class="stext-115 cl11 size-213 p-t-18"
+                                    class="stext-115 cl1 size-213 p-t-18"
                                     v-text="oContacto.fonos"
                                 ></p>
                             </div>
@@ -85,10 +85,10 @@
                             </span>
 
                             <div class="size-212 p-t-2">
-                                <span class="mtext-110 cl2"> Correo </span>
+                                <span class="mtext-110 cl0"> Correo </span>
 
                                 <p
-                                    class="stext-115 cl11 size-213 p-t-18"
+                                    class="stext-115 cl1 size-213 p-t-18"
                                     v-text="oContacto.correo"
                                 ></p>
                             </div>
@@ -153,8 +153,8 @@ export default {
 
             // Configura el icono personalizado
             const customIcon = {
-                url: main_url + "/imgs/pinqhana.png", // Ruta a tu icono personalizado
-                scaledSize: new google.maps.Size(32, 32), // Tamaño del icono
+                url: main_url + "/imgs/pinmap.gif", // Ruta a tu icono personalizado
+                scaledSize: new google.maps.Size(50, 50), // Tamaño del icono
             };
 
             // Crea un marcador en el centro del mapa

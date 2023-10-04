@@ -53,6 +53,13 @@
                                 Bs. {{ oProducto.precio }}
                             </span>
 
+                            <p class="stext-104 cl3 p-t-23">
+                                <strong>Stock actual: </strong
+                                ><span class="mtext-106">{{
+                                    oProducto.cantidad_stock
+                                }}</span>
+                            </p>
+
                             <p class="stext-102 cl3 p-t-23">
                                 {{ oProducto.descripcion }}
                             </p>
@@ -75,7 +82,9 @@
                                             class="mtext-104 cl3 txt-center num-product"
                                             type="number"
                                             name="num-product"
+                                            min="1"
                                             value="1"
+                                            ref="input_cantidad"
                                         />
 
                                         <div
@@ -87,6 +96,7 @@
 
                                     <button
                                         class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                        @click="agregarCarrito"
                                     >
                                         Añadir al carrito
                                     </button>
@@ -139,8 +149,56 @@ export default {
                     let self = this;
                     setTimeout(function () {
                         self.initSlick3();
+                        self.initContador();
                     }, 500);
                 });
+        },
+        agregarCarrito() {
+            if (this.$refs.input_cantidad.value > 0) {
+                let carrito = [];
+                if (localStorage.getItem("carrito_qhana")) {
+                    carrito = JSON.parse(localStorage.getItem("carrito_qhana"));
+                }
+                let subtotal =
+                    parseFloat(this.$refs.input_cantidad.value) *
+                    parseFloat(this.oProducto.precio);
+                subtotal = subtotal.toFixed(2);
+
+                let cantidad_agregada = this.$refs.input_cantidad.value;
+
+                if (cantidad_agregada > this.oProducto.cantidad_stock) {
+                    cantidad_agregada = this.oProducto.cantidad_stock;
+                }
+
+                carrito.push({
+                    producto_id: this.oProducto.id,
+                    nombre: this.oProducto.nombre,
+                    cantidad: cantidad_agregada,
+                    subtotal: subtotal,
+                    url_imagen: this.oProducto.url_imagen,
+                    precio: this.oProducto.precio,
+                });
+                localStorage.setItem("carrito_qhana", JSON.stringify(carrito));
+                this.$refs.input_cantidad.value = 1;
+                EventBus.$emit("producto_agregado");
+                this.cerrar();
+                Swal.fire({
+                    icon: "success",
+                    title: "Correcto",
+                    html: "Producto agregado correctamente",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    html: "La cantidad no debe ser menor a 1",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#c57a40",
+                    confirmButtonText: "Aceptar",
+                });
+            }
         },
         cerrar() {
             this.oProducto = {
@@ -178,22 +236,32 @@ export default {
                     mainClass: "mfp-fade",
                 });
             });
+        },
+        initContador() {
+            let self = this;
             /*==================================================================
-            [ +/- num product ]*/
-            $(".btn-num-product-down").on("click", function () {
-                var numProduct = Number($(this).next().val());
-                if (numProduct > 0)
-                    $(this)
-                        .next()
-                        .val(numProduct - 1);
-            });
+                [ +/- num product ]*/
+            $(".btn-num-product-down")
+                .off("click")
+                .on("click", function () {
+                    var numProduct = Number($(this).next().val());
+                    if (numProduct > 1)
+                        $(this)
+                            .next()
+                            .val(numProduct - 1);
+                });
 
-            $(".btn-num-product-up").on("click", function () {
-                var numProduct = Number($(this).prev().val());
-                $(this)
-                    .prev()
-                    .val(numProduct + 1);
-            });
+            // Desvincular los eventos de clic antes de adjuntar nuevos eventos
+            $(".btn-num-product-up")
+                .off("click")
+                .on("click", function () {
+                    var numProduct = Number($(this).prev().val());
+                    if (numProduct < self.oProducto.cantidad_stock) {
+                        $(this)
+                            .prev()
+                            .val(numProduct + 1);
+                    }
+                });
         },
     },
 };

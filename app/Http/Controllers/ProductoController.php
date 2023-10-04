@@ -36,7 +36,7 @@ class ProductoController extends Controller
 
     public function listaProductos(Request $request)
     {
-        $productos = Producto::with("catalogo")->orderBy("nombre", "asc")->get();
+        $productos = Producto::with("catalogo")->orderBy("id", "desc")->get();
         return response()->JSON(['productos' => $productos, 'total' => count($productos)], 200);
     }
 

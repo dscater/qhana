@@ -43,6 +43,13 @@ export default new Router({
             component: require("./portal/Productos.vue").default,
         },
 
+        // CARRITO
+        {
+            path: "/carrito",
+            name: "portal.carrito",
+            component: require("./portal/Carrito.vue").default,
+        },
+
         // CONTACTOS
         {
             path: "/contactos",

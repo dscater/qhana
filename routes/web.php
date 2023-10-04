@@ -32,7 +32,8 @@ Route::get('portal/ultimasActividades', [ActividadController::class, 'ultimasAct
 Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
 Route::get('portal/getContacto', [ContactoController::class, 'index']);
 Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);
-Route::get('portal/getProductos', [ProductoController::class, 'listaProductos']);
+Route::get('portal/listaProductos', [ProductoController::class, 'listaProductos']);
+Route::get('portal/getCatalogos', [CatalogoController::class, 'index']);
 Route::get('portal/ultimosProductos', [ProductoController::class, 'ultimosProductos']);
 Route::get('portal/getProducto/{producto}', [ProductoController::class, 'show']);
 

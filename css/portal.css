@@ -9519,6 +9519,10 @@ input.num-product::-webkit-inner-spin-button {
     --transparente: #000000bd;
 }
 
+.bg-warning {
+    background-color: var(--principal) !important;
+}
+
 .fondo_seccion {
     background-color: #3a3a3a;
 }
@@ -9701,6 +9705,32 @@ a.cl7:hover,
     display: flex;
     justify-content: start;
     align-items: center;
+}
+
+.how-active1 {
+    color: var(--principal_hover);
+    border-color: var(--principal_hover);
+}
+
+/*---------------------------------------------*/
+.hov1:hover {
+    color: var(--principal_hover);
+    border-color: var(--principal_hover);
+}
+
+.filter-link {
+    color: #aaa;
+    border-bottom: 1px solid transparent;
+}
+
+.filter-link:hover {
+    color: var(--principal_hover);
+    border-bottom: 1px solid var(--principal_hover);
+}
+
+.filter-link-active {
+    color: var(--principal_hover);
+    border-bottom: 1px solid var(--principal_hover);
 }
 
 @media (max-width: 900px) {
