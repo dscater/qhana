@@ -156,7 +156,7 @@
                             <p>Pedidos</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a
                             href=""
                             class="nav-link"
@@ -185,7 +185,7 @@
                             <i class="nav-icon fas fa-cash-register"></i>
                             <p>Cajas</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li
                         class="nav-header font-weight-bold"
                         v-if="permisos.includes('reportes.usuarios')"

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ConfiguracionController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RedSocialController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +90,11 @@ Route::middleware(['auth'])->group(function () {
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
+        // APIS
+        Route::resource('apis', ApiController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
         // REDES SOCIALES
         Route::resource('red_socials', RedSocialController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
@@ -110,6 +117,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('pedidos', PedidoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
+
+
+        Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);
     });
 });
 

@@ -143,6 +143,14 @@ export default new Router({
             props: true,
         },
 
+        // Portal - apis
+        {
+            path: "/administracion/portal/apis",
+            name: "admin_portal.apis",
+            component: require("./components/modulos/portal/Apis.vue").default,
+            props: true,
+        },
+
         // Catálogos
         {
             path: "/administracion/catalogos",
@@ -182,6 +190,15 @@ export default new Router({
             path: "/administracion/configuracion",
             name: "configuracion",
             component: require("./components/modulos/configuracion/index.vue")
+                .default,
+            props: true,
+        },
+
+        // Reportes
+        {
+            path: "/administracion/reportes/usuarios",
+            name: "reportes.usuarios",
+            component: require("./components/modulos/reportes/usuarios.vue")
                 .default,
             props: true,
         },

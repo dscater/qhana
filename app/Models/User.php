@@ -21,7 +21,7 @@ class User extends Authenticatable
         "usuario", "nombre", "paterno", "materno", "ci", "ci_exp", "fecha_nac",
         "genero", "cargo", "fecha_ingreso", "taller", "dir", "fono",
         "tipo_personal", "p_discapacidad", "tipo", "foto", "validez_credencial",
-        "password", "estado", "fecha_registro",
+        "password", "estado", "fecha_registro", "acceso"
     ];
 
     /**

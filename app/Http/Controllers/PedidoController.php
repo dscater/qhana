@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SolicitudPedido;
+use App\Models\Api;
 use App\Models\Configuracion;
 use App\Models\HistorialAccion;
 use App\Models\Pedido;
@@ -227,9 +228,17 @@ class PedidoController extends Controller
 
             $configuracion = Configuracion::first();
             if ($configuracion) {
-                $name = "QHANA";
-                $correo_envio = "correosyseventos@gmail.com";
-                $password = "gywdptczpyhtkghm";
+                $api = Api::first();
+                if ($api) {
+                    $name = $api->nombre;
+                    $correo_envio = $api->correo;
+                    $password = $api->password;
+                } else {
+                    $name = "QHANA";
+                    $correo_envio = "correosyseventos@gmail.com";
+                    $password = "gywdptczpyhtkghm";
+                }
+
                 // Configurar el servicio de correo con la configuración de Gmail dinámicamente
                 Config::set([
                     'mail.mailers.smtp.host' => 'smtp.gmail.com',

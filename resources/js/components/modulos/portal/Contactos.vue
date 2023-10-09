@@ -240,7 +240,7 @@ export default {
             // Configura el icono personalizado
             const customIcon = {
                 url: main_url + "/imgs/pinmap.gif", // Ruta a tu icono personalizado
-                scaledSize: new google.maps.Size(32, 32), // Tamaño del icono
+                scaledSize: new google.maps.Size(50, 50), // Tamaño del icono
             };
 
             // Crea un marcador en el centro del mapa

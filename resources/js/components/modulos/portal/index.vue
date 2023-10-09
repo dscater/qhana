@@ -184,7 +184,7 @@
                             </router-link>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="card card_portal collapsed-card">
                             <div class="card-header bg-dark">
                                 <router-link
@@ -276,6 +276,56 @@
                             </router-link>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card card_portal collapsed-card">
+                            <div class="card-header bg-dark">
+                                <router-link
+                                    :to="{
+                                        name: 'admin_portal.apis',
+                                    }"
+                                    class="text-left card-title btn btn-flat btn-warning"
+                                    ><strong>Apis</strong></router-link
+                                >
+                                <div class="card-tools">
+                                    <button
+                                        type="button"
+                                        class="btn btn-tool"
+                                        data-card-widget="collapse"
+                                    >
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <router-link
+                                :to="{ name: 'admin_portal.apis' }"
+                                class="card-body link_body"
+                            >
+                                <div class="col-md-12" v-if="oApi">
+                                    <h4>Envío de correos:</h4>
+                                    <p>
+                                        <strong>Correo:</strong>
+                                        {{ oApi.correo }}
+                                    </p>
+                                    <p>
+                                        <strong>Nombre:</strong>
+                                        {{ oApi.nombre }}
+                                    </p>
+                                    <p>
+                                        <strong>Password:</strong>
+                                        {{ oApi.password.replace(/.*/g, "*") }}
+                                    </p>
+                                    <h4>Google maps:</h4>
+                                    <p>
+                                        <strong>Youtube:</strong>
+                                        {{ oApi.api_google }}
+                                    </p>
+                                </div>
+                                <div class="col-md-12" v-else>
+                                    AÚN NO SE HA CONFIGURADO LOS APIS DEL PORTAL
+                                </div>
+                            </router-link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -299,6 +349,7 @@ export default {
             oContacto: null,
             oBanner: null,
             oRedSocial: null,
+            oApi: null,
         };
     },
     mounted() {
@@ -307,6 +358,7 @@ export default {
         this.getUltimoBanner();
         this.getInfoNosotros();
         this.getInfoContacto();
+        this.getInfoApi();
         this.getInfoRedSocial();
     },
     methods: {
@@ -332,6 +384,11 @@ export default {
         getInfoContacto() {
             axios.get(main_url + "/admin/contactos").then((response) => {
                 this.oContacto = response.data.contacto;
+            });
+        },
+        getInfoApi() {
+            axios.get(main_url + "/admin/apis").then((response) => {
+                this.oApi = response.data.api;
             });
         },
         getInfoRedSocial() {

@@ -28,7 +28,7 @@ class UserController extends Controller
         'fono' => 'required',
         'dir' => 'required',
         'tipo_personal' => 'required',
-        'p_discapacidad' => 'required|numeric|min:1',
+        'p_discapacidad' => 'required|numeric|min:0',
         'validez_credencial' => 'required',
 
     ];
@@ -96,7 +96,7 @@ class UserController extends Controller
             'configuracion.index',
             'configuracion.edit',
 
-            // "reportes.usuarios"
+            "reportes.usuarios"
         ],
         "REPRESENTANTE" => [],
         "SOCIO" => [],

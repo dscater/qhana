@@ -98,13 +98,29 @@
                                                             row.item.estado == 1
                                                         "
                                                     >
-                                                        HABILITADO
+                                                        ACTIVO
                                                     </span>
                                                     <span
                                                         v-else
                                                         class="badge badge-danger"
                                                     >
                                                         RETIRADO
+                                                    </span>
+                                                </template>
+                                                <template #cell(acceso)="row">
+                                                    <span
+                                                        class="badge badge-success"
+                                                        v-if="
+                                                            row.item.acceso == 1
+                                                        "
+                                                    >
+                                                        HABILITADO
+                                                    </span>
+                                                    <span
+                                                        v-else
+                                                        class="badge badge-danger"
+                                                    >
+                                                        DESHABILITADO
                                                     </span>
                                                 </template>
                                                 <template #cell(mas)="row">
@@ -414,6 +430,7 @@ export default {
                     label: "Fecha de registro",
                     sortable: true,
                 },
+                { key: "acceso", label: "Acceso al sistema" },
                 { key: "mas", label: "Ver mas" },
                 { key: "accion", label: "Acción" },
             ],
@@ -445,6 +462,7 @@ export default {
                 validez_credencial: "",
                 password: "",
                 estado: "",
+                acceso: "",
             },
             currentPage: 1,
             perPage: 5,
@@ -487,12 +505,13 @@ export default {
                 : "";
             this.oUsuario.p_discapacidad = item.p_discapacidad
                 ? item.p_discapacidad
-                : "";
+                : "0";
             this.oUsuario.tipo = item.tipo ? item.tipo : "";
             this.oUsuario.validez_credencial = item.validez_credencial
                 ? item.validez_credencial
                 : "";
             this.oUsuario.estado = item.estado ? "" + item.estado : "0";
+            this.oUsuario.acceso = item.acceso ? "" + item.acceso : "0";
             this.modal_accion = "edit";
             this.muestra_modal = true;
         },
@@ -618,6 +637,7 @@ export default {
             this.oUsuario.foto = null;
             this.oUsuario.validez_credencial = "";
             this.oUsuario.estado = "0";
+            this.oUsuario.acceso = "0";
         },
         formatoFecha(date) {
             return this.$moment(String(date)).format("DD/MM/YYYY");

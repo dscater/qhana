@@ -433,6 +433,33 @@
                                     v-text="errors.validez_credencial[0]"
                                 ></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.acceso,
+                                    }"
+                                    >Acceso al sistema*</label
+                                >
+                                <el-switch
+                                    :class="{
+                                        'is-invalid': errors.acceso,
+                                    }"
+                                    style="display: block"
+                                    v-model="usuario.acceso"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949"
+                                    active-text="HABILITADO"
+                                    inactive-text="DESHABILITADO"
+                                    active-value="1"
+                                    inactive-value="0"
+                                >
+                                </el-switch>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.acceso"
+                                    v-text="errors.acceso[0]"
+                                ></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -490,6 +517,7 @@ export default {
                 foto: null,
                 validez_credencial: "",
                 estado: "0",
+                acceso: "0",
             },
         },
     },
@@ -629,6 +657,10 @@ export default {
                     "estado",
                     this.usuario.estado ? this.usuario.estado : "0"
                 );
+                formdata.append(
+                    "acceso",
+                    this.usuario.acceso ? this.usuario.acceso : "0"
+                );
 
                 if (this.accion == "edit") {
                     url = main_url + "/admin/usuarios/" + this.usuario.id;
@@ -715,6 +747,7 @@ export default {
             this.usuario.foto = null;
             this.usuario.validez_credencial = "";
             this.usuario.estado = "0";
+            this.usuario.acceso = "0";
             this.$refs.input_file.value = null;
         },
     },

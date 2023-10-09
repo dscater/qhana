@@ -30,6 +30,15 @@
             padding: 5px;
             text-align: center;
         }
+
+        .bg-black {
+            background: black;
+            color: white;
+        }
+
+        .text-md {
+            font-size: 1.3em;
+        }
     </style>
 </head>
 
@@ -56,6 +65,10 @@
                     <td>{{ $dp->subtotal }}</td>
                 </tr>
             @endforeach
+            <tr class="bg-black text-md">
+                <td colspan="3">TOTAL</td>
+                <td>{{ $pedido->monto->total }}</td>
+            </tr>
         </tbody>
     </table>
 </body>
