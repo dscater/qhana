@@ -90,6 +90,10 @@ class ActividadController extends Controller
 
     public function update(Request $request, Actividad $actividad)
     {
+        if ($request->hasFile("imagen")) {
+            $this->validacion['imagen'] = 'required|mimes:jpeg,jpg,png,webp|max:4096';
+        }
+
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {

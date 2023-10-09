@@ -123,7 +123,7 @@
                                                 'text-danger':
                                                     errors.api_google,
                                             }"
-                                            >Api de Google Maps*</label
+                                            >Key Api de Google Maps*</label
                                         >
                                         <el-input
                                             type="textarea"

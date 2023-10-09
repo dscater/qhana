@@ -159,7 +159,7 @@
                                 :to="{ name: 'admin_portal.contactos' }"
                                 class="card-body link_body"
                             >
-                                <div class="col-md-12" v-if="oContacto">
+                                <div class="col-md-12 p-3" v-if="oContacto">
                                     <p>
                                         <strong>Dirección:</strong>
                                         {{ oContacto.direccion }}
@@ -248,7 +248,7 @@
                                 :to="{ name: 'admin_portal.redes_sociales' }"
                                 class="card-body link_body"
                             >
-                                <div class="col-md-12" v-if="oRedSocial">
+                                <div class="col-md-12 p-3" v-if="oRedSocial">
                                     <p>
                                         <strong>Twitter:</strong>
                                         {{ oRedSocial.twitter }}
@@ -300,7 +300,7 @@
                                 :to="{ name: 'admin_portal.apis' }"
                                 class="card-body link_body"
                             >
-                                <div class="col-md-12" v-if="oApi">
+                                <div class="col-md-12 p-3" v-if="oApi">
                                     <h4>Envío de correos:</h4>
                                     <p>
                                         <strong>Correo:</strong>
@@ -312,11 +312,11 @@
                                     </p>
                                     <p>
                                         <strong>Password:</strong>
-                                        {{ oApi.password.replace(/.*/g, "*") }}
+                                        {{ oApi.password.replace(/.*/g, "***") }}
                                     </p>
                                     <h4>Google maps:</h4>
                                     <p>
-                                        <strong>Youtube:</strong>
+                                        <strong>Key Api:</strong>
                                         {{ oApi.api_google }}
                                     </p>
                                 </div>
