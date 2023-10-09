@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalogo;
 use App\Models\Empresa;
 use App\Models\HistorialAccion;
+use App\Models\Pedido;
+use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -401,31 +404,35 @@ class UserController extends Controller
                 "url" => "usuarios.index"
             ];
         }
+        if (in_array('pedidos.index', $this->permisos[$tipo])) {
+            $array_infos[] = [
+                'label' => 'Pedidos',
+                'cantidad' => count(Pedido::all()),
+                'color' => 'bg-dark',
+                'icon' => asset("imgs/checklist.png"),
+                "url" => "pedidos.index"
+            ];
+        }
 
-        $array_infos[] = [
-            'label' => 'Pedidos',
-            'cantidad' => count(User::where('id', '!=', 1)->get()),
-            'color' => 'bg-dark',
-            'icon' => asset("imgs/checklist.png"),
-            "url" => ""
-        ];
+        if (in_array('catalogos.index', $this->permisos[$tipo])) {
+            $array_infos[] = [
+                'label' => 'Catálogos',
+                'cantidad' => count(Catalogo::all()),
+                'color' => 'bg-dark',
+                'icon' => asset("imgs/catalogue.png"),
+                "url" => "catalogos.index"
+            ];
+        }
 
-        $array_infos[] = [
-            'label' => 'Catálogos',
-            'cantidad' => count(User::where('id', '!=', 1)->get()),
-            'color' => 'bg-dark',
-            'icon' => asset("imgs/catalogue.png"),
-            "url" => ""
-        ];
-
-        $array_infos[] = [
-            'label' => 'Productos',
-            'cantidad' => count(User::where('id', '!=', 1)->get()),
-            'color' => 'bg-dark',
-            'icon' => asset("imgs/product-development.png"),
-            "url" => ""
-        ];
-
+        if (in_array('productos.index', $this->permisos[$tipo])) {
+            $array_infos[] = [
+                'label' => 'Productos',
+                'cantidad' => count(Producto::all()),
+                'color' => 'bg-dark',
+                'icon' => asset("imgs/product-development.png"),
+                "url" => "productos.index"
+            ];
+        }
         return response()->JSON($array_infos);
     }
 

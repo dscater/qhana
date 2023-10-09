@@ -59,7 +59,8 @@
                                             </div>
                                         </td>
                                         <td class="column-2 text-white">
-                                            {{ item.nombre }}
+                                            {{ item.nombre }}<br />
+                                            <span class="text-xs text-warning">{{ item.catalogo.nombre }}</span>
                                         </td>
                                         <td class="column-3 text-white">
                                             Bs. {{ item.precio }}

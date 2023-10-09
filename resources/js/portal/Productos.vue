@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="container bg-dark wow fadeInUp" wow-data-delay="0.2s">
-            <div class="flex-w flex-sb-m p-b-52">
+            <div class="flex-w flex-sb-m p-b-30">
                 <div class="flex-w flex-c-m m-tb-10">
                     <div
                         class="flex-c-m stext-106 cl11 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter"
@@ -34,7 +34,7 @@
                         <i
                             class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"
                         ></i>
-                        Buscar
+                        <span>Buscar</span>
                     </div>
                 </div>
 
@@ -53,6 +53,8 @@
                             name="search-product"
                             placeholder="Buscar"
                             id="btnBuscarProducto"
+                            v-model="search"
+                            @keyup="searchProductos"
                         />
                     </div>
                 </div>
@@ -69,7 +71,15 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
-                                        class="filter-link stext-106 trans-04 filter-link-active"
+                                        @click.prevent="
+                                            aplicarFiltros('orden', 'defecto')
+                                        "
+                                        class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.orden == 'defecto'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Defecto
                                     </a>
@@ -78,7 +88,15 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('orden', 'nombre')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.orden == 'nombre'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Nombre
                                     </a>
@@ -87,7 +105,18 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros(
+                                                'orden',
+                                                'precio_mayor'
+                                            )
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.orden == 'precio_mayor'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Precio mayor
                                     </a>
@@ -96,7 +125,18 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros(
+                                                'orden',
+                                                'precio_menor'
+                                            )
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.orden == 'precio_menor'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Precio menor
                                     </a>
@@ -110,7 +150,15 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
-                                        class="filter-link stext-106 trans-04 filter-link-active"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', 'todos')
+                                        "
+                                        class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == 'todos'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Todos
                                     </a>
@@ -119,45 +167,85 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', '0-50')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == '0-50'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
-                                        $0.00 - $50.00
+                                        Bs 0.00 - Bs 50.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', '50-100')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == '50-100'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
-                                        $50.00 - $100.00
+                                        Bs 50.00 - Bs 100.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', '100-150')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == '100-150'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
-                                        $100.00 - $150.00
+                                        Bs 100.00 - Bs 150.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', '150-200')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == '150-200'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
-                                        $150.00 - $200.00
+                                        Bs 150.00 - Bs 200.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('precio', '200')
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.precio == '200'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
-                                        $200.00+
+                                        Bs 200.00+
                                     </a>
                                 </li>
                             </ul>
@@ -166,7 +254,7 @@
                             <div class="mtext-102 cl2 p-b-15">Catálogos</div>
 
                             <ul
-                            class="filtro_catalogos"
+                                class="filtro_catalogos"
                                 :class="[
                                     listCatalogos.length > 5
                                         ? 'column-list'
@@ -176,7 +264,15 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
-                                        class="filter-link stext-106 trans-04 filter-link-active"
+                                        @click.prevent="
+                                            aplicarFiltros('catalogo', 'todos')
+                                        "
+                                        class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.catalogo == 'todos'
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         Todos
                                     </a>
@@ -185,7 +281,15 @@
                                 <li class="p-b-6" v-for="item in listCatalogos">
                                     <a
                                         href="#"
+                                        @click.prevent="
+                                            aplicarFiltros('catalogo', item.id)
+                                        "
                                         class="filter-link stext-106 trans-04"
+                                        :class="[
+                                            filtro.catalogo == item.id
+                                                ? 'filter-link-active'
+                                                : '',
+                                        ]"
                                     >
                                         <p>{{ item.nombre }}</p>
                                     </a>
@@ -196,59 +300,108 @@
                 </div>
             </div>
 
-            <div class="row isotope-grid">
-                <div
-                    v-for="item in listProductos"
-                    class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item"
-                    :class="[item.catalogo ? 'c' + item.catalogo.id : '']"
-                >
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img :src="item.url_imagen" alt="IMG-PRODUCT" />
+            <div class="row mb-3" v-if="search != ''">
+                <div class="col-md-12 text-white">
+                    Resultados para:
+                    <span class="font-weight-bold">{{ search }}</span>
+                </div>
+            </div>
+            <b-skeleton-wrapper :loading="loading">
+                <template #loading>
+                    <b-row>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                    </b-row>
+                    <b-row class="mt-4 pb-5">
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-skeleton-img></b-skeleton-img>
+                        </b-col>
+                    </b-row>
+                </template>
+                <div class="row isotope-grid" v-if="listProductos.length > 0">
+                    <div
+                        v-for="item in listProductos"
+                        class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item"
+                        :class="[item.catalogo ? 'c' + item.catalogo.id : '']"
+                    >
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img :src="item.url_imagen" alt="IMG-PRODUCT" />
 
-                            <button
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04"
-                                @click="showModalProducto(item.id)"
-                            >
-                                Ver producto
-                            </button>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l">
-                                <span
-                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
+                                <button
+                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04"
+                                    @click="showModalProducto(item.id)"
                                 >
-                                    {{ item.nombre }}
-                                </span>
-
-                                <span class="stext-105 cl3">
-                                    Bs. {{ item.precio }}
+                                    Ver producto
+                                </button>
+                                <span class="info_catalogo">
+                                    {{ item.catalogo.nombre }}
                                 </span>
                             </div>
 
-                            <div class="block2-txt-child2 flex-r p-t-3">
-                                <button
-                                    class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 text-warning"
-                                    @click="showModalProducto(item.id)"
-                                >
-                                    <i class="fa fa-cart-plus fa-lg"></i>
-                                </button>
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l">
+                                    <span
+                                        class="stext-104 cl0 hov-cl1 trans-04 js-name-b2 p-b-6"
+                                    >
+                                        {{ item.nombre }}
+                                    </span>
+                                    <span class="stext-105 cl12">
+                                        Bs. {{ item.precio }}
+                                    </span>
+                                </div>
+
+                                <div class="block2-txt-child2 flex-r p-t-3">
+                                    <button
+                                        class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 text-warning"
+                                        @click="showModalProducto(item.id)"
+                                    >
+                                        <i class="fa fa-cart-plus fa-lg"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45 p-b-45">
-                <a
-                    href="#"
-                    class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"
-                >
-                    Cargar más
-                </a>
+                <div class="row pb-5" v-else>
+                    <div class="col-md-12">
+                        <h4 class="text-center text-white">
+                            No se encontrarón registros disponibles
+                        </h4>
+                    </div>
+                </div>
+            </b-skeleton-wrapper>
+            <div class="row" v-if="!loading && listProductos.length > 0">
+                <div class="col-md-12 pb-3 paginacion_portal">
+                    <b-pagination
+                        class="rounded-0"
+                        align="center"
+                        v-model="currentPage"
+                        :total-rows="rows"
+                        :per-page="perPage"
+                        aria-controls="my-table"
+                    ></b-pagination>
+                </div>
             </div>
         </div>
         <ModalProducto
@@ -275,7 +428,23 @@ export default {
             listProductos: [],
             id_seleccionado: 0,
             muestra_modal_producto: false,
+            currentPage: 1,
+            rows: 1000,
+            perPage: 5,
+            filtro: {
+                orden: "defecto",
+                precio: "todos",
+                catalogo: "todos",
+            },
+            search: "",
+            setTimeOutSearch: null,
+            loading: false,
         };
+    },
+    watch: {
+        currentPage(newVal) {
+            this.getProductos(newVal);
+        },
     },
     mounted() {
         this.loadingWindow.close();
@@ -289,14 +458,45 @@ export default {
                 this.url_asset = response.data;
             });
         },
-        getProductos() {
-            axios.get(main_url + "/portal/listaProductos").then((response) => {
-                this.listProductos = response.data.productos;
-                let self = this;
-                setTimeout(function () {
-                    self.metodosProductos();
-                }, 300);
-            });
+        getProductos(page = 1) {
+            this.loading = true;
+            axios
+                .get(main_url + "/portal/listaProductos", {
+                    params: {
+                        page: page,
+                        orden: this.filtro.orden,
+                        precio: this.filtro.precio,
+                        catalogo: this.filtro.catalogo,
+                        texto: this.search,
+                    },
+                })
+                .then((response) => {
+                    this.listProductos = response.data.productos.data;
+                    this.rows = response.data.productos.total;
+                    this.perPage = response.data.per_page;
+                    let self = this;
+                    setTimeout(function () {
+                        self.metodosProductos();
+                        self.loading = false;
+                    }, 300);
+                });
+        },
+        aplicarFiltros(key, valor) {
+            this.loading = true;
+            this.filtro[key] = valor;
+            if (this.currentPage != 1) {
+                this.currentPage = 1;
+            } else {
+                this.getProductos();
+            }
+        },
+        searchProductos() {
+            this.loading = true;
+            clearInterval(this.setTimeOutSearch);
+            let self = this;
+            this.setTimeOutSearch = setTimeout(function () {
+                self.getProductos();
+            }, 600);
         },
         getCatalogos() {
             axios.get(main_url + "/portal/getCatalogos").then((response) => {
@@ -309,28 +509,36 @@ export default {
         },
 
         metodosProductos() {
+            let self = this;
             /*==================================================================
             [ Filter / Search product ]*/
-            $(".js-show-filter").on("click", function () {
-                $(this).toggleClass("show-filter");
-                $(".panel-filter").slideToggle(400);
+            $(".js-show-filter")
+                .off("click")
+                .on("click", function () {
+                    $(this).toggleClass("show-filter");
+                    $(".panel-filter").slideToggle(400);
 
-                if ($(".js-show-search").hasClass("show-search")) {
-                    $(".js-show-search").removeClass("show-search");
-                    $(".panel-search").slideUp(400);
-                }
-            });
+                    if ($(".js-show-search").hasClass("show-search")) {
+                        $(".js-show-search").removeClass("show-search");
+                        $(".panel-search").slideUp(400);
+                    }
+                });
 
-            $(".js-show-search").on("click", function () {
-                $(this).toggleClass("show-search");
-                $(".panel-search").slideToggle(400);
-                $("#btnBuscarProducto").focus();
+            $(".js-show-search")
+                .off("click")
+                .on("click", function () {
+                    $(this).toggleClass("show-search");
+                    $(".panel-search").slideToggle(400);
 
-                if ($(".js-show-filter").hasClass("show-filter")) {
-                    $(".js-show-filter").removeClass("show-filter");
-                    $(".panel-filter").slideUp(400);
-                }
-            });
+                    if ($(this).hasClass("show-search")) {
+                        $("#btnBuscarProducto").focus();
+                    }
+
+                    if ($(".js-show-filter").hasClass("show-filter")) {
+                        $(".js-show-filter").removeClass("show-filter");
+                        $(".panel-filter").slideUp(400);
+                    }
+                });
         },
     },
 };
@@ -356,5 +564,15 @@ export default {
 
 .contenedor_productos .filtro_catalogos li a p:first-letter {
     text-transform: capitalize;
+}
+
+.contenedor_productos .info_catalogo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: var(--secundario_transparent);
+    padding: 7px;
+    color: var(--principal);
+    font-size: 0.75em;
 }
 </style>

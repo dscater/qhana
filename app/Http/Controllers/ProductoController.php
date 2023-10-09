@@ -36,8 +36,63 @@ class ProductoController extends Controller
 
     public function listaProductos(Request $request)
     {
-        $productos = Producto::with("catalogo")->orderBy("id", "desc")->get();
-        return response()->JSON(['productos' => $productos, 'total' => count($productos)], 200);
+        $per_page = 12;
+
+        $orden  = $request->orden;
+        $precio  = $request->precio;
+        $catalogo  = $request->catalogo;
+        $texto  = $request->texto;
+
+        $productos = Producto::select("productos.*")
+            ->with("catalogo")
+            ->join("catalogos", "catalogos.id", "=", "productos.catalogo_id");
+
+        if ($texto != "") {
+            $productos->where(DB::raw('CONCAT(productos.nombre, catalogos.nombre)'), 'LIKE', "%$texto%");
+        }
+
+        if ($precio != "todos") {
+            if ($precio == "0-50") {
+                $productos->whereBetween("precio", [0, 50]);
+            }
+            if ($precio == "50-100") {
+                $productos->whereBetween("precio", [50, 100]);
+            }
+            if ($precio == "100-150") {
+                $productos->whereBetween("precio", [100, 150]);
+            }
+            if ($precio == "150-200") {
+                $productos->whereBetween("precio", [150, 200]);
+            }
+            if ($precio == "200") {
+                $productos->where("precio", ">", 200);
+            }
+        }
+
+        if ($catalogo != "todos") {
+            $productos->where("catalogo_id", $catalogo);
+        }
+
+        if ($orden != "defecto") {
+            if ($orden == "nombre") {
+                $productos->orderBy($orden, "asc");
+            }
+            if ($orden == "precio_mayor") {
+                $productos->orderBy("precio", "desc");
+            }
+            if ($orden == "precio_menor") {
+                $productos->orderBy("precio", "asc");
+            }
+        } else {
+            $productos->orderBy("id", "desc");
+        }
+
+        $productos = $productos->paginate($per_page);
+        return response()->JSON([
+            'productos' => $productos,
+            'total' => count($productos),
+            "per_page" => $per_page
+        ], 200);
     }
 
     public function ultimosProductos(Request $request)

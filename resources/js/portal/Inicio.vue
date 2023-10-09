@@ -69,6 +69,9 @@
                                                 >
                                                     Ver producto
                                                 </button>
+                                                <span class="info_catalogo">
+                                                    {{ item.catalogo.nombre }}
+                                                </span>
                                             </div>
 
                                             <div
@@ -83,7 +86,9 @@
                                                         {{ item.nombre }}
                                                     </span>
 
-                                                    <span class="stext-105 cl4">
+                                                    <span
+                                                        class="stext-105 cl12"
+                                                    >
                                                         Bs. {{ item.precio }}
                                                     </span>
                                                 </div>
@@ -310,5 +315,15 @@ export default {
 .contenedor_inicio .block2-pic img {
     height: 100%;
     object-fit: cover;
+}
+
+.contenedor_inicio .info_catalogo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: var(--secundario_transparent);
+    padding: 7px;
+    color: var(--principal);
+    font-size: 0.75em;
 }
 </style>

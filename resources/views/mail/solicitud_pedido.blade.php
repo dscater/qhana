@@ -67,7 +67,7 @@
             @endforeach
             <tr class="bg-black text-md">
                 <td colspan="3">TOTAL</td>
-                <td>{{ $pedido->monto->total }}</td>
+                <td>{{ $pedido->monto_total }}</td>
             </tr>
         </tbody>
     </table>

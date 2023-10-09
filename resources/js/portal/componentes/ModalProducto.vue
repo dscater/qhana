@@ -7,7 +7,7 @@
         <div class="overlay-modal1 js-hide-modal1" @click="cerrar"></div>
 
         <div class="container">
-            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+            <div class="bg-dark p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                 <button
                     class="how-pos3 hov3 trans-04 js-hide-modal1"
                     @click="cerrar"
@@ -45,61 +45,79 @@
 
                     <div class="col-md-6 col-lg-5 p-b-30">
                         <div class="p-r-50 p-t-5 p-lr-0-lg">
-                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                                {{ oProducto.nombre }}
-                            </h4>
-
-                            <span class="mtext-106 cl2">
-                                Bs. {{ oProducto.precio }}
-                            </span>
-
-                            <p class="stext-104 cl3 p-t-23">
-                                <strong>Stock actual: </strong
-                                ><span class="mtext-106">{{
-                                    oProducto.cantidad_stock
-                                }}</span>
-                            </p>
-
-                            <p class="stext-102 cl3 p-t-23">
-                                {{ oProducto.descripcion }}
-                            </p>
-
-                            <!--  -->
-                            <div class="p-t-33">
-                                <div class="contenedor_agregar_carrito">
-                                    <div
-                                        class="wrap-num-product flex-w m-r-20 m-tb-10"
+                            .
+                            <div class="card">
+                                <div class="card-body bg-dark">
+                                    <h4
+                                        class="mtext-105 cl2 js-name-detail text-warning p-b-14 font-weight-bold"
                                     >
-                                        <div
-                                            class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                        >
-                                            <i
-                                                class="fs-16 zmdi zmdi-minus"
-                                            ></i>
-                                        </div>
+                                        {{ oProducto.nombre }}
+                                    </h4>
+                                    <span
+                                        class="text-md cl0 js-name-detail rounded p-3 bg-dark d-block mb-2 border border-warning"
+                                    >
+                                        {{ oProducto.catalogo.nombre }}
+                                    </span>
 
-                                        <input
-                                            class="mtext-104 cl3 txt-center num-product"
-                                            type="number"
-                                            name="num-product"
-                                            min="1"
-                                            value="1"
-                                            ref="input_cantidad"
-                                        />
+                                    <span
+                                        class="text-md cl0 rounded p-3 bg-warning d-block font-weight-bold"
+                                    >
+                                        Bs. {{ oProducto.precio }}
+                                    </span>
 
-                                        <div
-                                            class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                    <p class="stext-104 cl12 p-t-23">
+                                        <span class="mtext-106"
+                                            >{{
+                                                oProducto.cantidad_stock
+                                            }}
+                                            Unidad(es) disponibles</span
                                         >
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                    </p>
+
+                                    <p class="stext-102 cl12 p-t-23">
+                                        {{ oProducto.descripcion }}
+                                    </p>
+
+                                    <!--  -->
+                                    <div class="p-t-33">
+                                        <div class="contenedor_agregar_carrito">
+                                            <div
+                                                class="wrap-num-product flex-w m-r-20 m-tb-10"
+                                            >
+                                                <div
+                                                    class="bg-white btn-num-product-down cl8 trans-04 flex-c-m"
+                                                >
+                                                    <i
+                                                        class="fs-16 zmdi zmdi-minus"
+                                                    ></i>
+                                                </div>
+
+                                                <input
+                                                    class="mtext-104 cl3 txt-center num-product"
+                                                    type="number"
+                                                    name="num-product"
+                                                    min="1"
+                                                    value="1"
+                                                    ref="input_cantidad"
+                                                />
+
+                                                <div
+                                                    class="bg-white btn-num-product-up cl8 trans-04 flex-c-m"
+                                                >
+                                                    <i
+                                                        class="fs-16 zmdi zmdi-plus"
+                                                    ></i>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                                @click="agregarCarrito"
+                                            >
+                                                Añadir al carrito
+                                            </button>
                                         </div>
                                     </div>
-
-                                    <button
-                                        class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
-                                        @click="agregarCarrito"
-                                    >
-                                        Añadir al carrito
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -177,6 +195,7 @@ export default {
                     subtotal: subtotal,
                     url_imagen: this.oProducto.url_imagen,
                     precio: this.oProducto.precio,
+                    catalogo: this.oProducto.catalogo,
                 });
                 localStorage.setItem("carrito_qhana", JSON.stringify(carrito));
                 this.$refs.input_cantidad.value = 1;
