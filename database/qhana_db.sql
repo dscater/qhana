@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-10-2023 a las 21:53:16
+-- Tiempo de generación: 09-10-2023 a las 15:40:31
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -42,6 +42,29 @@ CREATE TABLE `actividads` (
 INSERT INTO `actividads` (`id`, `imagen`, `descripcion`, `created_at`, `updated_at`) VALUES
 (1, '1696265570_2.png', 'LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY. LOREM IPSUM HAS BEEN THE INDUSTRY\'S STANDARD DUMMY TEXT EVER SINCE THE 1500S, WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK. IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPESETTING, REMAINING ESSENTIALLY UNCHANGED. IT WAS POPULARISED IN THE 1960S WITH THE RELEASE OF LETRASET SHEETS CONTAINING LOREM IPSUM PASSAGES, AND MORE RECENTLY WITH DESKTOP PUBLISHING SOFTWARE. LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY. LOREM IPSUM HAS BEEN THE INDUSTRY\'S STANDARD DUMMY TEXT EVER SINCE THE 1500S, WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK. IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPESETTING, REMAINING ESSENTIALLY UNCHANGED. IT WAS POPULARISED IN THE 1960S WITH THE RELEASE OF LETRASET SHEETS CONTAINING LOREM IPSUM PASSAGES, AND MORE RECENTLY WITH DESKTOP PUBLISHING SOFTWARE. IT IS A LONG ESTABLISHED FACT THAT A READER WILL BE DISTRACTED BY THE READABLE CONTENT LIKE ALDUS PAGEMAKER INCLUDING VERSIONS OF LOREM IPSUM. LIKE ALDUS PAGEMAKER INCLUDING VERSIONS OF LOREM IPSUM.', '2023-10-02 16:52:50', '2023-10-02 16:52:59'),
 (3, '1696275555_3.jpg', 'CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.', '2023-10-02 16:53:30', '2023-10-02 19:39:15');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `apis`
+--
+
+CREATE TABLE `apis` (
+  `id` bigint UNSIGNED NOT NULL,
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `api_google` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `apis`
+--
+
+INSERT INTO `apis` (`id`, `correo`, `nombre`, `password`, `api_google`, `created_at`, `updated_at`) VALUES
+(1, 'correosyseventos@gmail.com', 'Qhana', 'gywdptczpyhtkghm', 'AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes', '2023-10-09 15:12:54', '2023-10-09 15:12:54');
 
 -- --------------------------------------------------------
 
@@ -119,7 +142,7 @@ CREATE TABLE `configuracions` (
 --
 
 INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `ciudad`, `dir`, `fono`, `web`, `actividad`, `correo`, `correo_pedido`, `correo_pedido2`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'QHANA', 'QHANA', 'QHANA', 'LA PAZ', 'LA PAZ', '222222', 'QHANAWEB', 'ACTIVIDAD QHANA', 'qhana@gmail.com', 'qhanapedido@gmail.com', 'qhanapedido2@gmail.com', 'logo.png', NULL, '2023-09-28 21:09:17');
+(1, 'QHANA', 'QHANA', 'QHANA', 'LA PAZ', 'LA PAZ', '222222', 'QHANAWEB', 'ACTIVIDAD QHANA', 'qhana@gmail.com', 'victorgonzalo.as@gmail.com', 'qhanapedido2@gmail.com', 'logo.png', NULL, '2023-09-28 21:09:17');
 
 -- --------------------------------------------------------
 
@@ -143,7 +166,7 @@ CREATE TABLE `contactos` (
 --
 
 INSERT INTO `contactos` (`id`, `direccion`, `fonos`, `correo`, `lat`, `lng`, `created_at`, `updated_at`) VALUES
-(1, 'ZONA LOS OLIVOS CALLE 3 #1111', '22222 - 77766666', 'qhana@gmail.com', 0x2d31362e353034343230333234363031, '-68.131239153443', '2023-10-02 19:08:12', '2023-10-02 19:23:00');
+(1, 'ZONA LOS OLIVOS CALLE 3 #1111', '22222 - 77766666', 'qhana@gmail.com', 0x2d31362e353034313934303135323037, '-68.131335712968', '2023-10-02 19:08:12', '2023-10-09 02:29:52');
 
 -- --------------------------------------------------------
 
@@ -161,6 +184,17 @@ CREATE TABLE `detalle_pedidos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_pedidos`
+--
+
+INSERT INTO `detalle_pedidos` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subtotal`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, 2.00, 200.50, 401.00, '2023-10-09 00:57:28', '2023-10-09 00:57:28'),
+(2, 1, 5, 1.00, 99.99, 99.99, '2023-10-09 00:57:28', '2023-10-09 00:57:28'),
+(3, 1, 4, 1.00, 189.99, 189.99, '2023-10-09 00:57:28', '2023-10-09 00:57:28'),
+(4, 2, 7, 1.00, 100.00, 100.00, '2023-10-09 00:59:37', '2023-10-09 00:59:37'),
+(5, 3, 3, 1.00, 200.00, 200.00, '2023-10-09 01:01:37', '2023-10-09 01:01:37');
 
 -- --------------------------------------------------------
 
@@ -252,7 +286,27 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (63, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:24<br/>descripcion: <br/>id: 3<br/>imagen: 1696365444_3.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:37:24<br/>', 'cantidad_stock: 5<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:37:24<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 3<br/>imagen: 1696365444_3.jpg<br/>nombre: PRODUCTO #2<br/>precio: 200.00<br/>updated_at: 2023-10-03 16:40:02<br/>', 'PRODUCTOS', '2023-10-03', '16:40:02', '2023-10-03 20:40:02', '2023-10-03 20:40:02'),
 (64, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'cantidad_stock: 10<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:06<br/>descripcion: DESC. PROD. #1<br/>id: 1<br/>imagen: default.png<br/>nombre: PRODUCTO #1<br/>precio: 300.00<br/>updated_at: 2023-10-03 16:33:06<br/>', 'cantidad_stock: 10<br/>catalogo_id: 1<br/>created_at: 2023-10-03 16:33:06<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>id: 1<br/>imagen: default.png<br/>nombre: PRODUCTO #1<br/>precio: 300.00<br/>updated_at: 2023-10-03 16:40:08<br/>', 'PRODUCTOS', '2023-10-03', '16:40:08', '2023-10-03 20:40:08', '2023-10-03 20:40:08'),
 (65, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 10<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:45:30<br/>descripcion: PROD 5<br/>id: 6<br/>imagen: 1696365930_6.jpg<br/>nombre: PRODUCTO #5<br/>precio: 200.5<br/>updated_at: 2023-10-03 16:45:30<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:45:30', '2023-10-03 20:45:30', '2023-10-03 20:45:30'),
-(66, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 2<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:45:44<br/>descripcion: DESC 6<br/>id: 7<br/>imagen: default.png<br/>nombre: PRODUCTO #6<br/>precio: 100<br/>updated_at: 2023-10-03 16:45:44<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:45:44', '2023-10-03 20:45:44', '2023-10-03 20:45:44');
+(66, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN PRODUCTO', 'cantidad_stock: 2<br/>catalogo_id: 2<br/>created_at: 2023-10-03 16:45:44<br/>descripcion: DESC 6<br/>id: 7<br/>imagen: default.png<br/>nombre: PRODUCTO #6<br/>precio: 100<br/>updated_at: 2023-10-03 16:45:44<br/>', NULL, 'PRODUCTOS', '2023-10-03', '16:45:44', '2023-10-03 20:45:44', '2023-10-03 20:45:44'),
+(67, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 20:57:28<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:09:55<br/>', 'PEDIDOS', '2023-10-08', '22:09:55', '2023-10-09 02:09:55', '2023-10-09 02:09:55'),
+(68, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:09:55<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:14:19<br/>', 'PEDIDOS', '2023-10-08', '22:14:19', '2023-10-09 02:14:19', '2023-10-09 02:14:19'),
+(69, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:14:19<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:14:51<br/>', 'PEDIDOS', '2023-10-08', '22:14:51', '2023-10-09 02:14:51', '2023-10-09 02:14:51');
+INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(70, 1, 'MODIFICACIÓN', 'EL USUARIO  ELIMINÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:14:51<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:15:58<br/>', 'PEDIDOS', '2023-10-08', '22:15:58', '2023-10-09 02:15:58', '2023-10-09 02:15:58'),
+(71, 1, 'MODIFICACIÓN', 'EL USUARIO  RESTABLECIÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:15:58<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:25:39<br/>', 'PEDIDOS', '2023-10-08', '22:25:39', '2023-10-09 02:25:39', '2023-10-09 02:25:39'),
+(72, 1, 'MODIFICACIÓN', 'EL USUARIO  CAMBIO UN PEDIDO A ATENDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:25:39<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:25:54<br/>', 'PEDIDOS', '2023-10-08', '22:25:54', '2023-10-09 02:25:54', '2023-10-09 02:25:54'),
+(73, 1, 'MODIFICACIÓN', 'EL USUARIO  ELIMINÓ UN PEDIDO', 'apellidos: PERES<br/>correo: <br/>created_at: 2023-10-08 20:59:37<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 6666<br/>id: 2<br/>monto_total: 100.00<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 20:59:37<br/>', 'apellidos: PERES<br/>correo: <br/>created_at: 2023-10-08 20:59:37<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 6666<br/>id: 2<br/>monto_total: 100.00<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:26:03<br/>', 'PEDIDOS', '2023-10-08', '22:26:03', '2023-10-09 02:26:03', '2023-10-09 02:26:03'),
+(74, 1, 'MODIFICACIÓN', 'EL USUARIO  ELIMINÓ UN PEDIDO', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:25:54<br/>', 'apellidos: PERES<br/>correo: JUAN@GMAIL.COM<br/>created_at: 2023-10-08 20:57:28<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 7777777<br/>id: 1<br/>monto_total: 690.98<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:27:32<br/>', 'PEDIDOS', '2023-10-08', '22:27:32', '2023-10-09 02:27:32', '2023-10-09 02:27:32'),
+(75, 1, 'MODIFICACIÓN', 'EL USUARIO  CAMBIO UN PEDIDO A ATENDIDO', 'apellidos: GONZALES<br/>correo: FELIPE@GMAIL.COM<br/>created_at: 2023-10-08 21:01:37<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 777777<br/>id: 3<br/>monto_total: 200.00<br/>nombres: FELIPE<br/>pec: LA PAZ<br/>updated_at: 2023-10-08 21:01:37<br/>', 'apellidos: GONZALES<br/>correo: FELIPE@GMAIL.COM<br/>created_at: 2023-10-08 21:01:37<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-08<br/>fono: 777777<br/>id: 3<br/>monto_total: 200.00<br/>nombres: FELIPE<br/>pec: LA PAZ<br/>updated_at: 2023-10-08 22:27:42<br/>', 'PEDIDOS', '2023-10-08', '22:27:42', '2023-10-09 02:27:42', '2023-10-09 02:27:42'),
+(76, 1, 'MODIFICACIÓN', 'EL USUARIO  RESTABLECIÓ UN PEDIDO', 'apellidos: PERES<br/>correo: <br/>created_at: 2023-10-08 20:59:37<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-08<br/>fono: 6666<br/>id: 2<br/>monto_total: 100.00<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:26:03<br/>', 'apellidos: PERES<br/>correo: <br/>created_at: 2023-10-08 20:59:37<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-08<br/>fono: 6666<br/>id: 2<br/>monto_total: 100.00<br/>nombres: JUAN<br/>pec: BOLIVIA<br/>updated_at: 2023-10-08 22:28:09<br/>', 'PEDIDOS', '2023-10-08', '22:28:09', '2023-10-09 02:28:09', '2023-10-09 02:28:09'),
+(77, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN CONTACTOS', 'correo: qhana@gmail.com<br/>created_at: 2023-10-02 15:08:12<br/>direccion: ZONA LOS OLIVOS CALLE 3 #1111<br/>fonos: 22222 - 77766666<br/>id: 1<br/>lat: -16.504194015207<br/>lng: -68.131335712968<br/>updated_at: 2023-10-08 22:29:52<br/>', NULL, 'CONTACTOS', '2023-10-08', '22:29:52', '2023-10-09 02:29:52', '2023-10-09 02:29:52'),
+(78, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN APIS', 'api_google: AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes<br/>correo: correosyseventos@gmail.com<br/>created_at: 2023-10-09 11:12:54<br/>id: 1<br/>nombre: Qhana<br/>password: gywdptczpyhtkghm<br/>updated_at: 2023-10-09 11:12:54<br/>', NULL, 'APIS', '2023-10-09', '11:12:54', '2023-10-09 15:12:54', '2023-10-09 15:12:54'),
+(79, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'acceso: 0<br/>cargo: CARGO #1 QHANA BOLIVIA<br/>ci: 1234<br/>ci_exp: LP<br/>created_at: 2023-09-19 14:30:04<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2019-01-01<br/>fecha_nac: 1990-02-02<br/>fecha_registro: 2023-09-19<br/>fono: 7777777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 2<br/>materno: MAMANI<br/>nombre: JUAN<br/>p_discapacidad: 100<br/>password: $2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy<br/>paterno: PERES<br/>taller: TALLER #2<br/>tipo: REPRESENTANTE<br/>tipo_personal: SOCIO<br/>updated_at: 2023-09-28 18:12:45<br/>usuario: JPERES<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'acceso: 0<br/>cargo: CARGO #1 QHANA BOLIVIA<br/>ci: 1234<br/>ci_exp: LP<br/>created_at: 2023-09-19 14:30:04<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2019-01-01<br/>fecha_nac: 1990-02-02<br/>fecha_registro: 2023-09-19<br/>fono: 7777777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 2<br/>materno: MAMANI<br/>nombre: JUAN<br/>p_discapacidad: 100<br/>password: $2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy<br/>paterno: PERES<br/>taller: TALLER #2<br/>tipo: REPRESENTANTE<br/>tipo_personal: SOCIO<br/>updated_at: 2023-09-28 18:12:45<br/>usuario: JPERES<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'USUARIOS', '2023-10-09', '11:32:40', '2023-10-09 15:32:40', '2023-10-09 15:32:40'),
+(80, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'acceso: 0<br/>cargo: CARGO #1 QHANA BOLIVIA<br/>ci: 1234<br/>ci_exp: LP<br/>created_at: 2023-09-19 14:30:04<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2019-01-01<br/>fecha_nac: 1990-02-02<br/>fecha_registro: 2023-09-19<br/>fono: 7777777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 2<br/>materno: MAMANI<br/>nombre: JUAN<br/>p_discapacidad: 100<br/>password: $2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy<br/>paterno: PERES<br/>taller: TALLER #2<br/>tipo: REPRESENTANTE<br/>tipo_personal: SOCIO<br/>updated_at: 2023-09-28 18:12:45<br/>usuario: JPERES<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'acceso: 1<br/>cargo: CARGO #1 QHANA BOLIVIA<br/>ci: 1234<br/>ci_exp: LP<br/>created_at: 2023-09-19 14:30:04<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2019-01-01<br/>fecha_nac: 1990-02-02<br/>fecha_registro: 2023-09-19<br/>fono: 7777777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 2<br/>materno: MAMANI<br/>nombre: JUAN<br/>p_discapacidad: 100<br/>password: $2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy<br/>paterno: PERES<br/>taller: TALLER #2<br/>tipo: REPRESENTANTE<br/>tipo_personal: SOCIO<br/>updated_at: 2023-10-09 11:32:56<br/>usuario: JPERES<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'USUARIOS', '2023-10-09', '11:32:56', '2023-10-09 15:32:56', '2023-10-09 15:32:56'),
+(81, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN USUARIO', 'acceso: 1<br/>cargo: CARGO #4<br/>ci: 4444<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:34:49<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2023-10-09<br/>fecha_nac: 1999-01-01<br/>fecha_registro: 2023-10-09<br/>fono: 77777<br/>foto: default.png<br/>genero: FEMENINO<br/>id: 6<br/>materno: CACERES<br/>nombre: SOFIA<br/>p_discapacidad: 0<br/>password: $2y$10$YL0hndJf5qJZg3kL380SiOt/f4Dzhk2VThPQKnPKRCP/Btfe1eiO6<br/>paterno: CACERES<br/>taller: TALLER #2<br/>tipo: SOCIO<br/>tipo_personal: SOCIO<br/>updated_at: 2023-10-09 11:34:49<br/>usuario: SCACERES<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', NULL, 'USUARIOS', '2023-10-09', '11:34:49', '2023-10-09 15:34:49', '2023-10-09 15:34:49'),
+(82, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN USUARIO', 'acceso: 0<br/>cargo: SIN CARGO<br/>ci: 5555<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:35:58<br/>dir: LOS OLIVOS<br/>estado: 0<br/>fecha_ingreso: 2023-01-01<br/>fecha_nac: 2000-03-03<br/>fecha_registro: 2023-10-09<br/>fono: 7777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 7<br/>materno: QUISPE<br/>nombre: ELVIS<br/>p_discapacidad: 0<br/>password: $2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.<br/>paterno: QUISPE<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-10-09 11:35:58<br/>usuario: EQUISPE<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', NULL, 'USUARIOS', '2023-10-09', '11:35:58', '2023-10-09 15:35:58', '2023-10-09 15:35:58'),
+(83, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'acceso: 0<br/>cargo: SIN CARGO<br/>ci: 5555<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:35:58<br/>dir: LOS OLIVOS<br/>estado: 0<br/>fecha_ingreso: 2023-01-01<br/>fecha_nac: 2000-03-03<br/>fecha_registro: 2023-10-09<br/>fono: 7777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 7<br/>materno: QUISPE<br/>nombre: ELVIS<br/>p_discapacidad: 0<br/>password: $2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.<br/>paterno: QUISPE<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-10-09 11:35:58<br/>usuario: EQUISPE<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'acceso: 1<br/>cargo: SIN CARGO<br/>ci: 5555<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:35:58<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2023-01-01<br/>fecha_nac: 2000-03-03<br/>fecha_registro: 2023-10-09<br/>fono: 7777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 7<br/>materno: QUISPE<br/>nombre: ELVIS<br/>p_discapacidad: 0<br/>password: $2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.<br/>paterno: QUISPE<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-10-09 11:36:45<br/>usuario: EQUISPE<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'USUARIOS', '2023-10-09', '11:36:45', '2023-10-09 15:36:45', '2023-10-09 15:36:45'),
+(84, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'acceso: 0<br/>cargo: CARGO #3 QHANA BOLIVIA<br/>ci: 3333<br/>ci_exp: LP<br/>created_at: 2023-09-28 18:18:55<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2018-01-01<br/>fecha_nac: 1999-01-01<br/>fecha_registro: 2023-09-28<br/>fono: 66666<br/>foto: default.png<br/>genero: FEMENINO<br/>id: 5<br/>materno: MAMANI<br/>nombre: MARIA<br/>p_discapacidad: 100<br/>password: $2y$10$q9MGwRRWSzADVe559suEL.D3LmI4FS8Cjcw08Ja8mYDu7ao/NrLh2<br/>paterno: MAMANI<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-09-28 18:18:55<br/>usuario: MMAMANI<br/>validez_credencial: VALIDO DEL 01/01/23 AL 01/01/24<br/>', 'acceso: 0<br/>cargo: CARGO #3 QHANA BOLIVIA<br/>ci: 3333<br/>ci_exp: LP<br/>created_at: 2023-09-28 18:18:55<br/>dir: LOS OLIVOS<br/>estado: 0<br/>fecha_ingreso: 2018-01-01<br/>fecha_nac: 1999-01-01<br/>fecha_registro: 2023-09-28<br/>fono: 66666<br/>foto: default.png<br/>genero: FEMENINO<br/>id: 5<br/>materno: MAMANI<br/>nombre: MARIA<br/>p_discapacidad: 100<br/>password: $2y$10$q9MGwRRWSzADVe559suEL.D3LmI4FS8Cjcw08Ja8mYDu7ao/NrLh2<br/>paterno: MAMANI<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-10-09 11:36:55<br/>usuario: MMAMANI<br/>validez_credencial: VALIDO DEL 01/01/23 AL 01/01/24<br/>', 'USUARIOS', '2023-10-09', '11:36:55', '2023-10-09 15:36:55', '2023-10-09 15:36:55'),
+(85, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'acceso: 1<br/>cargo: SIN CARGO<br/>ci: 5555<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:35:58<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2023-01-01<br/>fecha_nac: 2000-03-03<br/>fecha_registro: 2023-10-09<br/>fono: 7777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 7<br/>materno: QUISPE<br/>nombre: ELVIS<br/>p_discapacidad: 0<br/>password: $2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.<br/>paterno: QUISPE<br/>taller: TALLER #3<br/>tipo: NINGUNO<br/>tipo_personal: TRABAJADOR<br/>updated_at: 2023-10-09 11:36:45<br/>usuario: EQUISPE<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'acceso: 1<br/>cargo: SIN CARGO<br/>ci: 5555<br/>ci_exp: CB<br/>created_at: 2023-10-09 11:35:58<br/>dir: LOS OLIVOS<br/>estado: 1<br/>fecha_ingreso: 2023-01-01<br/>fecha_nac: 2000-03-03<br/>fecha_registro: 2023-10-09<br/>fono: 7777<br/>foto: default.png<br/>genero: MASCULINO<br/>id: 7<br/>materno: QUISPE<br/>nombre: ELVIS<br/>p_discapacidad: 0<br/>password: $2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.<br/>paterno: QUISPE<br/>taller: TALLER #3<br/>tipo: REPRESENTANTE<br/>tipo_personal: SOCIO<br/>updated_at: 2023-10-09 11:37:48<br/>usuario: EQUISPE<br/>validez_credencial: VALIDO DEL 01/01/2023 AL 01/01/2024<br/>', 'USUARIOS', '2023-10-09', '11:37:48', '2023-10-09 15:37:48', '2023-10-09 15:37:48');
 
 -- --------------------------------------------------------
 
@@ -283,7 +337,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2023_09_28_182851_create_catalogos_table', 2),
 (19, '2023_09_28_182912_create_productos_table', 2),
 (20, '2023_09_28_183049_create_pedidos_table', 2),
-(21, '2023_09_28_184051_create_detalle_pedidos_table', 2);
+(21, '2023_09_28_184051_create_detalle_pedidos_table', 2),
+(22, '2023_10_09_104851_create_apis_table', 3);
 
 -- --------------------------------------------------------
 
@@ -327,6 +382,15 @@ CREATE TABLE `pedidos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `nombres`, `apellidos`, `pec`, `fono`, `correo`, `estado`, `monto_total`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'JUAN', 'PERES', 'BOLIVIA', '7777777', 'JUAN@GMAIL.COM', 'ELIMINADO', 690.98, '2023-10-08', '2023-10-09 00:57:28', '2023-10-09 02:27:32'),
+(2, 'JUAN', 'PERES', 'BOLIVIA', '6666', '', 'PENDIENTE', 100.00, '2023-10-08', '2023-10-09 00:59:37', '2023-10-09 02:28:09'),
+(3, 'FELIPE', 'GONZALES', 'LA PAZ', '777777', 'FELIPE@GMAIL.COM', 'ATENDIDO', 200.00, '2023-10-08', '2023-10-09 01:01:37', '2023-10-09 02:27:42');
+
 -- --------------------------------------------------------
 
 --
@@ -369,11 +433,11 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad_stock`, `catalogo_id`, `imagen`, `created_at`, `updated_at`) VALUES
 (1, 'PRODUCTO #1', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 300.00, 10.00, 1, 'default.png', '2023-10-03 20:33:06', '2023-10-03 20:40:08'),
-(3, 'PRODUCTO #2', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 200.00, 5.00, 1, '1696365444_3.jpg', '2023-10-03 20:37:24', '2023-10-03 20:40:02'),
-(4, 'PRODUCTO #3', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 189.99, 3.00, 1, '1696365467_4.jpg', '2023-10-03 20:37:47', '2023-10-03 20:39:57'),
-(5, 'PRODUCTO #4', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 99.99, 3.00, 2, '1696365516_5.jpg', '2023-10-03 20:38:36', '2023-10-03 20:39:52'),
-(6, 'PRODUCTO #5', 'PROD 5', 200.50, 10.00, 2, '1696365930_6.jpg', '2023-10-03 20:45:30', '2023-10-03 20:45:30'),
-(7, 'PRODUCTO #6', 'DESC 6', 100.00, 2.00, 2, 'default.png', '2023-10-03 20:45:44', '2023-10-03 20:45:44');
+(3, 'PRODUCTO #2', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 200.00, 4.00, 1, '1696365444_3.jpg', '2023-10-03 20:37:24', '2023-10-09 01:01:37'),
+(4, 'PRODUCTO #3', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 189.99, 3.00, 1, '1696365467_4.jpg', '2023-10-03 20:37:47', '2023-10-09 02:27:32'),
+(5, 'PRODUCTO #4', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 99.99, 3.00, 2, '1696365516_5.jpg', '2023-10-03 20:38:36', '2023-10-09 02:27:32'),
+(6, 'PRODUCTO #5', 'PROD 5', 200.50, 10.00, 2, '1696365930_6.jpg', '2023-10-03 20:45:30', '2023-10-09 02:27:32'),
+(7, 'PRODUCTO #6', 'DESC 6', 100.00, 1.00, 2, 'default.png', '2023-10-03 20:45:44', '2023-10-09 02:28:09');
 
 -- --------------------------------------------------------
 
@@ -426,6 +490,7 @@ CREATE TABLE `users` (
   `validez_credencial` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `estado` int NOT NULL,
+  `acceso` int NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -435,11 +500,13 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `fecha_nac`, `genero`, `cargo`, `fecha_ingreso`, `taller`, `dir`, `fono`, `tipo_personal`, `p_discapacidad`, `tipo`, `foto`, `validez_credencial`, `password`, `estado`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin', NULL, '0', '', NULL, '', '', NULL, '', '', NULL, '', 0.00, 'ADMINISTRADOR', NULL, '', '$2y$10$RrCZZySOwPej2gMFWsrjMe6dLzfaL5Q88h4J75I1FesEBRNPwq1x.', 0, '2023-07-23', NULL, NULL),
-(2, 'JPERES', 'JUAN', 'PERES', 'MAMANI', '1234', 'LP', '1990-02-02', 'MASCULINO', 'CARGO #1 QHANA BOLIVIA', '2019-01-01', 'TALLER #2', 'LOS OLIVOS', '7777777', 'SOCIO', 100.00, 'REPRESENTANTE', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy', 1, '2023-09-19', '2023-09-19 18:30:04', '2023-09-28 22:12:45'),
-(4, 'FMAMANI', 'FERNANDO GONZALO', 'MAMANI', 'MAMANI', '2222', 'LP', '2000-01-01', 'MASCULINO', 'CARGO QHANA BOLIVIA', '2020-01-01', 'TALLER #1', 'LOS OLIVOS', '777777', 'SOCIO', 70.00, 'ADMINISTRADOR', 'default.png', 'VALIDO DEL 20/01/23 AL 20/01/2024', '$2y$10$EosVGjhgfm3HNQ9JFnnbC..vgv7SsuWysSrLL7AjEq0iTRoYs/PWC', 1, '2023-09-28', '2023-09-28 22:10:52', '2023-09-29 17:01:06'),
-(5, 'MMAMANI', 'MARIA', 'MAMANI', 'MAMANI', '3333', 'LP', '1999-01-01', 'FEMENINO', 'CARGO #3 QHANA BOLIVIA', '2018-01-01', 'TALLER #3', 'LOS OLIVOS', '66666', 'TRABAJADOR', 100.00, 'NINGUNO', 'default.png', 'VALIDO DEL 01/01/23 AL 01/01/24', '$2y$10$q9MGwRRWSzADVe559suEL.D3LmI4FS8Cjcw08Ja8mYDu7ao/NrLh2', 1, '2023-09-28', '2023-09-28 22:18:55', '2023-09-28 22:18:55');
+INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `fecha_nac`, `genero`, `cargo`, `fecha_ingreso`, `taller`, `dir`, `fono`, `tipo_personal`, `p_discapacidad`, `tipo`, `foto`, `validez_credencial`, `password`, `estado`, `acceso`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', 'admin', NULL, '0', '', NULL, '', '', NULL, '', '', NULL, '', 0.00, 'ADMINISTRADOR', NULL, '', '$2y$10$RrCZZySOwPej2gMFWsrjMe6dLzfaL5Q88h4J75I1FesEBRNPwq1x.', 0, 0, '2023-07-23', NULL, NULL),
+(2, 'JPERES', 'JUAN', 'PERES', 'MAMANI', '1234', 'LP', '1990-02-02', 'MASCULINO', 'CARGO #1 QHANA BOLIVIA', '2019-01-01', 'TALLER #2', 'LOS OLIVOS', '7777777', 'SOCIO', 100.00, 'REPRESENTANTE', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$q.fJiEAafZGZW3fDvWjq7uAa85PxmpYKP6cG8I0PsPU4Po3h22dBy', 1, 1, '2023-09-19', '2023-09-19 18:30:04', '2023-10-09 15:32:56'),
+(4, 'FMAMANI', 'FERNANDO GONZALO', 'MAMANI', 'MAMANI', '2222', 'LP', '2000-01-01', 'MASCULINO', 'CARGO QHANA BOLIVIA', '2020-01-01', 'TALLER #1', 'LOS OLIVOS', '777777', 'SOCIO', 70.00, 'ADMINISTRADOR', 'default.png', 'VALIDO DEL 20/01/23 AL 20/01/2024', '$2y$10$EosVGjhgfm3HNQ9JFnnbC..vgv7SsuWysSrLL7AjEq0iTRoYs/PWC', 1, 0, '2023-09-28', '2023-09-28 22:10:52', '2023-09-29 17:01:06'),
+(5, 'MMAMANI', 'MARIA', 'MAMANI', 'MAMANI', '3333', 'LP', '1999-01-01', 'FEMENINO', 'CARGO #3 QHANA BOLIVIA', '2018-01-01', 'TALLER #3', 'LOS OLIVOS', '66666', 'TRABAJADOR', 100.00, 'NINGUNO', 'default.png', 'VALIDO DEL 01/01/23 AL 01/01/24', '$2y$10$q9MGwRRWSzADVe559suEL.D3LmI4FS8Cjcw08Ja8mYDu7ao/NrLh2', 0, 0, '2023-09-28', '2023-09-28 22:18:55', '2023-10-09 15:36:55'),
+(6, 'SCACERES', 'SOFIA', 'CACERES', 'CACERES', '4444', 'CB', '1999-01-01', 'FEMENINO', 'CARGO #4', '2023-10-09', 'TALLER #2', 'LOS OLIVOS', '77777', 'SOCIO', 0.00, 'SOCIO', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$YL0hndJf5qJZg3kL380SiOt/f4Dzhk2VThPQKnPKRCP/Btfe1eiO6', 1, 1, '2023-10-09', '2023-10-09 15:34:49', '2023-10-09 15:34:49'),
+(7, 'EQUISPE', 'ELVIS', 'QUISPE', 'QUISPE', '5555', 'CB', '2000-03-03', 'MASCULINO', 'SIN CARGO', '2023-01-01', 'TALLER #3', 'LOS OLIVOS', '7777', 'SOCIO', 0.00, 'REPRESENTANTE', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.', 1, 1, '2023-10-09', '2023-10-09 15:35:58', '2023-10-09 15:37:48');
 
 --
 -- Índices para tablas volcadas
@@ -449,6 +516,12 @@ INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_
 -- Indices de la tabla `actividads`
 --
 ALTER TABLE `actividads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `apis`
+--
+ALTER TABLE `apis`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -546,6 +619,12 @@ ALTER TABLE `actividads`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `apis`
+--
+ALTER TABLE `apis`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `banners`
 --
 ALTER TABLE `banners`
@@ -573,19 +652,19 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `detalle_pedidos`
 --
 ALTER TABLE `detalle_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `nosotros`
@@ -597,7 +676,7 @@ ALTER TABLE `nosotros`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -621,7 +700,7 @@ ALTER TABLE `red_socials`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
