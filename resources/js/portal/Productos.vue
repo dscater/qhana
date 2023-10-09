@@ -12,29 +12,12 @@
         </div>
         <div class="container bg-dark wow fadeInUp" wow-data-delay="0.2s">
             <div class="flex-w flex-sb-m p-b-52">
-                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                    <button
-                        class="stext-106 cl11 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-                        data-filter="*"
-                    >
-                        Todos los productos
-                    </button>
-
-                    <button
-                        v-for="item in listCatalogos"
-                        class="stext-106 cl11 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                        :data-filter="'.c' + item.id"
-                    >
-                        {{ item.nombre }}
-                    </button>
-                </div>
-
                 <div class="flex-w flex-c-m m-tb-10">
                     <div
                         class="flex-c-m stext-106 cl11 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter"
                     >
                         <i
-                            class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"
+                            class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list text-warning"
                         ></i>
                         <i
                             class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"
@@ -46,7 +29,7 @@
                         class="flex-c-m stext-106 cl11 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search"
                     >
                         <i
-                            class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"
+                            class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search text-warning"
                         ></i>
                         <i
                             class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"
@@ -69,6 +52,7 @@
                             type="text"
                             name="search-product"
                             placeholder="Buscar"
+                            id="btnBuscarProducto"
                         />
                     </div>
                 </div>
@@ -78,14 +62,14 @@
                     <div
                         class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm"
                     >
-                        <div class="filter-col1 p-r-15 p-b-27">
+                        <div class="col-3">
                             <div class="mtext-102 cl2 p-b-15">Ordenar por</div>
 
                             <ul>
                                 <li class="p-b-6">
                                     <a
                                         href="#"
-                                        class="filter-link stext-106 trans-04"
+                                        class="filter-link stext-106 trans-04 filter-link-active"
                                     >
                                         Defecto
                                     </a>
@@ -112,15 +96,14 @@
                                 <li class="p-b-6">
                                     <a
                                         href="#"
-                                        class="filter-link stext-106 trans-04 filter-link-active"
+                                        class="filter-link stext-106 trans-04"
                                     >
                                         Precio menor
                                     </a>
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="filter-col2 p-r-15 p-b-27">
+                        <div class="col-3">
                             <div class="mtext-102 cl2 p-b-15">Precio</div>
 
                             <ul>
@@ -175,6 +158,36 @@
                                         class="filter-link stext-106 trans-04"
                                     >
                                         $200.00+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <div class="mtext-102 cl2 p-b-15">Catálogos</div>
+
+                            <ul
+                            class="filtro_catalogos"
+                                :class="[
+                                    listCatalogos.length > 5
+                                        ? 'column-list'
+                                        : '',
+                                ]"
+                            >
+                                <li class="p-b-6">
+                                    <a
+                                        href="#"
+                                        class="filter-link stext-106 trans-04 filter-link-active"
+                                    >
+                                        Todos
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6" v-for="item in listCatalogos">
+                                    <a
+                                        href="#"
+                                        class="filter-link stext-106 trans-04"
+                                    >
+                                        <p>{{ item.nombre }}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -297,46 +310,6 @@ export default {
 
         metodosProductos() {
             /*==================================================================
-            [ Isotope ]*/
-            var $topeContainer = $(".isotope-grid");
-            var $filter = $(".filter-tope-group");
-
-            // filter items on button click
-            $filter.each(function () {
-                $filter.on("click", "button", function () {
-                    var filterValue = $(this).attr("data-filter");
-                    $topeContainer.isotope({ filter: filterValue });
-                });
-            });
-
-            // init Isotope
-            $(window).on("load", function () {
-                var $grid = $topeContainer.each(function () {
-                    $(this).isotope({
-                        itemSelector: ".isotope-item",
-                        layoutMode: "fitRows",
-                        percentPosition: true,
-                        animationEngine: "best-available",
-                        masonry: {
-                            columnWidth: ".isotope-item",
-                        },
-                    });
-                });
-            });
-
-            var isotopeButton = $(".filter-tope-group button");
-
-            $(isotopeButton).each(function () {
-                $(this).on("click", function () {
-                    for (var i = 0; i < isotopeButton.length; i++) {
-                        $(isotopeButton[i]).removeClass("how-active1");
-                    }
-
-                    $(this).addClass("how-active1");
-                });
-            });
-
-            /*==================================================================
             [ Filter / Search product ]*/
             $(".js-show-filter").on("click", function () {
                 $(this).toggleClass("show-filter");
@@ -351,6 +324,7 @@ export default {
             $(".js-show-search").on("click", function () {
                 $(this).toggleClass("show-search");
                 $(".panel-search").slideToggle(400);
+                $("#btnBuscarProducto").focus();
 
                 if ($(".js-show-filter").hasClass("show-filter")) {
                     $(".js-show-filter").removeClass("show-filter");
@@ -369,5 +343,18 @@ export default {
 .contenedor_productos .block2-pic img {
     height: 100%;
     object-fit: cover;
+}
+
+.contenedor_productos .column-list {
+    column-count: 2; /* Define el número de columnas deseado */
+    column-gap: 20px;
+}
+
+.contenedor_productos .filtro_catalogos li a p {
+    text-transform: lowercase;
+}
+
+.contenedor_productos .filtro_catalogos li a p:first-letter {
+    text-transform: capitalize;
 }
 </style>

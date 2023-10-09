@@ -24,6 +24,7 @@
     "/imgs/login.png": "/imgs/login.png",
     "/imgs/logo.png": "/imgs/logo.png",
     "/imgs/people.png": "/imgs/people.png",
+    "/imgs/pinmap.gif": "/imgs/pinmap.gif",
     "/imgs/pinqhana.png": "/imgs/pinqhana.png",
     "/imgs/product-development.png": "/imgs/product-development.png",
     "/imgs/productos/1696365444_3.jpg": "/imgs/productos/1696365444_3.jpg",
@@ -195,6 +196,5 @@
     "/fonts/Poppins/Poppins-Thin.ttf": "/fonts/Poppins/Poppins-Thin.ttf",
     "/fonts/Poppins/Poppins-ThinItalic.ttf": "/fonts/Poppins/Poppins-ThinItalic.ttf",
     "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf",
-    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff",
-    "/imgs/pinmap.gif": "/imgs/pinmap.gif"
+    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff"
 }

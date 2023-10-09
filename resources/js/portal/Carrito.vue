@@ -41,10 +41,14 @@
                                     </th>
                                 </tr>
 
-                                <template v-if="carrito.length > 0">
+                                <template
+                                    v-if="oPedido.detalle_pedidos.length > 0"
+                                >
                                     <tr
                                         class="table_row"
-                                        v-for="(item, index) in carrito"
+                                        v-for="(
+                                            item, index
+                                        ) in oPedido.detalle_pedidos"
                                     >
                                         <td class="column-1 text-white">
                                             <div class="how-itemcart1">
@@ -110,45 +114,103 @@
 
                             <div class="size-209">
                                 <span class="mtext-110 cl0">
-                                    Bs. {{ total }}
+                                    Bs. {{ oPedido.monto_total }}
                                 </span>
                             </div>
                         </div>
                         <div class="row bor12 pt-2">
                             <div class="form-group col-md-12">
                                 <label class="text-white">Nombres*</label>
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.nombres,
+                                    }"
+                                    v-model="oPedido.nombres"
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.nombres"
+                                    v-text="errors.nombres[0]"
+                                ></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="text-white">Apellidos*</label>
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.apellidos,
+                                    }"
+                                    v-model="oPedido.apellidos"
+                                /><span
+                                    class="error invalid-feedback"
+                                    v-if="errors.apellidos"
+                                    v-text="errors.apellidos[0]"
+                                ></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="text-white"
                                     >País/Estado/Ciudad*</label
                                 >
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.pec,
+                                    }"
+                                    v-model="oPedido.pec"
+                                /><span
+                                    class="error invalid-feedback"
+                                    v-if="errors.pec"
+                                    v-text="errors.pec[0]"
+                                ></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="text-white"
                                     >Teléfono/Celular*</label
                                 >
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.fono,
+                                    }"
+                                    v-model="oPedido.fono"
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.fono"
+                                    v-text="errors.fono[0]"
+                                ></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="text-white"
                                     >Correo electrónico</label
                                 >
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid': errors.correo,
+                                    }"
+                                    v-model="oPedido.correo"
+                                /><span
+                                    class="error invalid-feedback"
+                                    v-if="errors.correo"
+                                    v-text="errors.correo[0]"
+                                ></span>
                             </div>
                         </div>
 
                         <button
-                            v-if="carrito.length > 0"
+                            v-if="oPedido.detalle_pedidos.length > 0"
                             class="flex-c-m stext-101 cl2 size-116 bg8 bor14 hov-btn3 p-lr-15 trans-04 pointer mt-3"
-                        >
-                            FINALIZAR PEDIDO
-                        </button>
+                            @click="prepararEnvio()"
+                            :disabled="enviando"
+                            v-text="txtBoton"
+                        ></button>
                     </div>
                 </div>
             </div>
@@ -163,9 +225,25 @@ export default {
             loadingWindow: Loading.service({
                 fullscreen: this.fullscreenLoading,
             }),
-            carrito: [],
-            total: "0.00",
+            oPedido: {
+                nombres: "",
+                apellidos: "",
+                pec: "",
+                correo: "",
+                monto_total: "0.00",
+                detalle_pedidos: [],
+            },
+            errors: [],
+            enviando: false,
         };
+    },
+    computed: {
+        txtBoton() {
+            if (this.enviando) {
+                return "ENVIANDO...";
+            }
+            return "FINALIZAR PEDIDO";
+        },
     },
     mounted() {
         this.loadingWindow.close();
@@ -176,10 +254,10 @@ export default {
     methods: {
         getCarrito() {
             if (localStorage.getItem("carrito_qhana")) {
-                this.carrito = JSON.parse(
+                this.oPedido.detalle_pedidos = JSON.parse(
                     localStorage.getItem("carrito_qhana")
                 );
-                this.cantidad_carrito = this.carrito.length;
+                this.cantidad_carrito = this.oPedido.detalle_pedidos.length;
             } else {
                 this.cantidad_carrito;
             }
@@ -187,23 +265,23 @@ export default {
         },
         getTotal() {
             if (localStorage.getItem("carrito_qhana")) {
-                this.carrito = JSON.parse(
+                this.oPedido.detalle_pedidos = JSON.parse(
                     localStorage.getItem("carrito_qhana")
                 );
-                let sum_total = this.carrito.reduce(function (
+                let sum_total = this.oPedido.detalle_pedidos.reduce(function (
                     acumulador,
                     objeto
                 ) {
                     return acumulador + parseFloat(objeto.subtotal);
                 },
                 0);
-                this.total = parseFloat(sum_total).toFixed(2);
+                this.oPedido.monto_total = parseFloat(sum_total).toFixed(2);
             } else {
-                this.total = "0.00";
+                this.oPedido.monto_total = "0.00";
             }
         },
         eliminarProducto(index) {
-            let nombre = this.carrito[index].nombre;
+            let nombre = this.oPedido.detalle_pedidos[index].nombre;
             Swal.fire({
                 title: "¿Quierés eliminar este producto del carrito?",
                 html: `<strong>${nombre}</strong>`,
@@ -215,15 +293,55 @@ export default {
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    this.carrito.splice(index, 1);
+                    this.oPedido.detalle_pedidos.splice(index, 1);
                     localStorage.setItem(
                         "carrito_qhana",
-                        JSON.stringify(this.carrito)
+                        JSON.stringify(this.oPedido.detalle_pedidos)
                     );
                     this.getCarrito();
                     EventBus.$emit("producto_agregado");
                 }
             });
+        },
+        prepararEnvio() {
+            this.enviando = true;
+            let self = this;
+            setTimeout(function () {
+                self.enviarPedido();
+            }, 500);
+        },
+        enviarPedido() {
+            axios
+                .post(main_url + "/portal/solicitudPedido", this.oPedido)
+                .then((response) => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Correcto!",
+                        html: response.data.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    this.oPedido.detalle_pedidos = [];
+                    localStorage.removeItem("carrito_qhana");
+                    this.enviando = false;
+                })
+                .catch((error) => {
+                    this.enviando = false;
+                    if (error.response) {
+                        if (error.response.status === 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        if (error.response.status === 500) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                html: error.response.data.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+                    }
+                });
         },
     },
 };

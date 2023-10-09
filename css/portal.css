@@ -9718,6 +9718,13 @@ a.cl7:hover,
     border-color: var(--principal_hover);
 }
 
+.hov-btn3:disabled {
+    border-color: #e6a675;
+    background-color: #f0924b;
+    color: #fff;
+    cursor: not-allowed;
+}
+
 .filter-link {
     color: #aaa;
     border-bottom: 1px solid transparent;

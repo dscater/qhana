@@ -7,6 +7,7 @@ use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NosotrosController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RedSocialController;
@@ -25,17 +26,26 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/configuracion/getConfiguracion', [ConfiguracionController::class, 'getConfiguracion']);
 
 // ACCIONES PORTAL
+// sliders
 Route::get('portal/getSliders', [BannerController::class, 'index']);
+// actividades
 Route::get('portal/getActividades', [ActividadController::class, 'index']);
 Route::get('portal/getActividad/{actividad}', [ActividadController::class, 'show']);
 Route::get('portal/ultimasActividades', [ActividadController::class, 'ultimasActividades']);
+// nosotros
 Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
+// contacto
 Route::get('portal/getContacto', [ContactoController::class, 'index']);
+// redes sociales
 Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);
+// productos
 Route::get('portal/listaProductos', [ProductoController::class, 'listaProductos']);
-Route::get('portal/getCatalogos', [CatalogoController::class, 'index']);
 Route::get('portal/ultimosProductos', [ProductoController::class, 'ultimosProductos']);
 Route::get('portal/getProducto/{producto}', [ProductoController::class, 'show']);
+// catalogos
+Route::get('portal/getCatalogos', [CatalogoController::class, 'index']);
+// pedidos
+Route::post('portal/solicitudPedido', [PedidoController::class, 'solicitudPedido']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/configuracion/update', [ConfiguracionController::class, 'update']);
