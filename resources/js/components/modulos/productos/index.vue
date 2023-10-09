@@ -458,7 +458,7 @@ export default {
             this.oProducto.precio = item.precio ? item.precio : "";
             this.oProducto.cantidad_stock = item.cantidad_stock
                 ? item.cantidad_stock
-                : "";
+                : "0";
             this.oProducto.catalogo_id = item.catalogo_id
                 ? item.catalogo_id
                 : "";

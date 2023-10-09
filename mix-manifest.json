@@ -8,7 +8,7 @@
     "/js/portal.js": "/js/portal.js",
     "/js/portal_custom.js": "/js/portal_custom.js",
     "/imgs/actividads/1696265570_2.png": "/imgs/actividads/1696265570_2.png",
-    "/imgs/actividads/1696275555_3.jpg": "/imgs/actividads/1696275555_3.jpg",
+    "/imgs/actividads/1696866167_3.png": "/imgs/actividads/1696866167_3.png",
     "/imgs/avatar.png": "/imgs/avatar.png",
     "/imgs/banners/1696264182_5.png": "/imgs/banners/1696264182_5.png",
     "/imgs/banners/1696264203_6.png": "/imgs/banners/1696264203_6.png",
@@ -31,6 +31,8 @@
     "/imgs/productos/1696365467_4.jpg": "/imgs/productos/1696365467_4.jpg",
     "/imgs/productos/1696365516_5.jpg": "/imgs/productos/1696365516_5.jpg",
     "/imgs/productos/1696365930_6.jpg": "/imgs/productos/1696365930_6.jpg",
+    "/imgs/productos/1696877778_7.jpg": "/imgs/productos/1696877778_7.jpg",
+    "/imgs/productos/1696877788_1.jpg": "/imgs/productos/1696877788_1.jpg",
     "/imgs/productos/default.png": "/imgs/productos/default.png",
     "/imgs/secciones/1.png": "/imgs/secciones/1.png",
     "/imgs/secciones/2.png": "/imgs/secciones/2.png",
@@ -196,6 +198,5 @@
     "/fonts/Poppins/Poppins-Thin.ttf": "/fonts/Poppins/Poppins-Thin.ttf",
     "/fonts/Poppins/Poppins-ThinItalic.ttf": "/fonts/Poppins/Poppins-ThinItalic.ttf",
     "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.ttf",
-    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff",
-    "/imgs/actividads/1696866167_3.png": "/imgs/actividads/1696866167_3.png"
+    "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff": "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff"
 }

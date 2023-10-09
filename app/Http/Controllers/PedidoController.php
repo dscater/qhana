@@ -263,6 +263,7 @@ class PedidoController extends Controller
                 "message" => "Pedido enviado con éxito",
             ], 200);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->JSON([
                 "sw" => false,
                 "message" => "Ocurrió un error: " . $e->getMessage(),

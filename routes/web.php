@@ -31,13 +31,14 @@ Route::get('/configuracion/getConfiguracion', [ConfiguracionController::class, '
 // sliders
 Route::get('portal/getSliders', [BannerController::class, 'index']);
 // actividades
-Route::get('portal/getActividades', [ActividadController::class, 'index']);
+Route::get('portal/listaActividades', [ActividadController::class, 'listaActividades']);
 Route::get('portal/getActividad/{actividad}', [ActividadController::class, 'show']);
 Route::get('portal/ultimasActividades', [ActividadController::class, 'ultimasActividades']);
 // nosotros
 Route::get('portal/getNosotros', [NosotrosController::class, 'index']);
 // contacto
 Route::get('portal/getContacto', [ContactoController::class, 'index']);
+Route::post('portal/enviarcorreo', [ContactoController::class, 'enviarcorreo']);
 // redes sociales
 Route::get('portal/getRedSocial', [RedSocialController::class, 'index']);
 // productos

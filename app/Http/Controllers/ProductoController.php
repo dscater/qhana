@@ -87,6 +87,7 @@ class ProductoController extends Controller
             $productos->orderBy("id", "desc");
         }
 
+        $productos->where("cantidad_stock", ">", 0);
         $productos = $productos->paginate($per_page);
         return response()->JSON([
             'productos' => $productos,

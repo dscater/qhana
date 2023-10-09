@@ -28,6 +28,24 @@ class ActividadController extends Controller
         return response()->JSON(['actividads' => $actividads, 'total' => count($actividads)], 200);
     }
 
+    public function listaActividades(Request $request)
+    {
+        $per_page = 12;
+        $texto  = $request->texto;
+        $actividads = Actividad::select("actividads.*");
+
+        if ($texto != '') {
+            $actividads->where("descripcion", "LIKE", "%$texto%");
+        }
+
+        $actividads = $actividads->orderBy("id", "desc")->paginate($per_page);
+        return response()->JSON([
+            'actividads' => $actividads,
+            'total' => count($actividads),
+            "per_page" => $per_page
+        ], 200);
+    }
+
     public function ultimaActividad()
     {
         $actividad = Actividad::orderBy("id", "asc")->get()->last();

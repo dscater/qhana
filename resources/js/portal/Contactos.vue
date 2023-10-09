@@ -15,12 +15,21 @@
                                 Escribenos
                             </h4>
 
+                            <span
+                                v-if="errors.correo"
+                                class="error invalid-feedback d-block"
+                                v-text="errors.correo[0]"
+                            ></span>
                             <div class="bor8 m-b-20 how-pos4-parent">
                                 <input
                                     class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"
                                     type="text"
                                     name="email"
                                     placeholder="Tú correo"
+                                    v-model="oCorreo.correo"
+                                    :class="{
+                                        'is-invalid': errors.correo,
+                                    }"
                                 />
                                 <img
                                     class="how-pos4 pointer-none"
@@ -28,20 +37,29 @@
                                     alt="ICON"
                                 />
                             </div>
-
+                            <span
+                                v-if="errors.mensaje"
+                                class="error invalid-feedback d-block"
+                                v-text="errors.mensaje[0]"
+                            ></span>
                             <div class="bor8 m-b-30">
                                 <textarea
                                     class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25"
                                     name="msg"
                                     placeholder="Mensaje"
+                                    v-model="oCorreo.mensaje"
+                                    :class="{
+                                        'is-invalid': errors.mensaje,
+                                    }"
                                 ></textarea>
                             </div>
-
                             <button
+                                type="button"
                                 class="flex-c-m stext-101 cl2 size-121 bg0 bor1 hov-btn3 p-lr-15 trans-04 pointer"
-                            >
-                                Enviar
-                            </button>
+                                @click="prepararEnvio"
+                                :disabled="enviando"
+                                v-text="txtBoton"
+                            ></button>
                         </form>
                     </div>
 
@@ -109,12 +127,26 @@ export default {
             }),
             url_asset: "",
             oContacto: null,
+            oCorreo: {
+                correo: "",
+                mensaje: "",
+            },
+            errors: [],
+            enviando: false,
         };
     },
     mounted() {
         this.loadingWindow.close();
         this.getUrlAsset();
         this.getInfoContacto();
+    },
+    computed: {
+        txtBoton() {
+            if (this.enviando) {
+                return "ENVIANDO...";
+            }
+            return "ENVIAR";
+        },
     },
     methods: {
         getUrlAsset() {
@@ -183,6 +215,46 @@ export default {
                     this.infowindow.open(this.map, this.marker);
                 });
             }
+        },
+        prepararEnvio() {
+            this.enviando = true;
+            let self = this;
+            this.errors = [];
+            setTimeout(function () {
+                self.enviarCorreo();
+            }, 500);
+        },
+        enviarCorreo() {
+            axios
+                .post(main_url + "/portal/enviarcorreo", this.oCorreo)
+                .then((response) => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Correcto!",
+                        html: response.data.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    this.enviando = false;
+                    this.oCorreo.mensaje = "";
+                })
+                .catch((error) => {
+                    this.enviando = false;
+                    if (error.response) {
+                        if (error.response.status === 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        if (error.response.status === 500) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                html: error.response.data.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+                    }
+                });
         },
     },
 };

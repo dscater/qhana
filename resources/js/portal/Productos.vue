@@ -43,6 +43,7 @@
                     <div class="bor8 dis-flex p-l-15">
                         <button
                             class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04"
+                            @click="searchProductos"
                         >
                             <i class="zmdi zmdi-search"></i>
                         </button>
@@ -429,7 +430,7 @@ export default {
             id_seleccionado: 0,
             muestra_modal_producto: false,
             currentPage: 1,
-            rows: 1000,
+            rows: 12,
             perPage: 5,
             filtro: {
                 orden: "defecto",

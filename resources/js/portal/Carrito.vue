@@ -60,7 +60,12 @@
                                         </td>
                                         <td class="column-2 text-white">
                                             {{ item.nombre }}<br />
-                                            <span class="text-xs text-warning">{{ item.catalogo.nombre }}</span>
+                                            <span
+                                                class="text-xs text-warning"
+                                                >{{
+                                                    item.catalogo.nombre
+                                                }}</span
+                                            >
                                         </td>
                                         <td class="column-3 text-white">
                                             Bs. {{ item.precio }}
@@ -307,6 +312,7 @@ export default {
         prepararEnvio() {
             this.enviando = true;
             let self = this;
+            this.errors = [];
             setTimeout(function () {
                 self.enviarPedido();
             }, 500);
@@ -324,6 +330,7 @@ export default {
                     });
                     this.oPedido.detalle_pedidos = [];
                     localStorage.removeItem("carrito_qhana");
+                    EventBus.$emit("producto_agregado");
                     this.enviando = false;
                 })
                 .catch((error) => {

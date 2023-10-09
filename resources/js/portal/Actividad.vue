@@ -28,14 +28,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mt-4">
+                <div class="col-md-3 mt-4">
                     <router-link
                         :to="{
                             name: 'portal.actividads',
                         }"
-                        class="btn btn-warning btn-xs btn-block mt-1"
+                        class="btn bg-white btn-xs btn-block mt-1"
                     >
-                        Volver a Actividades
+                        <i class="fa fa-arrow-left"></i>
+                        Volver
                     </router-link>
                 </div>
             </div>

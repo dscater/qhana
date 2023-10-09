@@ -85,7 +85,8 @@ export default {
                 );
                 this.cantidad_carrito = this.carrito.length;
             } else {
-                this.cantidad_carrito;
+                this.carrito = [];
+                this.cantidad_carrito = 0;
             }
             this.getTotal();
         },
