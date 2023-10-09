@@ -147,14 +147,14 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <a
-                            href=""
+                        <router-link
+                            :to="{ name: 'pedidos.index' }"
                             class="nav-link"
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fas fa-clipboard-list"></i>
                             <p>Pedidos</p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
                         <a

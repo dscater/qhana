@@ -81,6 +81,9 @@ class UserController extends Controller
             'catalogos.destroy',
 
             'pedidos.index',
+            'pedidos.create',
+            'pedidos.edit',
+            'pedidos.destroy',
 
             'personals.index',
 

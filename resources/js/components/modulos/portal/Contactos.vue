@@ -239,7 +239,7 @@ export default {
 
             // Configura el icono personalizado
             const customIcon = {
-                url: main_url + "/imgs/pinqhana.png", // Ruta a tu icono personalizado
+                url: main_url + "/imgs/pinmap.gif", // Ruta a tu icono personalizado
                 scaledSize: new google.maps.Size(32, 32), // Tamaño del icono
             };
 

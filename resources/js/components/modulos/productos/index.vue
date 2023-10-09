@@ -83,6 +83,25 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
+                                                <template #cell(precio)="row">
+                                                    <span
+                                                        class="text-md badge badge-warning text-white"
+                                                        >{{
+                                                            row.item.precio
+                                                        }}</span
+                                                    >
+                                                </template>
+                                                <template
+                                                    #cell(cantidad_stock)="row"
+                                                >
+                                                    <span
+                                                        class="text-md badge badge-primary"
+                                                        >{{
+                                                            row.item
+                                                                .cantidad_stock
+                                                        }}</span
+                                                    >
+                                                </template>
                                                 <template #cell(imagen)="row">
                                                     <img
                                                         :src="

@@ -4,16 +4,181 @@ namespace App\Http\Controllers;
 
 use App\Mail\SolicitudPedido;
 use App\Models\Configuracion;
+use App\Models\HistorialAccion;
 use App\Models\Pedido;
 use App\Models\Producto;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
+    public function index(Request $request)
+    {
+        $pedidos = Pedido::with("detalle_pedidos")->orderBy("id", "desc")->get();
+        return response()->JSON(['pedidos' => $pedidos, 'total' => count($pedidos)], 200);
+    }
+
+    public function update(Request $request, Pedido $pedido)
+    {
+        DB::beginTransaction();
+        try {
+            $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            $pedido->update(array_map('mb_strtoupper', $request->all()));
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            HistorialAccion::create([
+                'user_id' => Auth::user()->id,
+                'accion' => 'MODIFICACIÓN',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->pedido . ' MODIFICÓ UN PEDIDO',
+                'datos_original' => $datos_original,
+                'datos_nuevo' => $datos_nuevo,
+                'modulo' => 'PEDIDOS',
+                'fecha' => date('Y-m-d'),
+                'hora' => date('H:i:s')
+            ]);
+
+            DB::commit();
+            return response()->JSON([
+                'sw' => true,
+                'pedido' => $pedido,
+                'msj' => 'El registro se actualizó de forma correcta'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->JSON([
+                'sw' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function eliminarPedido(Request $request, Pedido $pedido)
+    {
+        DB::beginTransaction();
+        try {
+            $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            $pedido->update(array_map('mb_strtoupper', $request->all()));
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            HistorialAccion::create([
+                'user_id' => Auth::user()->id,
+                'accion' => 'MODIFICACIÓN',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->pedido . ' ELIMINÓ UN PEDIDO',
+                'datos_original' => $datos_original,
+                'datos_nuevo' => $datos_nuevo,
+                'modulo' => 'PEDIDOS',
+                'fecha' => date('Y-m-d'),
+                'hora' => date('H:i:s')
+            ]);
+
+            // restablecer stock de los productos
+            foreach ($pedido->detalle_pedidos as $dp) {
+                $producto = Producto::find($dp->producto_id);
+                $producto->cantidad_stock = (float)$producto->cantidad_stock + (float)$dp->cantidad;
+                $producto->save();
+            }
+
+            DB::commit();
+            return response()->JSON([
+                'sw' => true,
+                'pedido' => $pedido,
+                'msj' => 'El registro se actualizó de forma correcta'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->JSON([
+                'sw' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function restablecerPedido(Request $request, Pedido $pedido)
+    {
+        DB::beginTransaction();
+        try {
+            $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            $pedido->update(array_map('mb_strtoupper', $request->all()));
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            HistorialAccion::create([
+                'user_id' => Auth::user()->id,
+                'accion' => 'MODIFICACIÓN',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->pedido . ' RESTABLECIÓ UN PEDIDO',
+                'datos_original' => $datos_original,
+                'datos_nuevo' => $datos_nuevo,
+                'modulo' => 'PEDIDOS',
+                'fecha' => date('Y-m-d'),
+                'hora' => date('H:i:s')
+            ]);
+
+            // restablecer stock de los productos
+            foreach ($pedido->detalle_pedidos as $dp) {
+                $producto = Producto::find($dp->producto_id);
+                if ($dp->cantidad > $producto->cantidad_stock) {
+                    throw new Exception("No se pudo reestablecer el pedido debido a que la cantidad requerida del producto " . $dp->producto->nombre . " supera al stock disponible");
+                }
+                $producto->cantidad_stock = (float)$producto->cantidad_stock - (float)$dp->cantidad;
+                $producto->save();
+            }
+
+            DB::commit();
+            return response()->JSON([
+                'sw' => true,
+                'pedido' => $pedido,
+                'msj' => 'El registro se actualizó de forma correcta'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->JSON([
+                'sw' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function atenderPedido(Request $request, Pedido $pedido)
+    {
+        DB::beginTransaction();
+        try {
+            $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            $pedido->update(array_map('mb_strtoupper', $request->all()));
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+            HistorialAccion::create([
+                'user_id' => Auth::user()->id,
+                'accion' => 'MODIFICACIÓN',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->pedido . ' CAMBIO UN PEDIDO A ATENDIDO',
+                'datos_original' => $datos_original,
+                'datos_nuevo' => $datos_nuevo,
+                'modulo' => 'PEDIDOS',
+                'fecha' => date('Y-m-d'),
+                'hora' => date('H:i:s')
+            ]);
+
+            DB::commit();
+            return response()->JSON([
+                'sw' => true,
+                'pedido' => $pedido,
+                'msj' => 'El registro se actualizó de forma correcta'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->JSON([
+                'sw' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function show(Pedido $pedido)
+    {
+        return response()->JSON([
+            'sw' => true,
+            'pedido' => $pedido->load("detalle_pedidos.producto")
+        ], 200);
+    }
+
     public function solicitudPedido(Request $request)
     {
         $request->validate([

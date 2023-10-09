@@ -125,7 +125,7 @@
             </div>
             <hr />
             <div
-                class="container bg-dark pt-3 pb-3 wow slideInLeft contenedor_actividades"
+                class="container bg-dark pt-3 pb-3 wow slideInUp contenedor_actividades"
                 data-wow-delay="0.1s"
             >
                 <h4 class="cl11 txt-center respon1 mb-2">

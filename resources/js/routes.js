@@ -161,6 +161,22 @@ export default new Router({
             props: true,
         },
 
+        // Pedidos
+        {
+            path: "/administracion/pedidos",
+            name: "pedidos.index",
+            component: require("./components/modulos/pedidos/index.vue")
+                .default,
+            props: true,
+        },
+
+        {
+            path: "/administracion/pedidos/:id",
+            name: "pedidos.show",
+            component: require("./components/modulos/pedidos/show.vue").default,
+            props: true,
+        },
+
         // Configuración
         {
             path: "/administracion/configuracion",

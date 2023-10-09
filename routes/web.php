@@ -102,6 +102,14 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('productos', ProductoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
+
+        // PEDIDOS
+        Route::put('pedidos/eliminarPedido/{pedido}', [PedidoController::class, 'eliminarPedido']);
+        Route::put('pedidos/atenderPedido/{pedido}', [PedidoController::class, 'atenderPedido']);
+        Route::put('pedidos/restablecerPedido/{pedido}', [PedidoController::class, 'restablecerPedido']);
+        Route::resource('pedidos', PedidoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
     });
 });
 
