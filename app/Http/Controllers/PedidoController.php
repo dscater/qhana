@@ -114,16 +114,6 @@ class PedidoController extends Controller
                 'hora' => date('H:i:s')
             ]);
 
-            // restablecer stock de los productos
-            foreach ($pedido->detalle_pedidos as $dp) {
-                $producto = Producto::find($dp->producto_id);
-                if ($dp->cantidad > $producto->cantidad_stock) {
-                    throw new Exception("No se pudo reestablecer el pedido debido a que la cantidad requerida del producto " . $dp->producto->nombre . " supera al stock disponible");
-                }
-                $producto->cantidad_stock = (float)$producto->cantidad_stock - (float)$dp->cantidad;
-                $producto->save();
-            }
-
             DB::commit();
             return response()->JSON([
                 'sw' => true,
@@ -146,6 +136,18 @@ class PedidoController extends Controller
             $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
             $pedido->update(array_map('mb_strtoupper', $request->all()));
             $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+
+            // actualizar stock producto
+            $detalle_pedidos = $pedido->detalle_pedidos;
+            foreach ($detalle_pedidos as $dp) {
+                $producto = Producto::find($dp->producto_id);
+                if ($dp->cantidad > $producto->cantidad_stock) {
+                    throw new Exception("No se pudo confirmar el pedido debido a que la cantidad requerida del producto " . $dp->producto->nombre . " supera al stock disponible");
+                }
+                $producto->cantidad_stock = (float)$producto->cantidad_stock - (float)$dp->cantidad;
+                $producto->save();
+            }
+
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'MODIFICACIÓN',
@@ -216,15 +218,14 @@ class PedidoController extends Controller
                     "subtotal" => $dp["subtotal"]
                 ]);
 
-                $producto = Producto::find($dp["producto_id"]);
-                if ($dp["cantidad"] > $producto->cantidad_stock) {
-                    throw new Exception("Sentimos las molestias, pero la cantidad que seleccionó del producto " . $producto->nombre . " supera al stock disponible (" . $producto->cantidad_stock . " unidades)");
-                }
-                $producto->cantidad_stock = (float)$producto->cantidad_stock - (float)$dp["cantidad"];
-                $producto->save();
+                // $producto = Producto::find($dp["producto_id"]);
+                // if ($dp["cantidad"] > $producto->cantidad_stock) {
+                //     throw new Exception("Sentimos las molestias, pero la cantidad que seleccionó del producto " . $producto->nombre . " supera al stock disponible (" . $producto->cantidad_stock . " unidades)");
+                // }
+                // $producto->cantidad_stock = (float)$producto->cantidad_stock - (float)$dp["cantidad"];
+                // $producto->save();
             }
             $detalle_pedidos = $nuevo_pedido->detalle_pedidos;
-
 
             $configuracion = Configuracion::first();
             if ($configuracion) {

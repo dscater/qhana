@@ -3,13 +3,15 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CajaController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MovimientoCajaController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RedSocialController;
 use App\Http\Controllers\ReporteController;
@@ -56,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         // Usuarios
         Route::post('usuarios/imprimirCredencial/{usuario}', [UserController::class, 'imprimirCredencial']);
+        Route::get('usuarios/getUsuarioTipoPersonal', [UserController::class, 'getUsuarioTipoPersonal']);
         Route::get('usuarios/getUsuarioTipo', [UserController::class, 'getUsuarioTipo']);
         Route::get('usuarios/getUsuario/{usuario}', [UserController::class, 'getUsuario']);
         Route::patch('usuarios/asignarConfiguracion/{usuario}', [UserController::class, 'asignarConfiguracion']);
@@ -108,6 +111,23 @@ Route::middleware(['auth'])->group(function () {
 
         // PRODUCTOS
         Route::resource('productos', ProductoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // CONCEPTOS
+        Route::resource('conceptos', ConceptoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // CAJAS
+        Route::post('cajas/generarRecibo/{caja}', [CajaController::class, 'generarRecibo']);
+        Route::get('cajas/getSaldo', [CajaController::class, 'getSaldo']);
+        Route::resource('cajas', CajaController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // MOVIMIENTOS CAJAS
+        Route::resource('movimiento_cajas', MovimientoCajaController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 

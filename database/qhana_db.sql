@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-10-2023 a las 19:01:15
+-- Tiempo de generación: 18-10-2023 a las 22:26:32
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -94,6 +94,46 @@ INSERT INTO `banners` (`id`, `img`, `posicion`, `desc1`, `desc2`, `muestra_boton
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cajas`
+--
+
+CREATE TABLE `cajas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_movimiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `concepto_id` bigint UNSIGNED NOT NULL,
+  `monto` decimal(24,2) NOT NULL,
+  `responsable_id` bigint UNSIGNED NOT NULL,
+  `nro_factura` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `a_favor` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro` int DEFAULT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_registro` date NOT NULL,
+  `estado` int NOT NULL,
+  `movimiento_caja_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cajas`
+--
+
+INSERT INTO `cajas` (`id`, `tipo`, `tipo_movimiento`, `concepto_id`, `monto`, `responsable_id`, `nro_factura`, `fecha`, `descripcion`, `a_favor`, `nro`, `user_id`, `nombre`, `fecha_registro`, `estado`, `movimiento_caja_id`, `created_at`, `updated_at`) VALUES
+(1, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11111111', '2023-10-17', 'REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 20:23:07', '2023-10-18 20:34:31'),
+(2, 'RECIBO', 'INGRESO', 1, 500.00, 1, NULL, '2023-10-18', 'DESCRIPCION RECIBO #1', 'OTRO', 1, 5, 'FELIPE GUTIERREZ', '2023-10-18', 2, 2, '2023-10-18 20:36:14', '2023-10-18 20:44:37'),
+(4, 'NORMAL', 'EGRESO', 2, 200.00, 1, '3333', '2023-10-18', 'PRUEBA EGRESO', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:09:48', '2023-10-18 21:09:48'),
+(5, 'RECIBO', 'INGRESO', 1, 350.00, 1, NULL, '2023-10-18', 'PRUEBA INGRESO RECIBO CON RECIBBO', 'SOCIO', 3, 7, NULL, '2023-10-18', 2, 2, '2023-10-18 21:50:25', '2023-10-18 21:50:25'),
+(6, 'NORMAL', 'EGRESO', 2, 150.50, 1, '1110000', '2023-10-18', 'PRUEBA EGRESO DECIMAL', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:51:04', '2023-10-18 21:51:04'),
+(7, 'RECIBO', 'EGRESO', 2, 120.00, 1, NULL, '2023-10-18', 'DESC. EGRESO RECIBO', 'TRABAJADOR', 4, 5, NULL, '2023-10-18', 2, 2, '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
+(8, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11211211', '2023-10-18', 'DESC', NULL, NULL, NULL, NULL, '2023-10-18', 1, 0, '2023-10-18 22:11:17', '2023-10-18 22:11:17');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `catalogos`
 --
 
@@ -112,6 +152,27 @@ CREATE TABLE `catalogos` (
 INSERT INTO `catalogos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) VALUES
 (1, 'CATÁLOGO #1', 'CATALOGO #1 DESCRIPCIÓN', '2023-10-03 19:50:56', '2023-10-03 19:50:56'),
 (2, 'CATÁLOGO #2', '', '2023-10-03 19:51:05', '2023-10-03 19:51:05');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `conceptos`
+--
+
+CREATE TABLE `conceptos` (
+  `id` bigint UNSIGNED NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `conceptos`
+--
+
+INSERT INTO `conceptos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'CONCEPTO #1 MODIFICADO', '2023-10-18 19:42:15', '2023-10-18 19:42:21'),
+(2, 'CONCEPTO #2', '2023-10-18 19:42:25', '2023-10-18 19:42:25');
 
 -- --------------------------------------------------------
 
@@ -142,7 +203,7 @@ CREATE TABLE `configuracions` (
 --
 
 INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `ciudad`, `dir`, `fono`, `web`, `actividad`, `correo`, `correo_pedido`, `correo_pedido2`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'QHANA', 'QHANA', 'QHANA', 'LA PAZ', 'LA PAZ', '222222', 'QHANAWEB', 'ACTIVIDAD QHANA', 'qhana@gmail.com', 'qhana2@gmail.com', 'qhanapedido2@gmail.com', 'logo.png', NULL, '2023-09-28 21:09:17');
+(1, 'QHANA', 'QHANA', 'QHANA', 'LA PAZ', 'ZONA LOS OLIVOS CALLE 3 N°322', '222222', 'QHANAWEB', 'ACTIVIDAD QHANA', 'qhana@gmail.com', 'qhana2@gmail.com', 'qhanapedido2@gmail.com', 'logo.png', NULL, '2023-10-18 21:35:33');
 
 -- --------------------------------------------------------
 
@@ -316,7 +377,41 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (88, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: default.png<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-03 16:40:08<br/>', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877749_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:55:49<br/>', 'PRODUCTOS', '2023-10-09', '14:55:49', '2023-10-09 18:55:49', '2023-10-09 18:55:49'),
 (89, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877749_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:55:49<br/>', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877768_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:56:08<br/>', 'PRODUCTOS', '2023-10-09', '14:56:08', '2023-10-09 18:56:08', '2023-10-09 18:56:08'),
 (90, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'id: 7<br/>nombre: PRODUCTO #6<br/>descripcion: DESC 6<br/>precio: 100.00<br/>cantidad_stock: 0<br/>catalogo_id: 2<br/>imagen: 1696877738_7.jpg<br/>created_at: 2023-10-03 16:45:44<br/>updated_at: 2023-10-09 14:55:38<br/>', 'id: 7<br/>nombre: PRODUCTO #6<br/>descripcion: DESC 6<br/>precio: 100.00<br/>cantidad_stock: 0<br/>catalogo_id: 2<br/>imagen: 1696877778_7.jpg<br/>created_at: 2023-10-03 16:45:44<br/>updated_at: 2023-10-09 14:56:18<br/>', 'PRODUCTOS', '2023-10-09', '14:56:18', '2023-10-09 18:56:18', '2023-10-09 18:56:18'),
-(91, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877768_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:56:08<br/>', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877788_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:56:28<br/>', 'PRODUCTOS', '2023-10-09', '14:56:28', '2023-10-09 18:56:28', '2023-10-09 18:56:28');
+(91, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN PRODUCTO', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877768_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:56:08<br/>', 'id: 1<br/>nombre: PRODUCTO #1<br/>descripcion: SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS<br/>precio: 300.00<br/>cantidad_stock: 10<br/>catalogo_id: 1<br/>imagen: 1696877788_1.jpg<br/>created_at: 2023-10-03 16:33:06<br/>updated_at: 2023-10-09 14:56:28<br/>', 'PRODUCTOS', '2023-10-09', '14:56:28', '2023-10-09 18:56:28', '2023-10-09 18:56:28'),
+(92, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CATALOGO', 'id: 2<br/>usuario: <br/>nombre: CATÁLOGO #2<br/>paterno: <br/>materno: <br/>ci: <br/>ci_exp: <br/>fecha_nac: <br/>genero: <br/>cargo: <br/>fecha_ingreso: <br/>taller: <br/>dir: <br/>fono: <br/>tipo_personal: <br/>p_discapacidad: <br/>tipo: <br/>foto: <br/>validez_credencial: <br/>password: <br/>estado: <br/>acceso: <br/>fecha_registro: <br/>created_at: 2023-10-03 15:51:05<br/>updated_at: 2023-10-03 15:51:05<br/>', 'id: 2<br/>usuario: <br/>nombre: CATÁLOGO #2<br/>paterno: <br/>materno: <br/>ci: <br/>ci_exp: <br/>fecha_nac: <br/>genero: <br/>cargo: <br/>fecha_ingreso: <br/>taller: <br/>dir: <br/>fono: <br/>tipo_personal: <br/>p_discapacidad: <br/>tipo: <br/>foto: <br/>validez_credencial: <br/>password: <br/>estado: <br/>acceso: <br/>fecha_registro: <br/>created_at: 2023-10-03 15:51:05<br/>updated_at: 2023-10-03 15:51:05<br/>', 'CATALOGOS', '2023-10-09', '23:41:31', '2023-10-10 03:41:31', '2023-10-10 03:41:31'),
+(93, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CATALOGO', 'id: 2<br/>usuario: <br/>nombre: CATÁLOGO #2<br/>paterno: <br/>materno: <br/>ci: <br/>ci_exp: <br/>fecha_nac: <br/>genero: <br/>cargo: <br/>fecha_ingreso: <br/>taller: <br/>dir: <br/>fono: <br/>tipo_personal: <br/>p_discapacidad: <br/>tipo: <br/>foto: <br/>validez_credencial: <br/>password: <br/>estado: <br/>acceso: <br/>fecha_registro: <br/>created_at: 2023-10-03 15:51:05<br/>updated_at: 2023-10-03 15:51:05<br/>', 'id: 2<br/>usuario: <br/>nombre: CATÁLOGO #2<br/>paterno: <br/>materno: <br/>ci: <br/>ci_exp: <br/>fecha_nac: <br/>genero: <br/>cargo: <br/>fecha_ingreso: <br/>taller: <br/>dir: <br/>fono: <br/>tipo_personal: <br/>p_discapacidad: <br/>tipo: <br/>foto: <br/>validez_credencial: <br/>password: <br/>estado: <br/>acceso: <br/>fecha_registro: <br/>created_at: 2023-10-03 15:51:05<br/>updated_at: 2023-10-03 15:51:05<br/>', 'CATALOGOS', '2023-10-09', '23:41:33', '2023-10-10 03:41:33', '2023-10-10 03:41:33'),
+(94, 1, 'MODIFICACIÓN', 'EL USUARIO  CAMBIO UN PEDIDO A ATENDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-09 13:30:41<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:54:55<br/>', 'PEDIDOS', '2023-10-18', '14:54:55', '2023-10-18 18:54:55', '2023-10-18 18:54:55'),
+(95, 1, 'MODIFICACIÓN', 'EL USUARIO  ELIMINÓ UN PEDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:54:55<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:55:07<br/>', 'PEDIDOS', '2023-10-18', '14:55:07', '2023-10-18 18:55:07', '2023-10-18 18:55:07'),
+(96, 1, 'MODIFICACIÓN', 'EL USUARIO  RESTABLECIÓ UN PEDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:55:07<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:55:14<br/>', 'PEDIDOS', '2023-10-18', '14:55:14', '2023-10-18 18:55:14', '2023-10-18 18:55:14'),
+(97, 1, 'MODIFICACIÓN', 'EL USUARIO  CAMBIO UN PEDIDO A ATENDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:55:14<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:56:53<br/>', 'PEDIDOS', '2023-10-18', '14:56:53', '2023-10-18 18:56:53', '2023-10-18 18:56:53'),
+(98, 1, 'MODIFICACIÓN', 'EL USUARIO  ELIMINÓ UN PEDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ATENDIDO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:56:53<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:56:57<br/>', 'PEDIDOS', '2023-10-18', '14:56:57', '2023-10-18 18:56:57', '2023-10-18 18:56:57'),
+(99, 1, 'MODIFICACIÓN', 'EL USUARIO  RESTABLECIÓ UN PEDIDO', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: ELIMINADO<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:56:57<br/>', 'apellidos: GONZALES<br/>correo: <br/>created_at: 2023-10-09 13:30:41<br/>estado: PENDIENTE<br/>fecha_registro: 2023-10-09<br/>fono: 787878787<br/>id: 5<br/>monto_total: 100.00<br/>nombres: EDUARDO<br/>pec: BOLIVIA<br/>updated_at: 2023-10-18 14:57:03<br/>', 'PEDIDOS', '2023-10-18', '14:57:03', '2023-10-18 18:57:03', '2023-10-18 18:57:03'),
+(100, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'created_at: 2023-10-18 15:42:15<br/>id: 1<br/>nombre: CONCEPTO #1<br/>updated_at: 2023-10-18 15:42:15<br/>', NULL, 'CONCEPTOS', '2023-10-18', '15:42:15', '2023-10-18 19:42:15', '2023-10-18 19:42:15'),
+(101, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CONCEPTO', 'created_at: 2023-10-18 15:42:15<br/>id: 1<br/>nombre: CONCEPTO #1<br/>updated_at: 2023-10-18 15:42:15<br/>', 'created_at: 2023-10-18 15:42:15<br/>id: 1<br/>nombre: CONCEPTO #1 MODIFICADO<br/>updated_at: 2023-10-18 15:42:21<br/>', 'CONCEPTOS', '2023-10-18', '15:42:21', '2023-10-18 19:42:21', '2023-10-18 19:42:21'),
+(102, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'created_at: 2023-10-18 15:42:25<br/>id: 2<br/>nombre: CONCEPTO #2<br/>updated_at: 2023-10-18 15:42:25<br/>', NULL, 'CONCEPTOS', '2023-10-18', '15:42:25', '2023-10-18 19:42:25', '2023-10-18 19:42:25'),
+(103, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'created_at: 2023-10-18 15:42:30<br/>id: 3<br/>nombre: CONCEPTO #3<br/>updated_at: 2023-10-18 15:42:30<br/>', NULL, 'CONCEPTOS', '2023-10-18', '15:42:30', '2023-10-18 19:42:30', '2023-10-18 19:42:30'),
+(104, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN CONCEPTO', 'created_at: 2023-10-18 15:42:30<br/>id: 3<br/>nombre: CONCEPTO #3<br/>updated_at: 2023-10-18 15:42:30<br/>', NULL, 'CONCEPTOS', '2023-10-18', '15:43:07', '2023-10-18 19:43:07', '2023-10-18 19:43:07'),
+(105, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:23:07<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '16:23:07', '2023-10-18 20:23:07', '2023-10-18 20:23:07'),
+(106, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:23:07<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMM<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:29:22<br/>user_id: <br/>', 'CAJAS', '2023-10-18', '16:29:22', '2023-10-18 20:29:22', '2023-10-18 20:29:22'),
+(107, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMM<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:29:22<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMM<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: 1211111<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:29:55<br/>user_id: <br/>', 'CAJAS', '2023-10-18', '16:29:55', '2023-10-18 20:29:55', '2023-10-18 20:29:55'),
+(108, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMM<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: 1211111<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:29:55<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: 111111<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:32:15<br/>user_id: <br/>', 'CAJAS', '2023-10-18', '16:32:15', '2023-10-18 20:32:15', '2023-10-18 20:32:15'),
+(109, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: 111111<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:32:15<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 16:23:07<br/>descripcion: REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS<br/>fecha: 2023-10-17<br/>fecha_registro: 2023-10-18<br/>id: 1<br/>monto: 1000.00<br/>nombre: <br/>nro: <br/>nro_factura: 11111111<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:34:31<br/>user_id: <br/>', 'CAJAS', '2023-10-18', '16:34:31', '2023-10-18 20:34:31', '2023-10-18 20:34:31'),
+(110, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500<br/>nombre: <br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:36:14<br/>user_id: 4<br/>', NULL, 'CAJAS', '2023-10-18', '16:36:14', '2023-10-18 20:36:14', '2023-10-18 20:36:14'),
+(111, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: OTRO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:38:06<br/>descripcion: RECIBO #2<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 3<br/>monto: 300<br/>nombre: JUAN GONZALES<br/>nro: 2<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:38:06<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '16:38:06', '2023-10-18 20:38:06', '2023-10-18 20:38:06'),
+(112, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: <br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:36:14<br/>user_id: 4<br/>', 'a_favor: TRABAJADOR<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: <br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:40:25<br/>user_id: 5<br/>', 'CAJAS', '2023-10-18', '16:40:25', '2023-10-18 20:40:25', '2023-10-18 20:40:25'),
+(113, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: TRABAJADOR<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: <br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:40:25<br/>user_id: 5<br/>', 'a_favor: OTRO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: PEPE<br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:41:03<br/>user_id: 5<br/>', 'CAJAS', '2023-10-18', '16:41:03', '2023-10-18 20:41:03', '2023-10-18 20:41:03'),
+(114, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: OTRO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: PEPE<br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:41:03<br/>user_id: 5<br/>', 'a_favor: TRABAJADOR<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: PEPE<br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:41:11<br/>user_id: 5<br/>', 'CAJAS', '2023-10-18', '16:41:11', '2023-10-18 20:41:11', '2023-10-18 20:41:11'),
+(115, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: OTRO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:38:06<br/>descripcion: RECIBO #2<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 3<br/>monto: 300.00<br/>nombre: JUAN GONZALES<br/>nro: 2<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:38:06<br/>user_id: <br/>', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:38:06<br/>descripcion: RECIBO #2<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 3<br/>monto: 300.00<br/>nombre: JUAN GONZALES<br/>nro: 2<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:44:26<br/>user_id: 2<br/>', 'CAJAS', '2023-10-18', '16:44:26', '2023-10-18 20:44:26', '2023-10-18 20:44:26'),
+(116, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: TRABAJADOR<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: PEPE<br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:41:11<br/>user_id: 5<br/>', 'a_favor: OTRO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:36:14<br/>descripcion: DESCRIPCION RECIBO #1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 2<br/>monto: 500.00<br/>nombre: FELIPE GUTIERREZ<br/>nro: 1<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:44:37<br/>user_id: 5<br/>', 'CAJAS', '2023-10-18', '16:44:37', '2023-10-18 20:44:37', '2023-10-18 20:44:37'),
+(117, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 2<br/>created_at: 2023-10-18 17:09:48<br/>descripcion: PRUEBA EGRESO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 4<br/>monto: 200<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 3333<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: EGRESO<br/>updated_at: 2023-10-18 17:09:48<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '17:09:48', '2023-10-18 21:09:48', '2023-10-18 21:09:48'),
+(118, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ LA CONFIGURACIÓN', 'actividad: ACTIVIDAD QHANA<br/>alias: QHANA<br/>ciudad: LA PAZ<br/>correo: qhana@gmail.com<br/>correo_pedido: qhana2@gmail.com<br/>correo_pedido2: qhanapedido2@gmail.com<br/>created_at: <br/>dir: LA PAZ<br/>fono: 222222<br/>id: 1<br/>logo: logo.png<br/>nombre_sistema: QHANA<br/>razon_social: QHANA<br/>updated_at: 2023-09-28 17:09:17<br/>web: QHANAWEB<br/>', 'actividad: ACTIVIDAD QHANA<br/>alias: QHANA<br/>ciudad: LA PAZ<br/>correo: qhana@gmail.com<br/>correo_pedido: qhana2@gmail.com<br/>correo_pedido2: qhanapedido2@gmail.com<br/>created_at: <br/>dir: ZONA LOS OLIVOS CALLE 3 N°322<br/>fono: 222222<br/>id: 1<br/>logo: logo.png<br/>nombre_sistema: QHANA<br/>razon_social: QHANA<br/>updated_at: 2023-10-18 17:35:33<br/>web: QHANAWEB<br/>', 'CONFIGURACIÓN', '2023-10-18', '17:35:33', '2023-10-18 21:35:33', '2023-10-18 21:35:33'),
+(119, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 17:50:25<br/>descripcion: PRUEBA INGRESO RECIBO CON RECIBBO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 5<br/>monto: 350<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: 3<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 17:50:25<br/>user_id: 7<br/>', NULL, 'CAJAS', '2023-10-18', '17:50:25', '2023-10-18 21:50:25', '2023-10-18 21:50:25'),
+(120, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 17:50:25<br/>descripcion: PRUEBA INGRESO RECIBO CON RECIBBO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 5<br/>monto: 350.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: 3<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 17:50:25<br/>user_id: 7<br/>', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 17:50:25<br/>descripcion: PRUEBA INGRESO RECIBO CON RECIBBO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 5<br/>monto: 350.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: 3<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 17:50:25<br/>user_id: 7<br/>', 'CAJAS', '2023-10-18', '17:50:34', '2023-10-18 21:50:34', '2023-10-18 21:50:34'),
+(121, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 2<br/>created_at: 2023-10-18 17:51:04<br/>descripcion: PRUEBA EGRESO DECIMAL<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 6<br/>monto: 150.5<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 1110000<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: EGRESO<br/>updated_at: 2023-10-18 17:51:04<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '17:51:04', '2023-10-18 21:51:04', '2023-10-18 21:51:04'),
+(122, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: TRABAJADOR<br/>concepto_id: 2<br/>created_at: 2023-10-18 17:52:18<br/>descripcion: DESC. EGRESO RECIBO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 7<br/>monto: 120<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: 4<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: EGRESO<br/>updated_at: 2023-10-18 17:52:18<br/>user_id: 5<br/>', NULL, 'CAJAS', '2023-10-18', '17:52:18', '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
+(123, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:38:06<br/>descripcion: RECIBO #2<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 3<br/>monto: 300.00<br/>movimiento_caja_id: 0<br/>nombre: JUAN GONZALES<br/>nro: 2<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:44:26<br/>user_id: 2<br/>', NULL, 'CAJAS', '2023-10-18', '17:53:07', '2023-10-18 21:53:07', '2023-10-18 21:53:07'),
+(124, 1, 'CREACIÓN', 'EL USUARIO  REALIZÓ UN CIERRE DE CAJA', 'created_at: 2023-10-18 18:09:18<br/>egresos: 470.50<br/>fecha: 2023-10-18<br/>hora: 18:09:18<br/>id: 2<br/>ingresos: 1850.00<br/>total: 1379.5<br/>updated_at: 2023-10-18 18:09:18<br/>', NULL, 'MOVIMIENTO DE CAJAS', '2023-10-18', '18:09:18', '2023-10-18 22:09:18', '2023-10-18 22:09:18'),
+(125, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 18:11:17<br/>descripcion: DESC<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 8<br/>monto: 1000<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 11211211<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 18:11:17<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '18:11:17', '2023-10-18 22:11:17', '2023-10-18 22:11:17');
 
 -- --------------------------------------------------------
 
@@ -348,7 +443,36 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2023_09_28_182912_create_productos_table', 2),
 (20, '2023_09_28_183049_create_pedidos_table', 2),
 (21, '2023_09_28_184051_create_detalle_pedidos_table', 2),
-(22, '2023_10_09_104851_create_apis_table', 3);
+(22, '2023_10_09_104851_create_apis_table', 3),
+(23, '2023_10_18_145914_create_conceptos_table', 4),
+(24, '2023_10_18_145915_create_cajas_table', 4),
+(25, '2023_10_18_150335_create_repositorios_table', 4),
+(26, '2023_10_18_150349_create_repositorio_archivos_table', 4),
+(27, '2023_10_18_170418_create_movimiento_cajas_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimiento_cajas`
+--
+
+CREATE TABLE `movimiento_cajas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `ingresos` decimal(24,2) NOT NULL,
+  `egresos` decimal(24,2) NOT NULL,
+  `total` decimal(24,2) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `movimiento_cajas`
+--
+
+INSERT INTO `movimiento_cajas` (`id`, `ingresos`, `egresos`, `total`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(2, 1850.00, 470.50, 1379.50, '2023-10-18', '18:09:18', '2023-10-18 22:09:18', '2023-10-18 22:09:18');
 
 -- --------------------------------------------------------
 
@@ -400,7 +524,7 @@ INSERT INTO `pedidos` (`id`, `nombres`, `apellidos`, `pec`, `fono`, `correo`, `e
 (1, 'JUAN', 'PERES', 'BOLIVIA', '7777777', 'JUAN@GMAIL.COM', 'ELIMINADO', 690.98, '2023-10-08', '2023-10-09 00:57:28', '2023-10-09 02:27:32'),
 (2, 'JUAN', 'PERES', 'BOLIVIA', '6666', '', 'PENDIENTE', 100.00, '2023-10-08', '2023-10-09 00:59:37', '2023-10-09 02:28:09'),
 (3, 'FELIPE', 'GONZALES', 'LA PAZ', '777777', 'FELIPE@GMAIL.COM', 'ATENDIDO', 200.00, '2023-10-08', '2023-10-09 01:01:37', '2023-10-09 02:27:42'),
-(5, 'EDUARDO', 'GONZALES', 'BOLIVIA', '787878787', '', 'PENDIENTE', 100.00, '2023-10-09', '2023-10-09 17:30:41', '2023-10-09 17:30:41'),
+(5, 'EDUARDO', 'GONZALES', 'BOLIVIA', '787878787', '', 'PENDIENTE', 100.00, '2023-10-09', '2023-10-09 17:30:41', '2023-10-18 18:57:03'),
 (6, 'EDUARDO', 'CARASCO', 'LA PA BOLIVIA', '77777', 'EDUARDO@GMAIL.COM', 'PENDIENTE', 200.50, '2023-10-09', '2023-10-09 18:57:36', '2023-10-09 18:57:36'),
 (7, 'MARIO', 'CARVAJAL', 'BOLIVIA', '22222', 'MARIO@GMAIL.COM', 'PENDIENTE', 189.99, '2023-10-09', '2023-10-09 18:58:42', '2023-10-09 18:58:42'),
 (8, 'FABIOLA', 'SUAREZ', 'LA PAZ', '767676767', '', 'PENDIENTE', 300.00, '2023-10-09', '2023-10-09 19:00:21', '2023-10-09 19:00:21');
@@ -451,7 +575,7 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad_stoc
 (4, 'PRODUCTO #3', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 189.99, 2.00, 1, '1696365467_4.jpg', '2023-10-03 20:37:47', '2023-10-09 18:58:42'),
 (5, 'PRODUCTO #4', 'SUSPENDISSE DAPIBUS ORCI SUSCIPIT PORTA SOLLICITUDIN. AENEAN PORTA QUIS TURPIS NON VULPUTATE. QUISQUE ALIQUAM ARCU NON LIBERO PORTTITOR MATTIS. CRAS ET LECTUS LAOREET NUNC LAOREET VARIUS', 99.99, 3.00, 2, '1696365516_5.jpg', '2023-10-03 20:38:36', '2023-10-09 02:27:32'),
 (6, 'PRODUCTO #5', 'PROD 5', 200.50, 9.00, 2, '1696365930_6.jpg', '2023-10-03 20:45:30', '2023-10-09 18:57:36'),
-(7, 'PRODUCTO #6', 'DESC 6', 100.00, 0.00, 2, '1696877778_7.jpg', '2023-10-03 20:45:44', '2023-10-09 18:56:18');
+(7, 'PRODUCTO #6', 'DESC 6', 100.00, 10.00, 2, '1696877778_7.jpg', '2023-10-03 20:45:44', '2023-10-18 18:56:57');
 
 -- --------------------------------------------------------
 
@@ -475,6 +599,35 @@ CREATE TABLE `red_socials` (
 
 INSERT INTO `red_socials` (`id`, `twitter`, `facebook`, `instagram`, `youtube`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'https://www.facebook.com/', NULL, 'https://www.youtube.com/', '2023-10-02 19:32:46', '2023-10-02 19:33:35');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `repositorios`
+--
+
+CREATE TABLE `repositorios` (
+  `id` bigint UNSIGNED NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `repositorio_archivos`
+--
+
+CREATE TABLE `repositorio_archivos` (
+  `id` bigint UNSIGNED NOT NULL,
+  `repositorio_id` bigint UNSIGNED NOT NULL,
+  `archivo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ext` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -545,9 +698,23 @@ ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cajas_concepto_id_foreign` (`concepto_id`),
+  ADD KEY `cajas_responsable_id_foreign` (`responsable_id`);
+
+--
 -- Indices de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `conceptos`
+--
+ALTER TABLE `conceptos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -580,6 +747,12 @@ ALTER TABLE `historial_accions`
 -- Indices de la tabla `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `movimiento_cajas`
+--
+ALTER TABLE `movimiento_cajas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -616,6 +789,19 @@ ALTER TABLE `red_socials`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `repositorios`
+--
+ALTER TABLE `repositorios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `repositorio_archivos`
+--
+ALTER TABLE `repositorio_archivos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `repositorio_archivos_repositorio_id_foreign` (`repositorio_id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -645,10 +831,22 @@ ALTER TABLE `banners`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `conceptos`
+--
+ALTER TABLE `conceptos`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -672,13 +870,19 @@ ALTER TABLE `detalle_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `movimiento_cajas`
+--
+ALTER TABLE `movimiento_cajas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `nosotros`
@@ -711,6 +915,18 @@ ALTER TABLE `red_socials`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `repositorios`
+--
+ALTER TABLE `repositorios`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `repositorio_archivos`
+--
+ALTER TABLE `repositorio_archivos`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
@@ -719,6 +935,13 @@ ALTER TABLE `users`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  ADD CONSTRAINT `cajas_concepto_id_foreign` FOREIGN KEY (`concepto_id`) REFERENCES `conceptos` (`id`),
+  ADD CONSTRAINT `cajas_responsable_id_foreign` FOREIGN KEY (`responsable_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `detalle_pedidos`
@@ -732,6 +955,12 @@ ALTER TABLE `detalle_pedidos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_catalogo_id_foreign` FOREIGN KEY (`catalogo_id`) REFERENCES `catalogos` (`id`);
+
+--
+-- Filtros para la tabla `repositorio_archivos`
+--
+ALTER TABLE `repositorio_archivos`
+  ADD CONSTRAINT `repositorio_archivos_repositorio_id_foreign` FOREIGN KEY (`repositorio_id`) REFERENCES `repositorios` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

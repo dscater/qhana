@@ -85,7 +85,9 @@
                             permisos.includes('usuarios.index') ||
                             permisos.includes('portals.index') ||
                             permisos.includes('catalogos.index') ||
-                            permisos.includes('productos.index')
+                            permisos.includes('productos.index') ||
+                            permisos.includes('conceptos.index') ||
+                            permisos.includes('cajas.index')
                         "
                     >
                         ADMINISTRACIÓN:
@@ -175,17 +177,27 @@
                             <i class="nav-icon fas fa-hand-holding-usd"></i>
                             <p>Pagos</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a
-                            href=""
+                        <router-link
+                            :to="{ name: 'cajas.index' }"
                             class="nav-link"
                             v-loading.fullscreen.lock="fullscreenLoading"
                         >
                             <i class="nav-icon fas fa-cash-register"></i>
-                            <p>Cajas</p>
-                        </a>
-                    </li> -->
+                            <p>Caja</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            :to="{ name: 'conceptos.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Conceptos</p>
+                        </router-link>
+                    </li>
                     <li
                         class="nav-header font-weight-bold"
                         v-if="permisos.includes('reportes.usuarios')"

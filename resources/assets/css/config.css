@@ -21,8 +21,18 @@
 .el-button--warning:focus,
 .el-button--warning:hover {
     color: #1f2d3d !important;
-    background-color: #c57a40 !important;
-    border-color: #c57a40 !important;
+    background-color: var(--principal) !important;
+    border-color: var(--principal) !important;
+}
+
+.btn-warning {
+    color: #1f2d3d !important;
+    background-color: var(--principal) !important;
+    border-color: var(--principal) !important;
+}
+
+.btn-warning:hover {
+    background-color: var(--principal_hover) !important;
 }
 
 .border-orange {
@@ -37,6 +47,18 @@
     background-color: #C57A40 !important;
     border-color: #C57A40 !important;
 } */
+
+.el-input.bg-warning input {
+    background-color: var(--principal);
+    font-weight: bold;
+    color: black;
+}
+
+.el-input.bg-dark input {
+    background-color: var(--secundario);
+    font-weight: bold;
+    color: white;
+}
 
 .text-secondary {
     color: var(--secondary);

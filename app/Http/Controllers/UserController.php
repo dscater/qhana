@@ -94,7 +94,15 @@ class UserController extends Controller
 
             'pagos.index',
 
+            'conceptos.index',
+            'conceptos.create',
+            'conceptos.edit',
+            'conceptos.destroy',
+
             'cajas.index',
+            'cajas.create',
+            'cajas.edit',
+            'cajas.destroy',
 
             'configuracion.index',
             'configuracion.edit',
@@ -455,6 +463,22 @@ class UserController extends Controller
                 $usuarios = User::where("id", "!=", 1)->whereIn("tipo", $tipo)->get();
             } else {
                 $usuarios = User::where("id", "!=", 1)->where("tipo", $tipo)->get();
+            }
+        } else {
+            $usuarios = User::where("id", "!=", 1)->get();
+        }
+        return response()->JSON($usuarios);
+    }
+
+    public function getUsuarioTipoPersonal(Request $request)
+    {
+        $tipo = $request->tipo;
+        $usuarios = [];
+        if ($tipo != "todos") {
+            if (is_array($tipo)) {
+                $usuarios = User::where("id", "!=", 1)->whereIn("tipo_personal", $tipo)->get();
+            } else {
+                $usuarios = User::where("id", "!=", 1)->where("tipo_personal", $tipo)->get();
             }
         } else {
             $usuarios = User::where("id", "!=", 1)->get();

@@ -185,6 +185,36 @@ export default new Router({
             props: true,
         },
 
+        // Cajas
+        {
+            path: "/administracion/conceptos",
+            name: "conceptos.index",
+            component: require("./components/modulos/conceptos/index.vue")
+                .default,
+            props: true,
+        },
+
+        // Cajas
+        {
+            path: "/administracion/cajas",
+            name: "cajas.index",
+            component: require("./components/modulos/cajas/index.vue").default,
+            props: true,
+        },
+        {
+            path: "/administracion/cajas/movimiento_cajas",
+            name: "cajas.MovimientoCajas",
+            component: require("./components/modulos/cajas/MovimientoCajas.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/cajas/movimiento_cajas/:id",
+            name: "movimiento_cajas.cajas",
+            component: require("./components/modulos/cajas/Cajas.vue").default,
+            props: true,
+        },
+
         // Configuración
         {
             path: "/administracion/configuracion",

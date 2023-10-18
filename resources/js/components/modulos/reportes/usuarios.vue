@@ -204,7 +204,11 @@ export default {
                 responseType: "blob",
             };
             axios
-                .post("/admin/reportes/usuarios", this.oReporte, config)
+                .post(
+                    main_url + "/admin/reportes/usuarios",
+                    this.oReporte,
+                    config
+                )
                 .then((res) => {
                     this.errors = [];
                     this.enviando = false;
