@@ -185,7 +185,7 @@ export default new Router({
             props: true,
         },
 
-        // Cajas
+        // Conceptos
         {
             path: "/administracion/conceptos",
             name: "conceptos.index",
@@ -212,6 +212,22 @@ export default new Router({
             path: "/administracion/cajas/movimiento_cajas/:id",
             name: "movimiento_cajas.cajas",
             component: require("./components/modulos/cajas/Cajas.vue").default,
+            props: true,
+        },
+
+        // Repositorios
+        {
+            path: "/administracion/repositorios",
+            name: "repositorios.index",
+            component: require("./components/modulos/repositorios/index.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/repositorios/subir_archivos/:id",
+            name: "repositorios.subir_archivos",
+            component: require("./components/modulos/repositorios/SubirArchivos.vue")
+                .default,
             props: true,
         },
 

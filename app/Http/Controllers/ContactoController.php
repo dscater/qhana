@@ -42,10 +42,11 @@ class ContactoController extends Controller
             // crear el Contacto
             $contacto = Contacto::get()->first();
             if (!$contacto) {
-                $contacto = Contacto::create(array_map('mb_strtoupper', $request->all()));
+                $contacto = Contacto::create(array_map('mb_strtoupper', $request->except("mapa")));
             } else {
-                $contacto->update(array_map('mb_strtoupper', $request->all()));
+                $contacto->update(array_map('mb_strtoupper', $request->except("mapa")));
             }
+            $contacto->mapa = $request->mapa;
             $contacto->correo = mb_strtolower($contacto->correo);
             $contacto->save();
             $datos_original = HistorialAccion::getDetalleRegistro($contacto, "contactos");

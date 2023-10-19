@@ -20,14 +20,20 @@
                         >Inicio</router-link
                     >
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <li
+                    class="nav-item d-none d-sm-inline-block"
+                    v-if="permisos.includes('pedidos.usuarios')"
+                >
                     <router-link
                         :to="{ name: 'inicio' }"
                         class="nav-link text-white"
                         >Pedidos</router-link
                     >
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <li
+                    class="nav-item d-none d-sm-inline-block"
+                    v-if="permisos.includes('actividads.usuarios')"
+                >
                     <router-link
                         :to="{ name: 'inicio' }"
                         class="nav-link text-white"

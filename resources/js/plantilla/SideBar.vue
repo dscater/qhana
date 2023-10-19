@@ -87,7 +87,8 @@
                             permisos.includes('catalogos.index') ||
                             permisos.includes('productos.index') ||
                             permisos.includes('conceptos.index') ||
-                            permisos.includes('cajas.index')
+                            permisos.includes('cajas.index') ||
+                            permisos.includes('repositorios.index')
                         "
                     >
                         ADMINISTRACIÓN:
@@ -148,7 +149,10 @@
                             <p>Catálogos</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('pedidos.index')"
+                    >
                         <router-link
                             :to="{ name: 'pedidos.index' }"
                             class="nav-link"
@@ -178,7 +182,10 @@
                             <p>Pagos</p>
                         </a>
                     </li> -->
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('cajas.index')"
+                    >
                         <router-link
                             :to="{ name: 'cajas.index' }"
                             class="nav-link"
@@ -188,7 +195,10 @@
                             <p>Caja</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('conceptos.index')"
+                    >
                         <router-link
                             :to="{ name: 'conceptos.index' }"
                             class="nav-link"
@@ -196,6 +206,19 @@
                         >
                             <i class="nav-icon fas fa-list-alt"></i>
                             <p>Conceptos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('repositorios.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'repositorios.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-folder-open"></i>
+                            <p>Repositorio</p>
                         </router-link>
                     </li>
                     <li

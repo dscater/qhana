@@ -105,12 +105,25 @@
                                             }"
                                             >Mapa*
                                             <small
-                                                >(Mueve el marcador para definir
-                                                la nueva ubicación)</small
+                                                >(Ingresa el "iframe" de google
+                                                maps)</small
                                             ></label
                                         >
-                                        <!-- Map -->
-                                        <div id="google_map"></div>
+                                        <el-input
+                                            type="textarea"
+                                            placeholder="Correo"
+                                            :class="{
+                                                'is-invalid': errors.mapa,
+                                            }"
+                                            v-model="oContacto.mapa"
+                                        >
+                                            >
+                                        </el-input>
+                                        <span
+                                            class="error invalid-feedback"
+                                            v-if="errors.mapa"
+                                            v-text="errors.mapa[0]"
+                                        ></span>
                                     </div>
                                 </div>
                             </div>
@@ -149,8 +162,7 @@ export default {
                 direccion: "",
                 fonos: "",
                 correo: "",
-                lat: "-16.50405",
-                lng: "-68.13081",
+                mapa: `<iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d15302.44340797871!2d-68.13196529479978!3d-16.495230895308648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.497514656468287!2d-68.12797416816427!5e0!3m2!1ses-419!2sbo!4v1697748242821!5m2!1ses-419!2sbo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
             },
             errors: [],
         };
@@ -169,15 +181,6 @@ export default {
                 if (res.data.contacto) {
                     this.oContacto = res.data.contacto;
                 }
-                let self = this;
-                setTimeout(function () {
-                    self.cargaMapaGoogle(
-                        self.oContacto.lat,
-                        self.oContacto.lng,
-                        true,
-                        self.oContacto.direccion
-                    );
-                }, 400);
             });
         },
         actualizaInformacion() {

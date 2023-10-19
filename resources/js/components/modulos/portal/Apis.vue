@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-header bg-dark rounded-0">
+                            <!-- <div class="card-header bg-dark rounded-0">
                                 <h4 class="card-title font-weight-bold">
                                     MAPA DE GOOGLE MAPS
                                     <a href="https://developers.google.com/maps/gmp-get-started?hl=es-419" class="text-white" target="_blank"
@@ -143,7 +143,7 @@
                                         ></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="card-footer">
                                 <div class="col-md-3">
                                     <button

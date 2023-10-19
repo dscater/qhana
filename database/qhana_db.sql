@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 18-10-2023 a las 22:26:32
+-- Tiempo de generación: 19-10-2023 a las 20:24:36
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -411,7 +411,12 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (122, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: TRABAJADOR<br/>concepto_id: 2<br/>created_at: 2023-10-18 17:52:18<br/>descripcion: DESC. EGRESO RECIBO<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 7<br/>monto: 120<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: 4<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: EGRESO<br/>updated_at: 2023-10-18 17:52:18<br/>user_id: 5<br/>', NULL, 'CAJAS', '2023-10-18', '17:52:18', '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
 (123, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REGISTRO DE CAJA', 'a_favor: SOCIO<br/>concepto_id: 1<br/>created_at: 2023-10-18 16:38:06<br/>descripcion: RECIBO #2<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 3<br/>monto: 300.00<br/>movimiento_caja_id: 0<br/>nombre: JUAN GONZALES<br/>nro: 2<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 16:44:26<br/>user_id: 2<br/>', NULL, 'CAJAS', '2023-10-18', '17:53:07', '2023-10-18 21:53:07', '2023-10-18 21:53:07'),
 (124, 1, 'CREACIÓN', 'EL USUARIO  REALIZÓ UN CIERRE DE CAJA', 'created_at: 2023-10-18 18:09:18<br/>egresos: 470.50<br/>fecha: 2023-10-18<br/>hora: 18:09:18<br/>id: 2<br/>ingresos: 1850.00<br/>total: 1379.5<br/>updated_at: 2023-10-18 18:09:18<br/>', NULL, 'MOVIMIENTO DE CAJAS', '2023-10-18', '18:09:18', '2023-10-18 22:09:18', '2023-10-18 22:09:18'),
-(125, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 18:11:17<br/>descripcion: DESC<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 8<br/>monto: 1000<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 11211211<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 18:11:17<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '18:11:17', '2023-10-18 22:11:17', '2023-10-18 22:11:17');
+(125, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 18:11:17<br/>descripcion: DESC<br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 8<br/>monto: 1000<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 11211211<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 18:11:17<br/>user_id: <br/>', NULL, 'CAJAS', '2023-10-18', '18:11:17', '2023-10-18 22:11:17', '2023-10-18 22:11:17'),
+(126, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPOSITORIO', 'created_at: 2023-10-19 15:09:18<br/>descripcion: REPOSITORIO #1<br/>id: 1<br/>updated_at: 2023-10-19 15:09:18<br/>', NULL, 'REPOSITORIOS', '2023-10-19', '15:09:18', '2023-10-19 19:09:18', '2023-10-19 19:09:18'),
+(127, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPOSITORIO', 'created_at: 2023-10-19 15:09:18<br/>descripcion: REPOSITORIO #1<br/>id: 1<br/>updated_at: 2023-10-19 15:09:18<br/>', 'created_at: 2023-10-19 15:09:18<br/>descripcion: REPOSITORIO #1 MODIFICADO<br/>id: 1<br/>updated_at: 2023-10-19 15:10:51<br/>', 'REPOSITORIOS', '2023-10-19', '15:10:51', '2023-10-19 19:10:51', '2023-10-19 19:10:51'),
+(128, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPOSITORIO', 'created_at: 2023-10-19 15:09:18<br/>descripcion: REPOSITORIO #1 MODIFICADO<br/>id: 1<br/>updated_at: 2023-10-19 15:10:51<br/>', NULL, 'REPOSITORIOS', '2023-10-19', '16:22:51', '2023-10-19 20:22:51', '2023-10-19 20:22:51'),
+(129, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPOSITORIO', 'created_at: 2023-10-19 16:23:10<br/>descripcion: REPO #1<br/>id: 2<br/>updated_at: 2023-10-19 16:23:10<br/>', NULL, 'REPOSITORIOS', '2023-10-19', '16:23:10', '2023-10-19 20:23:10', '2023-10-19 20:23:10'),
+(130, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPOSITORIO', 'created_at: 2023-10-19 16:23:35<br/>descripcion: REPO#2<br/>id: 3<br/>updated_at: 2023-10-19 16:23:35<br/>', NULL, 'REPOSITORIOS', '2023-10-19', '16:23:35', '2023-10-19 20:23:35', '2023-10-19 20:23:35');
 
 -- --------------------------------------------------------
 
@@ -613,6 +618,14 @@ CREATE TABLE `repositorios` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `repositorios`
+--
+
+INSERT INTO `repositorios` (`id`, `descripcion`, `created_at`, `updated_at`) VALUES
+(2, 'REPO #1', '2023-10-19 20:23:10', '2023-10-19 20:23:10'),
+(3, 'REPO#2', '2023-10-19 20:23:35', '2023-10-19 20:23:35');
+
 -- --------------------------------------------------------
 
 --
@@ -628,6 +641,17 @@ CREATE TABLE `repositorio_archivos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `repositorio_archivos`
+--
+
+INSERT INTO `repositorio_archivos` (`id`, `repositorio_id`, `archivo`, `ext`, `tipo`, `created_at`, `updated_at`) VALUES
+(4, 2, '1697746998250px-Melvin_Eugene_Punymeyer.png', 'png', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
+(5, 2, '16977469984139951.png', 'png', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
+(6, 2, '1697746998tenazassimpson.jpeg', 'jpeg', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
+(7, 3, '1697747022smartphone.png', 'png', 'imagen', '2023-10-19 20:23:42', '2023-10-19 20:23:42'),
+(8, 3, '1697747022tenazassimpson.jpeg', 'jpeg', 'imagen', '2023-10-19 20:23:42', '2023-10-19 20:23:42');
 
 -- --------------------------------------------------------
 
@@ -870,7 +894,7 @@ ALTER TABLE `detalle_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -918,13 +942,13 @@ ALTER TABLE `red_socials`
 -- AUTO_INCREMENT de la tabla `repositorios`
 --
 ALTER TABLE `repositorios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `repositorio_archivos`
 --
 ALTER TABLE `repositorio_archivos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

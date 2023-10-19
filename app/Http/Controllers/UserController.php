@@ -104,12 +104,30 @@ class UserController extends Controller
             'cajas.edit',
             'cajas.destroy',
 
+            'repositorios.index',
+            'repositorios.create',
+            'repositorios.edit',
+            'repositorios.destroy',
+
             'configuracion.index',
             'configuracion.edit',
 
             "reportes.usuarios"
         ],
-        "REPRESENTANTE" => [],
+        "REPRESENTANTE" => [
+            'portals.index',
+
+            'cajas.index',
+            'cajas.create',
+            'cajas.edit',
+            'cajas.destroy',
+
+            'repositorios.index',
+            'repositorios.create',
+            'repositorios.edit',
+            'repositorios.destroy',
+
+        ],
         "SOCIO" => [],
     ];
 

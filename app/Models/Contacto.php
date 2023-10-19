@@ -13,7 +13,6 @@ class Contacto extends Model
         "direccion",
         "fonos",
         "correo",
-        "lat",
-        "lng",
+        "mapa",
     ];
 }

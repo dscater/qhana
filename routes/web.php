@@ -15,6 +15,8 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RedSocialController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\RepositorioArchivoController;
+use App\Http\Controllers\RepositorioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -139,7 +141,15 @@ Route::middleware(['auth'])->group(function () {
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
+        // REPOSITORIOS
+        Route::resource('repositorios', RepositorioController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+        // REPOSITORIOS - ARCHIVOS
+        Route::post('repositorio_archivos/store/{repositorio}', [RepositorioArchivoController::class, 'store']);
+        Route::delete('repositorio_archivos/{repositorio_archivo}', [RepositorioArchivoController::class, 'destroy']);
 
+        // REPORTES
         Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);
     });
 });

@@ -284,7 +284,9 @@
                                         name: 'admin_portal.apis',
                                     }"
                                     class="text-left card-title btn btn-flat btn-warning"
-                                    ><strong>Apis</strong></router-link
+                                    ><strong
+                                        >Envío de correos automaticos</strong
+                                    ></router-link
                                 >
                                 <div class="card-tools">
                                     <button
@@ -312,13 +314,15 @@
                                     </p>
                                     <p>
                                         <strong>Password:</strong>
-                                        {{ oApi.password.replace(/.*/g, "***") }}
+                                        {{
+                                            oApi.password.replace(/.*/g, "***")
+                                        }}
                                     </p>
-                                    <h4>Google maps:</h4>
+                                    <!-- <h4>Google maps:</h4>
                                     <p>
                                         <strong>Key Api:</strong>
                                         {{ oApi.api_google }}
-                                    </p>
+                                    </p> -->
                                 </div>
                                 <div class="col-md-12" v-else>
                                     AÚN NO SE HA CONFIGURADO LOS APIS DEL PORTAL

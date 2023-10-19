@@ -10,4 +10,9 @@ class Repositorio extends Model
     use HasFactory;
 
     protected $fillable = ["descripcion"];
+
+    public function repositorio_archivos()
+    {
+        return $this->hasMany(RepositorioArchivo::class, 'repositorio_id');
+    }
 }

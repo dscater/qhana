@@ -2,7 +2,7 @@
     <div>
         <!-- Map -->
         <div class="map">
-            <div id="google_map"></div>
+            <div id="google_map" v-html="oContacto?.mapa"></div>
         </div>
         <section class="sec-blog bg0 p-t-60 p-b-90 fondo_seccion">
             <div class="container">
@@ -157,17 +157,6 @@ export default {
         getInfoContacto() {
             axios.get(main_url + "/portal/getContacto").then((response) => {
                 this.oContacto = response.data.contacto;
-                if (this.oContacto) {
-                    let self = this;
-                    setTimeout(function () {
-                        self.cargaMapaGoogle(
-                            self.oContacto.lat,
-                            self.oContacto.lng,
-                            false,
-                            self.oContacto.direccion
-                        );
-                    });
-                }
             });
         },
         cargaMapaGoogle(lat, lng, drag = false, dir = "") {
@@ -259,3 +248,11 @@ export default {
     },
 };
 </script>
+<style>
+#google_map iframe {
+    width: 100%;
+    /* Establece una altura relativa al ancho (aspect ratio) */
+    height: 100%;
+    padding-bottom: 0; /* Esto es un aspect ratio de 4:3 (3/4 * 100%) */
+}
+</style>

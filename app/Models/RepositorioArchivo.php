@@ -15,4 +15,11 @@ class RepositorioArchivo extends Model
         "ext",
         "tipo",
     ];
+
+    protected $appends = ["url"];
+
+    public function getUrlAttribute()
+    {
+        return asset("files/" . $this->archivo);
+    }
 }
