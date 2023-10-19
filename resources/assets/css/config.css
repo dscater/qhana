@@ -39,6 +39,10 @@
     border-color: var(--principal) !important;
 }
 
+.badge-warning {
+    color: white;
+}
+
 /* .el-button--warning.is-disabled,
 .el-button--warning.is-disabled:active,
 .el-button--warning.is-disabled:focus,

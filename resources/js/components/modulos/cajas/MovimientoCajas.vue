@@ -77,6 +77,13 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
+                                                <template #cell(total)="row">
+                                                    <span
+                                                        class="text-md font-weight-bold badge badge-warning"
+                                                    >
+                                                        {{ row.item.total }}
+                                                    </span>
+                                                </template>
                                                 <template #cell(ingresos)="row">
                                                     <span
                                                         class="text-md font-weight-bold badge badge-success"

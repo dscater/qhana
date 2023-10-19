@@ -42,12 +42,148 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="card">
+                    <div class="col-md-4">
+                        <div class="card" v-if="oMovimientoCaja">
                             <div class="card-header">
-                                <div class="row"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4
+                                            class="w-100 font-weight-bold text-center"
+                                        >
+                                            Movimiento de Caja
+                                        </h4>
+                                        <p>
+                                            <strong>Fecha: </strong>
+                                            {{
+                                                getFormatoFecha(
+                                                    oMovimientoCaja.fecha
+                                                )
+                                            }}
+                                        </p>
+                                        <p>
+                                            <strong>Hora: </strong>
+                                            {{ oMovimientoCaja.hora }}
+                                        </p>
+                                        <p>
+                                            <strong>Total Bs.: </strong>
+                                            <span
+                                                class="font-weight-bold text-md badge badge-warning"
+                                                >{{
+                                                    oMovimientoCaja.total
+                                                }}</span
+                                            >
+                                        </p>
+                                        <p>
+                                            <strong>Ingresos Bs.: </strong>
+                                            <span
+                                                class="font-weight-bold text-md badge badge-success"
+                                                >{{
+                                                    oMovimientoCaja.ingresos
+                                                }}</span
+                                            >
+                                        </p>
+                                        <p>
+                                            <strong>Egresos Bs.: </strong>
+                                            <span
+                                                class="font-weight-bold text-md badge badge-danger"
+                                                >{{
+                                                    oMovimientoCaja.egresos
+                                                }}</span
+                                            >
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body"></div>
+                        </div>
+                        <div class="card" v-else>
+                            <div class="card-body">
+                                <h4 class="w-100 font-weight-bold text-center">
+                                    Cargando...
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card" v-if="oMovimientoCaja">
+                            <div class="card-header">
+                                <h4 class="w-100 font-weight-bold text-center">
+                                    Detalle Movimientos
+                                </h4>
+                            </div>
+                            <div class="card-body bg-dark">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div
+                                            class="card"
+                                            v-for="item in oMovimientoCaja.cajas"
+                                        >
+                                            <div class="card-body bg-white">
+                                                <p>
+                                                    <strong>Fecha: </strong>
+                                                    {{
+                                                        getFormatoFecha(
+                                                            item.fecha
+                                                        )
+                                                    }}
+                                                </p>
+                                                <p>
+                                                    <strong>Tipo: </strong>
+                                                    <span
+                                                        class="badge text-md"
+                                                        :class="[
+                                                            item.tipo ==
+                                                            'RECIBO'
+                                                                ? 'badge-warning'
+                                                                : 'badge-dark',
+                                                        ]"
+                                                    >
+                                                        {{ item.tipo }}
+                                                    </span>
+                                                </p>
+                                                <p>
+                                                    <strong
+                                                        >Movimiento:
+                                                    </strong>
+                                                    <span
+                                                        class="badge text-md"
+                                                        :class="[
+                                                            item.tipo_movimiento ==
+                                                            'INGRESO'
+                                                                ? 'badge-success'
+                                                                : 'badge-danger',
+                                                        ]"
+                                                    >
+                                                        {{
+                                                            item.tipo_movimiento
+                                                        }}
+                                                    </span>
+                                                </p>
+                                                <p>
+                                                    <strong>Concepto: </strong>
+                                                    {{ item.concepto.nombre }}
+                                                </p>
+                                                <p>
+                                                    <strong>Monto Bs.: </strong>
+                                                    {{ item.monto }}
+                                                </p>
+                                                <p>
+                                                    <strong
+                                                        >Descripción:
+                                                    </strong>
+                                                    {{ item.descripcion }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" v-else>
+                            <div class="card-body">
+                                <h4 class="w-100 font-weight-bold text-center">
+                                    Cargando...
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,93 +199,24 @@ export default {
         return {
             user: JSON.parse(localStorage.getItem("user")),
             permisos: localStorage.getItem("permisos"),
-            search: "",
-            listRegistros: [],
-            showOverlay: false,
-            fields: [
-                {
-                    key: "fecha",
-                    label: "Fecha",
-                    sortable: true,
-                },
-                {
-                    key: "hora",
-                    label: "Hora",
-                    sortable: true,
-                },
-                {
-                    key: "ingresos",
-                    label: "Ingresos",
-                    sortable: true,
-                },
-                {
-                    key: "egresos",
-                    label: "Egresos",
-                    sortable: true,
-                },
-                {
-                    key: "total",
-                    label: "Monto total",
-                    sortable: true,
-                },
-                { key: "accion", label: "Acción" },
-            ],
-            loading: true,
             fullscreenLoading: true,
             loadingWindow: Loading.service({
                 fullscreen: this.fullscreenLoading,
             }),
-            muestra_modal: false,
-            modal_accion: "nuevo",
-            currentPage: 1,
-            perPage: 5,
-            pageOptions: [
-                { value: 5, text: "Mostrar 5 Registros" },
-                { value: 10, text: "Mostrar 10 Registros" },
-                { value: 25, text: "Mostrar 25 Registros" },
-                { value: 50, text: "Mostrar 50 Registros" },
-                { value: 100, text: "Mostrar 100 Registros" },
-                { value: this.totalRows, text: "Mostrar Todo" },
-            ],
-            totalRows: 10,
-            filter: null,
+            oMovimientoCaja: null,
         };
     },
     mounted() {
         this.loadingWindow.close();
-        this.getMovimientoCajas();
+        this.getMovimientoCaja();
     },
     methods: {
-        // Listar Cajas
-        getMovimientoCajas() {
-            this.showOverlay = true;
-            this.muestra_modal = false;
-            let url = main_url + "/admin/movimiento_cajas";
-            if (this.pagina != 0) {
-                url += "?page=" + this.pagina;
-            }
+        getMovimientoCaja() {
             axios
-                .get(url, {
-                    params: { per_page: this.per_page },
-                })
-                .then((res) => {
-                    this.showOverlay = false;
-                    this.listRegistros = res.data.movimiento_cajas;
-                    this.totalRows = res.data.total;
+                .get(main_url + "/admin/movimiento_cajas/" + this.id)
+                .then((response) => {
+                    this.oMovimientoCaja = response.data.movimiento_caja;
                 });
-        },
-        verCajas(id) {
-            this.$router.push({
-                name: "movimiento_cajas.cajas",
-                params: {
-                    id: id,
-                },
-            });
-        },
-        onFiltered(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
-            this.totalRows = filteredItems.length;
-            this.currentPage = 1;
         },
     },
 };

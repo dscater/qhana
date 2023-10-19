@@ -62,4 +62,11 @@ class MovimientoCajaController extends Controller
             ], 500);
         }
     }
+    public function show(MovimientoCaja $movimiento_caja)
+    {
+        return response()->JSON([
+            'sw' => true,
+            'movimiento_caja' => $movimiento_caja->load("cajas.concepto")
+        ], 200);
+    }
 }
