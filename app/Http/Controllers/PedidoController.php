@@ -61,6 +61,16 @@ class PedidoController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
+
+            if ($pedido->estado == 'ATENDIDO') {
+                // restablecer stock de los productos
+                foreach ($pedido->detalle_pedidos as $dp) {
+                    $producto = Producto::find($dp->producto_id);
+                    $producto->cantidad_stock = (float)$producto->cantidad_stock + (float)$dp->cantidad;
+                    $producto->save();
+                }
+            }
+
             $pedido->update(array_map('mb_strtoupper', $request->all()));
             $datos_nuevo = HistorialAccion::getDetalleRegistro($pedido, "pedidos");
             HistorialAccion::create([
@@ -74,12 +84,6 @@ class PedidoController extends Controller
                 'hora' => date('H:i:s')
             ]);
 
-            // restablecer stock de los productos
-            foreach ($pedido->detalle_pedidos as $dp) {
-                $producto = Producto::find($dp->producto_id);
-                $producto->cantidad_stock = (float)$producto->cantidad_stock + (float)$dp->cantidad;
-                $producto->save();
-            }
 
             DB::commit();
             return response()->JSON([
