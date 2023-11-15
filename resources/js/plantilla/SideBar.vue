@@ -223,7 +223,10 @@
                     </li>
                     <li
                         class="nav-header font-weight-bold"
-                        v-if="permisos.includes('reportes.usuarios')"
+                        v-if="
+                            permisos.includes('reportes.usuarios') ||
+                            permisos.includes('reportes.cajas')
+                        "
                     >
                         REPORTES:
                     </li>
@@ -237,6 +240,18 @@
                         >
                             <i class="fas fa-file-pdf nav-icon"></i>
                             <p>Lista de Usuarios</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.cajas')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.cajas' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Caja</p>
                         </router-link>
                     </li>
                     <li class="nav-header font-weight-bold">OTRAS OPCIONES:</li>

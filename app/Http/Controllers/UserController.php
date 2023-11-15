@@ -112,7 +112,8 @@ class UserController extends Controller
             'configuracion.index',
             'configuracion.edit',
 
-            "reportes.usuarios"
+            "reportes.usuarios",
+            "reportes.cajas"
         ],
         "REPRESENTANTE" => [
             'portals.index',

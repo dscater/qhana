@@ -226,8 +226,9 @@ export default new Router({
         {
             path: "/administracion/repositorios/subir_archivos/:id",
             name: "repositorios.subir_archivos",
-            component: require("./components/modulos/repositorios/SubirArchivos.vue")
-                .default,
+            component:
+                require("./components/modulos/repositorios/SubirArchivos.vue")
+                    .default,
             props: true,
         },
 
@@ -245,6 +246,13 @@ export default new Router({
             path: "/administracion/reportes/usuarios",
             name: "reportes.usuarios",
             component: require("./components/modulos/reportes/usuarios.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/cajas",
+            name: "reportes.cajas",
+            component: require("./components/modulos/reportes/cajas.vue")
                 .default,
             props: true,
         },
