@@ -18,11 +18,23 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\RepositorioArchivoController;
 use App\Http\Controllers\RepositorioController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 
 // PORTAL
 Route::get('/url_asset', [ConfiguracionController::class, 'url_asset'])->name("url_asset");
+
+// VACIAR CACHE
+Route::get('/cache_clear', function () {
+    Artisan::call("route:clear");
+    Artisan::call("route:cache");
+    Artisan::call("view:clear");
+    Artisan::call("config:cache");
+    Artisan::call("optimize");
+
+    return 'Cache borrada correctamente<br/><a href="' . url("/") . '">Volver al inicio<a>';
+});
 
 // LOGIN
 Route::post('/login', [LoginController::class, 'login']);
