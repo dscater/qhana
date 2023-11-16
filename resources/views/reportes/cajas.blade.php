@@ -208,7 +208,11 @@
                     <td class="centreado">{{ $caja->tipo }}</td>
                     <td class="centreado">{{ $caja->tipo_movimiento }}</td>
                     <td class="">{{ $caja->concepto->nombre }}</td>
-                    <td class="centreado">{{ $caja->responsable->full_name }}</td>
+                    <td class="centreado">
+                        @if ($caja->responsable)
+                            {{ $caja->responsable->full_name }}
+                        @endif
+                    </td>
                     <td class="centreado {{ $caja->nro_factura ? '' : 'vacio' }}">{{ $caja->nro_factura }}</td>
                     <td class="">{{ $caja->descripcion }}</td>
                     <td class="centreado {{ $caja->a_favor ? '' : 'vacio' }}">{{ $caja->a_favor }}</td>
@@ -218,7 +222,9 @@
                             @if ($caja->a_favor == 'OTRO')
                                 {{ $caja->nombre }}
                             @else
-                                {{ $caja->user->full_name }}
+                                @if ($caja->user)
+                                    {{ $caja->user->full_name }}
+                                @endif
                             @endif
                         @endif
                     </td>
