@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Caja;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use PDF;
 
 class ReporteController extends Controller
@@ -37,10 +38,22 @@ class ReporteController extends Controller
     public function cajas(Request $request)
     {
         $filtro =  $request->filtro;
-        $fecha_ini =  $request->fecha_ini;
-        $fecha_fin =  $request->fecha_fin;
+        $saldo = 0;
+        $fecha_anterior = "";
+        $fecha_ini =  Caja::orderBy("id", "asc")->get()->first()->fecha;
+        $fecha_fin =  Caja::orderBy("id", "asc")->get()->last()->fecha;
 
-        $cajas = Caja::all();
+        $cajas = Caja::orderBy("id", "asc")->get();
+        if ($filtro == 'Ingresos') {
+            $fecha_ini =  Caja::where("tipo_movimiento", "INGRESO")->orderBy("id", "asc")->get()->first()->fecha;
+            $fecha_fin =  Caja::where("tipo_movimiento", "INGRESO")->orderBy("id", "asc")->get()->last()->fecha;
+            $cajas = Caja::where('tipo_movimiento', 'INGRESO')->orderBy("id", "asc")->get();
+        }
+        if ($filtro == 'Egresos') {
+            $fecha_ini =  Caja::where("tipo_movimiento", "EGRESO")->orderBy("id", "asc")->get()->first()->fecha;
+            $fecha_fin =  Caja::where("tipo_movimiento", "EGRESO")->orderBy("id", "asc")->get()->last()->fecha;
+            $cajas = Caja::where('tipo_movimiento', 'EGRESO')->orderBy("id", "asc")->get();
+        }
         if ($filtro == 'Rango de fechas') {
             $request->validate([
                 "fecha_ini" => "required|date",
@@ -51,9 +64,14 @@ class ReporteController extends Controller
                 "fecha_fin.required" => "Debes ingresar una fecha fin",
                 "fecha_fin.date" => "Debes ingresar una fecha valida",
             ]);
-            $cajas = Caja::whereBetween('fecha', [$fecha_ini, $fecha_fin])->get();
+            $fecha_ini =  $request->fecha_ini;
+            $fecha_fin =  $request->fecha_fin;
+            $saldo = Caja::getSaldoCajaFechaAnteriorTodos($fecha_ini);
+            Log::debug($saldo);
+            $fecha_anterior = date("Y-m-d", strtotime($fecha_ini . "-1days"));
+            $cajas = Caja::whereBetween('fecha', [$fecha_ini, $fecha_fin])->orderBy("id", "asc")->get();
         }
-        $pdf = PDF::loadView('reportes.cajas', compact('cajas'))->setPaper('legal', 'landscape');
+        $pdf = PDF::loadView('reportes.cajas', compact('cajas', 'saldo', 'fecha_anterior', 'filtro', 'fecha_ini', 'fecha_fin'))->setPaper('legal', 'landscape');
 
         // ENUMERAR LAS PÁGINAS USANDO CANVAS
         $pdf->output();

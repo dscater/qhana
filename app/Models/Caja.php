@@ -83,4 +83,13 @@ class Caja extends Model
         $saldo = (float)$total_ingresos - (float)$total_egresos;
         return $saldo;
     }
+
+    public static function getSaldoCajaFechaAnteriorTodos($fecha)
+    {
+        $total_ingresos = Caja::whereIn("estado", [1, 2])->where("tipo_movimiento", "INGRESO")->where("fecha", "<", $fecha)->sum("monto");
+        $total_egresos = Caja::whereIn("estado", [1, 2])->where("tipo_movimiento", "EGRESO")->where("fecha", "<", $fecha)->sum("monto");
+
+        $saldo = (float)$total_ingresos - (float)$total_egresos;
+        return $saldo;
+    }
 }

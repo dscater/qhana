@@ -313,7 +313,7 @@ export default {
     mounted() {
         // Configurar el temporizador para llamar a logout después de 5 minutos de inactividad
         this.resetLogoutTimer();
-        // window.addEventListener("mousemove", this.resetLogoutTimer);
+        window.addEventListener("mousemove", this.resetLogoutTimer);
     },
     methods: {
         logout() {

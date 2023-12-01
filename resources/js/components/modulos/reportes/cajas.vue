@@ -143,7 +143,7 @@ export default {
             aFechas: [],
             enviando: false,
             textoBtn: "Generar Reporte",
-            listFiltro: ["Todos", "Rango de fechas"],
+            listFiltro: ["Todos", "Ingresos", "Egresos", "Rango de fechas"],
             errors: [],
         };
     },
