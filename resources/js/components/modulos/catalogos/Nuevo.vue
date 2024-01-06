@@ -62,8 +62,8 @@
                                 </el-input>
                                 <span
                                     class="error invalid-feedback"
-                                    v-if="errors.paterno"
-                                    v-text="errors.paterno[0]"
+                                    v-if="errors.descripcion"
+                                    v-text="errors.descripcion[0]"
                                 ></span>
                             </div>
                         </div>

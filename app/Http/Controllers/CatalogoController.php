@@ -33,7 +33,7 @@ class CatalogoController extends Controller
         try {
             // crear el Catalogo
             $nuevo_catalogo = Catalogo::create(array_map('mb_strtoupper', $request->all()));
-            $datos_original = HistorialAccion::getDetalleRegistro($nuevo_catalogo, "users");
+            $datos_original = HistorialAccion::getDetalleRegistro($nuevo_catalogo, "catalogos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'CREACIÓN',
@@ -64,9 +64,9 @@ class CatalogoController extends Controller
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
-            $datos_original = HistorialAccion::getDetalleRegistro($catalogo, "users");
+            $datos_original = HistorialAccion::getDetalleRegistro($catalogo, "catalogos");
             $catalogo->update(array_map('mb_strtoupper', $request->all()));
-            $datos_nuevo = HistorialAccion::getDetalleRegistro($catalogo, "users");
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($catalogo, "catalogos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'MODIFICACIÓN',
@@ -110,9 +110,9 @@ class CatalogoController extends Controller
 
             $antiguo = $catalogo->foto;
             if ($antiguo != 'default.png') {
-                \File::delete(public_path() . '/imgs/users/' . $antiguo);
+                \File::delete(public_path() . '/imgs/catalogos/' . $antiguo);
             }
-            $datos_original = HistorialAccion::getDetalleRegistro($catalogo, "users");
+            $datos_original = HistorialAccion::getDetalleRegistro($catalogo, "catalogos");
             $catalogo->delete();
 
             HistorialAccion::create([

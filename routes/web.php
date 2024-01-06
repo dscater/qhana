@@ -1,22 +1,33 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\AdminProductoController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CajaController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\DistribucionPedidoController;
+use App\Http\Controllers\IngresoMaterialController;
+use App\Http\Controllers\IngresoProductoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MovimientoCajaController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\RecepcionPedidoController;
 use App\Http\Controllers\RedSocialController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\RepositorioArchivoController;
 use App\Http\Controllers\RepositorioController;
+use App\Http\Controllers\SalidaMaterialController;
+use App\Http\Controllers\SalidaProductoController;
+use App\Http\Controllers\SolicitudPedidoController;
+use App\Http\Controllers\TarifaPagoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -160,6 +171,61 @@ Route::middleware(['auth'])->group(function () {
         // REPOSITORIOS - ARCHIVOS
         Route::post('repositorio_archivos/store/{repositorio}', [RepositorioArchivoController::class, 'store']);
         Route::delete('repositorio_archivos/{repositorio_archivo}', [RepositorioArchivoController::class, 'destroy']);
+
+        // ADMIN PRODUCTOS
+        Route::resource('admin_productos', AdminProductoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // INGRESO PRODUCTOS
+        Route::resource('ingreso_productos', IngresoProductoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // SALIDA PRODUCTOS
+        Route::resource('salida_productos', SalidaProductoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // CLIENTES
+        Route::resource('clientes', ClienteController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // SOLICITUD PEDIDOS
+        Route::resource('solicitud_pedidos', SolicitudPedidoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // DISTRIBUCION PEDIDOS
+        Route::resource('distribucion_pedidos', DistribucionPedidoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // RECEPCION PEDIDOS
+        Route::resource('recepcion_pedidos', RecepcionPedidoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // TARIFA PAGOS
+        Route::resource('tarifa_pagos', TarifaPagoController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // MATERIALES
+        Route::resource('materials', MaterialController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // INGRESO MATERIALES
+        Route::resource('ingreso_materials', IngresoMaterialController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
+
+        // SALIDA MATERIALES
+        Route::resource('salida_materials', SalidaMaterialController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
 
         // REPORTES
         Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);

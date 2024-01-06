@@ -109,6 +109,61 @@ class UserController extends Controller
             'repositorios.edit',
             'repositorios.destroy',
 
+            'admin_productos.index',
+            'admin_productos.create',
+            'admin_productos.edit',
+            'admin_productos.destroy',
+
+            'ingreso_productos.index',
+            'ingreso_productos.create',
+            'ingreso_productos.edit',
+            'ingreso_productos.destroy',
+
+            'salida_productos.index',
+            'salida_productos.create',
+            'salida_productos.edit',
+            'salida_productos.destroy',
+
+            'clientes.index',
+            'clientes.create',
+            'clientes.edit',
+            'clientes.destroy',
+
+            'solicitud_pedidos.index',
+            'solicitud_pedidos.create',
+            'solicitud_pedidos.edit',
+            'solicitud_pedidos.destroy',
+
+            'distribucion_pedidos.index',
+            'distribucion_pedidos.create',
+            'distribucion_pedidos.edit',
+            'distribucion_pedidos.destroy',
+
+            'recepcion_pedidos.index',
+            'recepcion_pedidos.create',
+            'recepcion_pedidos.edit',
+            'recepcion_pedidos.destroy',
+
+            'tarifa_pagos.index',
+            'tarifa_pagos.create',
+            'tarifa_pagos.edit',
+            'tarifa_pagos.destroy',
+
+            'materials.index',
+            'materials.create',
+            'materials.edit',
+            'materials.destroy',
+
+            'ingreso_materials.index',
+            'ingreso_materials.create',
+            'ingreso_materials.edit',
+            'ingreso_materials.destroy',
+
+            'salida_materials.index',
+            'salida_materials.create',
+            'salida_materials.edit',
+            'salida_materials.destroy',
+
             'configuracion.index',
             'configuracion.edit',
 

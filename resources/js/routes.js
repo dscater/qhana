@@ -232,6 +232,112 @@ export default new Router({
             props: true,
         },
 
+        // Admin Productos
+        {
+            path: "/administracion/admin_productos",
+            name: "admin_productos.index",
+            component: require("./components/modulos/admin_productos/index.vue")
+                .default,
+            props: true,
+        },
+
+        // ingreso_productos
+        {
+            path: "/administracion/ingreso_productos",
+            name: "ingreso_productos.index",
+            component:
+                require("./components/modulos/ingreso_productos/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // salida_productos
+        {
+            path: "/administracion/salida_productos",
+            name: "salida_productos.index",
+            component:
+                require("./components/modulos/salida_productos/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // clientes
+        {
+            path: "/administracion/clientes",
+            name: "clientes.index",
+            component: require("./components/modulos/clientes/index.vue")
+                .default,
+            props: true,
+        },
+
+        // solicitud_pedidos
+        {
+            path: "/administracion/solicitud_pedidos",
+            name: "solicitud_pedidos.index",
+            component:
+                require("./components/modulos/solicitud_pedidos/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // distribucion_pedidos
+        {
+            path: "/administracion/distribucion_pedidos",
+            name: "distribucion_pedidos.index",
+            component:
+                require("./components/modulos/distribucion_pedidos/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // recepcion_pedidos
+        {
+            path: "/administracion/recepcion_pedidos",
+            name: "recepcion_pedidos.index",
+            component:
+                require("./components/modulos/recepcion_pedidos/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // tarifa_pagos
+        {
+            path: "/administracion/tarifa_pagos",
+            name: "tarifa_pagos.index",
+            component: require("./components/modulos/tarifa_pagos/index.vue")
+                .default,
+            props: true,
+        },
+
+        // materials
+        {
+            path: "/administracion/materials",
+            name: "materials.index",
+            component: require("./components/modulos/materials/index.vue")
+                .default,
+            props: true,
+        },
+
+        // ingreso_materials
+        {
+            path: "/administracion/ingreso_materials",
+            name: "ingreso_materials.index",
+            component:
+                require("./components/modulos/ingreso_materials/index.vue")
+                    .default,
+            props: true,
+        },
+
+        // salida_materials
+        {
+            path: "/administracion/salida_materials",
+            name: "salida_materials.index",
+            component:
+                require("./components/modulos/salida_materials/index.vue")
+                    .default,
+            props: true,
+        },
+
         // Configuración
         {
             path: "/administracion/configuracion",

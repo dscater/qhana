@@ -159,52 +159,52 @@ export default {
                 this.oContacto = response.data.contacto;
             });
         },
-        cargaMapaGoogle(lat, lng, drag = false, dir = "") {
-            lat = parseFloat(lat);
-            lng = parseFloat(lng);
+        // cargaMapaGoogle(lat, lng, drag = false, dir = "") {
+        //     lat = parseFloat(lat);
+        //     lng = parseFloat(lng);
 
-            // Inicializa el mapa
-            this.map = new google.maps.Map(
-                document.getElementById("google_map"),
-                {
-                    center: { lat: lat, lng: lng },
-                    zoom: 18,
-                }
-            );
+        //     // Inicializa el mapa
+        //     this.map = new google.maps.Map(
+        //         document.getElementById("google_map"),
+        //         {
+        //             center: { lat: lat, lng: lng },
+        //             zoom: 18,
+        //         }
+        //     );
 
-            // Configura el icono personalizado
-            const customIcon = {
-                url: main_url + "/imgs/pinmap.gif", // Ruta a tu icono personalizado
-                scaledSize: new google.maps.Size(50, 50), // Tamaño del icono
-            };
+        //     // Configura el icono personalizado
+        //     const customIcon = {
+        //         url: main_url + "/imgs/pinmap.gif", // Ruta a tu icono personalizado
+        //         scaledSize: new google.maps.Size(50, 50), // Tamaño del icono
+        //     };
 
-            // Crea un marcador en el centro del mapa
-            this.marker = new google.maps.Marker({
-                position: { lat: lat, lng: lng },
-                map: this.map,
-                icon: customIcon,
-                draggable: drag,
-            });
+        //     // Crea un marcador en el centro del mapa
+        //     this.marker = new google.maps.Marker({
+        //         position: { lat: lat, lng: lng },
+        //         map: this.map,
+        //         icon: customIcon,
+        //         draggable: drag,
+        //     });
 
-            // Escucha el evento de arrastrar del marcador
-            google.maps.event.addListener(this.marker, "dragend", () => {
-                const newPosition = this.marker.getPosition();
-                this.oContacto.lat = newPosition.lat();
-                this.oContacto.lng = newPosition.lng();
-            });
+        //     // Escucha el evento de arrastrar del marcador
+        //     google.maps.event.addListener(this.marker, "dragend", () => {
+        //         const newPosition = this.marker.getPosition();
+        //         this.oContacto.lat = newPosition.lat();
+        //         this.oContacto.lng = newPosition.lng();
+        //     });
 
-            if (dir != "") {
-                // Crea una ventana de información (infowindow) con el contenido deseado
-                let self = this;
-                this.infowindow = new google.maps.InfoWindow({
-                    content: `<strong>DIRECCIÓN:</strong><br>${self.oContacto.direccion}`,
-                });
-                // Escucha el evento 'click' en el marcador para abrir la ventana de información
-                this.marker.addListener("click", () => {
-                    this.infowindow.open(this.map, this.marker);
-                });
-            }
-        },
+        //     if (dir != "") {
+        //         // Crea una ventana de información (infowindow) con el contenido deseado
+        //         let self = this;
+        //         this.infowindow = new google.maps.InfoWindow({
+        //             content: `<strong>DIRECCIÓN:</strong><br>${self.oContacto.direccion}`,
+        //         });
+        //         // Escucha el evento 'click' en el marcador para abrir la ventana de información
+        //         this.marker.addListener("click", () => {
+        //             this.infowindow.open(this.map, this.marker);
+        //         });
+        //     }
+        // },
         prepararEnvio() {
             this.enviando = true;
             let self = this;

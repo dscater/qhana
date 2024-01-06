@@ -48,12 +48,12 @@
                                 data-delay="1600"
                                 v-if="item.muestra_boton != 0"
                             >
-                                <a
-                                    href="product.html"
+                                <router-link
+                                    :to="{ name: 'portal.productos' }"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
                                 >
                                     Comprar ahora
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </div>

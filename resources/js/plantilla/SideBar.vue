@@ -83,9 +83,6 @@
                         class="nav-header font-weight-bold"
                         v-if="
                             permisos.includes('usuarios.index') ||
-                            permisos.includes('portals.index') ||
-                            permisos.includes('catalogos.index') ||
-                            permisos.includes('productos.index') ||
                             permisos.includes('conceptos.index') ||
                             permisos.includes('cajas.index') ||
                             permisos.includes('repositorios.index')
@@ -106,6 +103,313 @@
                             <i class="nav-icon fas fa-users"></i>
                             <p>Personal</p>
                         </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes('admin_productos.index') ||
+                            permisos.includes('ingreso_productos.index') ||
+                            permisos.includes('salida_productos.index')
+                        "
+                        :class="[
+                            $route.name == 'admin_productos.index' ||
+                            $route.name == 'ingreso_productos.index' ||
+                            $route.name == 'salida_productos.index'
+                                ? 'menu-is-opening menu-open'
+                                : '',
+                        ]"
+                    >
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview pl-2">
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('ingreso_productos.index')
+                                "
+                            >
+                                <router-link
+                                    :to="{ name: 'ingreso_productos.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Ingreso de Productos</p>
+                                </router-link>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('salida_productos.index')
+                                "
+                            >
+                                <router-link
+                                    :to="{ name: 'salida_productos.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Salida de Productos</p>
+                                </router-link>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('admin_productos.index')
+                                "
+                            >
+                                <router-link
+                                    :to="{ name: 'admin_productos.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Productos</p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes('solicitud_pedidos.index') ||
+                            permisos.includes('distribucion_pedidos.index') ||
+                            permisos.includes('recepcion_pedidos.index') ||
+                            permisos.includes('tarifa_pagos.index')
+                        "
+                        :class="[
+                            $route.name == 'solicitud_pedidos.index' ||
+                            $route.name == 'distribucion_pedidos.index' ||
+                            $route.name == 'recepcion_pedidos.index' ||
+                            $route.name == 'tarifa_pagos.index'
+                                ? 'menu-is-opening menu-open'
+                                : '',
+                        ]"
+                    >
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>
+                                Pedidos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview pl-2">
+                            <li
+                                class="nav-item"
+                                v-if="permisos.includes('tarifa_pagos.index')"
+                            >
+                                <a
+                                    href=""
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Tarifa de Pagos</p>
+                                </a>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('solicitud_pedidos.index')
+                                "
+                            >
+                                <a
+                                    href=""
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Solicitud de Pedidos</p>
+                                </a>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes(
+                                        'distribucion_pedidos.index'
+                                    )
+                                "
+                            >
+                                <a
+                                    href=""
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Distribución de Pedidos</p>
+                                </a>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('recepcion_pedidos.index')
+                                "
+                            >
+                                <a
+                                    href=""
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Recepción de Pedidos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('clientes.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'clientes.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Clientes</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes('materials.index') ||
+                            permisos.includes('ingreso_materials.index') ||
+                            permisos.includes('salida_materials.index')
+                        "
+                        :class="[
+                            $route.name == 'materials.index' ||
+                            $route.name == 'ingreso_materials.index' ||
+                            $route.name == 'salida_materials.index'
+                                ? 'menu-is-opening menu-open'
+                                : '',
+                        ]"
+                    >
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>
+                                Materiales
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview pl-2">
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('ingreso_materials.index')
+                                "
+                            >
+                                <router-link
+                                    :to="{ name: 'ingreso_materials.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Ingreso de Materiales</p>
+                                </router-link>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="
+                                    permisos.includes('salida_materials.index')
+                                "
+                            >
+                                <router-link
+                                    :to="{ name: 'salida_materials.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Salida de Materiales</p>
+                                </router-link>
+                            </li>
+                            <li
+                                class="nav-item"
+                                v-if="permisos.includes('materials.index')"
+                            >
+                                <router-link
+                                    :to="{ name: 'materials.index' }"
+                                    class="nav-link"
+                                    v-loading.fullscreen.lock="
+                                        fullscreenLoading
+                                    "
+                                >
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Materiales</p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('cajas.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'cajas.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-cash-register"></i>
+                            <p>Caja</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('conceptos.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'conceptos.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Conceptos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('repositorios.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'repositorios.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-folder-open"></i>
+                            <p>Repositorio</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-header font-weight-bold"
+                        v-if="
+                            permisos.includes('portals.index') ||
+                            permisos.includes('catalogos.index') ||
+                            permisos.includes('productos.index')
+                        "
+                    >
+                        PORTAL
                     </li>
                     <li
                         class="nav-item"
@@ -160,65 +464,6 @@
                         >
                             <i class="nav-icon fas fa-clipboard-list"></i>
                             <p>Pedidos</p>
-                        </router-link>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a
-                            href=""
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-truck-moving"></i>
-                            <p>Distribución de Pedidos</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            href=""
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-hand-holding-usd"></i>
-                            <p>Pagos</p>
-                        </a>
-                    </li> -->
-                    <li
-                        class="nav-item"
-                        v-if="permisos.includes('cajas.index')"
-                    >
-                        <router-link
-                            :to="{ name: 'cajas.index' }"
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-cash-register"></i>
-                            <p>Caja</p>
-                        </router-link>
-                    </li>
-                    <li
-                        class="nav-item"
-                        v-if="permisos.includes('conceptos.index')"
-                    >
-                        <router-link
-                            :to="{ name: 'conceptos.index' }"
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-list-alt"></i>
-                            <p>Conceptos</p>
-                        </router-link>
-                    </li>
-                    <li
-                        class="nav-item"
-                        v-if="permisos.includes('repositorios.index')"
-                    >
-                        <router-link
-                            :to="{ name: 'repositorios.index' }"
-                            class="nav-link"
-                            v-loading.fullscreen.lock="fullscreenLoading"
-                        >
-                            <i class="nav-icon fas fa-folder-open"></i>
-                            <p>Repositorio</p>
                         </router-link>
                     </li>
                     <li
@@ -318,14 +563,39 @@ export default {
     methods: {
         logout() {
             this.fullscreenLoading = true;
-            axios.post(main_url + "/logout").then((res) => {
-                let self = this;
-                setTimeout(function () {
-                    self.$router.push({ name: "login" });
-                    localStorage.clear();
-                    location.reload();
-                }, 500);
-            });
+            axios
+                .post(main_url + "/logout")
+                .then((res) => {
+                    let self = this;
+                    setTimeout(function () {
+                        self.$router.push({ name: "login" });
+                        localStorage.clear();
+                        location.reload();
+                    }, 500);
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        if (error.response.status === 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        if (
+                            error.response.status === 420 ||
+                            error.response.status === 419 ||
+                            error.response.status === 401
+                        ) {
+                            window.location = "/administracion/login";
+                        }
+                        if (error.response.status === 500) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                html: error.response.data.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+                    }
+                });
         },
         resetLogoutTimer() {
             // Reiniciar el temporizador cuando se detecta actividad
