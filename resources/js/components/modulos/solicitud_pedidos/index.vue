@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Catálogos</h1>
+                        <h1>Solicitud de Pedidos</h1>
                     </div>
                 </div>
             </div>
@@ -17,21 +17,20 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <button
+                                        <router-link
                                             v-if="
                                                 permisos.includes(
-                                                    'catalogos.create'
+                                                    'solicitud_pedidos.create'
                                                 )
                                             "
                                             class="btn btn-warning btn-flat btn-block"
-                                            @click="
-                                                abreModal('nuevo');
-                                                limpiaCatalogo();
-                                            "
+                                            :to="{
+                                                name: 'solicitud_pedidos.create',
+                                            }"
                                         >
                                             <i class="fa fa-plus"></i>
                                             Nuevo
-                                        </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +82,126 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
+                                                <template #cell(mas)="row">
+                                                    <b-button
+                                                        variant="warning"
+                                                        size="sm"
+                                                        @click="
+                                                            row.toggleDetails
+                                                        "
+                                                    >
+                                                        {{
+                                                            row.detailsShowing
+                                                                ? "Ocultar"
+                                                                : "Mostrar"
+                                                        }}
+                                                        Detalles
+                                                    </b-button>
+                                                </template>
+
+                                                <template #row-details="row">
+                                                    <b-card>
+                                                        <b-row
+                                                            class="mb-2"
+                                                            style="
+                                                                overflow: auto;
+                                                            "
+                                                        >
+                                                            <b-col cols="12">
+                                                                <table
+                                                                    class="table"
+                                                                >
+                                                                    <thead>
+                                                                        <th>
+                                                                            Código
+                                                                            Producto
+                                                                        </th>
+                                                                        <th>
+                                                                            Descripción
+                                                                        </th>
+                                                                        <th>
+                                                                            Talla
+                                                                        </th>
+                                                                        <th>
+                                                                            Cantidad
+                                                                        </th>
+                                                                        <th>
+                                                                            Elaborado
+                                                                        </th>
+                                                                        <th>
+                                                                            Título
+                                                                        </th>
+                                                                        <th>
+                                                                            Color
+                                                                            Código
+                                                                        </th>
+                                                                        <th>
+                                                                            Peso
+                                                                            (gr)
+                                                                        </th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            v-for="detalle in row
+                                                                                .item
+                                                                                .solicitud_detalles"
+                                                                        >
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.codigo
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.descripcion
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.talla
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.cantidad
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.elaborado
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.titulo
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.codigo_color
+                                                                                }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{
+                                                                                    detalle.peso
+                                                                                }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </b-col>
+                                                        </b-row>
+                                                        <b-button
+                                                            size="sm"
+                                                            variant="warning"
+                                                            @click="
+                                                                row.toggleDetails
+                                                            "
+                                                            >Ocultar</b-button
+                                                        >
+                                                    </b-card>
+                                                </template>
+
                                                 <template #cell(accion)="row">
                                                     <div
                                                         class="row justify-content-between"
@@ -90,7 +209,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.edit'
+                                                                    'solicitud_pedidos.edit'
                                                                 )
                                                             "
                                                             size="sm"
@@ -111,7 +230,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.destroy'
+                                                                    'solicitud_pedidos.destroy'
                                                                 )
                                                             "
                                                             size="sm"
@@ -120,7 +239,7 @@
                                                             class="btn-flat btn-block"
                                                             title="Eliminar registro"
                                                             @click="
-                                                                eliminaCatalogo(
+                                                                eliminaSolicitudPedido(
                                                                     row.item.id,
                                                                     `<br/><h4>¿Está seguro(a) de eliminar el registro nro. ${row.item.id}?</h4>`
                                                                 )
@@ -170,22 +289,11 @@
                 </div>
             </div>
         </section>
-        <Nuevo
-            :muestra_modal="muestra_modal"
-            :accion="modal_accion"
-            :catalogo="oCatalogo"
-            @close="muestra_modal = false"
-            @envioModal="getCatalogos"
-        ></Nuevo>
     </div>
 </template>
 
 <script>
-import Nuevo from "./Nuevo.vue";
 export default {
-    components: {
-        Nuevo,
-    },
     data() {
         return {
             user: JSON.parse(localStorage.getItem("user")),
@@ -199,8 +307,14 @@ export default {
                     label: "Nro.",
                     sortable: true,
                 },
-                { key: "nombre", label: "Nombre", sortable: true },
-                { key: "descripcion", label: "Descripción", sortable: true },
+                { key: "codigo", label: "Código de Pedido", sortable: true },
+                { key: "cliente.empresa", label: "Cliente", sortable: true },
+                {
+                    key: "fecha_recepcion",
+                    label: "Fecha de Recepción",
+                    sortable: true,
+                },
+                { key: "mas", label: "Ver más" },
                 { key: "accion", label: "Acción" },
             ],
             loading: true,
@@ -208,9 +322,7 @@ export default {
             loadingWindow: Loading.service({
                 fullscreen: this.fullscreenLoading,
             }),
-            muestra_modal: false,
-            modal_accion: "nuevo",
-            oCatalogo: {
+            oSolicitudPedido: {
                 id: 0,
                 nombre: "",
                 descripcion: "",
@@ -231,25 +343,14 @@ export default {
     },
     mounted() {
         this.loadingWindow.close();
-        this.getCatalogos();
+        this.getSolicitudPedidos();
     },
     methods: {
-        // Seleccionar Opciones de Tabla
-        editarRegistro(item) {
-            this.oCatalogo.id = item.id;
-            this.oCatalogo.nombre = item.nombre ? item.nombre : "";
-            this.oCatalogo.descripcion = item.descripcion
-                ? item.descripcion
-                : "";
-            this.modal_accion = "edit";
-            this.muestra_modal = true;
-        },
-
-        // Listar Catalogos
-        getCatalogos() {
+        // Listar SolicitudPedidos
+        getSolicitudPedidos() {
             this.showOverlay = true;
             this.muestra_modal = false;
-            let url = main_url + "/admin/catalogos";
+            let url = main_url + "/admin/solicitud_pedidos";
             if (this.pagina != 0) {
                 url += "?page=" + this.pagina;
             }
@@ -259,11 +360,19 @@ export default {
                 })
                 .then((res) => {
                     this.showOverlay = false;
-                    this.listRegistros = res.data.catalogos;
+                    this.listRegistros = res.data.solicitud_pedidos;
                     this.totalRows = res.data.total;
                 });
         },
-        eliminaCatalogo(id, descripcion) {
+        editarRegistro(item) {
+            this.$router.push({
+                name: "solicitud_pedidos.edit",
+                params: {
+                    id: item.id,
+                },
+            });
+        },
+        eliminaSolicitudPedido(id, descripcion) {
             Swal.fire({
                 title: "¿Quierés eliminar este registro?",
                 html: `<strong>${descripcion}</strong>`,
@@ -276,11 +385,11 @@ export default {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios
-                        .post(main_url + "/admin/catalogos/" + id, {
+                        .post(main_url + "/admin/solicitud_pedidos/" + id, {
                             _method: "DELETE",
                         })
                         .then((res) => {
-                            this.getCatalogos();
+                            this.getSolicitudPedidos();
                             this.filter = "";
                             Swal.fire({
                                 icon: "success",
@@ -315,21 +424,10 @@ export default {
                 }
             });
         },
-        abreModal(tipo_accion = "nuevo", catalogo = null) {
-            this.muestra_modal = true;
-            this.modal_accion = tipo_accion;
-            if (catalogo) {
-                this.oCatalogo = catalogo;
-            }
-        },
         onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
-        },
-        limpiaCatalogo() {
-            this.oCatalogo.nombre = "";
-            this.oCatalogo.descripcion = "";
         },
         formatoFecha(date) {
             return this.$moment(String(date)).format("DD/MM/YYYY");

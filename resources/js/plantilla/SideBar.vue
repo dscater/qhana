@@ -190,6 +190,8 @@
                         "
                         :class="[
                             $route.name == 'solicitud_pedidos.index' ||
+                            $route.name == 'solicitud_pedidos.create' ||
+                            $route.name == 'solicitud_pedidos.edit' ||
                             $route.name == 'distribucion_pedidos.index' ||
                             $route.name == 'recepcion_pedidos.index' ||
                             $route.name == 'tarifa_pagos.index'
@@ -226,8 +228,8 @@
                                     permisos.includes('solicitud_pedidos.index')
                                 "
                             >
-                                <a
-                                    href=""
+                                <router-link
+                                    :to="{ name: 'solicitud_pedidos.index' }"
                                     class="nav-link"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
@@ -235,7 +237,7 @@
                                 >
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Solicitud de Pedidos</p>
-                                </a>
+                                </router-link>
                             </li>
                             <li
                                 class="nav-item"

@@ -279,6 +279,22 @@ export default new Router({
                     .default,
             props: true,
         },
+        {
+            path: "/administracion/solicitud_pedidos/create",
+            name: "solicitud_pedidos.create",
+            component:
+                require("./components/modulos/solicitud_pedidos/create.vue")
+                    .default,
+            props: true,
+        },
+        {
+            path: "/administracion/solicitud_pedidos/:id",
+            name: "solicitud_pedidos.edit",
+            component:
+                require("./components/modulos/solicitud_pedidos/edit.vue")
+                    .default,
+            props: true,
+        },
 
         // distribucion_pedidos
         {

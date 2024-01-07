@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-01-2024 a las 18:52:57
+-- Tiempo de generación: 07-01-2024 a las 15:55:59
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -202,7 +202,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `empresa`, `nombre_encargado`, `fonos`, `dir`, `correo`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'EMP. #1', 'JUAN PERES', '777777 - 666666', 'LOS OLIVOS', 'EMP1@GMAIL.COM', '2024-01-06', '2024-01-06 16:59:35', '2024-01-06 16:59:35');
+(1, 'EMP. #1', 'JUAN PERES', '777777 - 666666', 'LOS OLIVOS', 'EMP1@GMAIL.COM', '2024-01-06', '2024-01-06 16:59:35', '2024-01-06 16:59:35'),
+(2, 'EMP. #2', 'EDUARDO RAMIREZ', '78787878', '', '', '2024-01-07', '2024-01-07 14:53:25', '2024-01-07 14:53:25');
 
 -- --------------------------------------------------------
 
@@ -543,7 +544,13 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (173, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA SALIDA DE MATERIAL', 'id: 1<br/>material_id: 1<br/>cantidad: 3<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:50:48<br/>updated_at: 2024-01-06 14:50:48<br/>', NULL, 'SALIDA DE MATERIAL', '2024-01-06', '14:50:48', '2024-01-06 18:50:48', '2024-01-06 18:50:48'),
 (174, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SALIDA DE MATERIAL', 'id: 1<br/>material_id: 1<br/>cantidad: 3<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:50:48<br/>updated_at: 2024-01-06 14:50:48<br/>', 'id: 1<br/>material_id: 1<br/>cantidad: 4<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:50:48<br/>updated_at: 2024-01-06 14:50:57<br/>', 'SALIDA DE MATERIALS', '2024-01-06', '14:50:57', '2024-01-06 18:50:57', '2024-01-06 18:50:57'),
 (175, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA SALIDA DE MATERIAL', 'id: 1<br/>material_id: 1<br/>cantidad: 4<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:50:48<br/>updated_at: 2024-01-06 14:50:57<br/>', NULL, 'SALIDA DE MATERIALS', '2024-01-06', '14:51:02', '2024-01-06 18:51:02', '2024-01-06 18:51:02'),
-(176, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA SALIDA DE MATERIAL', 'id: 1<br/>material_id: 1<br/>cantidad: 1<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:51:23<br/>updated_at: 2024-01-06 14:51:23<br/>', NULL, 'SALIDA DE MATERIAL', '2024-01-06', '14:51:23', '2024-01-06 18:51:23', '2024-01-06 18:51:23');
+(176, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA SALIDA DE MATERIAL', 'id: 1<br/>material_id: 1<br/>cantidad: 1<br/>fecha_salida: 2024-01-06<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 14:51:23<br/>updated_at: 2024-01-06 14:51:23<br/>', NULL, 'SALIDA DE MATERIAL', '2024-01-06', '14:51:23', '2024-01-06 18:51:23', '2024-01-06 18:51:23'),
+(177, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CLIENTE', 'correo: <br/>created_at: 2024-01-07 10:53:25<br/>dir: <br/>empresa: EMP. #2<br/>fecha_registro: 2024-01-07<br/>fonos: 78787878<br/>id: 2<br/>nombre_encargado: EDUARDO RAMIREZ<br/>updated_at: 2024-01-07 10:53:25<br/>', NULL, 'CLIENTES', '2024-01-07', '10:53:25', '2024-01-07 14:53:25', '2024-01-07 14:53:25'),
+(178, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: <br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', NULL, 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:35:58', '2024-01-07 15:35:58', '2024-01-07 15:35:58'),
+(179, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:54:32', '2024-01-07 15:54:32', '2024-01-07 15:54:32'),
+(180, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:54:47', '2024-01-07 15:54:47', '2024-01-07 15:54:47'),
+(181, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:55:01', '2024-01-07 15:55:01', '2024-01-07 15:55:01'),
+(182, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:55:07', '2024-01-07 15:55:07', '2024-01-07 15:55:07');
 
 -- --------------------------------------------------------
 
@@ -1011,6 +1018,13 @@ CREATE TABLE `solicitud_detalles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `solicitud_detalles`
+--
+
+INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `elaborado`, `titulo`, `codigo_color`, `peso`, `created_at`, `updated_at`) VALUES
+(2, 1, '4043', 'chompa cris', 'L', 5.00, 'MANO', '2/17', 'guindo-2500', 29.00, '2024-01-07 15:35:58', '2024-01-07 15:55:01');
+
 -- --------------------------------------------------------
 
 --
@@ -1026,6 +1040,13 @@ CREATE TABLE `solicitud_pedidos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `solicitud_pedidos`
+--
+
+INSERT INTO `solicitud_pedidos` (`id`, `codigo`, `cliente_id`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'B001', 1, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-07 15:35:58');
 
 -- --------------------------------------------------------
 
@@ -1391,7 +1412,7 @@ ALTER TABLE `catalogos`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `conceptos`
@@ -1433,7 +1454,7 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`
@@ -1547,13 +1568,13 @@ ALTER TABLE `salida_productos`
 -- AUTO_INCREMENT de la tabla `solicitud_detalles`
 --
 ALTER TABLE `solicitud_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitud_pedidos`
 --
 ALTER TABLE `solicitud_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tarifa_detalles`
