@@ -331,6 +331,22 @@ export default new Router({
                     .default,
             props: true,
         },
+        {
+            path: "/administracion/recepcion_pedidos/create",
+            name: "recepcion_pedidos.create",
+            component:
+                require("./components/modulos/recepcion_pedidos/create.vue")
+                    .default,
+            props: true,
+        },
+        {
+            path: "/administracion/recepcion_pedidos/:id",
+            name: "recepcion_pedidos.edit",
+            component:
+                require("./components/modulos/recepcion_pedidos/edit.vue")
+                    .default,
+            props: true,
+        },
 
         // tarifa_pagos
         {

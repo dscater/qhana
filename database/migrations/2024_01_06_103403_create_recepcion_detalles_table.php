@@ -16,6 +16,7 @@ class CreateRecepcionDetallesTable extends Migration
         Schema::create('recepcion_detalles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("recepcion_pedido_id");
+            $table->unsignedBigInteger("solicitud_detalle_id");
             $table->double("cantidad", 8, 2);
             $table->double("peso", 8, 2);
             $table->timestamps();

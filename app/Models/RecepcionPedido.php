@@ -13,6 +13,7 @@ class RecepcionPedido extends Model
         "user_id",
         "solicitud_pedido_id",
         "distribucion_pedido_id",
+        "fecha_recepcion",
         "fecha_registro",
     ];
 
@@ -29,5 +30,10 @@ class RecepcionPedido extends Model
     public function distribucion_pedido()
     {
         return $this->belongsTo(DistribucionPedido::class, 'distribucion_pedido_id');
+    }
+
+    public function recepcion_detalles()
+    {
+        return $this->hasMany(RecepcionDetalle::class, 'recepcion_pedido_id');
     }
 }

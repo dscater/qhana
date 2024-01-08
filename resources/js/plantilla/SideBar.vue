@@ -196,6 +196,8 @@
                             $route.name == 'distribucion_pedidos.create' ||
                             $route.name == 'distribucion_pedidos.edit' ||
                             $route.name == 'recepcion_pedidos.index' ||
+                            $route.name == 'recepcion_pedidos.create' ||
+                            $route.name == 'recepcion_pedidos.edit' ||
                             $route.name == 'tarifa_pagos.index'
                                 ? 'menu-is-opening menu-open'
                                 : '',
@@ -266,8 +268,8 @@
                                     permisos.includes('recepcion_pedidos.index')
                                 "
                             >
-                                <a
-                                    href=""
+                                <router-link
+                                    :to="{ name: 'recepcion_pedidos.index' }"
                                     class="nav-link"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
@@ -275,7 +277,7 @@
                                 >
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Recepción de Pedidos</p>
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                     </li>

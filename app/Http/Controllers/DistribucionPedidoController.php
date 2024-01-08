@@ -34,6 +34,12 @@ class DistribucionPedidoController extends Controller
         return response()->JSON(['distribucion_pedidos' => $distribucion_pedidos, 'total' => count($distribucion_pedidos)], 200);
     }
 
+    public function byUser(Request $request)
+    {
+        $distribucion_pedidos = DistribucionPedido::where("user_id", $request->user_id)->with(["solicitud_pedido", "user", "distribucion_detalles.solicitud_detalle"])->orderBy("id", "desc")->get();
+        return response()->JSON(['distribucion_pedidos' => $distribucion_pedidos, 'total' => count($distribucion_pedidos)], 200);
+    }
+
     public function store(Request $request)
     {
         $request->validate($this->validacion, $this->mensajes);
@@ -119,7 +125,7 @@ class DistribucionPedidoController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($distribucion_pedido, "distribucion_pedidos");
-            $distribucion_pedido->update(array_map('mb_strtoupper', $request->except("distribucion_detalles","solicitud_pedido")));
+            $distribucion_pedido->update(array_map('mb_strtoupper', $request->except("distribucion_detalles", "solicitud_pedido")));
             $datos_nuevo = HistorialAccion::getDetalleRegistro($distribucion_pedido, "distribucion_pedidos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,

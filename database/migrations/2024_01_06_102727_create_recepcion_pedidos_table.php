@@ -18,6 +18,7 @@ class CreateRecepcionPedidosTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("solicitud_pedido_id");
             $table->unsignedBigInteger("distribucion_pedido_id")->nullable();
+            $table->date("fecha_recepcion")->nullable();
             $table->date("fecha_registro")->nullable();
             $table->timestamps();
         });

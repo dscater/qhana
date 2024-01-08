@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 08-01-2024 a las 16:55:46
+-- Tiempo de generación: 08-01-2024 a las 19:54:56
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -577,7 +577,8 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (193, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:45:18', '2024-01-08 16:45:18', '2024-01-08 16:45:18'),
 (194, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:50:12', '2024-01-08 16:50:12', '2024-01-08 16:50:12'),
 (195, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:51:10', '2024-01-08 16:51:10', '2024-01-08 16:51:10'),
-(196, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:52:07', '2024-01-08 16:52:07', '2024-01-08 16:52:07');
+(196, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:52:07', '2024-01-08 16:52:07', '2024-01-08 16:52:07'),
+(197, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '13:02:09', '2024-01-08 17:02:09', '2024-01-08 17:02:09');
 
 -- --------------------------------------------------------
 
@@ -891,6 +892,7 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad_stoc
 CREATE TABLE `recepcion_detalles` (
   `id` bigint UNSIGNED NOT NULL,
   `recepcion_pedido_id` bigint UNSIGNED NOT NULL,
+  `solicitud_detalle_id` bigint UNSIGNED NOT NULL,
   `cantidad` double(8,2) NOT NULL,
   `peso` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1052,8 +1054,8 @@ CREATE TABLE `solicitud_detalles` (
 --
 
 INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `cantidad_restante`, `elaborado`, `titulo`, `codigo_color`, `peso`, `peso_restante`, `created_at`, `updated_at`) VALUES
-(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 3.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 14.00, '2024-01-07 15:35:58', '2024-01-08 16:52:07'),
-(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 27.00, '2024-01-08 15:33:10', '2024-01-08 16:52:07');
+(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 3.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 14.00, '2024-01-07 15:35:58', '2024-01-08 17:02:09'),
+(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 27.00, '2024-01-08 15:33:10', '2024-01-08 17:02:09');
 
 -- --------------------------------------------------------
 
@@ -1486,7 +1488,7 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`

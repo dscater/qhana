@@ -189,7 +189,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <strong>Cantidad Restante: </strong>
+                                    <strong>Cantidad: </strong>
                                     <span class="badge badge-primary text-md">{{
                                         item.solicitud_detalle.cantidad_restante
                                     }}</span>
@@ -216,7 +216,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Peso Restante: </strong>
+                                    <strong>Peso: </strong>
                                     <span class="badge badge-info text-md">{{
                                         item.solicitud_detalle.peso_restante
                                     }}</span>
@@ -245,7 +245,7 @@
                     </template>
                     <template v-else>
                         <tr>
-                            <td colspan="2" class="text-center">
+                            <td colspan="3" class="text-center">
                                 NO SE ENCONTRARÓN PRODUCTOS
                             </td>
                         </tr>

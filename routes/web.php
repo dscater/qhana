@@ -193,11 +193,13 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         // SOLICITUD PEDIDOS
+        Route::get("solicitud_pedidos/byUser", [SolicitudPedidoController::class, 'byUser']);
         Route::resource('solicitud_pedidos', SolicitudPedidoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
         // DISTRIBUCION PEDIDOS
+        Route::get("distribucion_pedidos/byUser", [DistribucionPedidoController::class, 'byUser']);
         Route::resource('distribucion_pedidos', DistribucionPedidoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
