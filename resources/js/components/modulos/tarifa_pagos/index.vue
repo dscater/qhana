@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Catálogos</h1>
+                        <h1>Tarifa de Pagos por Pedidos</h1>
                     </div>
                 </div>
             </div>
@@ -17,21 +17,20 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <button
+                                        <router-link
                                             v-if="
                                                 permisos.includes(
-                                                    'catalogos.create'
+                                                    'tarifa_pagos.create'
                                                 )
                                             "
                                             class="btn btn-warning btn-flat btn-block"
-                                            @click="
-                                                abreModal('nuevo');
-                                                limpiaCatalogo();
-                                            "
+                                            :to="{
+                                                name: 'tarifa_pagos.create',
+                                            }"
                                         >
                                             <i class="fa fa-plus"></i>
                                             Nuevo
-                                        </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +82,365 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
+                                                <template #cell(mas)="row">
+                                                    <b-button
+                                                        variant="warning"
+                                                        size="sm"
+                                                        @click="
+                                                            row.toggleDetails
+                                                        "
+                                                    >
+                                                        {{
+                                                            row.detailsShowing
+                                                                ? "Ocultar"
+                                                                : "Mostrar"
+                                                        }}
+                                                        Detalles
+                                                    </b-button>
+                                                </template>
+
+                                                <template #row-details="row">
+                                                    <b-card>
+                                                        <b-row
+                                                            class="mb-2"
+                                                            style="
+                                                                overflow: auto;
+                                                            "
+                                                        >
+                                                            <b-col cols="12">
+                                                                <table
+                                                                    class="table table-striped table_productos"
+                                                                >
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th
+                                                                                rowspan="2"
+                                                                            >
+                                                                                Detalle
+                                                                                Producto
+                                                                            </th>
+                                                                            <th
+                                                                                rowspan="2"
+                                                                            >
+                                                                                Cantidad
+                                                                            </th>
+                                                                            <th
+                                                                                colspan="3"
+                                                                                class="text-center bg-blue"
+                                                                            >
+                                                                                Lana
+                                                                            </th>
+                                                                            <th
+                                                                                colspan="3"
+                                                                                class="text-center bg-info"
+                                                                            >
+                                                                                Parametros
+                                                                            </th>
+                                                                            <th
+                                                                                colspan="3"
+                                                                                class="text-center"
+                                                                            >
+                                                                                A
+                                                                                Cancelar
+                                                                                Bs.
+                                                                            </th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th
+                                                                                class="bg-blue text-center"
+                                                                            >
+                                                                                Título
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-blue text-center"
+                                                                            >
+                                                                                Color
+                                                                                Código
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-blue text-center"
+                                                                            >
+                                                                                Peso
+                                                                                (gr)1
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-info text-center"
+                                                                            >
+                                                                                M.O.
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-info text-center"
+                                                                            >
+                                                                                DEP.
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-info text-center"
+                                                                            >
+                                                                                GAN.
+                                                                            </th>
+                                                                            <th
+                                                                                class="text-center"
+                                                                            >
+                                                                                Mano
+                                                                                de
+                                                                                Obra
+                                                                            </th>
+                                                                            <th
+                                                                                class="text-center"
+                                                                            >
+                                                                                Depreciación
+                                                                            </th>
+                                                                            <th
+                                                                                class="text-center"
+                                                                            >
+                                                                                Ganancia
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <template
+                                                                            v-if="
+                                                                                row
+                                                                                    .item
+                                                                                    .tarifa_detalles
+                                                                                    .length >
+                                                                                0
+                                                                            "
+                                                                        >
+                                                                            <tr
+                                                                                v-for="(
+                                                                                    item,
+                                                                                    index
+                                                                                ) in row
+                                                                                    .item
+                                                                                    .tarifa_detalles"
+                                                                            >
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="descripcion_producto"
+                                                                                    >
+                                                                                        <div
+                                                                                            class="desc codigo"
+                                                                                        >
+                                                                                            <strong
+                                                                                                >Código: </strong
+                                                                                            ><span
+                                                                                                >{{
+                                                                                                    item
+                                                                                                        .solicitud_detalle
+                                                                                                        .codigo
+                                                                                                }}</span
+                                                                                            >
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="desc descripcion"
+                                                                                        >
+                                                                                            <strong
+                                                                                                >Descripción: </strong
+                                                                                            ><span
+                                                                                                >{{
+                                                                                                    item
+                                                                                                        .solicitud_detalle
+                                                                                                        .descripcion
+                                                                                                }}</span
+                                                                                            >
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="desc talla"
+                                                                                        >
+                                                                                            <strong
+                                                                                                >Talla: </strong
+                                                                                            ><span
+                                                                                                >{{
+                                                                                                    item
+                                                                                                        .solicitud_detalle
+                                                                                                        .talla
+                                                                                                }}</span
+                                                                                            >
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="desc elaborado"
+                                                                                        >
+                                                                                            <strong
+                                                                                                >Elaborado: </strong
+                                                                                            ><span
+                                                                                                >{{
+                                                                                                    item
+                                                                                                        .solicitud_detalle
+                                                                                                        .elaborado
+                                                                                                }}</span
+                                                                                            >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    {{
+                                                                                        item
+                                                                                            .solicitud_detalle
+                                                                                            .cantidad
+                                                                                    }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{
+                                                                                        item
+                                                                                            .solicitud_detalle
+                                                                                            .titulo
+                                                                                    }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{
+                                                                                        item
+                                                                                            .solicitud_detalle
+                                                                                            .codigo_color
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    {{
+                                                                                        item
+                                                                                            .solicitud_detalle
+                                                                                            .peso
+                                                                                    }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{
+                                                                                        item.mano_obra
+                                                                                    }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{
+                                                                                        item.depreciacion
+                                                                                    }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{
+                                                                                        item.ganancia
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    {{
+                                                                                        item.mano_obra_pagar
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    {{
+                                                                                        item.depreciacion_pagar
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    {{
+                                                                                        item.ganancia_pagar
+                                                                                    }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    TOTAL
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    {{
+                                                                                        row
+                                                                                            .item
+                                                                                            .cantidad
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                ></td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                ></td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    {{
+                                                                                        row
+                                                                                            .item
+                                                                                            .peso
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                ></td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                ></td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                ></td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    {{
+                                                                                        row
+                                                                                            .item
+                                                                                            .mano_obra
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    {{
+                                                                                        row
+                                                                                            .item
+                                                                                            .depreciacion
+                                                                                    }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="text-center font-weight-bold"
+                                                                                >
+                                                                                    {{
+                                                                                        row
+                                                                                            .item
+                                                                                            .ganancia
+                                                                                    }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        </template>
+                                                                        <template
+                                                                            v-else
+                                                                        >
+                                                                            <tr>
+                                                                                <td
+                                                                                    colspan="11"
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    NO
+                                                                                    SE
+                                                                                    ENCONTRARÓN
+                                                                                    PRODUCTOS
+                                                                                </td>
+                                                                            </tr>
+                                                                        </template>
+                                                                        <template></template>
+                                                                    </tbody>
+                                                                </table>
+                                                            </b-col>
+                                                        </b-row>
+                                                        <b-button
+                                                            size="sm"
+                                                            variant="warning"
+                                                            @click="
+                                                                row.toggleDetails
+                                                            "
+                                                            >Ocultar</b-button
+                                                        >
+                                                    </b-card>
+                                                </template>
+
                                                 <template #cell(accion)="row">
                                                     <div
                                                         class="row justify-content-between"
@@ -90,7 +448,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.edit'
+                                                                    'tarifa_pagos.edit'
                                                                 )
                                                             "
                                                             size="sm"
@@ -111,7 +469,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.destroy'
+                                                                    'tarifa_pagos.destroy'
                                                                 )
                                                             "
                                                             size="sm"
@@ -120,7 +478,7 @@
                                                             class="btn-flat btn-block"
                                                             title="Eliminar registro"
                                                             @click="
-                                                                eliminaCatalogo(
+                                                                eliminaTarifaPago(
                                                                     row.item.id,
                                                                     `<br/><h4>¿Está seguro(a) de eliminar el registro nro. ${row.item.id}?</h4>`
                                                                 )
@@ -170,22 +528,11 @@
                 </div>
             </div>
         </section>
-        <Nuevo
-            :muestra_modal="muestra_modal"
-            :accion="modal_accion"
-            :catalogo="oCatalogo"
-            @close="muestra_modal = false"
-            @envioModal="getCatalogos"
-        ></Nuevo>
     </div>
 </template>
 
 <script>
-import Nuevo from "./Nuevo.vue";
 export default {
-    components: {
-        Nuevo,
-    },
     data() {
         return {
             user: JSON.parse(localStorage.getItem("user")),
@@ -199,8 +546,43 @@ export default {
                     label: "Nro.",
                     sortable: true,
                 },
-                { key: "nombre", label: "Nombre", sortable: true },
-                { key: "descripcion", label: "Descripción", sortable: true },
+                { key: "cliente.empresa", label: "Cliente", sortable: true },
+                {
+                    key: "solicitud_pedido.codigo",
+                    label: "Código de Pedido",
+                    sortable: true,
+                },
+                {
+                    key: "cantidad",
+                    label: "Cantidad",
+                    sortable: true,
+                },
+                {
+                    key: "peso",
+                    label: "Peso",
+                    sortable: true,
+                },
+                {
+                    key: "mano_obra",
+                    label: "Mano de Obra",
+                    sortable: true,
+                },
+                {
+                    key: "depreciacion",
+                    label: "Depreciación",
+                    sortable: true,
+                },
+                {
+                    key: "ganancia",
+                    label: "Ganancia",
+                    sortable: true,
+                },
+                {
+                    key: "fecha_registro",
+                    label: "Fecha de registro",
+                    sortable: true,
+                },
+                { key: "mas", label: "Ver más" },
                 { key: "accion", label: "Acción" },
             ],
             loading: true,
@@ -208,9 +590,7 @@ export default {
             loadingWindow: Loading.service({
                 fullscreen: this.fullscreenLoading,
             }),
-            muestra_modal: false,
-            modal_accion: "nuevo",
-            oCatalogo: {
+            oTarifaPago: {
                 id: 0,
                 nombre: "",
                 descripcion: "",
@@ -231,25 +611,14 @@ export default {
     },
     mounted() {
         this.loadingWindow.close();
-        this.getCatalogos();
+        this.getTarifaPagos();
     },
     methods: {
-        // Seleccionar Opciones de Tabla
-        editarRegistro(item) {
-            this.oCatalogo.id = item.id;
-            this.oCatalogo.nombre = item.nombre ? item.nombre : "";
-            this.oCatalogo.descripcion = item.descripcion
-                ? item.descripcion
-                : "";
-            this.modal_accion = "edit";
-            this.muestra_modal = true;
-        },
-
-        // Listar Catalogos
-        getCatalogos() {
+        // Listar TarifaPagos
+        getTarifaPagos() {
             this.showOverlay = true;
             this.muestra_modal = false;
-            let url = main_url + "/admin/catalogos";
+            let url = main_url + "/admin/tarifa_pagos";
             if (this.pagina != 0) {
                 url += "?page=" + this.pagina;
             }
@@ -259,11 +628,19 @@ export default {
                 })
                 .then((res) => {
                     this.showOverlay = false;
-                    this.listRegistros = res.data.catalogos;
+                    this.listRegistros = res.data.tarifa_pagos;
                     this.totalRows = res.data.total;
                 });
         },
-        eliminaCatalogo(id, descripcion) {
+        editarRegistro(item) {
+            this.$router.push({
+                name: "tarifa_pagos.edit",
+                params: {
+                    id: item.id,
+                },
+            });
+        },
+        eliminaTarifaPago(id, descripcion) {
             Swal.fire({
                 title: "¿Quierés eliminar este registro?",
                 html: `<strong>${descripcion}</strong>`,
@@ -276,11 +653,11 @@ export default {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios
-                        .post(main_url + "/admin/catalogos/" + id, {
+                        .post(main_url + "/admin/tarifa_pagos/" + id, {
                             _method: "DELETE",
                         })
                         .then((res) => {
-                            this.getCatalogos();
+                            this.getTarifaPagos();
                             this.filter = "";
                             Swal.fire({
                                 icon: "success",
@@ -315,21 +692,10 @@ export default {
                 }
             });
         },
-        abreModal(tipo_accion = "nuevo", catalogo = null) {
-            this.muestra_modal = true;
-            this.modal_accion = tipo_accion;
-            if (catalogo) {
-                this.oCatalogo = catalogo;
-            }
-        },
         onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
-        },
-        limpiaCatalogo() {
-            this.oCatalogo.nombre = "";
-            this.oCatalogo.descripcion = "";
         },
         formatoFecha(date) {
             return this.$moment(String(date)).format("DD/MM/YYYY");

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 08-01-2024 a las 19:54:56
+-- Tiempo de generación: 08-01-2024 a las 22:30:17
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 7.4.19
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -578,7 +578,15 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (194, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:50:12', '2024-01-08 16:50:12', '2024-01-08 16:50:12'),
 (195, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:51:10', '2024-01-08 16:51:10', '2024-01-08 16:51:10'),
 (196, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:52:07', '2024-01-08 16:52:07', '2024-01-08 16:52:07'),
-(197, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '13:02:09', '2024-01-08 17:02:09', '2024-01-08 17:02:09');
+(197, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '13:02:09', '2024-01-08 17:02:09', '2024-01-08 17:02:09'),
+(198, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:46:29', '2024-01-08 20:46:29', '2024-01-08 20:46:29'),
+(200, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:57:41', '2024-01-08 20:57:41', '2024-01-08 20:57:41'),
+(201, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:57:45', '2024-01-08 20:57:45', '2024-01-08 20:57:45'),
+(202, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:57:50', '2024-01-08 20:57:50', '2024-01-08 20:57:50'),
+(203, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA RECEPCIÓN DE PEDIDO', 'id: 2<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:58:48<br/>updated_at: 2024-01-08 16:58:48<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:58:48', '2024-01-08 20:58:48', '2024-01-08 20:58:48'),
+(204, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA RECEPCIÓN DE PEDIDO', 'id: 2<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:58:48<br/>updated_at: 2024-01-08 16:58:48<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '17:01:47', '2024-01-08 21:01:47', '2024-01-08 21:01:47'),
+(205, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN NOSOTROS', 'id: 1<br/>historia: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>mision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>vision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>created_at: 2023-10-02 13:11:42<br/>updated_at: 2023-10-02 17:05:59<br/>', NULL, 'NOSOTROS', '2024-01-08', '17:05:45', '2024-01-08 21:05:45', '2024-01-08 21:05:45'),
+(207, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA TARIFA DE PAGO', 'id: 2<br/>cliente_id: 1<br/>solicitud_pedido_id: 1<br/>cantidad: 53<br/>peso: 2940<br/>mano_obra: 16<br/>depreciacion: 18<br/>ganancia: 19<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 18:25:57<br/>updated_at: 2024-01-08 18:25:57<br/>', NULL, 'TARIFA DE PAGOS', '2024-01-08', '18:25:57', '2024-01-08 22:25:57', '2024-01-08 22:25:57');
 
 -- --------------------------------------------------------
 
@@ -899,6 +907,14 @@ CREATE TABLE `recepcion_detalles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `recepcion_detalles`
+--
+
+INSERT INTO `recepcion_detalles` (`id`, `recepcion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1.00, 7.00, '2024-01-08 20:46:29', '2024-01-08 20:57:50'),
+(2, 1, 3, 1.00, 6.00, '2024-01-08 20:46:29', '2024-01-08 20:46:29');
+
 -- --------------------------------------------------------
 
 --
@@ -910,10 +926,18 @@ CREATE TABLE `recepcion_pedidos` (
   `user_id` bigint UNSIGNED NOT NULL,
   `solicitud_pedido_id` bigint UNSIGNED NOT NULL,
   `distribucion_pedido_id` bigint UNSIGNED DEFAULT NULL,
+  `fecha_recepcion` date NOT NULL,
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recepcion_pedidos`
+--
+
+INSERT INTO `recepcion_pedidos` (`id`, `user_id`, `solicitud_pedido_id`, `distribucion_pedido_id`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 1, '2024-01-08', '2024-01-08', '2024-01-08 20:46:29', '2024-01-08 20:46:29');
 
 -- --------------------------------------------------------
 
@@ -980,7 +1004,6 @@ CREATE TABLE `repositorio_archivos` (
 --
 
 INSERT INTO `repositorio_archivos` (`id`, `repositorio_id`, `archivo`, `ext`, `tipo`, `created_at`, `updated_at`) VALUES
-(4, 2, '1697746998250px-Melvin_Eugene_Punymeyer.png', 'png', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
 (5, 2, '16977469984139951.png', 'png', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
 (6, 2, '1697746998tenazassimpson.jpeg', 'jpeg', 'imagen', '2023-10-19 20:23:18', '2023-10-19 20:23:18'),
 (7, 3, '1697747022smartphone.png', 'png', 'imagen', '2023-10-19 20:23:42', '2023-10-19 20:23:42'),
@@ -1094,12 +1117,23 @@ CREATE TABLE `tarifa_detalles` (
   `solicitud_detalle_id` bigint UNSIGNED NOT NULL,
   `cantidad` double(8,2) NOT NULL,
   `peso` double(8,2) NOT NULL,
-  `mano_obra` decimal(24,2) NOT NULL,
-  `depreciacion` decimal(24,2) NOT NULL,
-  `ganancia` decimal(24,2) NOT NULL,
+  `mano_obra` double(8,2) NOT NULL,
+  `mano_obra_pagar` decimal(24,2) NOT NULL,
+  `depreciacion` double(8,2) NOT NULL,
+  `depreciacion_pagar` decimal(24,2) NOT NULL,
+  `ganancia` double(8,2) NOT NULL,
+  `ganancia_pagar` decimal(24,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tarifa_detalles`
+--
+
+INSERT INTO `tarifa_detalles` (`id`, `tarifa_pago_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `mano_obra`, `mano_obra_pagar`, `depreciacion`, `depreciacion_pagar`, `ganancia`, `ganancia_pagar`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, 5.00, 29.00, 2.00, 10.00, 3.00, 15.00, 2.00, 10.00, '2024-01-08 22:25:57', '2024-01-08 22:25:57'),
+(2, 2, 3, 3.00, 40.00, 2.00, 6.00, 1.00, 3.00, 3.00, 9.00, '2024-01-08 22:25:57', '2024-01-08 22:25:57');
 
 -- --------------------------------------------------------
 
@@ -1120,6 +1154,13 @@ CREATE TABLE `tarifa_pagos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tarifa_pagos`
+--
+
+INSERT INTO `tarifa_pagos` (`id`, `cliente_id`, `solicitud_pedido_id`, `cantidad`, `peso`, `mano_obra`, `depreciacion`, `ganancia`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(2, 1, 1, 53.00, 2940.00, 16.00, 18.00, 19.00, '2024-01-08', '2024-01-08 22:25:57', '2024-01-08 22:25:57');
 
 -- --------------------------------------------------------
 
@@ -1488,7 +1529,7 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`
@@ -1560,13 +1601,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `recepcion_detalles`
 --
 ALTER TABLE `recepcion_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `recepcion_pedidos`
 --
 ALTER TABLE `recepcion_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `red_socials`
@@ -1614,13 +1655,13 @@ ALTER TABLE `solicitud_pedidos`
 -- AUTO_INCREMENT de la tabla `tarifa_detalles`
 --
 ALTER TABLE `tarifa_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tarifa_pagos`
 --
 ALTER TABLE `tarifa_pagos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

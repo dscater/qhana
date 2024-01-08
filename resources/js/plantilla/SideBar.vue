@@ -215,8 +215,8 @@
                                 class="nav-item"
                                 v-if="permisos.includes('tarifa_pagos.index')"
                             >
-                                <a
-                                    href=""
+                                <router-link
+                                    :to="{ name: 'tarifa_pagos.index' }"
                                     class="nav-link"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
@@ -224,7 +224,7 @@
                                 >
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Tarifa de Pagos</p>
-                                </a>
+                                </router-link>
                             </li>
                             <li
                                 class="nav-item"

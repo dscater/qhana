@@ -356,6 +356,20 @@ export default new Router({
                 .default,
             props: true,
         },
+        {
+            path: "/administracion/tarifa_pagos/create",
+            name: "tarifa_pagos.create",
+            component: require("./components/modulos/tarifa_pagos/create.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/tarifa_pagos/:id",
+            name: "tarifa_pagos.edit",
+            component: require("./components/modulos/tarifa_pagos/edit.vue")
+                .default,
+            props: true,
+        },
 
         // materials
         {

@@ -43,6 +43,13 @@ class SolicitudPedidoController extends Controller
         return response()->JSON(['solicitud_pedidos' => $solicitud_pedidos, 'total' => count($solicitud_pedidos)], 200);
     }
 
+    public function byCliente(Request $request)
+    {
+        $solicitud_pedidos = SolicitudPedido::where("cliente_id", $request->cliente_id)->with(["cliente", "solicitud_detalles"])->orderBy("id", "desc")->get();
+        return response()->JSON(['solicitud_pedidos' => $solicitud_pedidos, 'total' => count($solicitud_pedidos)], 200);
+    }
+
+
     public function store(Request $request)
     {
         $request->validate($this->validacion, $this->mensajes);

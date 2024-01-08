@@ -19,9 +19,12 @@ class CreateTarifaDetallesTable extends Migration
             $table->unsignedBigInteger("solicitud_detalle_id");
             $table->double("cantidad", 8, 2);
             $table->double("peso", 8, 2);
-            $table->decimal("mano_obra", 24, 2);
-            $table->decimal("depreciacion", 24, 2);
-            $table->decimal("ganancia", 24, 2);
+            $table->double("mano_obra", 8, 2);
+            $table->decimal("mano_obra_pagar", 24, 2);
+            $table->doulbe("depreciacion", 8, 2);
+            $table->decimal("depreciacion_pagar", 24, 2);
+            $table->doulbe("ganancia", 8, 2);
+            $table->decimal("ganancia_pagar", 24, 2);
             $table->timestamps();
         });
     }

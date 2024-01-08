@@ -29,4 +29,8 @@ class TarifaPago extends Model
     {
         return $this->belongsTo(SolicitudPedido::class, 'solicitud_pedido_id');
     }
+    public function tarifa_detalles()
+    {
+        return $this->hasMany(TarifaDetalle::class, 'tarifa_pago_id');
+    }
 }

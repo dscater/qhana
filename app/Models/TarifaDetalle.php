@@ -15,8 +15,11 @@ class TarifaDetalle extends Model
         "cantidad",
         "peso",
         "mano_obra",
+        "mano_obra_pagar",
         "depreciacion",
+        "depreciacion_pagar",
         "ganancia",
+        "ganancia_pagar",
     ];
 
     public function tarifa_pago()
