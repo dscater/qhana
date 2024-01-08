@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-01-2024 a las 15:55:59
+-- Tiempo de generación: 08-01-2024 a las 16:55:46
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -51,9 +51,9 @@ INSERT INTO `actividads` (`id`, `imagen`, `descripcion`, `created_at`, `updated_
 
 CREATE TABLE `admin_productos` (
   `id` bigint UNSIGNED NOT NULL,
-  `codigo_color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(800) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `titulo` varchar(600) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titulo` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `stock_kg` double(8,2) NOT NULL DEFAULT '0.00',
   `stock_conos` double(8,2) NOT NULL DEFAULT '0.00',
   `fecha_registro` date DEFAULT NULL,
@@ -187,11 +187,11 @@ INSERT INTO `catalogos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_a
 
 CREATE TABLE `clientes` (
   `id` bigint UNSIGNED NOT NULL,
-  `empresa` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre_encargado` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fonos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `empresa` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_encargado` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fonos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -328,6 +328,14 @@ CREATE TABLE `distribucion_detalles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `distribucion_detalles`
+--
+
+INSERT INTO `distribucion_detalles` (`id`, `distribucion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
+(3, 1, 2, 2.00, 15.00, '2024-01-08 16:52:07', '2024-01-08 16:52:07'),
+(4, 1, 3, 1.00, 13.00, '2024-01-08 16:52:07', '2024-01-08 16:52:07');
+
 -- --------------------------------------------------------
 
 --
@@ -343,6 +351,13 @@ CREATE TABLE `distribucion_pedidos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `distribucion_pedidos`
+--
+
+INSERT INTO `distribucion_pedidos` (`id`, `solicitud_pedido_id`, `user_id`, `fecha_distribucion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '2024-01-08', '2024-01-08', '2024-01-08 16:52:07', '2024-01-08 16:52:07');
 
 -- --------------------------------------------------------
 
@@ -550,7 +565,19 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (179, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:54:32', '2024-01-07 15:54:32', '2024-01-07 15:54:32'),
 (180, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:54:47', '2024-01-07 15:54:47', '2024-01-07 15:54:47'),
 (181, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:55:01', '2024-01-07 15:55:01', '2024-01-07 15:55:01'),
-(182, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:55:07', '2024-01-07 15:55:07', '2024-01-07 15:55:07');
+(182, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-07', '11:55:07', '2024-01-07 15:55:07', '2024-01-07 15:55:07'),
+(184, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '11:26:52', '2024-01-08 15:26:52', '2024-01-08 15:26:52'),
+(185, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '11:33:10', '2024-01-08 15:33:10', '2024-01-08 15:33:10'),
+(186, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '12:08:56', '2024-01-08 16:08:56', '2024-01-08 16:08:56'),
+(187, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '12:15:05', '2024-01-08 16:15:05', '2024-01-08 16:15:05'),
+(188, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '12:15:56', '2024-01-08 16:15:56', '2024-01-08 16:15:56'),
+(190, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:17:50', '2024-01-08 16:17:50', '2024-01-08 16:17:50'),
+(191, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cantidad_restante: 0<br/>cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>peso_restante: 0<br/>updated_at: 2024-01-07 11:35:58<br/>', 'cantidad_restante: 0<br/>cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>peso_restante: 0<br/>updated_at: 2024-01-07 11:35:58<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '12:23:15', '2024-01-08 16:23:15', '2024-01-08 16:23:15'),
+(192, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'cantidad_restante: 0<br/>cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>peso_restante: 1<br/>updated_at: 2024-01-08 12:23:15<br/>', 'cantidad_restante: 0<br/>cliente_id: 1<br/>codigo: B001<br/>created_at: 2024-01-07 11:35:58<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>id: 1<br/>peso_restante: 1<br/>updated_at: 2024-01-08 12:23:15<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-08', '12:24:47', '2024-01-08 16:24:47', '2024-01-08 16:24:47'),
+(193, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:45:18', '2024-01-08 16:45:18', '2024-01-08 16:45:18'),
+(194, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:50:12', '2024-01-08 16:50:12', '2024-01-08 16:50:12'),
+(195, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:17:50<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 2<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:17:50<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:51:10', '2024-01-08 16:51:10', '2024-01-08 16:51:10'),
+(196, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', NULL, 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-08', '12:52:07', '2024-01-08 16:52:07', '2024-01-08 16:52:07');
 
 -- --------------------------------------------------------
 
@@ -609,8 +636,8 @@ INSERT INTO `ingreso_productos` (`id`, `admin_producto_id`, `cantidad`, `cantida
 
 CREATE TABLE `materials` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(800) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `stock` double(8,2) NOT NULL DEFAULT '0.00',
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -711,7 +738,7 @@ INSERT INTO `movimiento_cajas` (`id`, `ingresos`, `egresos`, `total`, `fecha`, `
 CREATE TABLE `movimiento_materials` (
   `id` bigint UNSIGNED NOT NULL,
   `registro_id` bigint UNSIGNED NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cantidad` double(8,2) NOT NULL,
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -735,7 +762,7 @@ INSERT INTO `movimiento_materials` (`id`, `registro_id`, `tipo`, `cantidad`, `fe
 CREATE TABLE `movimiento_productos` (
   `id` bigint UNSIGNED NOT NULL,
   `registro_id` bigint UNSIGNED NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cantidad` double(8,2) NOT NULL,
   `cantidad_conos` double(8,2) NOT NULL,
   `fecha_registro` date DEFAULT NULL,
@@ -1006,14 +1033,16 @@ CREATE TABLE `salida_productos` (
 CREATE TABLE `solicitud_detalles` (
   `id` bigint UNSIGNED NOT NULL,
   `solicitud_pedido_id` bigint UNSIGNED NOT NULL,
-  `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(600) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `talla` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `talla` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cantidad` double(8,2) NOT NULL,
-  `elaborado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `titulo` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo_color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cantidad_restante` double(8,2) NOT NULL,
+  `elaborado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titulo` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `peso` double(8,2) NOT NULL,
+  `peso_restante` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1022,8 +1051,9 @@ CREATE TABLE `solicitud_detalles` (
 -- Volcado de datos para la tabla `solicitud_detalles`
 --
 
-INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `elaborado`, `titulo`, `codigo_color`, `peso`, `created_at`, `updated_at`) VALUES
-(2, 1, '4043', 'chompa cris', 'L', 5.00, 'MANO', '2/17', 'guindo-2500', 29.00, '2024-01-07 15:35:58', '2024-01-07 15:55:01');
+INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `cantidad_restante`, `elaborado`, `titulo`, `codigo_color`, `peso`, `peso_restante`, `created_at`, `updated_at`) VALUES
+(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 3.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 14.00, '2024-01-07 15:35:58', '2024-01-08 16:52:07'),
+(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 27.00, '2024-01-08 15:33:10', '2024-01-08 16:52:07');
 
 -- --------------------------------------------------------
 
@@ -1033,8 +1063,10 @@ INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descri
 
 CREATE TABLE `solicitud_pedidos` (
   `id` bigint UNSIGNED NOT NULL,
-  `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cliente_id` bigint UNSIGNED NOT NULL,
+  `cantidad_restante` double(8,2) NOT NULL DEFAULT '0.00',
+  `peso_restante` double(8,2) NOT NULL DEFAULT '0.00',
   `fecha_recepcion` date NOT NULL,
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1045,8 +1077,8 @@ CREATE TABLE `solicitud_pedidos` (
 -- Volcado de datos para la tabla `solicitud_pedidos`
 --
 
-INSERT INTO `solicitud_pedidos` (`id`, `codigo`, `cliente_id`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'B001', 1, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-07 15:35:58');
+INSERT INTO `solicitud_pedidos` (`id`, `codigo`, `cliente_id`, `cantidad_restante`, `peso_restante`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'B001', 1, 5.00, 41.00, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-08 16:52:07');
 
 -- --------------------------------------------------------
 
@@ -1442,19 +1474,19 @@ ALTER TABLE `detalle_pedidos`
 -- AUTO_INCREMENT de la tabla `distribucion_detalles`
 --
 ALTER TABLE `distribucion_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `distribucion_pedidos`
 --
 ALTER TABLE `distribucion_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`
@@ -1568,7 +1600,7 @@ ALTER TABLE `salida_productos`
 -- AUTO_INCREMENT de la tabla `solicitud_detalles`
 --
 ALTER TABLE `solicitud_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitud_pedidos`

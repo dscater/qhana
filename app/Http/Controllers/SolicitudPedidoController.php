@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DistribucionDetalle;
 use App\Models\DistribucionPedido;
 use App\Models\HistorialAccion;
 use App\Models\RecepcionPedido;
@@ -67,18 +68,28 @@ class SolicitudPedidoController extends Controller
             ]);
 
             $solicitud_detalles = $request->solicitud_detalles;
+            $total_cantidad_resante = 0;
+            $total_peso_resante = 0;
             foreach ($solicitud_detalles as $value) {
                 $nueva_solicitud_pedido->solicitud_detalles()->create([
-                    "codigo" => $value["codigo"],
-                    "descripcion" => $value["descripcion"],
-                    "talla" => $value["talla"],
+                    "codigo" => mb_strtoupper($value["codigo"]),
+                    "descripcion" => mb_strtoupper($value["descripcion"]),
+                    "talla" => mb_strtoupper($value["talla"]),
                     "cantidad" => $value["cantidad"],
-                    "elaborado" => $value["elaborado"],
-                    "titulo" => $value["titulo"],
-                    "codigo_color" => $value["codigo_color"],
+                    "cantidad_restante" => $value["cantidad"],
+                    "elaborado" => mb_strtoupper($value["elaborado"]),
+                    "titulo" => mb_strtoupper($value["titulo"]),
+                    "codigo_color" => mb_strtoupper($value["codigo_color"]),
                     "peso" => $value["peso"],
+                    "peso_restante" => $value["peso"],
                 ]);
+                $total_cantidad_resante += (float)$value["cantidad"];
+                $total_peso_resante += (float)$value["peso"];
             }
+
+            $nueva_solicitud_pedido->cantidad_restante = $total_cantidad_resante;
+            $nueva_solicitud_pedido->peso_restante = $total_peso_resante;
+            $nueva_solicitud_pedido->save();
 
             DB::commit();
             return response()->JSON([
@@ -133,34 +144,72 @@ class SolicitudPedidoController extends Controller
             }
 
             $solicitud_detalles = $request->solicitud_detalles;
-
+            $total_cantidad_resante = 0;
+            $total_peso_resante = 0;
             foreach ($solicitud_detalles as $value) {
                 if ($value["id"] != 0) {
                     $solicitud_detalle = SolicitudDetalle::findOrFail($value["id"]);
                     $solicitud_detalle->update([
-                        "codigo" => $value["codigo"],
-                        "descripcion" => $value["descripcion"],
-                        "talla" => $value["talla"],
+                        "codigo" => mb_strtoupper($value["codigo"]),
+                        "descripcion" => mb_strtoupper($value["descripcion"]),
+                        "talla" => mb_strtoupper($value["talla"]),
                         "cantidad" => $value["cantidad"],
-                        "elaborado" => $value["elaborado"],
-                        "titulo" => $value["titulo"],
-                        "codigo_color" => $value["codigo_color"],
+                        "elaborado" => mb_strtoupper($value["elaborado"]),
+                        "titulo" => mb_strtoupper($value["titulo"]),
+                        "codigo_color" => mb_strtoupper($value["codigo_color"]),
                         "peso" => $value["peso"],
                     ]);
+
+                    $suma_cantidad_distribucion = DistribucionDetalle::where("solicitud_detalle_id", $solicitud_detalle->id)->sum("cantidad");
+                    $suma_peso_distribucion = DistribucionDetalle::where("solicitud_detalle_id", $solicitud_detalle->id)->sum("peso");
+
+                    if ($suma_cantidad_distribucion > $solicitud_detalle->cantidad) {
+                        throw new Exception("No es posible actualizar el producto con código <strong>" . $solicitud_detalle->codigo . "</strong>, debido a que existe una o varias distribuciones y la suma de la cantidad (" . $suma_cantidad_distribucion . ") de estas supera a la cantidad ingresada de: " . $solicitud_detalle->cantidad);
+                    }
+                    if ($suma_peso_distribucion > $solicitud_detalle->peso) {
+                        throw new Exception("No es posible actualizar el producto con código <strong>" . $solicitud_detalle->codigo . "</strong>, debido a que existe una o varias distribuciones y la suma del peso (" . $suma_peso_distribucion . ") de estas supera al peso ingresado de: " . $solicitud_detalle->peso);
+                    }
+
+                    if ($suma_cantidad_distribucion > 0) {
+                        $solicitud_detalle->update([
+                            "cantidad_restante" => $solicitud_detalle->cantidad - $suma_cantidad_distribucion,
+                        ]);
+                    } else {
+                        $solicitud_detalle->update([
+                            "cantidad_restante" => $value["cantidad"],
+                        ]);
+                    }
+                    if ($suma_peso_distribucion > 0) {
+                        $solicitud_detalle->update([
+                            "peso_restante" => $solicitud_detalle->peso - $suma_peso_distribucion,
+                        ]);
+                    } else {
+                        $solicitud_detalle->update([
+                            "peso_restante" => $value["peso"],
+                        ]);
+                    }
+                    $total_cantidad_resante += (float)$solicitud_detalle["cantidad_restante"];
+                    $total_peso_resante += (float)$solicitud_detalle["peso_restante"];
                 } else {
                     $solicitud_pedido->solicitud_detalles()->create([
-                        "codigo" => $value["codigo"],
-                        "descripcion" => $value["descripcion"],
-                        "talla" => $value["talla"],
+                        "codigo" => mb_strtoupper($value["codigo"]),
+                        "descripcion" => mb_strtoupper($value["descripcion"]),
+                        "talla" => mb_strtoupper($value["talla"]),
                         "cantidad" => $value["cantidad"],
-                        "elaborado" => $value["elaborado"],
-                        "titulo" => $value["titulo"],
-                        "codigo_color" => $value["codigo_color"],
+                        "cantidad_restante" => $value["cantidad"],
+                        "elaborado" => mb_strtoupper($value["elaborado"]),
+                        "titulo" => mb_strtoupper($value["titulo"]),
+                        "codigo_color" => mb_strtoupper($value["codigo_color"]),
                         "peso" => $value["peso"],
+                        "peso_restante" => $value["peso"],
                     ]);
+                    $total_cantidad_resante += (float)$value["cantidad"];
+                    $total_peso_resante += (float)$value["peso"];
                 }
             }
-
+            $solicitud_pedido->cantidad_restante = $total_cantidad_resante;
+            $solicitud_pedido->peso_restante = $total_peso_resante;
+            $solicitud_pedido->save();
             DB::commit();
             return response()->JSON([
                 'sw' => true,
@@ -199,10 +248,7 @@ class SolicitudPedidoController extends Controller
                 throw new Exception("No se puede eliminar el registro debido a que existen registros que lo usan");
             }
 
-            $antiguo = $solicitud_pedido->foto;
-            if ($antiguo != 'default.png') {
-                \File::delete(public_path() . '/imgs/solicitud_pedidos/' . $antiguo);
-            }
+            $solicitud_pedido->solicitud_detalles()->delete();
             $datos_original = HistorialAccion::getDetalleRegistro($solicitud_pedido, "solicitud_pedidos");
             $solicitud_pedido->delete();
 
@@ -235,7 +281,6 @@ class SolicitudPedidoController extends Controller
         $errors = [];
         // Log::debug($array);
         foreach ($array as $key => $value) {
-            Log::debug($value);
             if (trim($value["codigo"]) == '' || !$value["codigo"]) {
                 $errors["codigo_" . $key] = ["Debes ingresar el código"];
             }

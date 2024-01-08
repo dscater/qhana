@@ -459,9 +459,6 @@ class UserController extends Controller
 
     public function imprimirCredencial(User $usuario)
     {
-
-
-
         $pdf = PDF::loadView('reportes.credencial', compact('usuario'))->setPaper('letter', 'portrait');
         $pdf->setPaper([0, 0, 350, 150], 'cm');
         return $pdf->download('Credencial.pdf');

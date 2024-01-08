@@ -273,7 +273,7 @@
                 </tfoot>
             </table>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <button
                 class="btn btn-flat btn-block btn-warning"
                 v-html="txtBtn"
@@ -281,8 +281,8 @@
                 @click="enviarFormulario"
             ></button>
         </div>
-        <div class="col-md-1 text-center">
-            <router-link :to="{ name: 'solicitud_pedidos.index' }" class="btn">
+        <div class="col-md-2 text-center">
+            <router-link :to="{ name: 'solicitud_pedidos.index' }" class="btn btn-default btn-block btn-flat">
                 <i class="fa fa-arrow-left"></i> Volver
             </router-link>
         </div>

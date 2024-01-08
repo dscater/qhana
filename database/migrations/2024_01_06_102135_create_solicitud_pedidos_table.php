@@ -17,6 +17,8 @@ class CreateSolicitudPedidosTable extends Migration
             $table->id();
             $table->string("codigo", 255);
             $table->unsignedBigInteger("cliente_id");
+            $table->double("cantidad_restante", 8, 2)->default(0);
+            $table->double("peso_restante", 8, 2)->default(0);
             $table->date("fecha_recepcion");
             $table->date("fecha_registro")->nullable();
             $table->timestamps();

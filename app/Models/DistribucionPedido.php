@@ -25,4 +25,9 @@ class DistribucionPedido extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function distribucion_detalles()
+    {
+        return $this->hasMany(DistribucionDetalle::class, 'distribucion_pedido_id');
+    }
 }

@@ -16,6 +16,17 @@ class DistribucionDetalle extends Model
         "peso",
     ];
 
+    protected $appends = ["cantidad_aux", "peso_aux"];
+
+    public function getCantidadAuxAttribute()
+    {
+        return $this->cantidad;
+    }
+    public function getPesoAuxAttribute()
+    {
+        return $this->peso;
+    }
+
     public function distribucion_pedido()
     {
         return $this->belongsTo(DistribucionPedido::class, 'distribucion_pedido_id');

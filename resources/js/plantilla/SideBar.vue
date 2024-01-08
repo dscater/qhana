@@ -193,6 +193,8 @@
                             $route.name == 'solicitud_pedidos.create' ||
                             $route.name == 'solicitud_pedidos.edit' ||
                             $route.name == 'distribucion_pedidos.index' ||
+                            $route.name == 'distribucion_pedidos.create' ||
+                            $route.name == 'distribucion_pedidos.edit' ||
                             $route.name == 'recepcion_pedidos.index' ||
                             $route.name == 'tarifa_pagos.index'
                                 ? 'menu-is-opening menu-open'
@@ -247,8 +249,8 @@
                                     )
                                 "
                             >
-                                <a
-                                    href=""
+                                <router-link
+                                    :to="{ name: 'distribucion_pedidos.index' }"
                                     class="nav-link"
                                     v-loading.fullscreen.lock="
                                         fullscreenLoading
@@ -256,7 +258,7 @@
                                 >
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Distribución de Pedidos</p>
-                                </a>
+                                </router-link>
                             </li>
                             <li
                                 class="nav-item"

@@ -305,6 +305,22 @@ export default new Router({
                     .default,
             props: true,
         },
+        {
+            path: "/administracion/distribucion_pedidos/create",
+            name: "distribucion_pedidos.create",
+            component:
+                require("./components/modulos/distribucion_pedidos/create.vue")
+                    .default,
+            props: true,
+        },
+        {
+            path: "/administracion/distribucion_pedidos/:id",
+            name: "distribucion_pedidos.edit",
+            component:
+                require("./components/modulos/distribucion_pedidos/edit.vue")
+                    .default,
+            props: true,
+        },
 
         // recepcion_pedidos
         {

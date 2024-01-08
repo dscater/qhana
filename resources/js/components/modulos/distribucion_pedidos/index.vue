@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Catálogos</h1>
+                        <h1>Distribución de Pedidos</h1>
                     </div>
                 </div>
             </div>
@@ -17,21 +17,20 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <button
+                                        <router-link
                                             v-if="
                                                 permisos.includes(
-                                                    'catalogos.create'
+                                                    'distribucion_pedidos.create'
                                                 )
                                             "
                                             class="btn btn-warning btn-flat btn-block"
-                                            @click="
-                                                abreModal('nuevo');
-                                                limpiaCatalogo();
-                                            "
+                                            :to="{
+                                                name: 'distribucion_pedidos.create',
+                                            }"
                                         >
                                             <i class="fa fa-plus"></i>
                                             Nuevo
-                                        </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +82,234 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
+                                                <template #cell(mas)="row">
+                                                    <b-button
+                                                        variant="warning"
+                                                        size="sm"
+                                                        @click="
+                                                            row.toggleDetails
+                                                        "
+                                                    >
+                                                        {{
+                                                            row.detailsShowing
+                                                                ? "Ocultar"
+                                                                : "Mostrar"
+                                                        }}
+                                                        Detalles
+                                                    </b-button>
+                                                </template>
+
+                                                <template #row-details="row">
+                                                    <b-card>
+                                                        <b-row
+                                                            class="mb-2"
+                                                            style="
+                                                                overflow: auto;
+                                                            "
+                                                        >
+                                                            <b-col cols="12">
+                                                                <table
+                                                                    class="table table-striped"
+                                                                >
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                Detalle
+                                                                                Producto
+                                                                            </th>
+                                                                            <th>
+                                                                                Distribución
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <template
+                                                                            v-if="
+                                                                                row
+                                                                                    .item
+                                                                                    .distribucion_detalles
+                                                                                    .length >
+                                                                                0
+                                                                            "
+                                                                        >
+                                                                            <template
+                                                                                v-for="(
+                                                                                    item,
+                                                                                    index
+                                                                                ) in row
+                                                                                    .item
+                                                                                    .distribucion_detalles"
+                                                                            >
+                                                                                <tr>
+                                                                                    <td
+                                                                                        rowspan="2"
+                                                                                    >
+                                                                                        <div
+                                                                                            class="descripcion_producto"
+                                                                                        >
+                                                                                            <div
+                                                                                                class="desc codigo"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Código: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .codigo
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc descripcion"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Descripción: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .descripcion
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc talla"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Talla: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .talla
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc cantidad"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Cantidad: </strong
+                                                                                                ><span
+                                                                                                    class="badge badge-primary text-md"
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .cantidad
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc elaborado"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Elaborado: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .elaborado
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc titulo"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Título: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .titulo
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc codigo_color"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Color
+                                                                                                    Código: </strong
+                                                                                                ><span
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .codigo_color
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="desc peso"
+                                                                                            >
+                                                                                                <strong
+                                                                                                    >Peso: </strong
+                                                                                                ><span
+                                                                                                    class="badge badge-info text-md"
+                                                                                                    >{{
+                                                                                                        item
+                                                                                                            .solicitud_detalle
+                                                                                                            .peso
+                                                                                                    }}</span
+                                                                                                >
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        Cantidad:
+                                                                                        <span
+                                                                                            class="badge badge-primary text-md"
+                                                                                            >{{
+                                                                                                item.cantidad
+                                                                                            }}</span
+                                                                                        >
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        Peso:
+                                                                                        <span
+                                                                                            class="badge badge-info text-md"
+                                                                                            >{{
+                                                                                                item.peso
+                                                                                            }}</span
+                                                                                        >
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </template>
+                                                                        </template>
+                                                                        <template
+                                                                            v-else
+                                                                        >
+                                                                            <tr>
+                                                                                <td
+                                                                                    colspan="2"
+                                                                                    class="text-center"
+                                                                                >
+                                                                                    NO
+                                                                                    SE
+                                                                                    ENCONTRARÓN
+                                                                                    PRODUCTOS
+                                                                                </td>
+                                                                            </tr>
+                                                                        </template>
+                                                                        <template></template>
+                                                                    </tbody>
+                                                                </table>
+                                                            </b-col>
+                                                        </b-row>
+                                                        <b-button
+                                                            size="sm"
+                                                            variant="warning"
+                                                            @click="
+                                                                row.toggleDetails
+                                                            "
+                                                            >Ocultar</b-button
+                                                        >
+                                                    </b-card>
+                                                </template>
+
                                                 <template #cell(accion)="row">
                                                     <div
                                                         class="row justify-content-between"
@@ -90,7 +317,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.edit'
+                                                                    'distribucion_pedidos.edit'
                                                                 )
                                                             "
                                                             size="sm"
@@ -111,7 +338,7 @@
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
-                                                                    'catalogos.destroy'
+                                                                    'distribucion_pedidos.destroy'
                                                                 )
                                                             "
                                                             size="sm"
@@ -120,7 +347,7 @@
                                                             class="btn-flat btn-block"
                                                             title="Eliminar registro"
                                                             @click="
-                                                                eliminaCatalogo(
+                                                                eliminaDistribucionPedido(
                                                                     row.item.id,
                                                                     `<br/><h4>¿Está seguro(a) de eliminar el registro nro. ${row.item.id}?</h4>`
                                                                 )
@@ -170,22 +397,11 @@
                 </div>
             </div>
         </section>
-        <Nuevo
-            :muestra_modal="muestra_modal"
-            :accion="modal_accion"
-            :catalogo="oCatalogo"
-            @close="muestra_modal = false"
-            @envioModal="getCatalogos"
-        ></Nuevo>
     </div>
 </template>
 
 <script>
-import Nuevo from "./Nuevo.vue";
 export default {
-    components: {
-        Nuevo,
-    },
     data() {
         return {
             user: JSON.parse(localStorage.getItem("user")),
@@ -199,8 +415,23 @@ export default {
                     label: "Nro.",
                     sortable: true,
                 },
-                { key: "nombre", label: "Nombre", sortable: true },
-                { key: "descripcion", label: "Descripción", sortable: true },
+                {
+                    key: "solicitud_pedido.codigo",
+                    label: "Código de Pedido",
+                    sortable: true,
+                },
+                { key: "user.full_name", label: "Taller", sortable: true },
+                {
+                    key: "fecha_distribucion",
+                    label: "Fecha de Distribución",
+                    sortable: true,
+                },
+                {
+                    key: "fecha_registro",
+                    label: "Fecha de registro",
+                    sortable: true,
+                },
+                { key: "mas", label: "Ver más" },
                 { key: "accion", label: "Acción" },
             ],
             loading: true,
@@ -208,9 +439,7 @@ export default {
             loadingWindow: Loading.service({
                 fullscreen: this.fullscreenLoading,
             }),
-            muestra_modal: false,
-            modal_accion: "nuevo",
-            oCatalogo: {
+            oDistribucionPedido: {
                 id: 0,
                 nombre: "",
                 descripcion: "",
@@ -231,25 +460,14 @@ export default {
     },
     mounted() {
         this.loadingWindow.close();
-        this.getCatalogos();
+        this.getDistribucionPedidos();
     },
     methods: {
-        // Seleccionar Opciones de Tabla
-        editarRegistro(item) {
-            this.oCatalogo.id = item.id;
-            this.oCatalogo.nombre = item.nombre ? item.nombre : "";
-            this.oCatalogo.descripcion = item.descripcion
-                ? item.descripcion
-                : "";
-            this.modal_accion = "edit";
-            this.muestra_modal = true;
-        },
-
-        // Listar Catalogos
-        getCatalogos() {
+        // Listar DistribucionPedidos
+        getDistribucionPedidos() {
             this.showOverlay = true;
             this.muestra_modal = false;
-            let url = main_url + "/admin/catalogos";
+            let url = main_url + "/admin/distribucion_pedidos";
             if (this.pagina != 0) {
                 url += "?page=" + this.pagina;
             }
@@ -259,11 +477,19 @@ export default {
                 })
                 .then((res) => {
                     this.showOverlay = false;
-                    this.listRegistros = res.data.catalogos;
+                    this.listRegistros = res.data.distribucion_pedidos;
                     this.totalRows = res.data.total;
                 });
         },
-        eliminaCatalogo(id, descripcion) {
+        editarRegistro(item) {
+            this.$router.push({
+                name: "distribucion_pedidos.edit",
+                params: {
+                    id: item.id,
+                },
+            });
+        },
+        eliminaDistribucionPedido(id, descripcion) {
             Swal.fire({
                 title: "¿Quierés eliminar este registro?",
                 html: `<strong>${descripcion}</strong>`,
@@ -276,11 +502,11 @@ export default {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios
-                        .post(main_url + "/admin/catalogos/" + id, {
+                        .post(main_url + "/admin/distribucion_pedidos/" + id, {
                             _method: "DELETE",
                         })
                         .then((res) => {
-                            this.getCatalogos();
+                            this.getDistribucionPedidos();
                             this.filter = "";
                             Swal.fire({
                                 icon: "success",
@@ -315,21 +541,10 @@ export default {
                 }
             });
         },
-        abreModal(tipo_accion = "nuevo", catalogo = null) {
-            this.muestra_modal = true;
-            this.modal_accion = tipo_accion;
-            if (catalogo) {
-                this.oCatalogo = catalogo;
-            }
-        },
         onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
-        },
-        limpiaCatalogo() {
-            this.oCatalogo.nombre = "";
-            this.oCatalogo.descripcion = "";
         },
         formatoFecha(date) {
             return this.$moment(String(date)).format("DD/MM/YYYY");
