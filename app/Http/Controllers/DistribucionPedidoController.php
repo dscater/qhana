@@ -119,7 +119,7 @@ class DistribucionPedidoController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($distribucion_pedido, "distribucion_pedidos");
-            $distribucion_pedido->update(array_map('mb_strtoupper', $request->except("distribucion_detalles")));
+            $distribucion_pedido->update(array_map('mb_strtoupper', $request->except("distribucion_detalles","solicitud_pedido")));
             $datos_nuevo = HistorialAccion::getDetalleRegistro($distribucion_pedido, "distribucion_pedidos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
@@ -181,7 +181,7 @@ class DistribucionPedidoController extends Controller
     {
         return response()->JSON([
             'sw' => true,
-            'distribucion_pedido' => $distribucion_pedido->load(["distribucion_detalles.solicitud_detalle"])
+            'distribucion_pedido' => $distribucion_pedido->load(["solicitud_pedido", "distribucion_detalles.solicitud_detalle"])
         ], 200);
     }
     public function destroy(DistribucionPedido $distribucion_pedido)

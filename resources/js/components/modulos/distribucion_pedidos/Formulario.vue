@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4" v-if="accion == 'nuevo'">
             <label
                 :class="{
                     'text-danger': errors.solicitud_pedido_id,
@@ -24,6 +24,28 @@
                 >
                 </el-option>
             </el-select>
+            <span
+                class="error invalid-feedback"
+                v-if="errors.solicitud_pedido_id"
+                v-text="errors.solicitud_pedido_id[0]"
+            ></span>
+        </div>
+        <div class="form-group col-md-4" v-else>
+            <label
+                :class="{
+                    'text-danger': errors.solicitud_pedido_id,
+                }"
+                >Código de Pedido*</label
+            >
+            <el-input
+                v-if="distribucion_pedido.solicitud_pedido"
+                placeholder="Seleccionar Código de Pedido"
+                class="w-100"
+                :class="{ 'is-invalid': errors.solicitud_pedido_id }"
+                v-model="distribucion_pedido.solicitud_pedido.codigo"
+                readonly
+            >
+            </el-input>
             <span
                 class="error invalid-feedback"
                 v-if="errors.solicitud_pedido_id"
