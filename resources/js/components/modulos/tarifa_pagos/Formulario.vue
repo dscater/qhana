@@ -38,11 +38,11 @@
                 >Cliente*</label
             >
             <el-input
-                v-if="tarifa_pago.user"
+                v-if="tarifa_pago.cliente"
                 placeholder="Seleccionar Cliente"
                 class="w-100"
                 :class="{ 'is-invalid': errors.cliente_id }"
-                v-model="tarifa_pago.user.empresa"
+                v-model="tarifa_pago.cliente.empresa"
                 readonly
             >
             </el-input>
@@ -380,6 +380,7 @@ export default {
                     .then((response) => {
                         this.listSolicitudPedidos =
                             response.data.solicitud_pedidos;
+                        this.recalcularPagos();
                     });
             } else {
                 this.listSolicitudPedidos = [];
@@ -421,15 +422,19 @@ export default {
                                 ganancia_pagar: 0,
                                 solicitud_detalle: elem,
                             });
-                            this.tarifa_pago.cantidad += parseFloat(
-                                elem.cantidad
-                            );
-                            this.tarifa_pago.peso += parseFloat(elem.peso);
+                            this.tarifa_pago.cantidad =
+                                parseFloat(this.tarifa_pago.cantidad) +
+                                parseFloat(elem.cantidad);
+                            this.tarifa_pago.peso =
+                                parseFloat(this.tarifa_pago.peso) +
+                                parseFloat(elem.peso);
                         });
                     });
             }
         },
         recalcularPagos() {
+            let total_cantidad = 0;
+            let total_peso = 0;
             let total_mano_obra = 0;
             let total_depreciacion = 0;
             let total_ganancia = 0;
@@ -457,11 +462,15 @@ export default {
                     this.tarifa_pago.tarifa_detalles[index].ganancia_pagar =
                         ganancia_pagar;
 
+                    total_cantidad += parseFloat(elem.cantidad);
+                    total_peso += parseFloat(elem.peso);
                     total_mano_obra += parseFloat(mano_obra_pagar);
                     total_depreciacion += parseFloat(depreciacion_pagar);
                     total_ganancia += parseFloat(ganancia_pagar);
                 });
             }
+            this.tarifa_pago.cantidad = total_cantidad;
+            this.tarifa_pago.peso = total_peso;
             this.tarifa_pago.mano_obra = total_mano_obra;
             this.tarifa_pago.depreciacion = total_depreciacion;
             this.tarifa_pago.ganancia = total_ganancia;
