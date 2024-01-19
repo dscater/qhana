@@ -82,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         // Usuarios
+        Route::get('usuarios/index_users', [UserController::class, 'index_users']);
+
         Route::post('usuarios/imprimirCredencial/{usuario}', [UserController::class, 'imprimirCredencial']);
         Route::get('usuarios/getUsuarioTipoPersonal', [UserController::class, 'getUsuarioTipoPersonal']);
         Route::get('usuarios/getUsuarioTipo', [UserController::class, 'getUsuarioTipo']);

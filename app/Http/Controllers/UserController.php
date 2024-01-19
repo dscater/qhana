@@ -56,10 +56,17 @@ class UserController extends Controller
 
     public $permisos = [
         'ADMINISTRADOR' => [
+            // personal
             'usuarios.index',
             'usuarios.create',
             'usuarios.edit',
             'usuarios.destroy',
+
+            // usuarios
+            'users.index',
+            'users.create',
+            'users.edit',
+            'users.destroy',
 
             'portals.index',
 
@@ -185,12 +192,27 @@ class UserController extends Controller
 
         ],
         "SOCIO" => [],
+        "CAJA" => [
+            'cajas.index',
+            'cajas.create',
+            'cajas.edit',
+            'cajas.destroy',
+
+            "reportes.cajas"
+        ],
     ];
 
 
     public function index(Request $request)
     {
-        $usuarios = User::where('id', '!=', 1)->get();
+        $usuarios = User::where('id', '!=', 1)->where("tipo", "!=", "CAJA")->get();
+        return response()->JSON(['usuarios' => $usuarios, 'total' => count($usuarios)], 200);
+    }
+
+    public function index_users()
+    {
+        User::verificaUsuarioCaja();
+        $usuarios = User::where('id', '!=', 1)->whereIn("tipo", ["CAJA"])->get();
         return response()->JSON(['usuarios' => $usuarios, 'total' => count($usuarios)], 200);
     }
 

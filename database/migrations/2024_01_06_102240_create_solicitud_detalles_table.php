@@ -25,6 +25,7 @@ class CreateSolicitudDetallesTable extends Migration
             $table->string("titulo", 300);
             $table->string("codigo_color", 255);
             $table->double("peso", 8, 2);
+            $table->double("peso_total", 8, 2);
             $table->double("peso_restante", 8, 2);
             $table->timestamps();
         });

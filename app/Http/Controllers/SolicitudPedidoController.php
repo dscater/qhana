@@ -94,10 +94,11 @@ class SolicitudPedidoController extends Controller
                     "titulo" => mb_strtoupper($value["titulo"]),
                     "codigo_color" => mb_strtoupper($value["codigo_color"]),
                     "peso" => $value["peso"],
-                    "peso_restante" => $value["peso"],
+                    "peso_total" => $value["peso_total"],
+                    "peso_restante" => $value["peso_total"],
                 ]);
                 $total_cantidad_resante += (float)$value["cantidad"];
-                $total_peso_resante += (float)$value["peso"];
+                $total_peso_resante += (float)$value["peso_total"];
             }
 
             $nueva_solicitud_pedido->cantidad_restante = $total_cantidad_resante;
@@ -171,6 +172,7 @@ class SolicitudPedidoController extends Controller
                         "titulo" => mb_strtoupper($value["titulo"]),
                         "codigo_color" => mb_strtoupper($value["codigo_color"]),
                         "peso" => $value["peso"],
+                        "peso_total" => $value["peso_total"],
                     ]);
 
                     $suma_cantidad_distribucion = DistribucionDetalle::where("solicitud_detalle_id", $solicitud_detalle->id)->sum("cantidad");
@@ -194,11 +196,11 @@ class SolicitudPedidoController extends Controller
                     }
                     if ($suma_peso_distribucion > 0) {
                         $solicitud_detalle->update([
-                            "peso_restante" => $solicitud_detalle->peso - $suma_peso_distribucion,
+                            "peso_restante" => $solicitud_detalle->peso_total - $suma_peso_distribucion,
                         ]);
                     } else {
                         $solicitud_detalle->update([
-                            "peso_restante" => $value["peso"],
+                            "peso_restante" => $value["peso_total"],
                         ]);
                     }
                     $total_cantidad_resante += (float)$solicitud_detalle["cantidad_restante"];
@@ -214,10 +216,11 @@ class SolicitudPedidoController extends Controller
                         "titulo" => mb_strtoupper($value["titulo"]),
                         "codigo_color" => mb_strtoupper($value["codigo_color"]),
                         "peso" => $value["peso"],
-                        "peso_restante" => $value["peso"],
+                        "peso_total" => $value["peso_total"],
+                        "peso_restante" => $value["peso_total"],
                     ]);
                     $total_cantidad_resante += (float)$value["cantidad"];
-                    $total_peso_resante += (float)$value["peso"];
+                    $total_peso_resante += (float)$value["peso_total"];
                 }
             }
             $solicitud_pedido->cantidad_restante = $total_cantidad_resante;
@@ -317,6 +320,9 @@ class SolicitudPedidoController extends Controller
             }
             if (trim($value["peso"]) == '' || !$value["peso"]) {
                 $errors["peso_" . $key] = ["Debes ingresar el peso"];
+            }
+            if (trim($value["peso_total"]) == '' || !$value["peso_total"]) {
+                $errors["peso_total_" . $key] = ["El peso total debe ser mayor a 0"];
             }
         }
         return $errors;

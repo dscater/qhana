@@ -124,6 +124,7 @@
                                         }"
                                         v-model="caja.concepto_id"
                                         clearable
+                                        filterable
                                     >
                                         <el-option
                                             v-for="item in listConceptos"
@@ -478,9 +479,17 @@ export default {
             }
         },
         getConceptos() {
-            axios.get(main_url + "/admin/conceptos").then((response) => {
-                this.listConceptos = response.data.conceptos;
-            });
+            axios
+                .get(main_url + "/admin/conceptos", {
+                    params: {
+                        ordenado: true,
+                        col: "nombre",
+                        order: "asc",
+                    },
+                })
+                .then((response) => {
+                    this.listConceptos = response.data.conceptos;
+                });
         },
         setRegistroModal() {
             this.enviando = true;

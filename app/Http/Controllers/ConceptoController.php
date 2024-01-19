@@ -22,7 +22,12 @@ class ConceptoController extends Controller
     ];
     public function index(Request $request)
     {
-        $conceptos = Concepto::all();
+        $conceptos = [];
+        if (isset($request->ordenado) && $request->ordenado) {
+            $conceptos = Concepto::orderBy($request->col, $request->order)->get();
+        } else {
+            $conceptos = Concepto::all();
+        }
         return response()->JSON(['conceptos' => $conceptos, 'total' => count($conceptos)], 200);
     }
     public function store(Request $request)

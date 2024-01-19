@@ -158,6 +158,15 @@
                                                 }}</span
                                             >
                                         </div>
+                                        <div class="desc peso">
+                                            <strong>Peso Uni.(gr): </strong
+                                            ><span
+                                                class="badge badge-info text-md"
+                                                >{{
+                                                    item.solicitud_detalle.peso
+                                                }}</span
+                                            >
+                                        </div>
                                         <div class="desc elaborado">
                                             <strong>Elaborado: </strong
                                             ><span>{{
@@ -178,11 +187,12 @@
                                             }}</span>
                                         </div>
                                         <div class="desc peso">
-                                            <strong>Peso: </strong
+                                            <strong>Peso Total (gr): </strong
                                             ><span
                                                 class="badge badge-info text-md"
                                                 >{{
-                                                    item.solicitud_detalle.peso
+                                                    item.solicitud_detalle
+                                                        .peso_total
                                                 }}</span
                                             >
                                         </div>

@@ -75,7 +75,7 @@ export default new Router({
             component: require("./Auth.vue").default,
         },
 
-        // Usuarios
+        // Usuarios-Personal
         {
             path: "/administracion/usuarios/perfil/:id",
             name: "usuarios.perfil",
@@ -88,6 +88,12 @@ export default new Router({
             name: "usuarios.index",
             component: require("./components/modulos/usuarios/index.vue")
                 .default,
+        },
+        // USERS
+        {
+            path: "/administracion/users",
+            name: "users.index",
+            component: require("./components/modulos/users/index.vue").default,
         },
 
         // Portal

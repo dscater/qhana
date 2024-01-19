@@ -83,6 +83,7 @@
                         class="nav-header font-weight-bold"
                         v-if="
                             permisos.includes('usuarios.index') ||
+                            permisos.includes('users.index') ||
                             permisos.includes('conceptos.index') ||
                             permisos.includes('cajas.index') ||
                             permisos.includes('repositorios.index')
@@ -122,7 +123,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-list-alt"></i>
                             <p>
-                                Productos
+                                Producto Lana
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -175,7 +176,7 @@
                                     "
                                 >
                                     <i class="nav-icon far fa-circle"></i>
-                                    <p>Productos</p>
+                                    <p>Producto Lana</p>
                                 </router-link>
                             </li>
                         </ul>
@@ -405,6 +406,19 @@
                         >
                             <i class="nav-icon fas fa-folder-open"></i>
                             <p>Repositorio</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('users.index')"
+                    >
+                        <router-link
+                            :to="{ name: 'users.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Usuarios</p>
                         </router-link>
                     </li>
                     <li

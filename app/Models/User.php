@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -99,5 +100,33 @@ class User extends Authenticatable
     public function valoracion_user()
     {
         return $this->hasMany(ValoracionUser::class, 'user_id');
+    }
+
+    public static function verificaUsuarioCaja()
+    {
+        $usuarios = User::where('id', '!=', 1)->whereIn("tipo", ["CAJA"])->get();
+        if (count($usuarios) == 0) {
+            User::create([
+                "usuario" => "caja",
+                "nombre" => "caja",
+                "paterno" => "",
+                "ci" => "123456",
+                "ci_exp" => "",
+                "genero" => "",
+                "cargo" => "",
+                "taller" => "",
+                "dir" => "",
+                "tipo_personal" => "",
+                "p_discapacidad" => 0,
+                "tipo" => "CAJA",
+                "validez_credencial" => "",
+                "password" => Hash::make("123456"),
+                "estado" => 1,
+                "acceso" => 1,
+                "fecha_registro" => date("Y-m-d"),
+            ]);
+        }
+
+        return true;
     }
 }

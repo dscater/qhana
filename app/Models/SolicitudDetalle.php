@@ -20,6 +20,7 @@ class SolicitudDetalle extends Model
         "titulo",
         "codigo_color",
         "peso",
+        "peso_total",
         "peso_restante",
     ];
 

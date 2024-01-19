@@ -78,14 +78,15 @@
             <table class="table table-bordered">
                 <thead class="bg-warning text-white">
                     <tr>
-                        <th>Código Producto</th>
-                        <th>Descripción</th>
-                        <th>Talla</th>
-                        <th>Cantidad</th>
-                        <th>Elaborado</th>
-                        <th>Título</th>
-                        <th>Color Código</th>
-                        <th>Peso (gr)</th>
+                        <th class="text-center">Código Producto</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Talla</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-center">Elaborado</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Color Código</th>
+                        <th class="text-center">Peso Uni. (gr)</th>
+                        <th class="text-center">Peso Total (gr)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -158,6 +159,8 @@
                                             errors['cantidad_' + index],
                                     }"
                                     v-model="item.cantidad"
+                                    @keyup="calculaPesoTotal(index)"
+                                    @change="calculaPesoTotal(index)"
                                 />
                                 <span
                                     class="error invalid-feedback"
@@ -231,11 +234,32 @@
                                         'is-invalid': errors['peso_' + index],
                                     }"
                                     v-model="item.peso"
+                                    @keyup="calculaPesoTotal(index)"
+                                    @change="calculaPesoTotal(index)"
                                 />
                                 <span
                                     class="error invalid-feedback"
                                     v-if="errors['peso_' + index]"
                                     v-text="errors['peso_' + index][0]"
+                                ></span>
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    placeholder="Peso"
+                                    class="form-control"
+                                    :class="{
+                                        'is-invalid':
+                                            errors['peso_total_' + index],
+                                    }"
+                                    readonly
+                                    v-model="item.peso_total"
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors['peso_total_' + index]"
+                                    v-text="errors['peso_total_' + index][0]"
                                 ></span>
                             </td>
                             <td>
@@ -252,7 +276,7 @@
                     </template>
                     <template v-else>
                         <tr>
-                            <td colspan="9" class="text-center">
+                            <td colspan="10" class="text-center">
                                 NO SE AGREGARON PRODUCTOS
                             </td>
                         </tr>
@@ -261,7 +285,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="9" class="p-0">
+                        <td colspan="10" class="p-0">
                             <button
                                 class="btn btn-primary btn-flat btn-block"
                                 @click.prevent="agregarDetalle"
@@ -282,7 +306,10 @@
             ></button>
         </div>
         <div class="col-md-2 text-center">
-            <router-link :to="{ name: 'solicitud_pedidos.index' }" class="btn btn-default btn-block btn-flat">
+            <router-link
+                :to="{ name: 'solicitud_pedidos.index' }"
+                class="btn btn-default btn-block btn-flat"
+            >
                 <i class="fa fa-arrow-left"></i> Volver
             </router-link>
         </div>
@@ -411,8 +438,9 @@ export default {
                                     icon: "error",
                                     title: "Error",
                                     html: error.response.data.message,
-                                    showConfirmButton: false,
-                                    timer: 2000,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: "#c57a40",
+                                    confirmButtonText: "Aceptar",
                                 });
                             }
                         }
@@ -421,6 +449,18 @@ export default {
                 this.enviando = false;
                 console.log(e);
             }
+        },
+        calculaPesoTotal(index) {
+            let cantidad = this.solicitud_pedido.solicitud_detalles[index]
+                .cantidad
+                ? this.solicitud_pedido.solicitud_detalles[index].cantidad
+                : 0;
+            let peso = this.solicitud_pedido.solicitud_detalles[index].peso
+                ? this.solicitud_pedido.solicitud_detalles[index].peso
+                : 0;
+
+            this.solicitud_pedido.solicitud_detalles[index].peso_total =
+                parseFloat(cantidad) * parseFloat(peso);
         },
     },
 };

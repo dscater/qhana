@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Administrar Productos</h1>
+                        <h1>Administrar Producto Lana</h1>
                     </div>
                 </div>
             </div>
@@ -88,6 +88,16 @@
                                                         class="badge badge-primary text-md"
                                                         >{{
                                                             row.item.stock_kg
+                                                        }}</span
+                                                    >
+                                                </template>
+                                                <template
+                                                    #cell(stock_conos)="row"
+                                                >
+                                                    <span
+                                                        class="badge badge-info text-md"
+                                                        >{{
+                                                            row.item.stock_conos
                                                         }}</span
                                                     >
                                                 </template>
@@ -211,6 +221,7 @@ export default {
                 { key: "descripcion", label: "Descripción", sortable: true },
                 { key: "titulo", label: "Título", sortable: true },
                 { key: "stock_kg", label: "Stock (KG)", sortable: true },
+                { key: "stock_conos", label: "Stock Conos", sortable: true },
                 {
                     key: "fecha_registro",
                     label: "Fecha de Registro",

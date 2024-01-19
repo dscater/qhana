@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 08-01-2024 a las 22:30:17
+-- Tiempo de generación: 19-01-2024 a las 15:55:25
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -155,7 +155,8 @@ INSERT INTO `cajas` (`id`, `tipo`, `tipo_movimiento`, `concepto_id`, `monto`, `r
 (5, 'RECIBO', 'INGRESO', 1, 350.00, 1, NULL, '2023-10-18', 'PRUEBA INGRESO RECIBO CON RECIBBO', 'SOCIO', 3, 7, NULL, '2023-10-18', 2, 2, '2023-10-18 21:50:25', '2023-10-18 21:50:25'),
 (6, 'NORMAL', 'EGRESO', 2, 150.50, 1, '1110000', '2023-10-18', 'PRUEBA EGRESO DECIMAL', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:51:04', '2023-10-18 21:51:04'),
 (7, 'RECIBO', 'EGRESO', 2, 120.00, 1, NULL, '2023-10-18', 'DESC. EGRESO RECIBO', 'TRABAJADOR', 4, 5, NULL, '2023-10-18', 2, 2, '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
-(8, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11211211', '2023-10-18', 'DESC', NULL, NULL, NULL, NULL, '2023-10-18', 1, 0, '2023-10-18 22:11:17', '2023-10-18 22:11:17');
+(8, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11211211', '2023-10-18', 'DESC', NULL, NULL, NULL, NULL, '2023-10-18', 1, 0, '2023-10-18 22:11:17', '2023-10-18 22:11:17'),
+(9, 'NORMAL', 'EGRESO', 1, 10.00, 1, '', '2024-01-19', 'PASAJE', NULL, NULL, NULL, NULL, '2024-01-19', 1, 0, '2024-01-19 14:50:23', '2024-01-19 14:50:23');
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,10 @@ CREATE TABLE `conceptos` (
 
 INSERT INTO `conceptos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (1, 'CONCEPTO #1 MODIFICADO', '2023-10-18 19:42:15', '2023-10-18 19:42:21'),
-(2, 'CONCEPTO #2', '2023-10-18 19:42:25', '2023-10-18 19:42:25');
+(2, 'CONCEPTO #2', '2023-10-18 19:42:25', '2023-10-18 19:42:25'),
+(4, 'APERTURA DE CAJA', '2024-01-19 14:51:58', '2024-01-19 14:51:58'),
+(5, 'PASAJE', '2024-01-19 14:52:07', '2024-01-19 14:52:07'),
+(6, 'VENTA', '2024-01-19 14:52:12', '2024-01-19 14:52:12');
 
 -- --------------------------------------------------------
 
@@ -333,8 +337,8 @@ CREATE TABLE `distribucion_detalles` (
 --
 
 INSERT INTO `distribucion_detalles` (`id`, `distribucion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
-(3, 1, 2, 2.00, 15.00, '2024-01-08 16:52:07', '2024-01-08 16:52:07'),
-(4, 1, 3, 1.00, 13.00, '2024-01-08 16:52:07', '2024-01-08 16:52:07');
+(3, 1, 2, 0.00, 0.00, '2024-01-08 16:52:07', '2024-01-19 15:19:00'),
+(4, 1, 3, 1.00, 50.00, '2024-01-08 16:52:07', '2024-01-19 15:13:29');
 
 -- --------------------------------------------------------
 
@@ -586,7 +590,19 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (203, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA RECEPCIÓN DE PEDIDO', 'id: 2<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:58:48<br/>updated_at: 2024-01-08 16:58:48<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '16:58:48', '2024-01-08 20:58:48', '2024-01-08 20:58:48'),
 (204, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA RECEPCIÓN DE PEDIDO', 'id: 2<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:58:48<br/>updated_at: 2024-01-08 16:58:48<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-08', '17:01:47', '2024-01-08 21:01:47', '2024-01-08 21:01:47'),
 (205, 1, 'CREACIÓN', 'EL USUARIO admin ACTUALIZÓ LA SECCIÓN NOSOTROS', 'id: 1<br/>historia: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>mision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>vision: CONTRARY TO POPULAR BELIEF, LOREM IPSUM IS NOT SIMPLY RANDOM TEXT. IT HAS ROOTS IN A PIECE OF CLASSICAL LATIN LITERATURE FROM 45 BC, MAKING IT OVER 2000 YEARS OLD. RICHARD MCCLINTOCK, A LATIN PROFESSOR AT HAMPDEN-SYDNEY COLLEGE IN VIRGINIA, LOOKED UP ONE OF THE MORE OBSCURE LATIN WORDS, CONSECTETUR, FROM A LOREM IPSUM PASSAGE, AND GOING THROUGH THE CITES OF THE WORD IN CLASSICAL LITERATURE, DISCOVERED THE UNDOUBTABLE SOURCE. LOREM IPSUM COMES FROM SECTIONS 1.10.32 AND 1.10.33 OF \"DE FINIBUS BONORUM ET MALORUM\" (THE EXTREMES OF GOOD AND EVIL) BY CICERO, WRITTEN IN 45 BC. THIS BOOK IS A TREATISE ON THE THEORY OF ETHICS, VERY POPULAR DURING THE RENAISSANCE. THE FIRST LINE OF LOREM IPSUM, \"LOREM IPSUM DOLOR SIT AMET..\", COMES FROM A LINE IN SECTION 1.10.32.<br/>created_at: 2023-10-02 13:11:42<br/>updated_at: 2023-10-02 17:05:59<br/>', NULL, 'NOSOTROS', '2024-01-08', '17:05:45', '2024-01-08 21:05:45', '2024-01-08 21:05:45'),
-(207, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA TARIFA DE PAGO', 'id: 2<br/>cliente_id: 1<br/>solicitud_pedido_id: 1<br/>cantidad: 53<br/>peso: 2940<br/>mano_obra: 16<br/>depreciacion: 18<br/>ganancia: 19<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 18:25:57<br/>updated_at: 2024-01-08 18:25:57<br/>', NULL, 'TARIFA DE PAGOS', '2024-01-08', '18:25:57', '2024-01-08 22:25:57', '2024-01-08 22:25:57');
+(207, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA TARIFA DE PAGO', 'id: 2<br/>cliente_id: 1<br/>solicitud_pedido_id: 1<br/>cantidad: 53<br/>peso: 2940<br/>mano_obra: 16<br/>depreciacion: 18<br/>ganancia: 19<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 18:25:57<br/>updated_at: 2024-01-08 18:25:57<br/>', NULL, 'TARIFA DE PAGOS', '2024-01-08', '18:25:57', '2024-01-08 22:25:57', '2024-01-08 22:25:57'),
+(208, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'id: 9<br/>tipo: NORMAL<br/>tipo_movimiento: EGRESO<br/>concepto_id: 1<br/>monto: 10<br/>responsable_id: 1<br/>nro_factura: <br/>fecha: 2024-01-19<br/>descripcion: PASAJE<br/>a_favor: <br/>nro: <br/>user_id: <br/>nombre: <br/>fecha_registro: 2024-01-19<br/>estado: 1<br/>movimiento_caja_id: 0<br/>created_at: 2024-01-19 10:50:23<br/>updated_at: 2024-01-19 10:50:23<br/>', NULL, 'CAJAS', '2024-01-19', '10:50:23', '2024-01-19 14:50:23', '2024-01-19 14:50:23'),
+(209, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'id: 4<br/>nombre: APERTURA DE CAJA<br/>created_at: 2024-01-19 10:51:58<br/>updated_at: 2024-01-19 10:51:58<br/>', NULL, 'CONCEPTOS', '2024-01-19', '10:51:58', '2024-01-19 14:51:58', '2024-01-19 14:51:58'),
+(210, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'id: 5<br/>nombre: PASAJE<br/>created_at: 2024-01-19 10:52:07<br/>updated_at: 2024-01-19 10:52:07<br/>', NULL, 'CONCEPTOS', '2024-01-19', '10:52:07', '2024-01-19 14:52:07', '2024-01-19 14:52:07'),
+(211, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'id: 6<br/>nombre: VENTA<br/>created_at: 2024-01-19 10:52:12<br/>updated_at: 2024-01-19 10:52:12<br/>', NULL, 'CONCEPTOS', '2024-01-19', '10:52:12', '2024-01-19 14:52:12', '2024-01-19 14:52:12'),
+(214, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'id: 1<br/>codigo: B001<br/>cliente_id: 1<br/>cantidad_restante: 5<br/>peso_restante: 41<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-07 11:35:58<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>codigo: B001<br/>cliente_id: 1<br/>cantidad_restante: 5<br/>peso_restante: 41<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-07 11:35:58<br/>updated_at: 2024-01-08 12:52:07<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-19', '11:09:42', '2024-01-19 15:09:42', '2024-01-19 15:09:42'),
+(215, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA SOLICITUD DE PEDIDO', 'id: 1<br/>codigo: B001<br/>cliente_id: 1<br/>cantidad_restante: 5<br/>peso_restante: 237<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-07 11:35:58<br/>updated_at: 2024-01-19 11:09:42<br/>', 'id: 1<br/>codigo: B001<br/>cliente_id: 1<br/>cantidad_restante: 5<br/>peso_restante: 237<br/>fecha_recepcion: 2024-01-07<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-07 11:35:58<br/>updated_at: 2024-01-19 11:09:42<br/>', 'SOLICITUD DE PEDIDOS', '2024-01-19', '11:09:50', '2024-01-19 15:09:50', '2024-01-19 15:09:50'),
+(216, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:13:13', '2024-01-19 15:13:13', '2024-01-19 15:13:13'),
+(217, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:13:29', '2024-01-19 15:13:29', '2024-01-19 15:13:29'),
+(218, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:18:46', '2024-01-19 15:18:46', '2024-01-19 15:18:46'),
+(219, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:18:53', '2024-01-19 15:18:53', '2024-01-19 15:18:53'),
+(220, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:19:00', '2024-01-19 15:19:00', '2024-01-19 15:19:00'),
+(221, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-19', '11:19:31', '2024-01-19 15:19:31', '2024-01-19 15:19:31');
 
 -- --------------------------------------------------------
 
@@ -1067,6 +1083,7 @@ CREATE TABLE `solicitud_detalles` (
   `titulo` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `codigo_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `peso` double(8,2) NOT NULL,
+  `peso_total` double(8,2) NOT NULL,
   `peso_restante` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1076,9 +1093,9 @@ CREATE TABLE `solicitud_detalles` (
 -- Volcado de datos para la tabla `solicitud_detalles`
 --
 
-INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `cantidad_restante`, `elaborado`, `titulo`, `codigo_color`, `peso`, `peso_restante`, `created_at`, `updated_at`) VALUES
-(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 3.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 14.00, '2024-01-07 15:35:58', '2024-01-08 17:02:09'),
-(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 27.00, '2024-01-08 15:33:10', '2024-01-08 17:02:09');
+INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `cantidad_restante`, `elaborado`, `titulo`, `codigo_color`, `peso`, `peso_total`, `peso_restante`, `created_at`, `updated_at`) VALUES
+(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 5.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 145.00, 145.00, '2024-01-07 15:35:58', '2024-01-19 15:19:00'),
+(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 120.00, 70.00, '2024-01-08 15:33:10', '2024-01-19 15:19:00');
 
 -- --------------------------------------------------------
 
@@ -1103,7 +1120,7 @@ CREATE TABLE `solicitud_pedidos` (
 --
 
 INSERT INTO `solicitud_pedidos` (`id`, `codigo`, `cliente_id`, `cantidad_restante`, `peso_restante`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'B001', 1, 5.00, 41.00, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-08 16:52:07');
+(1, 'B001', 1, 7.00, 215.00, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-19 15:19:00');
 
 -- --------------------------------------------------------
 
@@ -1185,7 +1202,7 @@ CREATE TABLE `users` (
   `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tipo_personal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `p_discapacidad` double(8,2) NOT NULL,
-  `tipo` enum('ADMINISTRADOR','REPRESENTANTE','SOCIO','NINGUNO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` enum('ADMINISTRADOR','REPRESENTANTE','SOCIO','CAJA','NINGUNO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `validez_credencial` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1206,7 +1223,8 @@ INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_
 (4, 'FMAMANI', 'FERNANDO GONZALO', 'MAMANI', 'MAMANI', '2222', 'LP', '2000-01-01', 'MASCULINO', 'CARGO QHANA BOLIVIA', '2020-01-01', 'TALLER #1', 'LOS OLIVOS', '777777', 'SOCIO', 70.00, 'ADMINISTRADOR', 'default.png', 'VALIDO DEL 20/01/23 AL 20/01/2024', '$2y$10$EosVGjhgfm3HNQ9JFnnbC..vgv7SsuWysSrLL7AjEq0iTRoYs/PWC', 1, 0, '2023-09-28', '2023-09-28 22:10:52', '2023-09-29 17:01:06'),
 (5, 'MMAMANI', 'MARIA', 'MAMANI', 'MAMANI', '3333', 'LP', '1999-01-01', 'FEMENINO', 'CARGO #3 QHANA BOLIVIA', '2018-01-01', 'TALLER #3', 'LOS OLIVOS', '66666', 'TRABAJADOR', 100.00, 'NINGUNO', 'default.png', 'VALIDO DEL 01/01/23 AL 01/01/24', '$2y$10$q9MGwRRWSzADVe559suEL.D3LmI4FS8Cjcw08Ja8mYDu7ao/NrLh2', 0, 0, '2023-09-28', '2023-09-28 22:18:55', '2023-10-09 15:36:55'),
 (6, 'SCACERES', 'SOFIA', 'CACERES', 'CACERES', '4444', 'CB', '1999-01-01', 'FEMENINO', 'CARGO #4', '2023-10-09', 'TALLER #2', 'LOS OLIVOS', '77777', 'SOCIO', 0.00, 'SOCIO', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$YL0hndJf5qJZg3kL380SiOt/f4Dzhk2VThPQKnPKRCP/Btfe1eiO6', 1, 1, '2023-10-09', '2023-10-09 15:34:49', '2023-10-09 15:34:49'),
-(7, 'EQUISPE', 'ELVIS', 'QUISPE', 'QUISPE', '5555', 'CB', '2000-03-03', 'MASCULINO', 'SIN CARGO', '2023-01-01', 'TALLER #3', 'LOS OLIVOS', '7777', 'SOCIO', 0.00, 'REPRESENTANTE', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.', 1, 1, '2023-10-09', '2023-10-09 15:35:58', '2023-10-09 15:37:48');
+(7, 'EQUISPE', 'ELVIS', 'QUISPE', 'QUISPE', '5555', 'CB', '2000-03-03', 'MASCULINO', 'SIN CARGO', '2023-01-01', 'TALLER #3', 'LOS OLIVOS', '7777', 'SOCIO', 0.00, 'REPRESENTANTE', 'default.png', 'VALIDO DEL 01/01/2023 AL 01/01/2024', '$2y$10$AKGhHxtE.Bp5AYiw9fe1Ou6j1bZU7QC0VvVrdGbnwGa5dUSqHQQ9.', 1, 1, '2023-10-09', '2023-10-09 15:35:58', '2023-10-09 15:37:48'),
+(8, 'caja', 'caja', '', NULL, '123456', '', NULL, '', '', NULL, '', '', NULL, '', 0.00, 'CAJA', NULL, '', '$2y$10$FmQTfV2nXBkwOI.TRHqShujlbDFgvPFLFxHH1iwilLrU2QnLik7zq', 1, 1, '2024-01-19', '2024-01-19 14:45:47', '2024-01-19 14:45:47');
 
 --
 -- Índices para tablas volcadas
@@ -1475,7 +1493,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT de la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos`
@@ -1493,7 +1511,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `conceptos`
 --
 ALTER TABLE `conceptos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -1529,7 +1547,7 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`
@@ -1667,7 +1685,7 @@ ALTER TABLE `tarifa_pagos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas

@@ -275,10 +275,12 @@
                         @endif
                     </td>
                     <td class="">
-                        @if ($caja->tipo == 'NORMAL')
-                            F/{{ $caja->nro_factura }}
-                        @else
-                            R/{{ $caja->nro }}
+                        @if ($caja->nro_factura || $caja->nro)
+                            @if ($caja->tipo == 'NORMAL')
+                                F/{{ $caja->nro_factura }}
+                            @else
+                                R/{{ $caja->nro }}
+                            @endif
                         @endif
                     </td>
                     @if ($caja->tipo_movimiento == 'INGRESO')
