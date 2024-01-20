@@ -11,18 +11,10 @@
         </section>
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <Formulario
-                                    :recepcion_pedido="oRecepcionPedido"
-                                    :accion="'edit'"
-                                ></Formulario>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Formulario
+                    :recepcion_pedido="oRecepcionPedido"
+                    :accion="'edit'"
+                ></Formulario>
             </div>
         </section>
     </div>
@@ -50,6 +42,7 @@ export default {
                 distribucion_pedido_id: "",
                 fecha_recepcion: "",
                 recepcion_detalles: [],
+                historia_recepcions: [],
             },
         };
     },
@@ -63,6 +56,7 @@ export default {
                 .get(main_url + "/admin/recepcion_pedidos/" + this.id)
                 .then((response) => {
                     this.oRecepcionPedido = response.data.recepcion_pedido;
+                    console.log(this.oRecepcionPedido);
                 });
         },
     },

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-01-2024 a las 15:55:25
+-- Tiempo de generación: 20-01-2024 a las 18:45:02
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -337,7 +337,7 @@ CREATE TABLE `distribucion_detalles` (
 --
 
 INSERT INTO `distribucion_detalles` (`id`, `distribucion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
-(3, 1, 2, 0.00, 0.00, '2024-01-08 16:52:07', '2024-01-19 15:19:00'),
+(3, 1, 2, 3.00, 50.00, '2024-01-08 16:52:07', '2024-01-20 17:23:53'),
 (4, 1, 3, 1.00, 50.00, '2024-01-08 16:52:07', '2024-01-19 15:13:29');
 
 -- --------------------------------------------------------
@@ -602,7 +602,59 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (218, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:18:46', '2024-01-19 15:18:46', '2024-01-19 15:18:46'),
 (219, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:18:53', '2024-01-19 15:18:53', '2024-01-19 15:18:53'),
 (220, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'id: 1<br/>solicitud_pedido_id: 1<br/>user_id: 2<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 12:52:07<br/>updated_at: 2024-01-08 12:52:07<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-19', '11:19:00', '2024-01-19 15:19:00', '2024-01-19 15:19:00'),
-(221, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-19', '11:19:31', '2024-01-19 15:19:31', '2024-01-19 15:19:31');
+(221, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>created_at: 2024-01-08 16:46:29<br/>updated_at: 2024-01-08 16:46:29<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-01-19', '11:19:31', '2024-01-19 15:19:31', '2024-01-19 15:19:31'),
+(222, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA RECEPCIÓN DE PEDIDO', 'created_at: 2024-01-08 16:46:29<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 16:46:29<br/>user_id: 2<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-20', '11:56:08', '2024-01-20 15:56:08', '2024-01-20 15:56:08'),
+(223, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA DISTRIBUCIÓN DE PEDIDO', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'created_at: 2024-01-08 12:52:07<br/>fecha_distribucion: 2024-01-08<br/>fecha_registro: 2024-01-08<br/>id: 1<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-08 12:52:07<br/>user_id: 2<br/>', 'DISTRIBUCIÓN DE PEDIDOS', '2024-01-20', '13:23:53', '2024-01-20 17:23:53', '2024-01-20 17:23:53'),
+(224, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA RECEPCIÓN DE PEDIDO', 'created_at: 2024-01-20 13:58:44<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-20<br/>fecha_registro: 2024-01-20<br/>id: 6<br/>solicitud_pedido_id: 1<br/>updated_at: 2024-01-20 13:58:44<br/>user_id: 2<br/>', NULL, 'RECEPCIÓN DE PEDIDOS', '2024-01-20', '13:58:44', '2024-01-20 17:58:44', '2024-01-20 17:58:44');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historia_recepcions`
+--
+
+CREATE TABLE `historia_recepcions` (
+  `id` bigint UNSIGNED NOT NULL,
+  `recepcion_pedido_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `solicitud_pedido_id` bigint UNSIGNED NOT NULL,
+  `distribucion_pedido_id` bigint UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `historia_recepcions`
+--
+
+INSERT INTO `historia_recepcions` (`id`, `recepcion_pedido_id`, `user_id`, `solicitud_pedido_id`, `distribucion_pedido_id`, `fecha`, `created_at`, `updated_at`) VALUES
+(6, 6, 2, 1, 1, '2024-01-20', '2024-01-20 17:58:44', '2024-01-20 17:58:44');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historia_recepcion_detalles`
+--
+
+CREATE TABLE `historia_recepcion_detalles` (
+  `id` bigint UNSIGNED NOT NULL,
+  `historia_recepcion_id` bigint UNSIGNED NOT NULL,
+  `recepcion_detalle_id` bigint UNSIGNED NOT NULL,
+  `solicitud_detalle_id` bigint UNSIGNED NOT NULL,
+  `cantidad` double(8,2) NOT NULL,
+  `peso` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `historia_recepcion_detalles`
+--
+
+INSERT INTO `historia_recepcion_detalles` (`id`, `historia_recepcion_id`, `recepcion_detalle_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
+(1, 6, 11, 2, 1.00, 3.00, '2024-01-20 17:58:44', '2024-01-20 17:58:44'),
+(2, 6, 12, 3, 0.00, 0.00, '2024-01-20 17:58:44', '2024-01-20 17:58:44');
 
 -- --------------------------------------------------------
 
@@ -728,7 +780,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2024_01_06_104238_create_materials_table', 6),
 (42, '2024_01_06_104250_create_ingreso_materials_table', 6),
 (43, '2024_01_06_104303_create_salida_materials_table', 6),
-(44, '2024_01_06_104730_create_movimiento_materials_table', 7);
+(44, '2024_01_06_104730_create_movimiento_materials_table', 7),
+(45, '2024_01_20_113932_create_historia_recepcions_table', 8),
+(46, '2024_01_20_114055_create_historia_recepcion_detalles_table', 8);
 
 -- --------------------------------------------------------
 
@@ -918,7 +972,9 @@ CREATE TABLE `recepcion_detalles` (
   `recepcion_pedido_id` bigint UNSIGNED NOT NULL,
   `solicitud_detalle_id` bigint UNSIGNED NOT NULL,
   `cantidad` double(8,2) NOT NULL,
+  `cantidad_restante` double(8,2) NOT NULL,
   `peso` double(8,2) NOT NULL,
+  `peso_restante` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -927,9 +983,9 @@ CREATE TABLE `recepcion_detalles` (
 -- Volcado de datos para la tabla `recepcion_detalles`
 --
 
-INSERT INTO `recepcion_detalles` (`id`, `recepcion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `peso`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1.00, 7.00, '2024-01-08 20:46:29', '2024-01-08 20:57:50'),
-(2, 1, 3, 1.00, 6.00, '2024-01-08 20:46:29', '2024-01-08 20:46:29');
+INSERT INTO `recepcion_detalles` (`id`, `recepcion_pedido_id`, `solicitud_detalle_id`, `cantidad`, `cantidad_restante`, `peso`, `peso_restante`, `created_at`, `updated_at`) VALUES
+(11, 6, 2, 3.00, 2.00, 50.00, 47.00, '2024-01-20 17:58:44', '2024-01-20 17:58:44'),
+(12, 6, 3, 1.00, 1.00, 50.00, 50.00, '2024-01-20 17:58:44', '2024-01-20 17:58:44');
 
 -- --------------------------------------------------------
 
@@ -953,7 +1009,7 @@ CREATE TABLE `recepcion_pedidos` (
 --
 
 INSERT INTO `recepcion_pedidos` (`id`, `user_id`, `solicitud_pedido_id`, `distribucion_pedido_id`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, '2024-01-08', '2024-01-08', '2024-01-08 20:46:29', '2024-01-08 20:46:29');
+(6, 2, 1, 1, '2024-01-20', '2024-01-20', '2024-01-20 17:58:44', '2024-01-20 17:58:44');
 
 -- --------------------------------------------------------
 
@@ -1094,8 +1150,8 @@ CREATE TABLE `solicitud_detalles` (
 --
 
 INSERT INTO `solicitud_detalles` (`id`, `solicitud_pedido_id`, `codigo`, `descripcion`, `talla`, `cantidad`, `cantidad_restante`, `elaborado`, `titulo`, `codigo_color`, `peso`, `peso_total`, `peso_restante`, `created_at`, `updated_at`) VALUES
-(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 5.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 145.00, 145.00, '2024-01-07 15:35:58', '2024-01-19 15:19:00'),
-(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 120.00, 70.00, '2024-01-08 15:33:10', '2024-01-19 15:19:00');
+(2, 1, '4043', 'CHOMPA CRIS', 'L', 5.00, 2.00, 'MANO', '2/17', 'GUINDO-2500', 29.00, 145.00, 95.00, '2024-01-07 15:35:58', '2024-01-20 17:23:53'),
+(3, 1, '4044', 'CHOMPA CUADRADA', 'M', 3.00, 2.00, 'MAQUINA', '2/16', 'AZUL-8100', 40.00, 120.00, 70.00, '2024-01-08 15:33:10', '2024-01-20 17:23:53');
 
 -- --------------------------------------------------------
 
@@ -1120,7 +1176,7 @@ CREATE TABLE `solicitud_pedidos` (
 --
 
 INSERT INTO `solicitud_pedidos` (`id`, `codigo`, `cliente_id`, `cantidad_restante`, `peso_restante`, `fecha_recepcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'B001', 1, 7.00, 215.00, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-19 15:19:00');
+(1, 'B001', 1, 4.00, 165.00, '2024-01-07', '2024-01-06', '2024-01-07 15:35:58', '2024-01-20 17:23:53');
 
 -- --------------------------------------------------------
 
@@ -1316,6 +1372,18 @@ ALTER TABLE `distribucion_pedidos`
 -- Indices de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `historia_recepcions`
+--
+ALTER TABLE `historia_recepcions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `historia_recepcion_detalles`
+--
+ALTER TABLE `historia_recepcion_detalles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1547,7 +1615,19 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+
+--
+-- AUTO_INCREMENT de la tabla `historia_recepcions`
+--
+ALTER TABLE `historia_recepcions`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `historia_recepcion_detalles`
+--
+ALTER TABLE `historia_recepcion_detalles`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_materials`
@@ -1571,7 +1651,7 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `movimiento_cajas`
@@ -1619,13 +1699,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `recepcion_detalles`
 --
 ALTER TABLE `recepcion_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `recepcion_pedidos`
 --
 ALTER TABLE `recepcion_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `red_socials`

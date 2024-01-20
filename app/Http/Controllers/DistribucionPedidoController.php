@@ -190,6 +190,28 @@ class DistribucionPedidoController extends Controller
             'distribucion_pedido' => $distribucion_pedido->load(["solicitud_pedido", "distribucion_detalles.solicitud_detalle"])
         ], 200);
     }
+    public function verificaRecepcion(DistribucionPedido $distribucion_pedido)
+    {
+        // VERIFICAR EXISTENCIA DE RECEPCION
+        $recepcion_pedido = RecepcionPedido::with(["recepcion_detalles.solicitud_detalle"])->where("solicitud_pedido_id", $distribucion_pedido->solicitud_pedido_id)
+            ->where("user_id", $distribucion_pedido->user_id)
+            ->where("distribucion_pedido_id", $distribucion_pedido->id)
+            ->get()
+            ->first();
+
+        $existe_recepcion = false;
+        if ($recepcion_pedido) {
+            $existe_recepcion = true;
+        }
+
+        return response()->JSON([
+            'sw' => true,
+            "existe_recepcion" => $existe_recepcion,
+            "recepcion_pedido" => $recepcion_pedido ? $recepcion_pedido->load(["user", "solicitud_pedido", "historia_recepcions.historia_recepcion_detalles.solicitud_detalle", "historia_recepcions.historia_recepcion_detalles.recepcion_detalle", "recepcion_detalles.solicitud_detalle"]) : null,
+            'distribucion_pedido' => $distribucion_pedido->load(["solicitud_pedido", "distribucion_detalles.solicitud_detalle"])
+        ], 200);
+    }
+
     public function destroy(DistribucionPedido $distribucion_pedido)
     {
         DB::beginTransaction();

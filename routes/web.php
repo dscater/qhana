@@ -202,6 +202,7 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         // DISTRIBUCION PEDIDOS
+        Route::get("distribucion_pedidos/verificaRecepcion/{distribucion_pedido}", [DistribucionPedidoController::class, 'verificaRecepcion']);
         Route::get("distribucion_pedidos/byUser", [DistribucionPedidoController::class, 'byUser']);
         Route::resource('distribucion_pedidos', DistribucionPedidoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'

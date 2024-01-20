@@ -13,26 +13,21 @@ class RecepcionDetalle extends Model
         "recepcion_pedido_id",
         "solicitud_detalle_id",
         "cantidad",
+        "cantidad_restante",
         "peso",
+        "peso_restante",
     ];
 
-    protected $appends = ["cantidad_asignada", "peso_asignada"];
+    protected $appends = ["cantidad_res_aux", "peso_res_aux"];
 
-    public function getCantidadAsignadaAttribute()
+    public function getCantidadResAuxAttribute()
     {
-        $distribucion_detalle = DistribucionDetalle::where("distribucion_pedido_id", $this->recepcion_pedido->distribucion_pedido_id)->where("solicitud_detalle_id", $this->solicitud_detalle_id)->get()->first();
-        if ($distribucion_detalle) {
-            return $distribucion_detalle->cantidad;
-        }
-        return 0;
+
+        return $this->cantidad_restante;
     }
-    public function getPesoAsignadaAttribute()
+    public function getPesoResAuxAttribute()
     {
-        $distribucion_detalle = DistribucionDetalle::where("distribucion_pedido_id", $this->recepcion_pedido->distribucion_pedido_id)->where("solicitud_detalle_id", $this->solicitud_detalle_id)->get()->first();
-        if ($distribucion_detalle) {
-            return $distribucion_detalle->peso;
-        }
-        return 0;
+        return $this->peso_restante;
     }
 
     public function solicitud_detalle()

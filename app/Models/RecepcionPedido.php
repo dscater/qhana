@@ -36,4 +36,9 @@ class RecepcionPedido extends Model
     {
         return $this->hasMany(RecepcionDetalle::class, 'recepcion_pedido_id');
     }
+
+    public function historia_recepcions()
+    {
+        return $this->hasMany(HistoriaRecepcion::class, 'recepcion_pedido_id')->orderBy("id", "desc");
+    }
 }
