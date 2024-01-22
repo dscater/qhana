@@ -95,7 +95,7 @@
                                                     #cell(cantidad_conos)="row"
                                                 >
                                                     <span
-                                                        class="badge badge-primary text-md"
+                                                        class="badge badge-info text-md"
                                                         >{{
                                                             row.item
                                                                 .cantidad_conos

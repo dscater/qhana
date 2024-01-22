@@ -193,13 +193,13 @@ class TarifaPagoController extends Controller
     {
         $errors = [];
         foreach ($array as $key => $value) {
-            if (trim($value["mano_obra"]) == '' || !$value["mano_obra"]) {
+            if (trim($value["mano_obra"]) == '') {
                 $errors["mano_obra_" . $key] = ["Debes ingresar la mano de obra"];
             }
-            if (trim($value["depreciacion"]) == '' || !$value["depreciacion"]) {
+            if (trim($value["depreciacion"]) == '') {
                 $errors["depreciacion_" . $key] = ["Debes ingresar la depreciación"];
             }
-            if (trim($value["ganancia"]) == '' || !$value["ganancia"]) {
+            if (trim($value["ganancia"]) == '') {
                 $errors["ganancia_" . $key] = ["Debes ingresar la ganancia"];
             }
         }

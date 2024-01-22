@@ -109,7 +109,7 @@
                                                         >
                                                             <b-col cols="12">
                                                                 <table
-                                                                    class="table table-striped"
+                                                                    class="table table-striped table_productos"
                                                                 >
                                                                     <thead>
                                                                         <tr>
@@ -117,8 +117,16 @@
                                                                                 Detalle
                                                                                 Producto
                                                                             </th>
-                                                                            <th>
-                                                                                Recepción
+                                                                            <th></th>
+                                                                            <th
+                                                                                class="bg-success text-center"
+                                                                            >
+                                                                                Asignado
+                                                                            </th>
+                                                                            <th
+                                                                                class="bg-primary text-center"
+                                                                            >
+                                                                                Recibido
                                                                             </th>
                                                                         </tr>
                                                                     </thead>
@@ -257,7 +265,9 @@
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        Cantidad:
+                                                                                        CANTIDAD
+                                                                                    </td>
+                                                                                    <td class="bg-success text-center">
                                                                                         <span
                                                                                             class="badge badge-primary text-md"
                                                                                             >{{
@@ -265,14 +275,32 @@
                                                                                             }}</span
                                                                                         >
                                                                                     </td>
+                                                                                    <td class="bg-primary text-center">
+                                                                                        <span
+                                                                                            class="badge badge-primary text-md"
+                                                                                            >{{
+                                                                                                item.cantidad_usada
+                                                                                            }}</span
+                                                                                        >
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        Peso:
+                                                                                        PESO
+                                                                                    </td>
+                                                                                    <td class="bg-success text-center">
                                                                                         <span
                                                                                             class="badge badge-info text-md"
                                                                                             >{{
                                                                                                 item.peso
+                                                                                            }}</span
+                                                                                        >
+                                                                                    </td>
+                                                                                    <td class="bg-primary text-center">
+                                                                                        <span
+                                                                                            class="badge badge-info text-md"
+                                                                                            >{{
+                                                                                                item.peso_usado
                                                                                             }}</span
                                                                                         >
                                                                                     </td>

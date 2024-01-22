@@ -262,10 +262,10 @@ class DistribucionPedidoController extends Controller
         $errors = [];
         foreach ($array as $key => $value) {
             if (trim($value["cantidad"]) != '' && trim($value["peso"]) != '' && ((float)($value["peso"]) != 0 && (float)($value["cantidad"]) != 0)) {
-                if (trim($value["cantidad"]) == '' || !$value["cantidad"]) {
+                if (trim($value["cantidad"]) == '') {
                     $errors["cantidad_" . $key] = ["Debes ingresar la cantidad"];
                 }
-                if (trim($value["peso"]) == '' || !$value["peso"]) {
+                if (trim($value["peso"]) == '') {
                     $errors["peso_" . $key] = ["Debes ingresar el peso"];
                 }
             }

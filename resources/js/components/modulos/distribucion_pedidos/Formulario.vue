@@ -107,10 +107,11 @@
             <h4 class="w-100 text-center">Productos</h4>
         </div>
         <div class="col-md-12" style="overflow: auto">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped table_productos">
                 <thead class="bg-warning text-white">
                     <tr>
                         <th>Detalle Producto</th>
+                        <th></th>
                         <th>Restante</th>
                         <th>Distribución</th>
                     </tr>
@@ -198,8 +199,8 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>CANTIDAD</td>
                                 <td>
-                                    <strong>Cantidad: </strong>
                                     <span class="badge badge-primary text-md">{{
                                         item.solicitud_detalle.cantidad_restante
                                     }}</span>
@@ -225,8 +226,8 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>PESO</td>
                                 <td>
-                                    <strong>Peso: </strong>
                                     <span class="badge badge-info text-md">{{
                                         item.solicitud_detalle.peso_restante
                                     }}</span>

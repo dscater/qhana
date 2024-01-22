@@ -139,16 +139,19 @@
                 </div>
             </div>
             <template v-if="oRecepcionPedido.historia_recepcions.length > 0">
-                <HistoriaRecepcion
-                    v-for="(
-                        item_historia, index_historia
-                    ) in oRecepcionPedido.historia_recepcions"
-                    :key="index_historia"
-                    :index="index_historia"
-                    :accion="accion"
-                    :errors="errors"
-                    :historia_recepcion="item_historia"
-                ></HistoriaRecepcion>
+                <div class="row">
+                    <HistoriaRecepcion
+                        v-for="(
+                            item_historia, index_historia
+                        ) in oRecepcionPedido.historia_recepcions"
+                        :key="index_historia"
+                        :index="index_historia"
+                        :accion="accion"
+                        :errors="errors"
+                        :historia_recepcion="item_historia"
+                        @eliminado="agregaEliminado"
+                    ></HistoriaRecepcion>
+                </div>
             </template>
             <div class="row" v-else>
                 <div class="col-12 mb-3">
@@ -213,7 +216,11 @@ export default {
                 return `<i class="fa fa-save"></i> Registrar Recepción`;
             }
             if (this.accion == "edit") {
-                return `<i class="fa fa-edit"></i> Actualizar Recepción`;
+                if (this.oRecepcionPedido.historia_recepcions.length <= 1) {
+                    return `<i class="fa fa-edit"></i> Actualizar Recepción`;
+                } else {
+                    return `<i class="fa fa-edit"></i> Actualizar Registros de Recepción`;
+                }
             }
         },
     },
@@ -226,6 +233,7 @@ export default {
             }
         },
         recepcion_pedido(newval) {
+            this.oRecepcionPedido = newval;
             this.getDistribucionPedidosByUser();
         },
     },
@@ -242,6 +250,7 @@ export default {
             listDistribucionPedidos: [],
             listUsers: [],
             oRecepcionPedido: this.recepcion_pedido,
+            eliminados: [],
         };
     },
     methods: {
@@ -412,6 +421,7 @@ export default {
                         "/admin/recepcion_pedidos/" +
                         this.oRecepcionPedido.id;
                     this.oRecepcionPedido["_method"] = "put";
+                    this.oRecepcionPedido["eliminados"] = this.eliminados;
                 }
                 axios
                     .post(url, this.oRecepcionPedido)
@@ -457,6 +467,13 @@ export default {
                 this.enviando = false;
                 console.log(e);
             }
+        },
+        agregaEliminado(index, id) {
+            console.log(index);
+            console.log(id);
+            this.oRecepcionPedido.historia_recepcions.splice(index, 1);
+            this.eliminados.push(id);
+            console.log(this.eliminados);
         },
     },
 };

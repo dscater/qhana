@@ -15,8 +15,6 @@ class SalidaProductoController extends Controller
 {
     public $validacion = [
         'admin_producto_id' => 'required',
-        'cantidad' => 'required',
-        'cantidad_conos' => 'required',
         'fecha_salida' => 'required|date',
     ];
 
@@ -36,7 +34,26 @@ class SalidaProductoController extends Controller
 
     public function store(Request $request)
     {
+        if (!isset($request->cantidad) && !isset($request->cantidad_conos)) {
+            $this->validacion["cantidad"] = "required";
+            $this->validacion["cantidad_conos"] = "required";
+        }
+
+        if (trim($request->cantidad) != '') {
+            $this->validacion["cantidad"] = "required|numeric|min:1";
+        } else {
+            unset($request["cantidad"]);
+        }
+
+        if (trim($request->cantidad_conos) != '') {
+            $this->validacion["cantidad_conos"] = "required|numeric|min:1";
+        } else {
+            unset($request["cantidad_conos"]);
+        }
+
         $request->validate($this->validacion, $this->mensajes);
+
+
         $request["fecha_registro"] = date("Y-m-d");
         DB::beginTransaction();
         try {
@@ -68,8 +85,8 @@ class SalidaProductoController extends Controller
             MovimientoProducto::create([
                 "registro_id" => $nuevo_salida_producto->id,
                 "tipo" => "SALIDA",
-                "cantidad" => $nuevo_salida_producto->cantidad,
-                "cantidad_conos" => $nuevo_salida_producto->cantidad_conos,
+                "cantidad" => $nuevo_salida_producto->cantidad ? $nuevo_salida_producto->cantidad : 0,
+                "cantidad_conos" => $nuevo_salida_producto->cantidad_conos ? $nuevo_salida_producto->cantidad_conos : 0,
                 "fecha_registro" => date("Y-m-d"),
             ]);
 
@@ -137,8 +154,8 @@ class SalidaProductoController extends Controller
             $salida_producto->admin_producto->save();
             // ACTUALIZAR MOVIMIENTO
             $movimiento->update([
-                "cantidad" => $salida_producto->cantidad,
-                "cantidad_conos" => $salida_producto->cantidad_conos,
+                "cantidad" => $salida_producto->cantidad ? $salida_producto->cantidad : 0,
+                "cantidad_conos" => $salida_producto->cantidad_conos ? $salida_producto->cantidad_conos : 0,
             ]);
 
             DB::commit();

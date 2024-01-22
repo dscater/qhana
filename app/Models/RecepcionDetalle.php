@@ -18,7 +18,18 @@ class RecepcionDetalle extends Model
         "peso_restante",
     ];
 
-    protected $appends = ["cantidad_res_aux", "peso_res_aux"];
+    protected $appends = ["cantidad_res_aux", "peso_res_aux", "cantidad_usada", "peso_usado"];
+
+    public function getCantidadUsadaAttribute()
+    {
+        $cantidad_usada = HistoriaRecepcionDetalle::where("recepcion_detalle_id", $this->id)->sum("cantidad");
+        return $cantidad_usada;
+    }
+    public function getPesoUsadoAttribute()
+    {
+        $peso_usado = HistoriaRecepcionDetalle::where("recepcion_detalle_id", $this->id)->sum("peso");
+        return $peso_usado;
+    }
 
     public function getCantidadResAuxAttribute()
     {

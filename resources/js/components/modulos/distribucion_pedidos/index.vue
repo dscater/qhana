@@ -109,7 +109,7 @@
                                                         >
                                                             <b-col cols="12">
                                                                 <table
-                                                                    class="table table-striped"
+                                                                    class="table table-striped table_productos"
                                                                 >
                                                                     <thead>
                                                                         <tr>
@@ -117,6 +117,7 @@
                                                                                 Detalle
                                                                                 Producto
                                                                             </th>
+                                                                            <th></th>
                                                                             <th>
                                                                                 Distribución
                                                                             </th>
@@ -270,8 +271,8 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>
+                                                                                    <td>CANTIDAD</td>
                                                                                     <td>
-                                                                                        Cantidad:
                                                                                         <span
                                                                                             class="badge badge-primary text-md"
                                                                                             >{{
@@ -281,8 +282,8 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td>PESO</td>
                                                                                     <td>
-                                                                                        Peso:
                                                                                         <span
                                                                                             class="badge badge-info text-md"
                                                                                             >{{

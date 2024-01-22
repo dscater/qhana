@@ -16,8 +16,8 @@ class CreateSalidaProductosTable extends Migration
         Schema::create('salida_productos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("admin_producto_id");
-            $table->double("cantidad", 8, 2);
-            $table->double("cantidad_conos", 8, 2);
+            $table->double("cantidad", 8, 2)->nullable();
+            $table->double("cantidad_conos", 8, 2)->nullable();
             $table->date("fecha_salida");
             $table->date("fecha_registro")->nullable();
             $table->timestamps();

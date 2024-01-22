@@ -282,14 +282,14 @@
                                                                                             .cantidad
                                                                                     }}
                                                                                 </td>
-                                                                                <td>
+                                                                                <td class="text-center bg-primary">
                                                                                     {{
                                                                                         item
                                                                                             .solicitud_detalle
                                                                                             .titulo
                                                                                     }}
                                                                                 </td>
-                                                                                <td>
+                                                                                <td class="text-center bg-primary">
                                                                                     {{
                                                                                         item
                                                                                             .solicitud_detalle
@@ -297,7 +297,7 @@
                                                                                     }}
                                                                                 </td>
                                                                                 <td
-                                                                                    class="text-center"
+                                                                                    class="text-center bg-primary"
                                                                                 >
                                                                                     {{
                                                                                         item
@@ -305,17 +305,17 @@
                                                                                             .peso
                                                                                     }}
                                                                                 </td>
-                                                                                <td>
+                                                                                <td class="text-center bg-info">
                                                                                     {{
                                                                                         item.mano_obra
                                                                                     }}
                                                                                 </td>
-                                                                                <td>
+                                                                                <td class="text-center bg-info">
                                                                                     {{
                                                                                         item.depreciacion
                                                                                     }}
                                                                                 </td>
-                                                                                <td>
+                                                                                <td class="text-center bg-info">
                                                                                     {{
                                                                                         item.ganancia
                                                                                     }}

@@ -199,7 +199,9 @@
                             $route.name == 'recepcion_pedidos.index' ||
                             $route.name == 'recepcion_pedidos.create' ||
                             $route.name == 'recepcion_pedidos.edit' ||
-                            $route.name == 'tarifa_pagos.index'
+                            $route.name == 'tarifa_pagos.index' ||
+                            $route.name == 'tarifa_pagos.create' ||
+                            $route.name == 'tarifa_pagos.edit'
                                 ? 'menu-is-opening menu-open'
                                 : '',
                         ]"

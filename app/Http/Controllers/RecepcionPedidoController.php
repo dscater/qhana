@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DistribucionPedido;
 use App\Models\HistorialAccion;
 use App\Models\HistoriaRecepcion;
+use App\Models\HistoriaRecepcionDetalle;
 use App\Models\RecepcionDetalle;
 use App\Models\RecepcionPedido;
 use App\Models\SolicitudDetalle;
@@ -40,7 +41,7 @@ class RecepcionPedidoController extends Controller
         $request->validate($this->validacion, $this->mensajes);
 
         if (!isset($request->historia_recepcions) || !$request->historia_recepcions || count($request->historia_recepcions) <= 0) {
-            throw new Exception("El registro que se envío no cuenta con una recepción asignada");
+            throw new Exception("Se debe registrar una recepción de pedido");
         }
         $errors = self::validarArray($request["historia_recepcions"]);
         if (count($errors) > 0) {
@@ -131,19 +132,22 @@ class RecepcionPedidoController extends Controller
     public function update(Request $request, RecepcionPedido $recepcion_pedido)
     {
         $request->validate($this->validacion, $this->mensajes);
-        if (!isset($request->recepcion_detalles) || !$request->recepcion_detalles || count($request->recepcion_detalles) <= 0) {
-            throw new Exception("Debes ingresar al menos un producto");
+        if (!isset($request->historia_recepcions) || !$request->historia_recepcions || count($request->historia_recepcions) <= 0) {
+            throw new Exception("Debes existir al menos una recepción de pedido");
         }
-        $errors = self::validarArray($request["recepcion_detalles"]);
+        $errors = self::validarArray($request["historia_recepcions"]);
         if (count($errors) > 0) {
             return response()->JSON([
                 "errors" => $errors
             ], 422);
         }
+
+        $datos_historias = $request["historia_recepcions"];
+        $request["fecha_recepcion"] = $datos_historias[0]["fecha"];
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($recepcion_pedido, "recepcion_pedidos");
-            $recepcion_pedido->update(array_map('mb_strtoupper', $request->except("recepcion_detalles", "solicitud_pedido", "user")));
+            $recepcion_pedido->update(array_map('mb_strtoupper', $request->except("historia_recepcions", "recepcion_detalles", "solicitud_pedido", "user", "eliminados")));
             $datos_nuevo = HistorialAccion::getDetalleRegistro($recepcion_pedido, "recepcion_pedidos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
@@ -156,16 +160,50 @@ class RecepcionPedidoController extends Controller
                 'hora' => date('H:i:s')
             ]);
 
-            $recepcion_detalles = $request->recepcion_detalles;
-            foreach ($recepcion_detalles as $value) {
-                $solicitud_detalle = SolicitudDetalle::findOrFail($value["solicitud_detalle"]["id"]);
-                // registrar recepcion detalle
-                $recepcion_detalle = RecepcionDetalle::findOrFail($value["id"]);
-                $recepcion_detalle->update([
-                    "solicitud_detalle_id" => $solicitud_detalle["id"],
-                    "cantidad" => $value["cantidad"],
-                    "peso" => $value["peso"],
-                ]);
+            $eliminados = $request->eliminados;
+            foreach ($eliminados  as $value) {
+                $historia_recepcion = HistoriaRecepcion::findOrFail($value);
+                $historia_recepcion->historia_recepcion_detalles()->delete();
+                $historia_recepcion->delete();
+            }
+
+            $historia_recepcions = $request->historia_recepcions;
+
+            $id_recepcion_detalles = [];
+            $sum_cantidades_usadas = [];
+            $sum_pesos_usados = [];
+            foreach ($historia_recepcions as $value) {
+                $historia_recepcion_detalles = $value["historia_recepcion_detalles"];
+                foreach ($historia_recepcion_detalles as $hrd) {
+                    if (!in_array($hrd["recepcion_detalle_id"], $id_recepcion_detalles)) {
+                        $id_recepcion_detalles[] = $hrd["recepcion_detalle_id"];
+                    }
+
+                    if (!isset($sum_cantidades_usadas[$hrd["recepcion_detalle_id"]])) {
+                        $sum_cantidades_usadas[$hrd["recepcion_detalle_id"]] = (float)$hrd["cantidad"];
+                    } else {
+                        $sum_cantidades_usadas[$hrd["recepcion_detalle_id"]] += (float)$hrd["cantidad"];
+                    }
+
+                    if (!isset($sum_pesos_usados[$hrd["recepcion_detalle_id"]])) {
+                        $sum_pesos_usados[$hrd["recepcion_detalle_id"]] = (float)$hrd["peso"];
+                    } else {
+                        $sum_pesos_usados[$hrd["recepcion_detalle_id"]] += (float)$hrd["peso"];
+                    }
+
+                    $historia_recepcion_detalle = HistoriaRecepcionDetalle::findOrFail($hrd["id"]);
+                    $historia_recepcion_detalle->cantidad = $hrd["cantidad"];
+                    $historia_recepcion_detalle->peso = $hrd["peso"];
+                    $historia_recepcion_detalle->save();
+                }
+            }
+
+
+            foreach ($id_recepcion_detalles as $value) {
+                $recepcion_detalle = RecepcionDetalle::findOrFail($value);
+                $recepcion_detalle->cantidad_restante = (float)$recepcion_detalle->cantidad - (float)$sum_cantidades_usadas[$value];
+                $recepcion_detalle->peso_restante = (float)$recepcion_detalle->peso - (float)$sum_pesos_usados[$value];
+                $recepcion_detalle->save();
             }
 
             DB::commit();
@@ -194,6 +232,13 @@ class RecepcionPedidoController extends Controller
     {
         DB::beginTransaction();
         try {
+
+            $historia_recepcions = $recepcion_pedido->historia_recepcions;
+            foreach ($historia_recepcions  as $value) {
+                $value->historia_recepcion_detalles()->delete();
+                $value->delete();
+            }
+
             $recepcion_pedido->recepcion_detalles()->delete();
             $datos_original = HistorialAccion::getDetalleRegistro($recepcion_pedido, "recepcion_pedidos");
             $recepcion_pedido->delete();
