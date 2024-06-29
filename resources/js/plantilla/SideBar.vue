@@ -123,7 +123,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-list-alt"></i>
                             <p>
-                                Producto Lana
+                                Lana
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -142,7 +142,7 @@
                                     "
                                 >
                                     <i class="nav-icon far fa-circle"></i>
-                                    <p>Ingreso de Productos</p>
+                                    <p>Ingreso de Lana</p>
                                 </router-link>
                             </li>
                             <li
@@ -159,7 +159,7 @@
                                     "
                                 >
                                     <i class="nav-icon far fa-circle"></i>
-                                    <p>Salida de Productos</p>
+                                    <p>Salida de Lana</p>
                                 </router-link>
                             </li>
                             <li
@@ -176,7 +176,7 @@
                                     "
                                 >
                                     <i class="nav-icon far fa-circle"></i>
-                                    <p>Producto Lana</p>
+                                    <p>Lana</p>
                                 </router-link>
                             </li>
                         </ul>

@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class SalidaProductoController extends Controller
 {
@@ -28,7 +29,7 @@ class SalidaProductoController extends Controller
 
     public function index(Request $request)
     {
-        $salida_productos = SalidaProducto::with(["admin_producto"])->orderBy("id", "desc")->get();
+        $salida_productos = SalidaProducto::with(["admin_producto", "user", "solicitud_pedido"])->orderBy("id", "desc")->get();
         return response()->JSON(['salida_productos' => $salida_productos, 'total' => count($salida_productos)], 200);
     }
 
@@ -108,6 +109,14 @@ class SalidaProductoController extends Controller
     public function update(Request $request, SalidaProducto $salida_producto)
     {
         $request->validate($this->validacion, $this->mensajes);
+
+        if (!$request->user_id) {
+            unset($request["user_id"]);
+        }
+        if (!$request->solicitud_pedido_id) {
+            unset($request["solicitud_pedido_id"]);
+        }
+
         DB::beginTransaction();
         try {
             // REINICIAR CANTIDAD
@@ -136,6 +145,15 @@ class SalidaProductoController extends Controller
 
             $datos_original = HistorialAccion::getDetalleRegistro($salida_producto, "salida_productos");
             $salida_producto->update(array_map('mb_strtoupper', $request->all()));
+            if (!$request->user_id) {
+                $salida_producto->user_id = null;
+            }
+            if (!$request->solicitud_pedido_id) {
+                $salida_producto->solicitud_pedido_id = null;
+            }
+            $salida_producto->save();
+
+
             $datos_nuevo = HistorialAccion::getDetalleRegistro($salida_producto, "salida_productos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
@@ -179,6 +197,21 @@ class SalidaProductoController extends Controller
             'salida_producto' => $salida_producto
         ], 200);
     }
+
+    public function pdf(SalidaProducto $salida_producto)
+    {
+        $pdf = PDF::loadView('reportes.salida_producto', compact('salida_producto'))->setPaper('letter', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+        return $pdf->download('salida_producto.pdf');
+    }
+
     public function destroy(SalidaProducto $salida_producto)
     {
         DB::beginTransaction();

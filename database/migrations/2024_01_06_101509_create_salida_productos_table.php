@@ -19,6 +19,10 @@ class CreateSalidaProductosTable extends Migration
             $table->double("cantidad", 8, 2)->nullable();
             $table->double("cantidad_conos", 8, 2)->nullable();
             $table->date("fecha_salida");
+            $table->string("tipo_registro");
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("solicitud_pedido_id")->nullable();
+            $table->string("detalle")->nullable();
             $table->date("fecha_registro")->nullable();
             $table->timestamps();
         });

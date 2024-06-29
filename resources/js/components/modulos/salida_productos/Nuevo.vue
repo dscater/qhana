@@ -124,6 +124,95 @@
                                     v-text="errors.fecha_salida[0]"
                                 ></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.user_id,
+                                    }"
+                                    >Seleccionar Socio</label
+                                >
+                                <el-select
+                                    placeholder="Seleccionar Socio"
+                                    class="w-100"
+                                    :class="{
+                                        'is-invalid': errors.user_id,
+                                    }"
+                                    v-model="salida_producto.user_id"
+                                    clearable
+                                    filtereable
+                                    @change="getSolicitudPedidos"
+                                >
+                                    <el-option
+                                        v-for="item in listUsersSocios"
+                                        :key="item.id"
+                                        :value="item.id"
+                                        :label="item.full_name"
+                                    ></el-option>
+                                </el-select>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.user_id"
+                                    v-text="errors.user_id[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger':
+                                            errors.solicitud_pedido_id,
+                                    }"
+                                    >Seleccionar Cód. Solicitud Pedido</label
+                                >
+                                <el-select
+                                    placeholder="Seleccionar Cód. Solicitud Pedido"
+                                    class="w-100"
+                                    :class="{
+                                        'is-invalid':
+                                            errors.solicitud_pedido_id,
+                                    }"
+                                    v-model="
+                                        salida_producto.solicitud_pedido_id
+                                    "
+                                    clearable
+                                    filtereable
+                                >
+                                    <el-option
+                                        v-for="item in listSolicitudPedidos"
+                                        :key="item.id"
+                                        :value="item.id"
+                                        :label="item.codigo"
+                                    ></el-option>
+                                </el-select>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.solicitud_pedido_id"
+                                    v-text="errors.solicitud_pedido_id[0]"
+                                ></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.detalle,
+                                    }"
+                                    >Otro(Escribir Detalle)</label
+                                >
+
+                                <el-input
+                                    type="textarea"
+                                    autosize
+                                    placeholder="Validez del Credencial"
+                                    :class="{
+                                        'is-invalid': errors.detalle,
+                                    }"
+                                    v-model="salida_producto.detalle"
+                                    clearable
+                                ></el-input>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.detalle"
+                                    v-text="errors.detalle[0]"
+                                ></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -167,6 +256,9 @@ export default {
                 cantidad: "",
                 cantidad_conos: "",
                 fecha_salida: "",
+                user_id: "",
+                solicitud_pedido_id: "",
+                detalle: "",
             },
         },
     },
@@ -206,13 +298,40 @@ export default {
             enviando: false,
             errors: [],
             listProductos: [],
+            listUsersSocios: [],
+            listSolicitudPedidos: [],
         };
     },
     mounted() {
         this.bModal = this.muestra_modal;
         this.getProductos();
+        this.getUserSocios();
+        this.getSolicitudPedidos();
     },
     methods: {
+        getSolicitudPedidos() {
+            this.listSolicitudPedidos = [];
+            axios
+                .get(main_url + "/admin/solicitud_pedidos", {
+                    params: {
+                        user_id: this.salida_producto.user_id,
+                    },
+                })
+                .then((response) => {
+                    this.listSolicitudPedidos = response.data.solicitud_pedidos;
+                });
+        },
+        getUserSocios() {
+            axios
+                .get(main_url + "/admin/usuarios/getUsuarioTipoPersonal", {
+                    params: {
+                        tipo: "SOCIO",
+                    },
+                })
+                .then((response) => {
+                    this.listUsersSocios = response.data;
+                });
+        },
         getProductos() {
             axios.get(main_url + "/admin/admin_productos").then((response) => {
                 this.listProductos = response.data.admin_productos;
@@ -245,6 +364,30 @@ export default {
                     "cantidad_conos",
                     this.salida_producto.cantidad_conos
                         ? this.salida_producto.cantidad_conos
+                        : ""
+                );
+                formdata.append(
+                    "tipo_registro",
+                    this.salida_producto.tipo_registro
+                        ? this.salida_producto.tipo_registro
+                        : ""
+                );
+                formdata.append(
+                    "user_id",
+                    this.salida_producto.user_id
+                        ? this.salida_producto.user_id
+                        : ""
+                );
+                formdata.append(
+                    "solicitud_pedido_id",
+                    this.salida_producto.solicitud_pedido_id
+                        ? this.salida_producto.solicitud_pedido_id
+                        : ""
+                );
+                formdata.append(
+                    "detalle",
+                    this.salida_producto.detalle
+                        ? this.salida_producto.detalle
                         : ""
                 );
                 formdata.append(
@@ -328,6 +471,10 @@ export default {
             this.salida_producto.admin_producto_id = "";
             this.salida_producto.cantidad = "";
             this.salida_producto.cantidad_conos = "";
+            this.salida_producto.tipo_registro = "";
+            this.salida_producto.user_id = "";
+            this.salida_producto.solicitud_pedido_id = "";
+            this.salida_producto.detalle = "";
             this.salida_producto.fecha_salida = "";
         },
     },

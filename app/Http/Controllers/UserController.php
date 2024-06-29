@@ -527,7 +527,7 @@ class UserController extends Controller
 
         if (in_array('productos.index', $this->permisos[$tipo])) {
             $array_infos[] = [
-                'label' => 'Productos',
+                'label' => 'Lana',
                 'cantidad' => count(Producto::all()),
                 'color' => 'bg-dark',
                 'icon' => asset("imgs/product-development.png"),

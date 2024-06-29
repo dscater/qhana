@@ -185,6 +185,7 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         // SALIDA PRODUCTOS
+        Route::post('salida_productos/pdf/{salida_producto}', [SalidaProductoController::class, 'pdf']);
         Route::resource('salida_productos', SalidaProductoController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);

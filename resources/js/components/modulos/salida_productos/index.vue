@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Salida de Productos</h1>
+                        <h1>Salida de Lana</h1>
                     </div>
                 </div>
             </div>
@@ -102,10 +102,38 @@
                                                         }}</span
                                                     >
                                                 </template>
+                                                <template #cell(user_id)="row">
+                                                    <span>{{
+                                                        row.item.user?.full_name
+                                                    }}</span>
+                                                </template>
+                                                <template
+                                                    #cell(solicitud_pedido_id)="row"
+                                                >
+                                                    <span>{{
+                                                        row.item
+                                                            .solicitud_pedido
+                                                            ?.codigo
+                                                    }}</span>
+                                                </template>
                                                 <template #cell(accion)="row">
                                                     <div
                                                         class="row justify-content-between"
                                                     >
+                                                        <b-button
+                                                            size="sm"
+                                                            pill
+                                                            variant="outline-primary"
+                                                            class="btn-flat btn-block"
+                                                            title="Constancia"
+                                                            @click="
+                                                                pdf(row.item)
+                                                            "
+                                                        >
+                                                            <i
+                                                                class="fa fa-file-pdf"
+                                                            ></i>
+                                                        </b-button>
                                                         <b-button
                                                             v-if="
                                                                 permisos.includes(
@@ -230,6 +258,21 @@ export default {
                     sortable: true,
                 },
                 {
+                    key: "user_id",
+                    label: "Socio",
+                    sortable: true,
+                },
+                {
+                    key: "solicitud_pedido_id",
+                    label: "Cód. Solicitud Pedido",
+                    sortable: true,
+                },
+                {
+                    key: "detalle",
+                    label: "Detalle",
+                    sortable: true,
+                },
+                {
                     key: "fecha_salida",
                     label: "Fecha de Salida",
                     sortable: true,
@@ -248,6 +291,10 @@ export default {
                 admin_producto_id: "",
                 cantidad: "",
                 cantidad_conos: "",
+                tipo_registro: "",
+                user_id: "",
+                solicitud_pedido_id: "",
+                detalle: "",
                 fecha_salida: "",
             },
             currentPage: 1,
@@ -269,6 +316,51 @@ export default {
         this.getSalidaProductos();
     },
     methods: {
+        pdf(item) {
+            let config = {
+                responseType: "blob",
+            };
+            axios
+                .post(
+                    main_url + "/admin/salida_productos/pdf/" + item.id,
+                    null,
+                    config
+                )
+                .then((res) => {
+                    this.errors = [];
+                    this.enviando = false;
+                    let pdfBlob = new Blob([res.data], {
+                        type: "application/pdf",
+                    });
+                    let urlReporte = URL.createObjectURL(pdfBlob);
+                    window.open(urlReporte);
+                })
+                .catch(async (error) => {
+                    let responseObj = await error.response.data.text();
+                    responseObj = JSON.parse(responseObj);
+                    console.log(error);
+                    this.enviando = false;
+                    if (error.response) {
+                        if (error.response.status === 422) {
+                            this.errors = responseObj.errors;
+                        }
+                        if (
+                            error.response.status === 420 ||
+                            error.response.status === 419 ||
+                            error.response.status === 401
+                        ) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                html: responseObj.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            window.location = "/";
+                        }
+                    }
+                });
+        },
         // Seleccionar Opciones de Tabla
         editarRegistro(item) {
             this.oSalidaProducto.id = item.id;
@@ -279,6 +371,17 @@ export default {
             this.oSalidaProducto.cantidad_conos = item.cantidad_conos
                 ? item.cantidad_conos
                 : "";
+            this.oSalidaProducto.fecha_salida = item.fecha_salida
+                ? item.fecha_salida
+                : "";
+            this.oSalidaProducto.tipo_registro = item.tipo_registro
+                ? item.tipo_registro
+                : "";
+            this.oSalidaProducto.user_id = item.user_id ? item.user_id : "";
+            this.oSalidaProducto.solicitud_pedido_id = item.solicitud_pedido_id
+                ? item.solicitud_pedido_id
+                : "";
+            this.oSalidaProducto.detalle = item.detalle ? item.detalle : "";
             this.oSalidaProducto.fecha_salida = item.fecha_salida
                 ? item.fecha_salida
                 : "";
@@ -372,6 +475,10 @@ export default {
             this.oSalidaProducto.admin_producto_id = "";
             this.oSalidaProducto.cantidad = "";
             this.oSalidaProducto.cantidad_conos = "";
+            this.oSalidaProducto.tipo_registro = "";
+            this.oSalidaProducto.user_id = "";
+            this.oSalidaProducto.solicitud_pedido_id = "";
+            this.oSalidaProducto.detalle = "";
             this.oSalidaProducto.fecha_salida = "";
         },
         formatoFecha(date) {
