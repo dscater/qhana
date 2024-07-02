@@ -15,6 +15,7 @@ class IngresoProductoController extends Controller
         'admin_producto_id' => 'required',
         'cantidad' => 'required',
         'cantidad_conos' => 'required',
+        'precio' => 'required|numeric|min:0',
         'fecha_ingreso' => 'required|date',
     ];
 
@@ -22,6 +23,7 @@ class IngresoProductoController extends Controller
         'admin_producto_id.required' => 'Este campo es obligatorio',
         'cantidad.required' => 'Este campo es obligatorio',
         'cantidad_conos.required' => 'Este campo es obligatorio',
+        'precio.required' => 'Este campo es obligatorio',
         'fecha_ingreso.required' => 'Este campo es obligatorio',
         'fecha_ingreso.date' => 'Debes ingresar una fecha valida',
     ];

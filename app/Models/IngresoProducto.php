@@ -14,6 +14,7 @@ class IngresoProducto extends Model
         "cantidad",
         "cantidad_conos",
         "fecha_ingreso",
+        "precio",
         "fecha_registro",
     ];
 

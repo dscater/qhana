@@ -181,7 +181,7 @@ class SolicitudPedidoController extends Controller
                     if ($suma_cantidad_distribucion > $solicitud_detalle->cantidad) {
                         throw new Exception("No es posible actualizar el producto con código <strong>" . $solicitud_detalle->codigo . "</strong>, debido a que existe una o varias distribuciones y la suma de la cantidad (" . $suma_cantidad_distribucion . ") de estas supera a la cantidad ingresada de: " . $solicitud_detalle->cantidad);
                     }
-                    if ($suma_peso_distribucion > $solicitud_detalle->peso) {
+                    if ($suma_peso_distribucion > $solicitud_detalle->peso_total) {
                         throw new Exception("No es posible actualizar el producto con código <strong>" . $solicitud_detalle->codigo . "</strong>, debido a que existe una o varias distribuciones y la suma del peso (" . $suma_peso_distribucion . ") de estas supera al peso ingresado de: " . $solicitud_detalle->peso);
                     }
 

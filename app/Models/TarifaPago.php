@@ -17,6 +17,8 @@ class TarifaPago extends Model
         "mano_obra",
         "depreciacion",
         "ganancia",
+        "tipo_registro",
+        "user_id",
         "fecha_registro",
     ];
 
@@ -32,5 +34,10 @@ class TarifaPago extends Model
     public function tarifa_detalles()
     {
         return $this->hasMany(TarifaDetalle::class, 'tarifa_pago_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

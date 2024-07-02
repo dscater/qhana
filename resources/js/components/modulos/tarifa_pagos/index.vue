@@ -107,6 +107,25 @@
                                                                 overflow: auto;
                                                             "
                                                         >
+                                                            <v-col cols="12">
+                                                                <p>
+                                                                    <strong
+                                                                        >Socio o
+                                                                        Taller: </strong
+                                                                    >{{
+                                                                        row.item
+                                                                            .tipo_registro ==
+                                                                        "SOCIO O TALLER"
+                                                                            ? row
+                                                                                  .item
+                                                                                  .user
+                                                                                  .full_name
+                                                                            : row
+                                                                                  .item
+                                                                                  .tipo_registro
+                                                                    }}
+                                                                </p>
+                                                            </v-col>
                                                             <b-col cols="12">
                                                                 <table
                                                                     class="table table-striped table_productos"
@@ -282,14 +301,18 @@
                                                                                             .cantidad
                                                                                     }}
                                                                                 </td>
-                                                                                <td class="text-center bg-primary">
+                                                                                <td
+                                                                                    class="text-center bg-primary"
+                                                                                >
                                                                                     {{
                                                                                         item
                                                                                             .solicitud_detalle
                                                                                             .titulo
                                                                                     }}
                                                                                 </td>
-                                                                                <td class="text-center bg-primary">
+                                                                                <td
+                                                                                    class="text-center bg-primary"
+                                                                                >
                                                                                     {{
                                                                                         item
                                                                                             .solicitud_detalle
@@ -305,17 +328,23 @@
                                                                                             .peso
                                                                                     }}
                                                                                 </td>
-                                                                                <td class="text-center bg-info">
+                                                                                <td
+                                                                                    class="text-center bg-info"
+                                                                                >
                                                                                     {{
                                                                                         item.mano_obra
                                                                                     }}
                                                                                 </td>
-                                                                                <td class="text-center bg-info">
+                                                                                <td
+                                                                                    class="text-center bg-info"
+                                                                                >
                                                                                     {{
                                                                                         item.depreciacion
                                                                                     }}
                                                                                 </td>
-                                                                                <td class="text-center bg-info">
+                                                                                <td
+                                                                                    class="text-center bg-info"
+                                                                                >
                                                                                     {{
                                                                                         item.ganancia
                                                                                     }}

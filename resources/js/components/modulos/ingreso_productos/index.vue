@@ -230,6 +230,12 @@ export default {
                     sortable: true,
                 },
                 {
+                    key: "precio",
+                    label: "Precio de lana",
+                    sortable: true,
+                },
+                
+                {
                     key: "fecha_ingreso",
                     label: "Fecha de Ingreso",
                     sortable: true,
@@ -248,6 +254,7 @@ export default {
                 admin_producto_id: "",
                 cantidad: "",
                 cantidad_conos: "",
+                precio: "",
                 fecha_ingreso: "",
             },
             currentPage: 1,
@@ -278,6 +285,9 @@ export default {
             this.oIngresoProducto.cantidad = item.cantidad ? item.cantidad : "";
             this.oIngresoProducto.cantidad_conos = item.cantidad_conos
                 ? item.cantidad_conos
+                : "";
+            this.oIngresoProducto.precio = item.precio
+                ? item.precio
                 : "";
             this.oIngresoProducto.fecha_ingreso = item.fecha_ingreso
                 ? item.fecha_ingreso
@@ -372,6 +382,7 @@ export default {
             this.oIngresoProducto.admin_producto_id = "";
             this.oIngresoProducto.cantidad = "";
             this.oIngresoProducto.cantidad_conos = "";
+            this.oIngresoProducto.precio = "";
             this.oIngresoProducto.fecha_ingreso = "";
         },
         formatoFecha(date) {

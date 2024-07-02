@@ -237,6 +237,14 @@ Route::middleware(['auth'])->group(function () {
         // REPORTES
         Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);
         Route::post('reportes/cajas', [ReporteController::class, 'cajas']);
+        Route::post('reportes/ingreso_general', [ReporteController::class, 'ingreso_general']);
+        Route::post('reportes/inventario', [ReporteController::class, 'inventario']);
+        Route::post('reportes/solicitud_productos', [ReporteController::class, 'solicitud_productos']);
+        Route::post('reportes/distribucion_pedidos', [ReporteController::class, 'distribucion_pedidos']);
+        Route::post('reportes/recepcion_pedidos', [ReporteController::class, 'recepcion_pedidos']);
+        Route::post('reportes/clientes', [ReporteController::class, 'clientes']);
+        Route::post('reportes/inventario_materiales', [ReporteController::class, 'inventario_materiales']);
+        Route::post('reportes/ingreso_salida_materiales', [ReporteController::class, 'ingreso_salida_materiales']);
     });
 });
 

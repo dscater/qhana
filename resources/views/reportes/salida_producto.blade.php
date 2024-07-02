@@ -186,7 +186,7 @@
                 <td>{{ $salida_producto->admin_producto->full_name }}</td>
             </tr>
             <tr>
-                <td class="bg-principal bold txt-right">Cantidad: </td>
+                <td class="bg-principal bold txt-right">Cantidad Kg: </td>
                 <td>{{ $salida_producto->cantidad }}</td>
             </tr>
             <tr>

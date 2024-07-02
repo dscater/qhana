@@ -63,7 +63,7 @@
 
                                 <input
                                     type="number"
-                                    step="0.01"
+                                    step="0.001"
                                     placeholder="Cantidad (KG)"
                                     class="form-control"
                                     :class="{
@@ -124,6 +124,30 @@
                                     v-text="errors.fecha_ingreso[0]"
                                 ></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.precio,
+                                    }"
+                                    >Precio de Lana*</label
+                                >
+
+                                <input
+                                    type="number"
+                                    placeholder="Precio de Lana"
+                                    class="form-control"
+                                    step="0.01"
+                                    :class="{
+                                        'is-invalid': errors.precio,
+                                    }"
+                                    v-model="ingreso_producto.precio"
+                                />
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.precio"
+                                    v-text="errors.precio[0]"
+                                ></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -166,6 +190,7 @@ export default {
                 admin_producto_id: "",
                 cantidad: "",
                 cantidad_conos: "",
+                precio: "",
                 fecha_ingreso: "",
             },
         },
@@ -248,6 +273,12 @@ export default {
                         : ""
                 );
                 formdata.append(
+                    "precio",
+                    this.ingreso_producto.precio
+                        ? this.ingreso_producto.precio
+                        : ""
+                );
+                formdata.append(
                     "fecha_ingreso",
                     this.ingreso_producto.fecha_ingreso
                         ? this.ingreso_producto.fecha_ingreso
@@ -327,6 +358,7 @@ export default {
             this.ingreso_producto.admin_producto_id = "";
             this.ingreso_producto.cantidad = "";
             this.ingreso_producto.cantidad_conos = "";
+            this.ingreso_producto.precio = "";
             this.ingreso_producto.fecha_ingreso = "";
         },
     },

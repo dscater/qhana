@@ -15,21 +15,27 @@ class TarifaPagoController extends Controller
     public $validacion = [
         'cliente_id' => 'required',
         'solicitud_pedido_id' => 'required',
+        "tipo_registro" => "required"
     ];
 
     public $mensajes = [
         'cliente_id.required' => 'Este campo es obligatorio',
         'solicitud_pedido_id.required' => 'Este campo es obligatorio',
+        'tipo_registro.required' => 'Este campo es obligatorio',
+        'user_id.required' => 'Este campo es obligatorio',
     ];
 
     public function index(Request $request)
     {
-        $tarifa_pagos = TarifaPago::with(["cliente", "solicitud_pedido", "tarifa_detalles.solicitud_detalle"])->orderBy("id", "desc")->get();
+        $tarifa_pagos = TarifaPago::with(["cliente", "solicitud_pedido", "tarifa_detalles.solicitud_detalle", "user"])->orderBy("id", "desc")->get();
         return response()->JSON(['tarifa_pagos' => $tarifa_pagos, 'total' => count($tarifa_pagos)], 200);
     }
 
     public function store(Request $request)
     {
+        if ($request->tipo_registro == 'SOCIO O TALLER') {
+            $this->validacion["user_id"] = "required";
+        }
         $request->validate($this->validacion, $this->mensajes);
 
         if (!isset($request->tarifa_detalles) || !$request->tarifa_detalles || count($request->tarifa_detalles) <= 0) {
@@ -92,6 +98,11 @@ class TarifaPagoController extends Controller
 
     public function update(Request $request, TarifaPago $tarifa_pago)
     {
+        if ($request->tipo_registro == 'SOCIO O TALLER') {
+            $this->validacion["user_id"] = "required";
+        } else {
+            unset($request["user_id"]);
+        }
         $request->validate($this->validacion, $this->mensajes);
         if (!isset($request->tarifa_detalles) || !$request->tarifa_detalles || count($request->tarifa_detalles) <= 0) {
             throw new Exception("Debes ingresar al menos un producto");
@@ -106,6 +117,12 @@ class TarifaPagoController extends Controller
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($tarifa_pago, "tarifa_pagos");
             $tarifa_pago->update(array_map('mb_strtoupper', $request->except("tarifa_detalles", "solicitud_pedido", "cliente")));
+
+            if ($request->tipo_registro == 'TODOS') {
+                $tarifa_pago->user_id = null;
+            }
+            $tarifa_pago->save();
+
             $datos_nuevo = HistorialAccion::getDetalleRegistro($tarifa_pago, "tarifa_pagos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,

@@ -159,8 +159,8 @@
                                             errors['cantidad_' + index],
                                     }"
                                     v-model="item.cantidad"
-                                    @keyup="calculaPesoTotal(index)"
-                                    @change="calculaPesoTotal(index)"
+                                    @keyup="calculaPesoTotal(index, item)"
+                                    @change="calculaPesoTotal(index, item)"
                                 />
                                 <span
                                     class="error invalid-feedback"
@@ -450,7 +450,7 @@ export default {
                 console.log(e);
             }
         },
-        calculaPesoTotal(index) {
+        calculaPesoTotal(index, item) {
             let cantidad = this.solicitud_pedido.solicitud_detalles[index]
                 .cantidad
                 ? this.solicitud_pedido.solicitud_detalles[index].cantidad
@@ -459,8 +459,9 @@ export default {
                 ? this.solicitud_pedido.solicitud_detalles[index].peso
                 : 0;
 
+            let peso_total = parseFloat(cantidad) * parseFloat(peso);
             this.solicitud_pedido.solicitud_detalles[index].peso_total =
-                parseFloat(cantidad) * parseFloat(peso);
+                peso_total;
         },
     },
 };

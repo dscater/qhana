@@ -38,21 +38,22 @@ class ReporteController extends Controller
     public function cajas(Request $request)
     {
         $filtro =  $request->filtro;
+        $concepto =  $request->concepto;
         $saldo = 0;
         $fecha_anterior = "";
         $fecha_ini =  Caja::orderBy("id", "asc")->get()->first()->fecha;
         $fecha_fin =  Caja::orderBy("id", "asc")->get()->last()->fecha;
 
-        $cajas = Caja::orderBy("id", "asc")->get();
+        $cajas = Caja::orderBy("id", "asc");
         if ($filtro == 'Ingresos') {
             $fecha_ini =  Caja::where("tipo_movimiento", "INGRESO")->orderBy("id", "asc")->get()->first()->fecha;
             $fecha_fin =  Caja::where("tipo_movimiento", "INGRESO")->orderBy("id", "asc")->get()->last()->fecha;
-            $cajas = Caja::where('tipo_movimiento', 'INGRESO')->orderBy("id", "asc")->get();
+            $cajas = Caja::where('tipo_movimiento', 'INGRESO')->orderBy("id", "asc");
         }
         if ($filtro == 'Egresos') {
             $fecha_ini =  Caja::where("tipo_movimiento", "EGRESO")->orderBy("id", "asc")->get()->first()->fecha;
             $fecha_fin =  Caja::where("tipo_movimiento", "EGRESO")->orderBy("id", "asc")->get()->last()->fecha;
-            $cajas = Caja::where('tipo_movimiento', 'EGRESO')->orderBy("id", "asc")->get();
+            $cajas = Caja::where('tipo_movimiento', 'EGRESO')->orderBy("id", "asc");
         }
         if ($filtro == 'Rango de fechas') {
             $request->validate([
@@ -67,10 +68,16 @@ class ReporteController extends Controller
             $fecha_ini =  $request->fecha_ini;
             $fecha_fin =  $request->fecha_fin;
             $saldo = Caja::getSaldoCajaFechaAnteriorTodos($fecha_ini);
-            Log::debug($saldo);
             $fecha_anterior = date("Y-m-d", strtotime($fecha_ini . "-1days"));
-            $cajas = Caja::whereBetween('fecha', [$fecha_ini, $fecha_fin])->orderBy("id", "asc")->get();
+            $cajas = Caja::whereBetween('fecha', [$fecha_ini, $fecha_fin])->orderBy("id", "asc");
         }
+
+        if ($concepto != "todos") {
+            $cajas = $cajas->where("concepto_id", $concepto);
+        }
+
+        $cajas = $cajas->get();
+
         $pdf = PDF::loadView('reportes.cajas', compact('cajas', 'saldo', 'fecha_anterior', 'filtro', 'fecha_ini', 'fecha_fin'))->setPaper('legal', 'landscape');
 
         // ENUMERAR LAS PÁGINAS USANDO CANVAS
@@ -82,5 +89,30 @@ class ReporteController extends Controller
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->download('caja.pdf');
+    }
+
+    public function ingreso_general(Request $request)
+    {
+    }
+    public function inventario(Request $request)
+    {
+    }
+    public function solicitud_productos(Request $request)
+    {
+    }
+    public function distribucion_pedidos(Request $request)
+    {
+    }
+    public function recepcion_pedidos(Request $request)
+    {
+    }
+    public function clientes(Request $request)
+    {
+    }
+    public function inventario_materiales(Request $request)
+    {
+    }
+    public function ingreso_salida_materiales(Request $request)
+    {
     }
 }

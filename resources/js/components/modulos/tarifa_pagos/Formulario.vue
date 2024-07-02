@@ -104,6 +104,66 @@
                 v-text="errors.solicitud_pedido_id[0]"
             ></span>
         </div>
+        <div class="form-group col-md-6">
+            <label
+                :class="{
+                    'text-danger': errors.tipo_registro,
+                }"
+                >Seleccionar*</label
+            >
+
+            <el-select
+                placeholder="Seleccionar"
+                class="w-100"
+                :class="{ 'is-invalid': errors.tipo_registro }"
+                v-model="tarifa_pago.tipo_registro"
+                clearable
+                filtereable
+            >
+                <el-option
+                    v-for="item in ['TODOS', 'SOCIO O TALLER']"
+                    :key="item"
+                    :value="item"
+                    :label="item"
+                >
+                </el-option>
+            </el-select>
+            <span
+                class="error invalid-feedback"
+                v-if="errors.tipo_registro"
+                v-text="errors.tipo_registro[0]"
+            ></span>
+        </div>
+        <div class="form-group col-md-6" v-show="tarifa_pago.tipo_registro=='SOCIO O TALLER'">
+            <label
+                :class="{
+                    'text-danger': errors.user_id,
+                }"
+                >Seleccionar Socio o Taller*</label
+            >
+
+            <el-select
+                placeholder="Seleccionar Socio o Taller"
+                class="w-100"
+                :class="{ 'is-invalid': errors.user_id }"
+                v-model="tarifa_pago.user_id"
+                clearable
+                filtereable
+            >
+                <el-option
+                    v-for="item in listUsersSocios"
+                    :key="item.id"
+                    :value="item.id"
+                    :label="item.full_name"
+                >
+                </el-option>
+            </el-select>
+            <span
+                class="error invalid-feedback"
+                v-if="errors.user_id"
+                v-text="errors.user_id[0]"
+            ></span>
+        </div>
         <div class="col-md-12">
             <hr />
             <h4 class="w-100 text-center">Productos</h4>
@@ -325,6 +385,8 @@ export default {
                 mano_obra: "",
                 depreciacion: "",
                 ganancia: "",
+                tipo_registro: "TODOS",
+                user_id: "",
                 tarifa_detalles: [],
             },
         },
@@ -359,6 +421,7 @@ export default {
             this.tarifa_pago.fecha_recepcion = this.getFechaActual();
         }
         this.getClientes();
+        this.getUserSocios();
     },
     data() {
         return {
@@ -366,9 +429,21 @@ export default {
             errors: [],
             listSolicitudPedidos: [],
             listClientes: [],
+            listUsersSocios: [],
         };
     },
     methods: {
+        getUserSocios() {
+            axios
+                .get(main_url + "/admin/usuarios/getUsuarioTipoPersonal", {
+                    params: {
+                        tipo: "SOCIO",
+                    },
+                })
+                .then((response) => {
+                    this.listUsersSocios = response.data;
+                });
+        },
         getSolicitudPedidosByCliente() {
             if (this.tarifa_pago.cliente_id != "") {
                 axios

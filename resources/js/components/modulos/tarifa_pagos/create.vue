@@ -51,6 +51,8 @@ export default {
                 mano_obra: 0,
                 depreciacion: 0,
                 ganancia: 0,
+                tipo_registro: "TODOS",
+                user_id: null,
                 tarifa_detalles: [],
             },
         };

@@ -131,39 +131,44 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 contenedor_recepcion">
             <div class="row">
                 <div class="col-md-12">
                     <hr />
                     <h4 class="w-100 text-center">Listado de Recepción</h4>
                 </div>
             </div>
-            <template v-if="oRecepcionPedido.historia_recepcions.length > 0">
-                <div class="row">
-                    <HistoriaRecepcion
-                        v-for="(
-                            item_historia, index_historia
-                        ) in oRecepcionPedido.historia_recepcions"
-                        :key="index_historia"
-                        :index="index_historia"
-                        :accion="accion"
-                        :errors="errors"
-                        :historia_recepcion="item_historia"
-                        @eliminado="agregaEliminado"
-                    ></HistoriaRecepcion>
-                </div>
-            </template>
-            <div class="row" v-else>
-                <div class="col-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="text-center">
-                                NO SE ENCONTRÓ NINGUN REGISTRO
-                            </h5>
+            <div class="cargando" v-if="cargando">Cargando...</div>
+            <template v-else>
+                <template
+                    v-if="oRecepcionPedido.historia_recepcions.length > 0"
+                >
+                    <div class="row">
+                        <HistoriaRecepcion
+                            v-for="(
+                                item_historia, index_historia
+                            ) in oRecepcionPedido.historia_recepcions"
+                            :key="index_historia"
+                            :index="index_historia"
+                            :accion="accion"
+                            :errors="errors"
+                            :historia_recepcion="item_historia"
+                            @eliminado="agregaEliminado"
+                        ></HistoriaRecepcion>
+                    </div>
+                </template>
+                <div class="row" v-else>
+                    <div class="col-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-center">
+                                    NO SE ENCONTRÓ NINGUN REGISTRO
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
         <div class="col-md-4 form-group">
             <button
@@ -251,10 +256,17 @@ export default {
             listUsers: [],
             oRecepcionPedido: this.recepcion_pedido,
             eliminados: [],
+            cargando: false,
         };
     },
     methods: {
         getDistribucionPedidosByUser() {
+            if (this.accion == "nuevo") {
+                this.oRecepcionPedido.distribucion_pedido_id = "";
+                this.oRecepcionPedido.historia_recepcions = [];
+                this.listDistribucionPedidos = [];
+                this.oRecepcionPedido.recepcion_detalles = [];
+            }
             if (this.oRecepcionPedido.user_id != "") {
                 axios
                     .get(main_url + "/admin/distribucion_pedidos/byUser", {
@@ -290,8 +302,9 @@ export default {
                 });
         },
         getDistribucionPedido() {
+            this.cargando = true;
+            this.oRecepcionPedido.historia_recepcions = [];
             this.oRecepcionPedido.recepcion_detalles = [];
-
             if (this.oRecepcionPedido.distribucion_pedido_id != "") {
                 axios
                     .get(
@@ -407,7 +420,12 @@ export default {
                                     historia_recepcion_detalles,
                             });
                         }
+                        setTimeout(() => {
+                            this.cargando = false;
+                        }, 700);
                     });
+            } else {
+                this.cargando = false;
             }
         },
         enviarFormulario() {
@@ -478,3 +496,20 @@ export default {
     },
 };
 </script>
+<style>
+.contenedor_recepcion {
+    position: relative;
+}
+
+.contenedor_recepcion .cargando {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: rgb(37, 33, 33);
+    color: white;
+}
+</style>

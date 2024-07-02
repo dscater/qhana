@@ -96,6 +96,38 @@
                                                     v-text="errors.fecha_fin[0]"
                                                 ></span>
                                             </div>
+                                            <div class="form-group col-md-12">
+                                                <label
+                                                    :class="{
+                                                        'text-danger':
+                                                            errors.concepto,
+                                                    }"
+                                                    >Concepto*</label
+                                                >
+                                                <el-select
+                                                    v-model="oReporte.concepto"
+                                                    filterable
+                                                    placeholder="Concepto"
+                                                    class="d-block"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            errors.concepto,
+                                                    }"
+                                                >
+                                                    <el-option
+                                                        v-for="item in listConceptos"
+                                                        :key="item.id"
+                                                        :label="item.nombre"
+                                                        :value="item.id"
+                                                    >
+                                                    </el-option>
+                                                </el-select>
+                                                <span
+                                                    class="error invalid-feedback"
+                                                    v-if="errors.concepto"
+                                                    v-text="errors.concepto[0]"
+                                                ></span>
+                                            </div>
                                         </div>
                                     </form>
                                     <div class="row">
@@ -139,20 +171,32 @@ export default {
                 filtro: "Todos",
                 fecha_ini: "",
                 fecha_fin: "",
+                concepto: "todos",
             },
             aFechas: [],
             enviando: false,
             textoBtn: "Generar Reporte",
             listFiltro: ["Todos", "Ingresos", "Egresos", "Rango de fechas"],
+            listConceptos: [],
             errors: [],
         };
     },
     mounted() {
         this.loadingWindow.close();
+        this.getConceptos();
     },
     methods: {
         limpiarFormulario() {
             this.oReporte.filtro = "Todos";
+        },
+        getConceptos() {
+            axios.get(main_url + "/admin/conceptos").then((response) => {
+                this.listConceptos = response.data.conceptos;
+                this.listConceptos.unshift({
+                    id: "todos",
+                    nombre: "TODOS",
+                });
+            });
         },
         generaReporte() {
             this.enviando = true;
