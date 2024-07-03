@@ -175,7 +175,16 @@ class UserController extends Controller
             'configuracion.edit',
 
             "reportes.usuarios",
-            "reportes.cajas"
+            "reportes.cajas",
+
+            "reportes.ingreso_general",
+            "reportes.inventario",
+            "reportes.solicitud_productos",
+            "reportes.distribucion_pedidos",
+            "reportes.recepcion_pedidos",
+            "reportes.clientes",
+            "reportes.inventario_materiales",
+            "reportes.ingreso_salida_materiales",
         ],
         "REPRESENTANTE" => [
             'portals.index',
@@ -189,7 +198,6 @@ class UserController extends Controller
             'repositorios.create',
             'repositorios.edit',
             'repositorios.destroy',
-
         ],
         "SOCIO" => [],
         "CAJA" => [

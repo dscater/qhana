@@ -430,6 +430,62 @@ export default new Router({
                 .default,
             props: true,
         },
+        {
+            path: "/administracion/reportes/ingreso_general",
+            name: "reportes.ingreso_general",
+            component: require("./components/modulos/reportes/ingreso_general.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/inventario",
+            name: "reportes.inventario",
+            component: require("./components/modulos/reportes/inventario.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/solicitud_productos",
+            name: "reportes.solicitud_productos",
+            component: require("./components/modulos/reportes/solicitud_productos.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/distribucion_pedidos",
+            name: "reportes.distribucion_pedidos",
+            component: require("./components/modulos/reportes/distribucion_pedidos.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/recepcion_pedidos",
+            name: "reportes.recepcion_pedidos",
+            component: require("./components/modulos/reportes/recepcion_pedidos.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/clientes",
+            name: "reportes.clientes",
+            component: require("./components/modulos/reportes/clientes.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/inventario_materiales",
+            name: "reportes.inventario_materiales",
+            component: require("./components/modulos/reportes/inventario_materiales.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/administracion/reportes/ingreso_salida_materiales",
+            name: "reportes.ingreso_salida_materiales",
+            component: require("./components/modulos/reportes/ingreso_salida_materiales.vue")
+                .default,
+            props: true,
+        },
 
         // PÁGINA NO ENCONTRADA
         {

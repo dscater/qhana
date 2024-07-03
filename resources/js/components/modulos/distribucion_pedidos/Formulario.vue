@@ -52,7 +52,7 @@
                 v-text="errors.solicitud_pedido_id[0]"
             ></span>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4" v-if="accion == 'nuevo'">
             <label
                 :class="{
                     'text-danger': errors.user_id,
@@ -75,6 +75,28 @@
                 >
                 </el-option>
             </el-select>
+            <span
+                class="error invalid-feedback"
+                v-if="errors.user_id"
+                v-text="errors.user_id[0]"
+            ></span>
+        </div>
+        <div class="form-group col-md-4" v-else>
+            <label
+                :class="{
+                    'text-danger': errors.user_id,
+                }"
+                >Socio/Taller*</label
+            >
+            <el-input
+                v-if="distribucion_pedido.user_id"
+                placeholder="Seleccionar Código de Pedido"
+                class="w-100"
+                :class="{ 'is-invalid': errors.user_id_id }"
+                v-model="distribucion_pedido.user.full_name"
+                readonly
+            >
+            </el-input>
             <span
                 class="error invalid-feedback"
                 v-if="errors.user_id"

@@ -187,7 +187,7 @@ class DistribucionPedidoController extends Controller
     {
         return response()->JSON([
             'sw' => true,
-            'distribucion_pedido' => $distribucion_pedido->load(["solicitud_pedido", "distribucion_detalles.solicitud_detalle"])
+            'distribucion_pedido' => $distribucion_pedido->load(["solicitud_pedido", "user", "distribucion_detalles.solicitud_detalle"])
         ], 200);
     }
     public function verificaRecepcion(DistribucionPedido $distribucion_pedido)

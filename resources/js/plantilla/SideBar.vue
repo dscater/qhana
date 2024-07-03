@@ -492,7 +492,21 @@
                         class="nav-header font-weight-bold"
                         v-if="
                             permisos.includes('reportes.usuarios') ||
-                            permisos.includes('reportes.cajas')
+                            permisos.includes('reportes.cajas') ||
+                            permisos.includes('reportes.ingreso_general') ||
+                            permisos.includes('reportes.inventario') ||
+                            permisos.includes('reportes.solicitud_productos') ||
+                            permisos.includes(
+                                'reportes.distribucion_pedidos'
+                            ) ||
+                            permisos.includes('reportes.recepcion_pedidos') ||
+                            permisos.includes('reportes.clientes') ||
+                            permisos.includes(
+                                'reportes.inventario_materiales'
+                            ) ||
+                            permisos.includes(
+                                'reportes.ingreso_salida_materiales'
+                            )
                         "
                     >
                         REPORTES:
@@ -519,6 +533,110 @@
                         >
                             <i class="fas fa-file-pdf nav-icon"></i>
                             <p>Caja</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.ingreso_general')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.ingreso_general' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Ingresos General</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.inventario')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.inventario' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Inventario de Productos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.solicitud_productos')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.solicitud_productos' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Solicitud de Productos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes('reportes.distribucion_pedidos')
+                        "
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.distribucion_pedidos' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Distribución de Pedidos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.recepcion_pedidos')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.recepcion_pedidos' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Recepción de Pedidos</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.clientes')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.clientes' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Clientes</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes('reportes.inventario_materiales')
+                        "
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.inventario_materiales' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Inventario de Materiales</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="
+                            permisos.includes(
+                                'reportes.ingreso_salida_materiales'
+                            )
+                        "
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.ingreso_salida_materiales' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Ingresos y Salidas de Materiales</p>
                         </router-link>
                     </li>
                     <li class="nav-header font-weight-bold">OTRAS OPCIONES:</li>
