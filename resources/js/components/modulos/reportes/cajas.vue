@@ -128,6 +128,41 @@
                                                     v-text="errors.concepto[0]"
                                                 ></span>
                                             </div>
+                                            <div class="form-group col-md-12">
+                                                <label
+                                                    :class="{
+                                                        'text-danger':
+                                                            errors.tipo,
+                                                    }"
+                                                    >Tipo*</label
+                                                >
+                                                <el-select
+                                                    v-model="oReporte.tipo"
+                                                    filterable
+                                                    placeholder="Concepto"
+                                                    class="d-block"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            errors.tipo,
+                                                    }"
+                                                >
+                                                    <el-option
+                                                        v-for="item in [
+                                                            'PDF',
+                                                            'EXCEL',
+                                                        ]"
+                                                        :key="item"
+                                                        :label="item"
+                                                        :value="item"
+                                                    >
+                                                    </el-option>
+                                                </el-select>
+                                                <span
+                                                    class="error invalid-feedback"
+                                                    v-if="errors.tipo"
+                                                    v-text="errors.tipo[0]"
+                                                ></span>
+                                            </div>
                                         </div>
                                     </form>
                                     <div class="row">
@@ -172,6 +207,7 @@ export default {
                 fecha_ini: "",
                 fecha_fin: "",
                 concepto: "todos",
+                tipo: "PDF",
             },
             aFechas: [],
             enviando: false,
@@ -208,11 +244,27 @@ export default {
                 .then((res) => {
                     this.errors = [];
                     this.enviando = false;
-                    let pdfBlob = new Blob([res.data], {
-                        type: "application/pdf",
-                    });
-                    let urlReporte = URL.createObjectURL(pdfBlob);
-                    window.open(urlReporte);
+                    if (this.oReporte.tipo == "PDF") {
+                        let pdfBlob = new Blob([res.data], {
+                            type: "application/pdf",
+                        });
+                        let urlReporte = URL.createObjectURL(pdfBlob);
+                        window.open(urlReporte);
+                    } else {
+                        // excel
+                        var fileURL = window.URL.createObjectURL(
+                            new Blob([res.data])
+                        );
+                        var fileLink = document.createElement("a");
+                        fileLink.href = fileURL;
+                        fileLink.setAttribute(
+                            "download",
+                            "cajas.xlsx"
+                        );
+                        document.body.appendChild(fileLink);
+
+                        fileLink.click();
+                    }
                 })
                 .catch(async (error) => {
                     let responseObj = await error.response.data.text();

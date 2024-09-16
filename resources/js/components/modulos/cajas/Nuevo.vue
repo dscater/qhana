@@ -352,6 +352,44 @@
                                     v-text="errors.nombre[0]"
                                 ></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    :class="{
+                                        'text-danger': errors.encargado_id,
+                                    }"
+                                    >Encargado</label
+                                >
+                                <input
+                                    type="checkbox"
+                                    v-model="check_encargado"
+                                    @change="detectaCheck()"
+                                />
+
+                                <el-select
+                                    v-if="check_encargado"
+                                    type="textarea"
+                                    placeholder="Seleccionar un socio"
+                                    class="w-100"
+                                    :class="{
+                                        'is-invalid': errors.encargado_id,
+                                    }"
+                                    v-model="caja.encargado_id"
+                                    autosize
+                                >
+                                    <el-option
+                                        v-for="item in listSocios"
+                                        :key="item.id"
+                                        :value="item.id"
+                                        :label="item.full_name"
+                                    >
+                                    </el-option>
+                                </el-select>
+                                <span
+                                    class="error invalid-feedback"
+                                    v-if="errors.encargado_id"
+                                    v-text="errors.encargado_id[0]"
+                                ></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -396,6 +434,7 @@ export default {
                 concepto_id: "",
                 monto: "",
                 responsable_id: "",
+                encargado_id: "",
                 nro_factura: "",
                 fecha: "",
                 descripcion: "",
@@ -414,6 +453,11 @@ export default {
                 this.bModal = true;
                 if (this.accion == "edit") {
                     this.getUsuarios();
+                }
+
+                this.check_encargado = false;
+                if (this.caja.encargado_id && this.caja.encargado_id != null) {
+                    this.check_encargado = true;
                 }
             } else {
                 this.bModal = false;
@@ -455,12 +499,15 @@ export default {
             enviando: false,
             listConceptos: [],
             listUsers: [],
+            listSocios: [],
             errors: [],
+            check_encargado: false,
         };
     },
     mounted() {
         this.bModal = this.muestra_modal;
         this.getConceptos();
+        this.getSocios();
     },
     methods: {
         getUsuarios() {
@@ -477,6 +524,20 @@ export default {
             } else {
                 this.listUsers = [];
             }
+        },
+        detectaCheck() {
+            this.caja.encargado_id = "";
+        },
+        getSocios() {
+            axios
+                .get(main_url + "/admin/usuarios/getUsuarioTipoPersonal", {
+                    params: {
+                        tipo: "SOCIO",
+                    },
+                })
+                .then((response) => {
+                    this.listSocios = response.data;
+                });
         },
         getConceptos() {
             axios
@@ -518,6 +579,10 @@ export default {
                 formdata.append(
                     "responsable_id",
                     this.caja.responsable_id ? this.caja.responsable_id : ""
+                );
+                formdata.append(
+                    "encargado_id",
+                    this.caja.encargado_id ? this.caja.encargado_id : ""
                 );
                 formdata.append(
                     "nro_factura",
@@ -660,6 +725,7 @@ export default {
             this.caja.concepto_id = "";
             this.caja.monto = "";
             this.caja.responsable_id = "";
+            this.caja.encargado_id = "";
             this.caja.nro_factura = "";
             this.caja.fecha = "";
             this.caja.descripcion = "";

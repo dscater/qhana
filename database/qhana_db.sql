@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-07-2024 a las 19:13:15
+-- Tiempo de generación: 16-09-2024 a las 16:01:02
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -130,6 +130,7 @@ CREATE TABLE `cajas` (
   `concepto_id` bigint UNSIGNED NOT NULL,
   `monto` decimal(24,2) NOT NULL,
   `responsable_id` bigint UNSIGNED NOT NULL,
+  `encargado_id` bigint UNSIGNED DEFAULT NULL,
   `nro_factura` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha` date NOT NULL,
   `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -148,15 +149,17 @@ CREATE TABLE `cajas` (
 -- Volcado de datos para la tabla `cajas`
 --
 
-INSERT INTO `cajas` (`id`, `tipo`, `tipo_movimiento`, `concepto_id`, `monto`, `responsable_id`, `nro_factura`, `fecha`, `descripcion`, `a_favor`, `nro`, `user_id`, `nombre`, `fecha_registro`, `estado`, `movimiento_caja_id`, `created_at`, `updated_at`) VALUES
-(1, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11111111', '2023-10-17', 'REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 20:23:07', '2023-10-18 20:34:31'),
-(2, 'RECIBO', 'INGRESO', 1, 500.00, 1, NULL, '2023-10-18', 'DESCRIPCION RECIBO #1', 'OTRO', 1, 5, 'FELIPE GUTIERREZ', '2023-10-18', 2, 2, '2023-10-18 20:36:14', '2023-10-18 20:44:37'),
-(4, 'NORMAL', 'EGRESO', 2, 200.00, 1, '3333', '2023-10-18', 'PRUEBA EGRESO', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:09:48', '2023-10-18 21:09:48'),
-(5, 'RECIBO', 'INGRESO', 1, 350.00, 1, NULL, '2023-10-18', 'PRUEBA INGRESO RECIBO CON RECIBBO', 'SOCIO', 3, 7, NULL, '2023-10-18', 2, 2, '2023-10-18 21:50:25', '2023-10-18 21:50:25'),
-(6, 'NORMAL', 'EGRESO', 2, 150.50, 1, '1110000', '2023-10-18', 'PRUEBA EGRESO DECIMAL', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:51:04', '2023-10-18 21:51:04'),
-(7, 'RECIBO', 'EGRESO', 2, 120.00, 1, NULL, '2023-10-18', 'DESC. EGRESO RECIBO', 'TRABAJADOR', 4, 5, NULL, '2023-10-18', 2, 2, '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
-(8, 'NORMAL', 'INGRESO', 1, 1000.00, 1, '11211211', '2023-10-18', 'DESC', NULL, NULL, NULL, NULL, '2023-10-18', 1, 0, '2023-10-18 22:11:17', '2023-10-18 22:11:17'),
-(9, 'NORMAL', 'EGRESO', 1, 10.00, 1, '', '2024-01-19', 'PASAJE', NULL, NULL, NULL, NULL, '2024-01-19', 1, 0, '2024-01-19 14:50:23', '2024-01-19 14:50:23');
+INSERT INTO `cajas` (`id`, `tipo`, `tipo_movimiento`, `concepto_id`, `monto`, `responsable_id`, `encargado_id`, `nro_factura`, `fecha`, `descripcion`, `a_favor`, `nro`, `user_id`, `nombre`, `fecha_registro`, `estado`, `movimiento_caja_id`, `created_at`, `updated_at`) VALUES
+(1, 'NORMAL', 'INGRESO', 1, 1000.00, 1, NULL, '11111111', '2023-10-17', 'REGISTRO CAJA 1000 BS. LOREM IPSUM TEXT IPSUM LOREM LEE QOIEE REMMSS', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 20:23:07', '2023-10-18 20:34:31'),
+(2, 'RECIBO', 'INGRESO', 1, 500.00, 1, NULL, NULL, '2023-10-18', 'DESCRIPCION RECIBO #1', 'OTRO', 1, 5, 'FELIPE GUTIERREZ', '2023-10-18', 2, 2, '2023-10-18 20:36:14', '2023-10-18 20:44:37'),
+(4, 'NORMAL', 'EGRESO', 2, 200.00, 1, NULL, '3333', '2023-10-18', 'PRUEBA EGRESO', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:09:48', '2023-10-18 21:09:48'),
+(5, 'RECIBO', 'INGRESO', 1, 350.00, 1, NULL, NULL, '2023-10-18', 'PRUEBA INGRESO RECIBO CON RECIBBO', 'SOCIO', 3, 7, NULL, '2023-10-18', 2, 2, '2023-10-18 21:50:25', '2023-10-18 21:50:25'),
+(6, 'NORMAL', 'EGRESO', 2, 150.50, 1, NULL, '1110000', '2023-10-18', 'PRUEBA EGRESO DECIMAL', NULL, NULL, NULL, NULL, '2023-10-18', 2, 2, '2023-10-18 21:51:04', '2023-10-18 21:51:04'),
+(7, 'RECIBO', 'EGRESO', 2, 120.00, 1, NULL, NULL, '2023-10-18', 'DESC. EGRESO RECIBO', 'TRABAJADOR', 4, 5, NULL, '2023-10-18', 2, 2, '2023-10-18 21:52:18', '2023-10-18 21:52:18'),
+(8, 'NORMAL', 'INGRESO', 1, 1000.00, 1, NULL, '11211211', '2023-10-18', 'DESC', NULL, NULL, NULL, NULL, '2023-10-18', 1, 0, '2023-10-18 22:11:17', '2023-10-18 22:11:17'),
+(9, 'NORMAL', 'EGRESO', 1, 10.00, 1, 2, '', '2024-01-19', 'PASAJE', NULL, NULL, NULL, NULL, '2024-01-19', 1, 0, '2024-01-19 14:50:23', '2024-09-16 15:11:02'),
+(10, 'NORMAL', 'INGRESO', 2, 1000.00, 1, NULL, '', '2024-09-16', '', NULL, NULL, NULL, NULL, '2024-09-16', 1, 0, '2024-09-16 15:12:51', '2024-09-16 15:12:51'),
+(11, 'RECIBO', 'INGRESO', 2, 350.00, 1, 4, NULL, '2024-09-16', 'DESC', 'OTRO', 5, NULL, 'JUAN PAREDES', '2024-09-16', 1, 0, '2024-09-16 15:29:47', '2024-09-16 15:29:47');
 
 -- --------------------------------------------------------
 
@@ -228,7 +231,8 @@ INSERT INTO `conceptos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (2, 'CONCEPTO #2', '2023-10-18 19:42:25', '2023-10-18 19:42:25'),
 (4, 'APERTURA DE CAJA', '2024-01-19 14:51:58', '2024-01-19 14:51:58'),
 (5, 'PASAJE', '2024-01-19 14:52:07', '2024-01-19 14:52:07'),
-(6, 'VENTA', '2024-01-19 14:52:12', '2024-01-19 14:52:12');
+(6, 'VENTA', '2024-01-19 14:52:12', '2024-01-19 14:52:12'),
+(7, 'CONCEPTO #3', '2024-09-16 15:35:10', '2024-09-16 15:35:10');
 
 -- --------------------------------------------------------
 
@@ -663,7 +667,14 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (282, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA RECEPCIÓN DE PEDIDO', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-01-22<br/>fecha_registro: 2024-01-22<br/>created_at: 2024-01-22 11:35:44<br/>updated_at: 2024-01-22 11:35:44<br/>', 'id: 1<br/>user_id: 2<br/>solicitud_pedido_id: 1<br/>distribucion_pedido_id: 1<br/>fecha_recepcion: 2024-07-02<br/>fecha_registro: 2024-01-22<br/>created_at: 2024-01-22 11:35:44<br/>updated_at: 2024-07-02 14:14:00<br/>', 'RECEPCIÓN DE PEDIDOS', '2024-07-02', '14:14:00', '2024-07-02 18:14:00', '2024-07-02 18:14:00'),
 (283, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ EL INGRESO DE UN PRODUCTO', 'id: 4<br/>admin_producto_id: 1<br/>cantidad: 30.313<br/>cantidad_conos: 5<br/>fecha_ingreso: 2024-01-06<br/>precio: 0.00<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 12:28:48<br/>updated_at: 2024-07-01 11:06:15<br/>', 'id: 4<br/>admin_producto_id: 1<br/>cantidad: 30.313<br/>cantidad_conos: 5<br/>fecha_ingreso: 2024-01-06<br/>precio: 1200<br/>fecha_registro: 2024-01-06<br/>created_at: 2024-01-06 12:28:48<br/>updated_at: 2024-07-02 14:18:51<br/>', 'INGRESO DE PRODUCTOS', '2024-07-02', '14:18:51', '2024-07-02 18:18:51', '2024-07-02 18:18:51'),
 (284, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO EL INGRESO DE UN PRODUCTO', 'id: 5<br/>admin_producto_id: 1<br/>cantidad: 100.911<br/>cantidad_conos: 3<br/>fecha_ingreso: 2024-07-02<br/>precio: 600<br/>fecha_registro: 2024-07-02<br/>created_at: 2024-07-02 14:19:09<br/>updated_at: 2024-07-02 14:19:09<br/>', NULL, 'INGRESO DE PRODUCTOS', '2024-07-02', '14:19:09', '2024-07-02 18:19:09', '2024-07-02 18:19:09'),
-(285, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN MATERIAL', 'created_at: 2024-07-03 14:54:27<br/>descripcion: DESC<br/>fecha_registro: 2024-07-03<br/>id: 2<br/>nombre: MATERIAL #2<br/>stock: <br/>updated_at: 2024-07-03 14:54:27<br/>', NULL, 'MATERIALES', '2024-07-03', '14:54:27', '2024-07-03 18:54:27', '2024-07-03 18:54:27');
+(285, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN MATERIAL', 'created_at: 2024-07-03 14:54:27<br/>descripcion: DESC<br/>fecha_registro: 2024-07-03<br/>id: 2<br/>nombre: MATERIAL #2<br/>stock: <br/>updated_at: 2024-07-03 14:54:27<br/>', NULL, 'MATERIALES', '2024-07-03', '14:54:27', '2024-07-03 18:54:27', '2024-07-03 18:54:27'),
+(286, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2024-01-19 10:50:23<br/>descripcion: PASAJE<br/>encargado_id: <br/>estado: 1<br/>fecha: 2024-01-19<br/>fecha_registro: 2024-01-19<br/>id: 9<br/>monto: 10.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: EGRESO<br/>updated_at: 2024-01-19 10:50:23<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2024-01-19 10:50:23<br/>descripcion: PASAJE<br/>encargado_id: 2<br/>estado: 1<br/>fecha: 2024-01-19<br/>fecha_registro: 2024-01-19<br/>id: 9<br/>monto: 10.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: EGRESO<br/>updated_at: 2024-09-16 11:11:02<br/>user_id: <br/>', 'CAJAS', '2024-09-16', '11:11:02', '2024-09-16 15:11:02', '2024-09-16 15:11:02'),
+(287, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 2<br/>created_at: 2024-09-16 11:12:51<br/>descripcion: <br/>encargado_id: <br/>estado: 1<br/>fecha: 2024-09-16<br/>fecha_registro: 2024-09-16<br/>id: 10<br/>monto: 1000<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: <br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2024-09-16 11:12:51<br/>user_id: <br/>', NULL, 'CAJAS', '2024-09-16', '11:12:51', '2024-09-16 15:12:51', '2024-09-16 15:12:51'),
+(288, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REGISTRO DE CAJA', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 18:11:17<br/>descripcion: DESC<br/>encargado_id: <br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 8<br/>monto: 1000.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 11211211<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 18:11:17<br/>user_id: <br/>', 'a_favor: <br/>concepto_id: 1<br/>created_at: 2023-10-18 18:11:17<br/>descripcion: DESC<br/>encargado_id: <br/>estado: 1<br/>fecha: 2023-10-18<br/>fecha_registro: 2023-10-18<br/>id: 8<br/>monto: 1000.00<br/>movimiento_caja_id: 0<br/>nombre: <br/>nro: <br/>nro_factura: 11211211<br/>responsable_id: 1<br/>tipo: NORMAL<br/>tipo_movimiento: INGRESO<br/>updated_at: 2023-10-18 18:11:17<br/>user_id: <br/>', 'CAJAS', '2024-09-16', '11:14:49', '2024-09-16 15:14:49', '2024-09-16 15:14:49'),
+(289, 1, 'CREACIÓN', 'EL USUARIO  CREÓ UN REGISTRO DE CAJA', 'a_favor: OTRO<br/>concepto_id: 2<br/>created_at: 2024-09-16 11:29:47<br/>descripcion: DESC<br/>encargado_id: 4<br/>estado: 1<br/>fecha: 2024-09-16<br/>fecha_registro: 2024-09-16<br/>id: 11<br/>monto: 350<br/>movimiento_caja_id: 0<br/>nombre: JUAN PAREDES<br/>nro: 5<br/>nro_factura: <br/>responsable_id: 1<br/>tipo: RECIBO<br/>tipo_movimiento: INGRESO<br/>updated_at: 2024-09-16 11:29:47<br/>user_id: <br/>', NULL, 'CAJAS', '2024-09-16', '11:29:47', '2024-09-16 15:29:47', '2024-09-16 15:29:47'),
+(290, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CONCEPTO', 'created_at: 2024-01-19 10:52:12<br/>id: 6<br/>nombre: VENTA<br/>updated_at: 2024-01-19 10:52:12<br/>', 'created_at: 2024-01-19 10:52:12<br/>id: 6<br/>nombre: VENTA<br/>updated_at: 2024-01-19 10:52:12<br/>', 'CONCEPTOS', '2024-09-16', '11:34:23', '2024-09-16 15:34:23', '2024-09-16 15:34:23'),
+(291, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN CONCEPTO', 'created_at: 2024-01-19 10:52:12<br/>id: 6<br/>nombre: VENTA<br/>updated_at: 2024-01-19 10:52:12<br/>', 'created_at: 2024-01-19 10:52:12<br/>id: 6<br/>nombre: VENTA<br/>updated_at: 2024-01-19 10:52:12<br/>', 'CONCEPTOS', '2024-09-16', '11:35:00', '2024-09-16 15:35:00', '2024-09-16 15:35:00'),
+(292, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN CONCEPTO', 'created_at: 2024-09-16 11:35:10<br/>id: 7<br/>nombre: CONCEPTO #3<br/>updated_at: 2024-09-16 11:35:10<br/>', NULL, 'CONCEPTOS', '2024-09-16', '11:35:10', '2024-09-16 15:35:10', '2024-09-16 15:35:10');
 
 -- --------------------------------------------------------
 
@@ -1655,7 +1666,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT de la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos`
@@ -1673,7 +1684,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `conceptos`
 --
 ALTER TABLE `conceptos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -1709,7 +1720,7 @@ ALTER TABLE `distribucion_pedidos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 --
 -- AUTO_INCREMENT de la tabla `historia_recepcions`

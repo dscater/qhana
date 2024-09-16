@@ -14,6 +14,7 @@ class Caja extends Model
         "concepto_id",
         "monto",
         "responsable_id",
+        "encargado_id",
         "nro_factura",
         "fecha",
         "descripcion",
@@ -63,6 +64,11 @@ class Caja extends Model
     public function responsable()
     {
         return $this->belongsTo(User::class, 'responsable_id');
+    }
+
+    public function encargado()
+    {
+        return $this->belongsTo(User::class, 'encargado_id');
     }
 
     public function user()

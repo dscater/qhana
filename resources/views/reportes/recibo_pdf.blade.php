@@ -204,6 +204,20 @@
             font-weight: bold;
             font-size: 0.5em;
         }
+
+        .firmas {
+            width: 100%;
+            margin-top: 60px;
+            border-collapse: separate;
+            border-spacing: 40px 0px;
+        }
+
+        .firmas tbody td {
+            color: #c57a40;
+            text-align: center;
+            border-top: dotted 1px #c57a40;
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -274,6 +288,15 @@
                     SON:
                     {{ $literal }}
                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="firmas">
+        <tbody>
+            <tr>
+                <td>Recibí conforme</td>
+                <td>Entregue conforme</td>
             </tr>
         </tbody>
     </table>

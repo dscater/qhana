@@ -223,12 +223,12 @@
                 $saldo_caja = 0;
                 $suma_ingresos = 0;
                 $suma_egresos = 0;
-                if (isset($saldo) && $saldo > 0) {
+                if (isset($saldo) && $saldo != 0) {
                     $saldo_caja = $saldo;
                 }
             @endphp
             {{-- MOSTRAR SALDO SI ES POR RANGO DE FECHAS | SI EXISTE --}}
-            @if (isset($saldo) && $saldo > 0)
+            @if (isset($saldo) && $saldo != 0)
                 @if ($saldo > 0)
                     <tr>
                         <td>{{ $fecha_anterior }}</td>
@@ -270,8 +270,8 @@
                     <td class="">{{ $caja->fecha }}</td>
                     <td class="">{{ $caja->concepto->nombre }}</td>
                     <td class="">
-                        @if ($caja->responsable)
-                            {{ $caja->responsable->full_name }}
+                        @if ($caja->encargado)
+                            {{ $caja->encargado->full_name }}
                         @endif
                     </td>
                     <td class="">

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class ConceptoController extends Controller
 {
     public $validacion = [
-        'nombre' => 'required|min:2',
+        'nombre' => 'required|min:2|unique:conceptos,nombre',
     ];
 
     public $mensajes = [
@@ -66,6 +66,7 @@ class ConceptoController extends Controller
 
     public function update(Request $request, Concepto $concepto)
     {
+        $this->validacion["nombre"] = 'required|min:2|unique:conceptos,nombre,' . $concepto->id;
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {

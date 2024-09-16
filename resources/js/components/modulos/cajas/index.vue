@@ -373,21 +373,16 @@ export default {
             showOverlay: false,
             fields: [
                 {
-                    key: "fecha",
-                    label: "Fecha",
-                    sortable: true,
-                },
-                {
-                    key: "tipo",
-                    label: "Tipo",
+                    key: "fecha_registro",
+                    label: "Fecha de registro",
                     sortable: true,
                 },
                 { key: "tipo_movimiento", label: "Movimiento", sortable: true },
                 { key: "concepto.nombre", label: "Concepto" },
                 { key: "monto", label: "Monto Bs." },
-                { key: "responsable.usuario", label: "Responsble" },
-                { key: "fecha_registro", label: "Imagen" },
-                { key: "mas", label: "Ver mas" },
+                { key: "encargado.full_name", label: "Encargado" },
+                // { key: "responsable.usuario", label: "Responsable" },
+                { key: "fecha", label: "Fecha de evento" },
                 { key: "accion", label: "Acción" },
             ],
             loading: true,
@@ -404,6 +399,7 @@ export default {
                 concepto_id: "",
                 monto: "",
                 responsable_id: "",
+                encargado_id: "",
                 nro_factura: "",
                 fecha: "",
                 descripcion: "",
@@ -453,6 +449,9 @@ export default {
             this.oCaja.monto = item.monto ? item.monto : "";
             this.oCaja.responsable_id = item.responsable_id
                 ? item.responsable_id
+                : "";
+            this.oCaja.encargado_id = item.encargado_id
+                ? item.encargado_id
                 : "";
             this.oCaja.nro_factura = item.nro_factura ? item.nro_factura : "";
             this.oCaja.fecha = item.fecha ? item.fecha : "";
@@ -644,6 +643,7 @@ export default {
             this.oCaja.concepto_id = "";
             this.oCaja.monto = "";
             this.oCaja.responsable_id = "";
+            this.oCaja.encargado_id = "";
             this.oCaja.nro_factura = "";
             this.oCaja.fecha = this.getFechaActual();
             this.oCaja.descripcion = "";

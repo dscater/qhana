@@ -92,17 +92,233 @@ class ReporteController extends Controller
 
         $cajas = $cajas->get();
 
-        $pdf = PDF::loadView('reportes.cajas', compact('cajas', 'saldo', 'fecha_anterior', 'filtro', 'fecha_ini', 'fecha_fin'))->setPaper('legal', 'landscape');
+        if ($request->tipo == 'PDF') {
 
-        // ENUMERAR LAS PÁGINAS USANDO CANVAS
-        $pdf->output();
-        $dom_pdf = $pdf->getDomPDF();
-        $canvas = $dom_pdf->get_canvas();
-        $alto = $canvas->get_height();
-        $ancho = $canvas->get_width();
-        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+            $pdf = PDF::loadView('reportes.cajas', compact('cajas', 'saldo', 'fecha_anterior', 'filtro', 'fecha_ini', 'fecha_fin'))->setPaper('legal', 'landscape');
 
-        return $pdf->download('caja.pdf');
+            // ENUMERAR LAS PÁGINAS USANDO CANVAS
+            $pdf->output();
+            $dom_pdf = $pdf->getDomPDF();
+            $canvas = $dom_pdf->get_canvas();
+            $alto = $canvas->get_height();
+            $ancho = $canvas->get_width();
+            $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+            return $pdf->download('caja.pdf');
+        } else {
+            $spreadsheet = new Spreadsheet();
+            $spreadsheet->getProperties()
+                ->setCreator("ADMIN")
+                ->setLastModifiedBy('Administración')
+                ->setTitle('Reporte')
+                ->setSubject('Reporte')
+                ->setDescription('Reporte')
+                ->setKeywords('PHPSpreadsheet')
+                ->setCategory('Listado');
+
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $spreadsheet->getDefaultStyle()->getFont()->setName('Arial');
+
+            $styleTexto = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 12,
+                    'family' => 'Times New Roman'
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                    ],
+                ],
+            ];
+
+            $styleTextoForm = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 10,
+                ],
+            ];
+
+            $styleArray = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 10,
+                    'color' => ['argb' => 'ffffff'],
+                ],
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['rgb' => 'c57a40']
+                ],
+            ];
+
+            $estilo_conenido = [
+                'font' => [
+                    'size' => 10,
+                ],
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    // 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+            ];
+
+            $fila = 1;
+            if (file_exists(public_path() . '/imgs/' . Configuracion::first()->logo)) {
+                $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing->setName('logo');
+                $drawing->setDescription('logo');
+                $drawing->setPath(public_path() . '/imgs/' . Configuracion::first()->logo);
+                $drawing->setCoordinates('A' . $fila);
+                $drawing->setOffsetX(5);
+                $drawing->setOffsetY(0);
+                $drawing->setHeight(60);
+                $drawing->setWorksheet($sheet);
+            }
+
+            $fila = 2;
+            $sheet->setCellValue('A' . $fila, "REPORTE DE CAJA");
+            $sheet->mergeCells("A" . $fila . ":H" . $fila);  //COMBINAR CELDAS
+            $sheet->getStyle('A' . $fila . ':H' . $fila)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle('A' . $fila . ':H' . $fila)->applyFromArray($styleTexto);
+            $fila++;
+            $fila++;
+            $sheet->setCellValue('A' . $fila, 'Fecha');
+            $sheet->setCellValue('B' . $fila, 'Detalle');
+            $sheet->setCellValue('C' . $fila, 'Encargado');
+            $sheet->setCellValue('D' . $fila, 'Rec/Fac');
+            $sheet->setCellValue('E' . $fila, 'Ingreso');
+            $sheet->setCellValue('F' . $fila, 'Egreso');
+            $sheet->setCellValue('G' . $fila, 'Saldo');
+            $sheet->setCellValue('H' . $fila, 'Observación');
+            $sheet->getStyle('A' . $fila . ':H' . $fila)->applyFromArray($styleArray);
+            $fila++;
+            $cont = 1;
+            $total = 0;
+            $styleArray = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 10,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+            ];
+
+
+            $cont = 1;
+            $total = 0;
+            $saldo_caja = 0;
+            $suma_ingresos = 0;
+            $suma_egresos = 0;
+            if (isset($saldo) && $saldo != 0) {
+                $saldo_caja = $saldo;
+            }
+
+            if (isset($saldo) && $saldo != 0) {
+                if ($saldo > 0) {
+                    $sheet->setCellValue('A' . $fila, $fecha_anterior);
+                    $sheet->setCellValue('B' . $fila, 'SALDO');
+                    $sheet->setCellValue('E' . $fila,  number_format($saldo, 2, '.', ''));
+                    $sheet->setCellValue('G' . $fila,  number_format($saldo, 2, '.', ''));
+                    $fila++;
+                } else {
+                    $sheet->setCellValue('A' . $fila, $fecha_anterior);
+                    $sheet->setCellValue('B' . $fila, 'SALDO');
+                    $sheet->setCellValue('F' . $fila,  number_format($saldo, 2, '.', ''));
+                    $sheet->setCellValue('G' . $fila,  number_format($saldo, 2, '.', ''));
+                    $fila++;
+                }
+            }
+            foreach ($cajas as $caja) {
+
+                if ($caja->tipo_movimiento == 'INGRESO') {
+                    $suma_ingresos += (float) $caja->monto;
+                    $saldo_caja += (float) $caja->monto;
+                } else {
+                    $suma_egresos += (float) $caja->monto;
+                    $saldo_caja -= (float) $caja->monto;
+                }
+
+
+                $sheet->setCellValue('A' . $fila, $caja->fecha);
+                $sheet->setCellValue('B' . $fila, $caja->concepto->nombre);
+                $sheet->setCellValue('C' . $fila, $caja->encargado ? $caja->encargado->full_name : '');
+                $txt_rec_fac = '';
+                if ($caja->nro_factura || $caja->nro) {
+                    if ($caja->tipo == 'NORMAL') {
+                        $txt_rec_fac = 'F/' . $caja->nro_factura;
+                    } else {
+                        $txt_rec_fac = 'C/' . $caja->nro;
+                    }
+                }
+                $sheet->setCellValue('D' . $fila, $txt_rec_fac);
+                if ($caja->tipo_movimiento == 'INGRESO') {
+                    $sheet->setCellValue('E' . $fila, $caja->monto);
+                } else {
+                    $sheet->setCellValue('F' . $fila, $caja->monto);
+                }
+                $sheet->setCellValue('G' . $fila, number_format($saldo_caja, 2, '.', ''));
+                $sheet->setCellValue('H' . $fila, $caja->descripcion);
+                $sheet->getStyle('A' . $fila . ':H' . $fila)->applyFromArray($estilo_conenido);
+                $sheet->getStyle('A' . $fila . ':H' . $fila)->getAlignment()->setWrapText(true);
+                $fila++;
+            }
+
+            $sheet->setCellValue('A' . $fila, "TOTAL");
+            $sheet->mergeCells("A" . $fila . ":D" . $fila);  //COMBINAR CELDAS
+            $sheet->setCellValue('E' . $fila, number_format($suma_ingresos, 2, '.', ''));
+            $sheet->setCellValue('F' . $fila, number_format($suma_egresos, 2, '.', ''));
+            $sheet->setCellValue('G' . $fila, number_format($saldo_caja, 2, '.', ''));
+            $sheet->getStyle('A' . $fila . ':H' . $fila)->applyFromArray($styleArray);
+
+            $sheet->getColumnDimension('A')->setWidth(10);
+            $sheet->getColumnDimension('B')->setWidth(25);
+            $sheet->getColumnDimension('C')->setWidth(35);
+            $sheet->getColumnDimension('D')->setWidth(15);
+            $sheet->getColumnDimension('E')->setWidth(15);
+            $sheet->getColumnDimension('F')->setWidth(15);
+            $sheet->getColumnDimension('G')->setWidth(15);
+            $sheet->getColumnDimension('H')->setWidth(45);
+
+
+            foreach (range('A', 'E') as $columnID) {
+                $sheet->getStyle($columnID)->getAlignment()->setWrapText(true);
+            }
+
+            $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+            $sheet->getPageMargins()->setTop(0.5);
+            $sheet->getPageMargins()->setRight(0.1);
+            $sheet->getPageMargins()->setLeft(0.1);
+            $sheet->getPageMargins()->setBottom(0.1);
+            $sheet->getPageSetup()->setPrintArea('A:H');
+            $sheet->getPageSetup()->setFitToWidth(1);
+            $sheet->getPageSetup()->setFitToHeight(0);
+
+            // DESCARGA DEL ARCHIVO
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="reporte.xlsx"');
+            header('Cache-Control: max-age=0');
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('php://output');
+        }
     }
 
     public function ingreso_general(Request $request)
@@ -1614,8 +1830,8 @@ class ReporteController extends Controller
                 $sheet->setCellValue('B' . $fila, 'Cantidad');
                 $sheet->setCellValue('C' . $fila, 'Fecha de Ingreso');
                 $sheet->setCellValue('D' . $fila, 'Fecha de Registro');
-                    $sheet->getStyle('A' . $fila . ':D' . $fila)->applyFromArray($styleArray);
-                    $fila++;
+                $sheet->getStyle('A' . $fila . ':D' . $fila)->applyFromArray($styleArray);
+                $fila++;
                 $cont = 1;
                 foreach ($ingresos as $value) {
                     $sheet->setCellValue('A' . $fila, $cont++);

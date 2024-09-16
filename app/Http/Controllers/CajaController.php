@@ -35,7 +35,7 @@ class CajaController extends Controller
     ];
     public function index(Request $request)
     {
-        $cajas = Caja::with(["concepto", "responsable"])->where("estado", 1)->orderBy("id", "desc")->get();
+        $cajas = Caja::with(["concepto", "responsable", "encargado"])->where("estado", 1)->orderBy("id", "desc")->get();
         return response()->JSON(['cajas' => $cajas, 'total' => count($cajas)], 200);
     }
 
@@ -67,6 +67,10 @@ class CajaController extends Controller
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
+            if ($request->encargado_id == '') {
+                unset($request["encargado_id"]);
+            }
+
             if ($request["tipo"] == 'RECIBO') {
                 $ultimo_recibo = Caja::where("tipo", "RECIBO")->get()->last();
                 $nro = 1;
@@ -129,6 +133,10 @@ class CajaController extends Controller
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
+            if ($request->encargado_id == '') {
+                unset($request["encargado_id"]);
+            }
+
             $datos_original = HistorialAccion::getDetalleRegistro($caja, "cajas");
 
             if ($request["tipo"] == 'NORMAL') {
